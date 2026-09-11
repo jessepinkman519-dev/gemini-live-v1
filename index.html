@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gemini Engine — Booking V1.5</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Lounge — Booking Engine V1.6</title>
 
 <style>
 * {
@@ -12,152 +12,297 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #111;
-  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0d0d0d;
+  color: #f2f2f2;
 }
 
 header {
+  background: #151515;
+  border-bottom: 1px solid #292929;
   padding: 22px 18px;
-  border-bottom: 1px solid #333;
-  position: sticky;
-  top: 0;
-  background: #111;
-  z-index: 5;
+  text-align: center;
 }
 
-.wrap {
-  max-width: 1050px;
-  margin: auto;
-  padding: 20px;
+header h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 1px;
 }
 
-h1, h2, h3, p {
-  margin-top: 0;
+header p {
+  margin: 7px 0 0;
+  color: #999;
+  font-size: 14px;
 }
 
 nav {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 14px;
+  padding: 12px;
+  background: #111;
+  border-bottom: 1px solid #292929;
+  overflow-x: auto;
 }
 
-button {
-  border: 1px solid #555;
-  background: #222;
-  color: #fff;
-  border-radius: 10px;
-  padding: 11px 14px;
-  font-weight: 700;
+nav button {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1b1b1b;
+  color: #ddd;
   cursor: pointer;
 }
 
-button:hover {
-  background: #333;
-}
-
-.primary {
-  background: #eee;
+nav button.active {
+  background: #f0f0f0;
   color: #111;
-  border-color: #eee;
 }
 
-.danger {
-  border-color: #a66;
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
 
-.good {
-  border-color: #6a6;
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
 }
 
 .panel {
-  background: #191919;
-  border: 1px solid #333;
-  border-radius: 16px;
-  padding: 18px;
-  margin: 16px 0;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(260px, 1fr)
-  );
-  gap: 14px;
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel h3 {
+  margin-bottom: 8px;
 }
 
 label {
   display: block;
-  font-size: 13px;
-  color: #aaa;
-  margin: 10px 0 5px;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  color: #bbb;
+  font-size: 14px;
 }
 
 input,
 select,
 textarea {
   width: 100%;
-  padding: 11px;
-  border-radius: 9px;
-  border: 1px solid #444;
-  background: #101010;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #363636;
+  background: #0f0f0f;
   color: #fff;
+  font-size: 15px;
 }
 
 textarea {
-  min-height: 90px;
+  min-height: 100px;
+  resize: vertical;
 }
 
-.event,
-.request {
-  border: 1px solid #3b3b3b;
-  border-radius: 12px;
+button.action {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #f0f0f0;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.action:hover {
+  opacity: .9;
+}
+
+button.secondary {
+  background: #242424;
+  color: #eee;
+  border: 1px solid #3a3a3a;
+}
+
+button.danger {
+  background: #4a1717;
+  color: #fff;
+  border: 1px solid #6a2222;
+}
+
+button.success {
+  background: #183b25;
+  color: #fff;
+  border: 1px solid #285c38;
+}
+
+button.warning {
+  background: #493b16;
+  color: #fff;
+  border: 1px solid #6c5920;
+}
+
+.status {
+  margin-top: 14px;
   padding: 14px;
-  margin: 10px 0;
+  border-radius: 8px;
+  display: none;
+}
+
+.status.show {
+  display: block;
+}
+
+.status.good {
+  background: #17351f;
+  border: 1px solid #285c38;
+  color: #c9f5d5;
+}
+
+.status.bad {
+  background: #421919;
+  border: 1px solid #6b2828;
+  color: #ffd0d0;
+}
+
+.status.info {
+  background: #1b2c3b;
+  border: 1px solid #31506b;
+  color: #d5ebff;
+}
+
+.card {
+  background: #101010;
+  border: 1px solid #2b2b2b;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.card strong {
+  color: #fff;
+}
+
+.meta {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 8px;
 }
 
 .badge {
   display: inline-block;
-  padding: 4px 8px;
-  border-radius: 99px;
-  background: #292929;
+  padding: 5px 8px;
+  border-radius: 6px;
   font-size: 12px;
-  margin-right: 5px;
+  margin-bottom: 8px;
+  background: #292929;
+  color: #ddd;
 }
 
-.available {
-  color: #9f9;
+.badge.confirmed {
+  background: #17351f;
+  color: #bff0cb;
 }
 
-.unavailable {
-  color: #f99;
+.badge.pending {
+  background: #493b16;
+  color: #ffe8a0;
 }
 
-.hidden {
-  display: none;
+.badge.reschedule {
+  background: #263b51;
+  color: #cbe6ff;
 }
 
-.muted {
-  color: #999;
+.badge.cancelled {
+  background: #421919;
+  color: #ffc4c4;
 }
 
-.big {
-  font-size: 32px;
-  font-weight: 800;
+.badge.declined {
+  background: #333;
+  color: #aaa;
 }
 
-.row {
+.actions {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
+  margin-top: 14px;
 }
 
-small {
-  color: #888;
+.actions button {
+  padding: 9px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px solid #333;
+  background: #222;
+  color: #eee;
+}
+
+.empty {
+  color: #777;
+  text-align: center;
+  padding: 25px 10px;
+}
+
+.small {
+  font-size: 12px;
+  color: #777;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 650px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 12px;
+  }
+
+  .panel {
+    padding: 15px;
+  }
+}
+
+.calendar-day {
+  border: 1px solid #292929;
+  background: #111;
+  border-radius: 9px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.calendar-day.available {
+  border-left: 4px solid #4d7;
+}
+
+.calendar-day.booked {
+  border-left: 4px solid #d55;
+}
+
+.calendar-day.cancelled {
+  border-left: 4px solid #777;
 }
 </style>
 </head>
@@ -165,949 +310,1831 @@ small {
 <body>
 
 <header>
-  <div class="wrap">
-
-    <div class="muted">
-      GEMINI ENGINE
-    </div>
-
-    <h1>
-      Booking System V1.5
-    </h1>
-
-    <div class="muted">
-      Artist booking → conflict check → owner approval → confirmed event
-    </div>
-
-    <nav>
-      <button
-        class="primary"
-        onclick="show('artist')">
-        Artist Booking
-      </button>
-
-      <button onclick="show('owner')">
-        Owner Dashboard
-      </button>
-
-      <button onclick="show('calendar')">
-        Calendar
-      </button>
-    </nav>
-
-  </div>
+  <h1>GEMINI LOUNGE</h1>
+  <p>Live Music Booking Engine — ScanCraft V1.6</p>
 </header>
 
+<nav>
+  <button class="tabButton active" onclick="showTab('artist', this)">
+    Artist Booking
+  </button>
 
-<main class="wrap">
+  <button class="tabButton" onclick="showTab('bookings', this)">
+    My Bookings
+  </button>
 
+  <button class="tabButton" onclick="showTab('owner', this)">
+    Owner Dashboard
+  </button>
 
-<!-- ========================= -->
-<!-- ARTIST BOOKING -->
-<!-- ========================= -->
+  <button class="tabButton" onclick="showTab('calendar', this)">
+    Calendar
+  </button>
 
-<section id="artist">
+  <button class="tabButton" onclick="showTab('history', this)">
+    History
+  </button>
+</nav>
+
+<main>
+
+<!-- ================= ARTIST BOOKING ================= -->
+
+<section id="artist" class="tab active">
 
   <div class="panel">
-
-    <h2>
-      Find a Date
-    </h2>
-
-    <p class="muted">
-      The system only blocks dates with confirmed bookings.
+    <h2>Artist Profile</h2>
+    <p class="small">
+      Build the artist profile Gemini will use when reviewing booking requests.
     </p>
 
     <div class="grid">
 
       <div>
-        <label>
-          Artist / Band
-        </label>
-
-        <input
-          id="artistName"
-          placeholder="e.g. Gina Gonzalez">
+        <label>Artist / Band Name</label>
+        <input id="artistName" placeholder="Example: Sly & Co.">
       </div>
 
-
       <div>
-        <label>
-          Genre
-        </label>
-
-        <input
-          id="genre"
-          placeholder="Singer-songwriter">
+        <label>Genre</label>
+        <input id="genre" placeholder="Rock, Country, Jazz...">
       </div>
 
-
       <div>
-        <label>
-          Location
-        </label>
-
-        <input
-          id="location"
-          placeholder="Bandon, OR">
+        <label>Location</label>
+        <input id="location" placeholder="Bandon, Oregon">
       </div>
 
-
       <div>
-        <label>
-          Requested Date
-        </label>
-
-        <input
-          id="date"
-          type="date">
-      </div>
-
-
-      <div>
-        <label>
-          Performance Window
-        </label>
-
-        <select id="time">
-
-          <option>
-            7:00 PM – 10:00 PM
-          </option>
-
-          <option>
-            6:00 PM – 9:00 PM
-          </option>
-
-          <option>
-            8:00 PM – 11:00 PM
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div>
-        <label>
-          Contact
-        </label>
-
-        <input
-          id="contact"
-          placeholder="Email or phone">
+        <label>Contact</label>
+        <input id="contact" placeholder="Email or phone">
       </div>
 
     </div>
 
+    <label>Performance Type</label>
+    <select id="performanceType">
+      <option>Solo</option>
+      <option>Duo</option>
+      <option>Trio</option>
+      <option>Band</option>
+      <option>DJ</option>
+      <option>Other</option>
+    </select>
 
-    <label>
-      Notes
-    </label>
+    <label>Social Link</label>
+    <input id="social" placeholder="Instagram / Facebook / Website">
 
-    <textarea
-      id="notes"
-      placeholder="Tell Gemini about your set, equipment, etc.">
-    </textarea>
+    <label>Artist Bio</label>
+    <textarea id="bio" placeholder="Tell Gemini about the artist..."></textarea>
 
-    <br>
-
-    <button
-      class="primary"
-      onclick="checkDate()">
-
-      Check Availability
-
+    <button class="action" onclick="saveArtistProfile()">
+      Save Artist Profile
     </button>
 
-
-    <div
-      id="availability"
-      class="panel hidden">
-    </div>
-
+    <div id="profileStatus" class="status"></div>
   </div>
 
 
-  <!-- PROFILE PREVIEW -->
+  <div class="panel">
+    <h2>Find a Date</h2>
+
+    <label>Desired Date</label>
+    <input type="date" id="bookingDate">
+
+    <label>Performance Window</label>
+    <select id="bookingWindow">
+      <option>6:00 PM – 8:00 PM</option>
+      <option>7:00 PM – 9:00 PM</option>
+      <option>8:00 PM – 10:00 PM</option>
+      <option>9:00 PM – 11:00 PM</option>
+    </select>
+
+    <label>Booking Notes</label>
+    <textarea id="bookingNotes"
+      placeholder="Anything Gemini should know?"></textarea>
+
+    <button class="action" onclick="checkAvailability()">
+      Check Availability
+    </button>
+
+    <div id="availabilityStatus" class="status"></div>
+
+    <button
+      id="requestButton"
+      class="action"
+      style="display:none;"
+      onclick="submitBookingRequest()">
+      Send Booking Request
+    </button>
+  </div>
+
+</section>
+
+
+<!-- ================= MY BOOKINGS ================= -->
+
+<section id="bookings" class="tab">
 
   <div class="panel">
+    <h2>My Bookings</h2>
 
-    <h2>
-      Artist Profile Preview
-    </h2>
-
-    <p class="muted">
-      V1.5 keeps the profile intentionally simple.
-      The richer artist platform comes next.
+    <p class="small">
+      Confirmed bookings, reschedule requests, and cancelled bookings
+      connected to this artist profile.
     </p>
 
-    <div
-      id="profilePreview"
-      class="muted">
-
-      Enter artist information above.
-
-    </div>
-
+    <div id="artistBookings"></div>
   </div>
 
 </section>
 
 
+<!-- ================= OWNER ================= -->
 
-<!-- ========================= -->
-<!-- OWNER DASHBOARD -->
-<!-- ========================= -->
+<section id="owner" class="tab">
 
-<section
-  id="owner"
-  class="hidden">
+  <div class="panel">
+    <h2>Pending Booking Requests</h2>
 
-  <div class="row">
-
-    <h2>
-      Owner Dashboard
-    </h2>
-
-    <span
-      id="requestCount"
-      class="badge">
-    </span>
-
+    <div id="pendingRequests"></div>
   </div>
 
 
   <div class="panel">
+    <h2>Reschedule Requests</h2>
 
-    <h3>
-      Booking Requests
-    </h3>
-
-    <div id="requests">
-    </div>
-
+    <div id="rescheduleRequests"></div>
   </div>
 
 
   <div class="panel">
+    <h2>Confirmed Shows</h2>
 
-    <h3>
-      Confirmed Shows
-    </h3>
-
-    <div id="confirmed">
-    </div>
-
+    <div id="confirmedShows"></div>
   </div>
 
 </section>
 
 
+<!-- ================= CALENDAR ================= -->
 
-<!-- ========================= -->
-<!-- CALENDAR -->
-<!-- ========================= -->
-
-<section
-  id="calendar"
-  class="hidden">
+<section id="calendar" class="tab">
 
   <div class="panel">
+    <h2>Gemini Calendar</h2>
 
-    <h2>
-      Gemini Calendar
-    </h2>
+    <p class="small">
+      Confirmed bookings block dates. Cancelled and declined bookings
+      release them again.
+    </p>
 
-    <div id="cal">
-    </div>
-
+    <div id="calendarList"></div>
   </div>
 
 </section>
 
+
+<!-- ================= HISTORY ================= -->
+
+<section id="history" class="tab">
+
+  <div class="panel">
+    <h2>Booking History</h2>
+
+    <p class="small">
+      Gemini never loses the history of a booking. This becomes useful
+      data for future ScanCraft analytics.
+    </p>
+
+    <div id="historyList"></div>
+  </div>
+
+</section>
 
 </main>
 
 
-
 <script>
 
-/* =========================================
-   GEMINI ENGINE V1.5
-   Local demo data storage
-========================================= */
+/* =========================================================
+   GEMINI ENGINE V1.6
+   ========================================================= */
 
-const KEY = "gemini_engine_v15";
+const STORAGE_KEY = "gemini_engine_v16";
 
+let state = loadState();
 
-let state = JSON.parse(
-  localStorage.getItem(KEY) ||
-  '{"requests":[],"confirmed":[]}'
-);
+let selectedBookingDate = null;
 
 
+/* =========================================================
+   DEFAULT STATE
+   ========================================================= */
 
-/* =========================================
-   SAVE DATA
-========================================= */
+function defaultState() {
 
-function save() {
+  return {
+    artistProfile: null,
+
+    bookings: [],
+
+    rescheduleRequests: [],
+
+    events: [],
+
+    history: []
+  };
+
+}
+
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+function loadState() {
+
+  try {
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      return JSON.parse(saved);
+    }
+
+  } catch (error) {
+
+    console.error("Storage load error:", error);
+
+  }
+
+  return defaultState();
+
+}
+
+
+function saveState() {
 
   localStorage.setItem(
-    KEY,
+    STORAGE_KEY,
     JSON.stringify(state)
   );
 
-  render();
 }
 
 
+/* =========================================================
+   TAB SYSTEM
+   ========================================================= */
 
-/* =========================================
-   PAGE NAVIGATION
-========================================= */
+function showTab(tabId, button) {
 
-function show(id) {
+  document
+    .querySelectorAll(".tab")
+    .forEach(tab => tab.classList.remove("active"));
 
-  [
-    "artist",
-    "owner",
-    "calendar"
-  ].forEach(function(section) {
+  document
+    .querySelectorAll(".tabButton")
+    .forEach(btn => btn.classList.remove("active"));
 
-    document
-      .getElementById(section)
-      .classList.toggle(
-        "hidden",
-        section !== id
-      );
+  document
+    .getElementById(tabId)
+    .classList.add("active");
 
-  });
+  if (button) {
+    button.classList.add("active");
+  }
 
-  render();
-}
-
-
-
-/* =========================================
-   BASIC SECURITY / HTML ESCAPE
-========================================= */
-
-function esc(value) {
-
-  return String(value || "")
-    .replace(/[&<>"']/g, function(c) {
-
-      return {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      }[c];
-
-    });
+  refreshUI();
 
 }
 
 
+/* =========================================================
+   ARTIST PROFILE
+   ========================================================= */
 
-/* =========================================
-   CHECK FOR CONFIRMED BOOKING
-========================================= */
+function saveArtistProfile() {
 
-function conflict(date) {
+  const profile = {
 
-  return state.confirmed.find(function(item) {
+    name: document.getElementById("artistName").value.trim(),
 
-    return item.date === date;
+    genre: document.getElementById("genre").value.trim(),
 
-  });
+    location: document.getElementById("location").value.trim(),
 
-}
+    contact: document.getElementById("contact").value.trim(),
 
+    performanceType:
+      document.getElementById("performanceType").value,
 
+    social:
+      document.getElementById("social").value.trim(),
 
-/* =========================================
-   CHECK DATE
-========================================= */
-
-function checkDate() {
-
-  const artist = document
-    .getElementById("artistName")
-    .value
-    .trim();
-
-  const genre = document
-    .getElementById("genre")
-    .value
-    .trim();
-
-  const location = document
-    .getElementById("location")
-    .value
-    .trim();
-
-  const date = document
-    .getElementById("date")
-    .value;
-
-  const time = document
-    .getElementById("time")
-    .value;
-
-  const contact = document
-    .getElementById("contact")
-    .value
-    .trim();
-
-  const notes = document
-    .getElementById("notes")
-    .value
-    .trim();
-
-
-  const availability =
-    document.getElementById(
-      "availability"
-    );
-
-
-  const profilePreview =
-    document.getElementById(
-      "profilePreview"
-    );
-
-
-  const artistData = {
-
-    artist,
-    genre,
-    location,
-    date,
-    time,
-    contact,
-    notes
+    bio:
+      document.getElementById("bio").value.trim()
 
   };
 
 
-  /* PROFILE PREVIEW */
+  if (!profile.name) {
 
-  if (artist) {
-
-    profilePreview.innerHTML =
-      "<strong>" +
-      esc(artist) +
-      "</strong> · " +
-
-      esc(
-        genre ||
-        "Genre not provided"
-      ) +
-
-      " · " +
-
-      esc(
-        location ||
-        "Location not provided"
-      ) +
-
-      "<br><small>" +
-
-      esc(
-        contact ||
-        "No contact yet"
-      ) +
-
-      "</small>";
-
-  } else {
-
-    profilePreview.innerHTML =
-      "Enter artist information above.";
-
-  }
-
-
-  /* REQUIRED FIELDS */
-
-  if (!artist || !date) {
-
-    availability.className =
-      "panel";
-
-    availability.innerHTML =
-      "<strong>Missing information.</strong>" +
-      "<br>" +
-      "Please enter an artist name and date.";
+    showStatus(
+      "profileStatus",
+      "Please enter the artist or band name.",
+      "bad"
+    );
 
     return;
 
   }
 
 
-  /* CONFLICT CHECK */
+  state.artistProfile = profile;
 
-  const existing =
-    conflict(date);
+  saveState();
 
+  showStatus(
+    "profileStatus",
+    "Artist profile saved.",
+    "good"
+  );
 
-  availability.className =
-    "panel";
-
-
-  /* UNAVAILABLE */
-
-  if (existing) {
-
-    availability.innerHTML =
-
-      '<div class="unavailable big">' +
-      "Unavailable" +
-      "</div>" +
-
-      "<p>" +
-      "Gemini already has a confirmed " +
-      "booking for this date." +
-      "</p>" +
-
-      '<span class="badge">' +
-      esc(existing.artist) +
-      "</span>" +
-
-      '<span class="badge">' +
-      esc(existing.time) +
-      "</span>";
-
-  }
-
-
-  /* AVAILABLE */
-
-  else {
-
-    availability.innerHTML =
-
-      '<div class="available big">' +
-      "Available" +
-      "</div>" +
-
-      "<p>" +
-      "No confirmed booking conflicts " +
-      "with this date." +
-      "</p>" +
-
-      '<button class="primary" ' +
-      'onclick=\'submitRequest(' +
-      JSON.stringify(artistData) +
-      ")\'>" +
-
-      "Submit Booking Request" +
-
-      "</button>";
-
-  }
+  refreshUI();
 
 }
 
 
+/* =========================================================
+   LOAD PROFILE INTO FORM
+   ========================================================= */
 
-/* =========================================
+function loadArtistProfile() {
+
+  const p = state.artistProfile;
+
+  if (!p) return;
+
+  document.getElementById("artistName").value =
+    p.name || "";
+
+  document.getElementById("genre").value =
+    p.genre || "";
+
+  document.getElementById("location").value =
+    p.location || "";
+
+  document.getElementById("contact").value =
+    p.contact || "";
+
+  document.getElementById("performanceType").value =
+    p.performanceType || "Solo";
+
+  document.getElementById("social").value =
+    p.social || "";
+
+  document.getElementById("bio").value =
+    p.bio || "";
+
+}
+
+
+/* =========================================================
+   AVAILABILITY
+   ========================================================= */
+
+function isDateConfirmed(date, ignoreBookingId = null) {
+
+  return state.bookings.some(booking =>
+
+    booking.status === "Confirmed" &&
+
+    booking.date === date &&
+
+    booking.id !== ignoreBookingId
+
+  );
+
+}
+
+
+function checkAvailability() {
+
+  const date =
+    document.getElementById("bookingDate").value;
+
+  const status =
+    document.getElementById("availabilityStatus");
+
+  const requestButton =
+    document.getElementById("requestButton");
+
+
+  if (!date) {
+
+    showStatus(
+      "availabilityStatus",
+      "Choose a date first.",
+      "bad"
+    );
+
+    requestButton.style.display = "none";
+
+    return;
+
+  }
+
+
+  selectedBookingDate = date;
+
+
+  if (isDateConfirmed(date)) {
+
+    showStatus(
+      "availabilityStatus",
+      "That date is already confirmed for another show.",
+      "bad"
+    );
+
+    requestButton.style.display = "none";
+
+    return;
+
+  }
+
+
+  showStatus(
+    "availabilityStatus",
+    "That date is currently available. You can submit a booking request.",
+    "good"
+  );
+
+  requestButton.style.display = "block";
+
+}
+
+
+/* =========================================================
    SUBMIT BOOKING REQUEST
-========================================= */
+   ========================================================= */
 
-function submitRequest(data) {
+function submitBookingRequest() {
 
-  /* DOUBLE CHECK */
+  const profile = state.artistProfile;
 
-  if (conflict(data.date)) {
+  if (!profile) {
 
-    alert(
-      "That date was just taken " +
-      "by a confirmed booking."
+    showStatus(
+      "availabilityStatus",
+      "Save your artist profile first.",
+      "bad"
     );
-
-    checkDate();
 
     return;
 
   }
 
 
-  /* ADD REQUEST */
+  const date =
+    document.getElementById("bookingDate").value;
 
-  state.requests.push({
+  const window =
+    document.getElementById("bookingWindow").value;
 
-    ...data,
+  const notes =
+    document.getElementById("bookingNotes").value.trim();
 
-    id: Date.now(),
 
-    status: "Pending"
+  if (!date) {
+
+    showStatus(
+      "availabilityStatus",
+      "Choose a date first.",
+      "bad"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Final availability check.
+    Pending requests do NOT block the date.
+  */
+
+  if (isDateConfirmed(date)) {
+
+    showStatus(
+      "availabilityStatus",
+      "That date was just taken by a confirmed booking.",
+      "bad"
+    );
+
+    return;
+
+  }
+
+
+  const booking = {
+
+    id: createId(),
+
+    artistName: profile.name,
+
+    genre: profile.genre,
+
+    location: profile.location,
+
+    contact: profile.contact,
+
+    performanceType: profile.performanceType,
+
+    social: profile.social,
+
+    bio: profile.bio,
+
+    date: date,
+
+    window: window,
+
+    notes: notes,
+
+    status: "Pending",
+
+    createdAt: new Date().toISOString()
+
+  };
+
+
+  state.bookings.push(booking);
+
+  state.history.push({
+    type: "Booking Request",
+    bookingId: booking.id,
+    artistName: booking.artistName,
+    date: booking.date,
+    status: "Pending",
+    timestamp: new Date().toISOString()
+  });
+
+
+  saveState();
+
+  showStatus(
+    "availabilityStatus",
+    "Booking request sent to Gemini.",
+    "good"
+  );
+
+  document.getElementById("requestButton").style.display =
+    "none";
+
+  document.getElementById("bookingNotes").value = "";
+
+  refreshUI();
+
+}
+
+
+/* =========================================================
+   OWNER — APPROVE BOOKING
+   ========================================================= */
+
+function approveBooking(id) {
+
+  const booking =
+    state.bookings.find(b => b.id === id);
+
+  if (!booking) return;
+
+
+  /*
+    Final conflict check.
+  */
+
+  if (isDateConfirmed(booking.date, booking.id)) {
+
+    alert(
+      "This date is already confirmed for another artist."
+    );
+
+    booking.status = "Declined";
+
+    saveState();
+
+    refreshUI();
+
+    return;
+
+  }
+
+
+  booking.status = "Confirmed";
+
+  booking.confirmedAt =
+    new Date().toISOString();
+
+
+  /*
+    Create event record.
+  */
+
+  const event = {
+
+    id: createId(),
+
+    bookingId: booking.id,
+
+    artistName: booking.artistName,
+
+    date: booking.date,
+
+    window: booking.window,
+
+    status: "Active",
+
+    createdAt: new Date().toISOString()
+
+  };
+
+
+  state.events.push(event);
+
+
+  state.history.push({
+
+    type: "Booking Approved",
+
+    bookingId: booking.id,
+
+    artistName: booking.artistName,
+
+    date: booking.date,
+
+    status: "Confirmed",
+
+    timestamp: new Date().toISOString()
 
   });
 
 
-  save();
+  saveState();
 
-
-  document.getElementById(
-    "availability"
-  ).innerHTML =
-
-    '<div class="available big">' +
-    "Request Submitted" +
-    "</div>" +
-
-    "<p>" +
-
-    "Gemini has received the request. " +
-
-    "The date remains available until " +
-    "an owner approves a booking." +
-
-    "</p>";
+  refreshUI();
 
 }
 
 
+/* =========================================================
+   OWNER — DECLINE BOOKING
+   ========================================================= */
 
-/* =========================================
-   APPROVE BOOKING
-========================================= */
+function declineBooking(id) {
 
-function approve(id) {
+  const booking =
+    state.bookings.find(b => b.id === id);
 
-  const request =
-    state.requests.find(
-      function(item) {
-
-        return item.id === id;
-
-      }
-    );
+  if (!booking) return;
 
 
-  if (!request) {
-
-    return;
-
-  }
+  booking.status = "Declined";
 
 
-  /* FINAL CONFLICT CHECK */
+  state.history.push({
 
-  if (conflict(request.date)) {
+    type: "Booking Declined",
 
-    alert(
-      "Cannot approve: that date " +
-      "now has a confirmed booking."
-    );
+    bookingId: booking.id,
 
-    return;
+    artistName: booking.artistName,
 
-  }
+    date: booking.date,
 
+    status: "Declined",
 
-  /* CREATE CONFIRMED EVENT */
-
-  state.confirmed.push({
-
-    artist: request.artist,
-
-    genre: request.genre,
-
-    date: request.date,
-
-    time: request.time
+    timestamp: new Date().toISOString()
 
   });
 
 
-  request.status =
-    "Approved";
+  saveState();
 
-
-  save();
+  refreshUI();
 
 }
 
 
+/* =========================================================
+   ARTIST — REQUEST RESCHEDULE
+   ========================================================= */
 
-/* =========================================
-   DECLINE BOOKING
-========================================= */
+function requestReschedule(id) {
 
-function decline(id) {
+  const booking =
+    state.bookings.find(b => b.id === id);
 
-  const request =
-    state.requests.find(
-      function(item) {
+  if (!booking) return;
 
-        return item.id === id;
 
-      }
+  if (booking.status !== "Confirmed") {
+
+    alert(
+      "Only confirmed bookings can be rescheduled."
     );
-
-
-  if (!request) {
 
     return;
 
   }
 
 
-  request.status =
-    "Declined";
+  const newDate =
+    prompt(
+      "Enter the new date (YYYY-MM-DD):",
+      booking.date
+    );
 
 
-  save();
+  if (!newDate) return;
+
+
+  const newWindow =
+    prompt(
+      "Enter the new performance window:",
+      booking.window
+    );
+
+
+  if (!newWindow) return;
+
+
+  const reason =
+    prompt(
+      "Reason for reschedule (optional):",
+      ""
+    ) || "";
+
+
+  /*
+    Check new date.
+    Original booking is ignored because
+    it is being moved.
+  */
+
+  if (isDateConfirmed(newDate, booking.id)) {
+
+    alert(
+      "That new date is already occupied by another confirmed show."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Do NOT change the original booking yet.
+    Gemini must approve first.
+  */
+
+  const request = {
+
+    id: createId(),
+
+    bookingId: booking.id,
+
+    artistName: booking.artistName,
+
+    originalDate: booking.date,
+
+    originalWindow: booking.window,
+
+    newDate: newDate,
+
+    newWindow: newWindow,
+
+    reason: reason,
+
+    status: "Pending",
+
+    createdAt: new Date().toISOString()
+
+  };
+
+
+  state.rescheduleRequests.push(request);
+
+  booking.status = "Reschedule Requested";
+
+
+  state.history.push({
+
+    type: "Reschedule Requested",
+
+    bookingId: booking.id,
+
+    artistName: booking.artistName,
+
+    date: newDate,
+
+    status: "Reschedule Requested",
+
+    timestamp: new Date().toISOString()
+
+  });
+
+
+  saveState();
+
+  refreshUI();
+
+
+  alert(
+    "Reschedule request sent to Gemini. Your original booking remains protected until the request is approved."
+  );
 
 }
 
 
+/* =========================================================
+   OWNER — APPROVE RESCHEDULE
+   ========================================================= */
 
-/* =========================================
-   RENDER EVERYTHING
-========================================= */
+function approveReschedule(requestId) {
 
-function render() {
+  const request =
+    state.rescheduleRequests.find(
+      r => r.id === requestId
+    );
 
-  const pending =
-    state.requests.filter(
-      function(item) {
+  if (!request) return;
 
-        return item.status === "Pending";
 
-      }
+  const booking =
+    state.bookings.find(
+      b => b.id === request.bookingId
     );
 
 
-  /* REQUEST COUNT */
-
-  document.getElementById(
-    "requestCount"
-  ).textContent =
-    pending.length +
-    " pending";
+  if (!booking) return;
 
 
-  /* =====================================
-     REQUEST LIST
-  ===================================== */
+  /*
+    FINAL conflict check.
+  */
 
-  const requests =
-    document.getElementById(
-      "requests"
+  if (
+    isDateConfirmed(
+      request.newDate,
+      booking.id
+    )
+  ) {
+
+    alert(
+      "The requested new date is no longer available. The original booking remains unchanged."
     );
 
+    request.status = "Declined";
 
-  if (pending.length) {
+    booking.status = "Confirmed";
 
-    requests.innerHTML =
-      pending.map(function(r) {
+    saveState();
 
-        return `
+    refreshUI();
 
-          <div class="request">
-
-            <div class="row">
-
-              <strong>
-                ${esc(r.artist)}
-              </strong>
-
-              <span class="badge">
-                ${esc(r.date)}
-              </span>
-
-            </div>
-
-            <p>
-              ${esc(r.genre)}
-              ·
-              ${esc(r.time)}
-              ·
-              ${esc(r.location)}
-            </p>
-
-            <small>
-              ${esc(r.contact)}
-
-              ${
-                r.notes
-                ? " · " + esc(r.notes)
-                : ""
-              }
-
-            </small>
-
-            <br><br>
-
-            <button
-              class="good"
-              onclick="approve(${r.id})">
-
-              Approve
-
-            </button>
-
-            <button
-              class="danger"
-              onclick="decline(${r.id})">
-
-              Decline
-
-            </button>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-  else {
-
-    requests.innerHTML =
-      '<p class="muted">' +
-      "No pending requests." +
-      "</p>";
+    return;
 
   }
 
 
+  /*
+    Move booking.
+  */
 
-  /* =====================================
-     CONFIRMED SHOWS
-  ===================================== */
+  const oldDate = booking.date;
+
+  booking.date = request.newDate;
+
+  booking.window = request.newWindow;
+
+  booking.status = "Confirmed";
+
+  booking.rescheduledAt =
+    new Date().toISOString();
+
+
+  request.status = "Approved";
+
+
+  /*
+    Update corresponding event.
+  */
+
+  const event =
+    state.events.find(
+      e => e.bookingId === booking.id
+    );
+
+  if (event) {
+
+    event.date = booking.date;
+
+    event.window = booking.window;
+
+  }
+
+
+  state.history.push({
+
+    type: "Reschedule Approved",
+
+    bookingId: booking.id,
+
+    artistName: booking.artistName,
+
+    date: booking.date,
+
+    previousDate: oldDate,
+
+    status: "Confirmed",
+
+    timestamp: new Date().toISOString()
+
+  });
+
+
+  saveState();
+
+  refreshUI();
+
+}
+
+
+/* =========================================================
+   OWNER — DECLINE RESCHEDULE
+   ========================================================= */
+
+function declineReschedule(requestId) {
+
+  const request =
+    state.rescheduleRequests.find(
+      r => r.id === requestId
+    );
+
+  if (!request) return;
+
+
+  const booking =
+    state.bookings.find(
+      b => b.id === request.bookingId
+    );
+
+
+  if (booking) {
+
+    booking.status = "Confirmed";
+
+  }
+
+
+  request.status = "Declined";
+
+
+  state.history.push({
+
+    type: "Reschedule Declined",
+
+    bookingId: request.bookingId,
+
+    artistName: request.artistName,
+
+    date: request.newDate,
+
+    status: "Declined",
+
+    timestamp: new Date().toISOString()
+
+  });
+
+
+  saveState();
+
+  refreshUI();
+
+}
+
+
+/* =========================================================
+   OWNER — CANCEL BOOKING
+   ========================================================= */
+
+function cancelBooking(id) {
+
+  const booking =
+    state.bookings.find(b => b.id === id);
+
+  if (!booking) return;
+
+
+  if (booking.status !== "Confirmed") {
+
+    alert(
+      "Only confirmed bookings can be cancelled from here."
+    );
+
+    return;
+
+  }
+
 
   const confirmed =
-    document.getElementById(
-      "confirmed"
+    confirm(
+      "Cancel this Gemini booking?\n\nThe date will become available again, but the booking will remain in history."
     );
 
 
-  const sortedConfirmed =
-    [...state.confirmed].sort(
-      function(a,b) {
+  if (!confirmed) return;
 
-        return a.date.localeCompare(
-          b.date
-        );
 
-      }
+  booking.status = "Cancelled";
+
+  booking.cancelledAt =
+    new Date().toISOString();
+
+
+  /*
+    Release the event.
+  */
+
+  const event =
+    state.events.find(
+      e => e.bookingId === booking.id
+    );
+
+  if (event) {
+
+    event.status = "Cancelled";
+
+  }
+
+
+  /*
+    Resolve pending reschedule request
+    attached to this booking.
+  */
+
+  state.rescheduleRequests
+    .filter(
+      r =>
+        r.bookingId === booking.id &&
+        r.status === "Pending"
+    )
+    .forEach(
+      r => r.status = "Cancelled"
     );
 
 
-  if (sortedConfirmed.length) {
+  state.history.push({
 
-    confirmed.innerHTML =
-      sortedConfirmed.map(function(r) {
+    type: "Booking Cancelled",
 
-        return `
+    bookingId: booking.id,
 
-          <div class="event">
+    artistName: booking.artistName,
 
-            <strong>
-              ${esc(r.artist)}
-            </strong>
+    date: booking.date,
 
-            <br>
+    status: "Cancelled",
 
-            <span class="badge">
-              ${esc(r.date)}
-            </span>
+    timestamp: new Date().toISOString()
 
-            <span class="badge">
-              ${esc(r.time)}
-            </span>
-
-            <span class="badge">
-              ${esc(r.genre)}
-            </span>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-  else {
-
-    confirmed.innerHTML =
-      '<p class="muted">' +
-      "No confirmed shows." +
-      "</p>";
-
-  }
+  });
 
 
+  saveState();
 
-  /* =====================================
-     CALENDAR
-  ===================================== */
-
-  const calendar =
-    document.getElementById(
-      "cal"
-    );
-
-
-  if (sortedConfirmed.length) {
-
-    calendar.innerHTML =
-      sortedConfirmed.map(function(r) {
-
-        return `
-
-          <div class="event">
-
-            <div class="big">
-              ${esc(r.date)}
-            </div>
-
-            <strong>
-              ${esc(r.artist)}
-            </strong>
-
-            <br>
-
-            ${esc(r.time)}
-            ·
-            ${esc(r.genre)}
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-  else {
-
-    calendar.innerHTML =
-      '<p class="muted">' +
-      "Calendar is clear." +
-      "</p>";
-
-  }
+  refreshUI();
 
 }
 
 
+/* =========================================================
+   ARTIST BOOKINGS
+   ========================================================= */
 
-/* =========================================
+function renderArtistBookings() {
+
+  const container =
+    document.getElementById("artistBookings");
+
+  const profile =
+    state.artistProfile;
+
+
+  if (!profile) {
+
+    container.innerHTML =
+      '<div class="empty">Save an artist profile first.</div>';
+
+    return;
+
+  }
+
+
+  const bookings =
+    state.bookings.filter(
+      b => b.artistName === profile.name
+    );
+
+
+  if (!bookings.length) {
+
+    container.innerHTML =
+      '<div class="empty">No bookings yet.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    bookings
+      .slice()
+      .sort(
+        (a, b) =>
+          a.date.localeCompare(b.date)
+      )
+      .map(renderArtistBookingCard)
+      .join("");
+
+}
+
+
+function renderArtistBookingCard(booking) {
+
+  let badgeClass = "";
+
+  if (booking.status === "Confirmed")
+    badgeClass = "confirmed";
+
+  if (booking.status === "Pending")
+    badgeClass = "pending";
+
+  if (booking.status === "Reschedule Requested")
+    badgeClass = "reschedule";
+
+  if (booking.status === "Cancelled")
+    badgeClass = "cancelled";
+
+  if (booking.status === "Declined")
+    badgeClass = "declined";
+
+
+  let actions = "";
+
+
+  if (
+    booking.status === "Confirmed"
+  ) {
+
+    actions += `
+      <button
+        class="secondary"
+        onclick="requestReschedule('${booking.id}')">
+        Request Reschedule
+      </button>
+    `;
+
+  }
+
+
+  return `
+
+    <div class="card">
+
+      <span class="badge ${badgeClass}">
+        ${escapeHTML(booking.status)}
+      </span>
+
+      <h3>
+        ${escapeHTML(booking.artistName)}
+      </h3>
+
+      <div class="meta">
+
+        <strong>Date:</strong>
+        ${escapeHTML(booking.date)}
+        <br>
+
+        <strong>Time:</strong>
+        ${escapeHTML(booking.window)}
+        <br>
+
+        <strong>Genre:</strong>
+        ${escapeHTML(booking.genre || "Not specified")}
+
+      </div>
+
+      ${
+        booking.notes
+          ? `
+            <div class="meta">
+              <strong>Notes:</strong>
+              ${escapeHTML(booking.notes)}
+            </div>
+          `
+          : ""
+      }
+
+      ${
+        booking.status === "Reschedule Requested"
+          ? `
+            <div class="meta">
+              A reschedule request is waiting for Gemini approval.
+            </div>
+          `
+          : ""
+      }
+
+      <div class="actions">
+        ${actions}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   OWNER — PENDING REQUESTS
+   ========================================================= */
+
+function renderPendingRequests() {
+
+  const container =
+    document.getElementById("pendingRequests");
+
+
+  const requests =
+    state.bookings.filter(
+      b => b.status === "Pending"
+    );
+
+
+  if (!requests.length) {
+
+    container.innerHTML =
+      '<div class="empty">No pending booking requests.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    requests
+      .slice()
+      .sort(
+        (a, b) =>
+          a.date.localeCompare(b.date)
+      )
+      .map(renderPendingCard)
+      .join("");
+
+}
+
+
+function renderPendingCard(booking) {
+
+  return `
+
+    <div class="card">
+
+      <span class="badge pending">
+        Pending
+      </span>
+
+      <h3>
+        ${escapeHTML(booking.artistName)}
+      </h3>
+
+      <div class="meta">
+
+        <strong>Date:</strong>
+        ${escapeHTML(booking.date)}
+        <br>
+
+        <strong>Performance:</strong>
+        ${escapeHTML(booking.window)}
+        <br>
+
+        <strong>Genre:</strong>
+        ${escapeHTML(booking.genre || "Not specified")}
+        <br>
+
+        <strong>Location:</strong>
+        ${escapeHTML(booking.location || "Not specified")}
+        <br>
+
+        <strong>Contact:</strong>
+        ${escapeHTML(booking.contact || "Not provided")}
+
+      </div>
+
+      ${
+        booking.bio
+          ? `
+            <div class="meta">
+              <strong>Bio:</strong>
+              ${escapeHTML(booking.bio)}
+            </div>
+          `
+          : ""
+      }
+
+      ${
+        booking.social
+          ? `
+            <div class="meta">
+              <strong>Social:</strong>
+              ${escapeHTML(booking.social)}
+            </div>
+          `
+          : ""
+      }
+
+      ${
+        booking.notes
+          ? `
+            <div class="meta">
+              <strong>Notes:</strong>
+              ${escapeHTML(booking.notes)}
+            </div>
+          `
+          : ""
+      }
+
+      <div class="actions">
+
+        <button
+          class="success"
+          onclick="approveBooking('${booking.id}')">
+          Approve
+        </button>
+
+        <button
+          class="danger"
+          onclick="declineBooking('${booking.id}')">
+          Decline
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   OWNER — RESCHEDULE REQUESTS
+   ========================================================= */
+
+function renderRescheduleRequests() {
+
+  const container =
+    document.getElementById("rescheduleRequests");
+
+
+  const requests =
+    state.rescheduleRequests.filter(
+      r => r.status === "Pending"
+    );
+
+
+  if (!requests.length) {
+
+    container.innerHTML =
+      '<div class="empty">No pending reschedule requests.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    requests
+      .map(renderRescheduleCard)
+      .join("");
+
+}
+
+
+function renderRescheduleCard(request) {
+
+  return `
+
+    <div class="card">
+
+      <span class="badge reschedule">
+        Reschedule Requested
+      </span>
+
+      <h3>
+        ${escapeHTML(request.artistName)}
+      </h3>
+
+      <div class="meta">
+
+        <strong>Current:</strong>
+        ${escapeHTML(request.originalDate)}
+        — ${escapeHTML(request.originalWindow)}
+
+        <br><br>
+
+        <strong>Requested:</strong>
+        ${escapeHTML(request.newDate)}
+        — ${escapeHTML(request.newWindow)}
+
+        ${
+          request.reason
+            ? `
+              <br><br>
+              <strong>Reason:</strong>
+              ${escapeHTML(request.reason)}
+            `
+            : ""
+        }
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="success"
+          onclick="approveReschedule('${request.id}')">
+          Approve Reschedule
+        </button>
+
+        <button
+          class="danger"
+          onclick="declineReschedule('${request.id}')">
+          Decline
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   OWNER — CONFIRMED SHOWS
+   ========================================================= */
+
+function renderConfirmedShows() {
+
+  const container =
+    document.getElementById("confirmedShows");
+
+
+  const shows =
+    state.bookings.filter(
+      b => b.status === "Confirmed"
+    );
+
+
+  if (!shows.length) {
+
+    container.innerHTML =
+      '<div class="empty">No confirmed shows.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    shows
+      .slice()
+      .sort(
+        (a, b) =>
+          a.date.localeCompare(b.date)
+      )
+      .map(renderConfirmedCard)
+      .join("");
+
+}
+
+
+function renderConfirmedCard(booking) {
+
+  return `
+
+    <div class="card">
+
+      <span class="badge confirmed">
+        Confirmed
+      </span>
+
+      <h3>
+        ${escapeHTML(booking.artistName)}
+      </h3>
+
+      <div class="meta">
+
+        <strong>Date:</strong>
+        ${escapeHTML(booking.date)}
+        <br>
+
+        <strong>Time:</strong>
+        ${escapeHTML(booking.window)}
+        <br>
+
+        <strong>Genre:</strong>
+        ${escapeHTML(booking.genre || "Not specified")}
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="danger"
+          onclick="cancelBooking('${booking.id}')">
+          Cancel Booking
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+function renderCalendar() {
+
+  const container =
+    document.getElementById("calendarList");
+
+
+  const bookings =
+    state.bookings
+      .filter(
+        b =>
+          b.status === "Confirmed" ||
+          b.status === "Cancelled"
+      )
+      .slice()
+      .sort(
+        (a, b) =>
+          a.date.localeCompare(b.date)
+      );
+
+
+  if (!bookings.length) {
+
+    container.innerHTML =
+      '<div class="empty">No scheduled shows yet.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    bookings
+      .map(booking => {
+
+        const isCancelled =
+          booking.status === "Cancelled";
+
+
+        return `
+
+          <div class="calendar-day ${
+            isCancelled
+              ? "cancelled"
+              : "booked"
+          }">
+
+            <strong>
+              ${escapeHTML(booking.date)}
+            </strong>
+
+            <br>
+
+            <span class="meta">
+
+              ${
+                isCancelled
+                  ? "AVAILABLE — previous booking cancelled"
+                  : `
+                    ${escapeHTML(booking.artistName)}
+                    —
+                    ${escapeHTML(booking.window)}
+                  `
+              }
+
+            </span>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+function renderHistory() {
+
+  const container =
+    document.getElementById("historyList");
+
+
+  if (!state.history.length) {
+
+    container.innerHTML =
+      '<div class="empty">No booking history yet.</div>';
+
+    return;
+
+  }
+
+
+  const history =
+    state.history
+      .slice()
+      .reverse();
+
+
+  container.innerHTML =
+    history
+      .map(item => `
+
+        <div class="card">
+
+          <span class="badge">
+            ${escapeHTML(item.status)}
+          </span>
+
+          <h3>
+            ${escapeHTML(item.type)}
+          </h3>
+
+          <div class="meta">
+
+            <strong>Artist:</strong>
+            ${escapeHTML(item.artistName)}
+
+            <br>
+
+            <strong>Date:</strong>
+            ${escapeHTML(item.date)}
+
+            ${
+              item.previousDate
+                ? `
+                  <br>
+                  <strong>Previous Date:</strong>
+                  ${escapeHTML(item.previousDate)}
+                `
+                : ""
+            }
+
+            <br>
+
+            <strong>Recorded:</strong>
+            ${formatTimestamp(item.timestamp)}
+
+          </div>
+
+        </div>
+
+      `)
+      .join("");
+
+}
+
+
+/* =========================================================
+   UI REFRESH
+   ========================================================= */
+
+function refreshUI() {
+
+  renderArtistBookings();
+
+  renderPendingRequests();
+
+  renderRescheduleRequests();
+
+  renderConfirmedShows();
+
+  renderCalendar();
+
+  renderHistory();
+
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+   ========================================================= */
+
+function showStatus(
+  elementId,
+  message,
+  type
+) {
+
+  const element =
+    document.getElementById(elementId);
+
+  element.textContent = message;
+
+  element.className =
+    "status show " + type;
+
+}
+
+
+/* =========================================================
+   ID GENERATOR
+   ========================================================= */
+
+function createId() {
+
+  return (
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .substring(2, 8)
+  );
+
+}
+
+
+/* =========================================================
+   TIMESTAMP
+   ========================================================= */
+
+function formatTimestamp(timestamp) {
+
+  if (!timestamp) return "";
+
+  return new Date(timestamp)
+    .toLocaleString();
+
+}
+
+
+/* =========================================================
+   BASIC HTML ESCAPE
+   ========================================================= */
+
+function escapeHTML(value) {
+
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
    INITIALIZE
-========================================= */
+   ========================================================= */
 
-render();
+loadArtistProfile();
+
+refreshUI();
 
 </script>
 
