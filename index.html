@@ -2,31 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini Lounge — ScanCraft V2.0</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gemini Lounge — ScanCraft</title>
 
 <style>
 :root{
-  --bg:#090909;
-  --panel:#111;
-  --panel2:#171717;
-  --line:#292929;
-  --text:#f4f4f4;
-  --muted:#999;
-  --gold:#f4b942;
-  --green:#43d17c;
-  --red:#ff5d5d;
-  --blue:#55aaff;
-  --purple:#a978ff;
+  --bg:#0b0d10;
+  --panel:#13171c;
+  --panel2:#191e25;
+  --line:#2a3038;
+  --text:#f2f4f7;
+  --muted:#9da6b2;
+  --accent:#d9b56d;
+  --green:#62d39b;
+  --red:#ef7272;
+  --blue:#72a9ef;
+  --shadow:0 15px 40px rgba(0,0,0,.28);
 }
 
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  background:var(--bg);
+  background:linear-gradient(180deg,#090b0e,#101419 55%,#090b0e);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Inter,Arial,sans-serif;
+  min-height:100vh;
 }
 
 button,input,select,textarea{
@@ -37,497 +38,381 @@ button{
   cursor:pointer;
 }
 
-header{
+.header{
+  padding:22px 18px 16px;
+  border-bottom:1px solid var(--line);
+  background:rgba(10,12,15,.94);
   position:sticky;
   top:0;
   z-index:20;
-  background:#0b0b0b;
-  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(12px);
 }
 
 .header-inner{
-  max-width:1200px;
+  max-width:1180px;
   margin:auto;
-  padding:18px 20px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  font-weight:900;
+  letter-spacing:.13em;
+  font-size:18px;
 }
 
-.brand h1{
-  margin:0;
-  font-size:24px;
-  letter-spacing:2px;
+.brand small{
+  display:block;
+  color:var(--muted);
+  letter-spacing:.04em;
+  font-weight:500;
+  margin-top:4px;
+  font-size:11px;
 }
 
-.brand span{
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:1px;
+.status{
+  font-size:11px;
+  color:var(--green);
+  border:1px solid rgba(98,211,155,.3);
+  padding:6px 9px;
+  border-radius:20px;
+}
+
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:20px 16px 70px;
 }
 
 .tabs{
   display:flex;
-  gap:7px;
-  overflow-x:auto;
-  padding-top:15px;
-  scrollbar-width:none;
-}
-
-.tabs::-webkit-scrollbar{
-  display:none;
+  gap:8px;
+  overflow:auto;
+  padding-bottom:10px;
+  margin-bottom:18px;
 }
 
 .tab{
   flex:0 0 auto;
   border:1px solid var(--line);
-  background:#101010;
+  background:var(--panel);
   color:var(--muted);
-  border-radius:9px;
-  padding:9px 12px;
+  padding:10px 14px;
+  border-radius:10px;
 }
 
 .tab.active{
-  background:var(--gold);
   color:#111;
-  border-color:var(--gold);
-  font-weight:bold;
+  background:var(--accent);
+  border-color:var(--accent);
+  font-weight:800;
 }
 
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:25px 20px 70px;
-}
-
-.tab-panel{
-  display:none;
-}
-
-.tab-panel.active{
-  display:block;
-}
-
-h2{
-  margin:0 0 7px;
-  font-size:28px;
-}
-
-h3{
-  margin-top:0;
-}
-
-.subtitle{
-  color:var(--muted);
-  margin-bottom:22px;
-}
+.view{display:none}
+.view.active{display:block}
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
-}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;
+  grid-template-columns:repeat(12,1fr);
+  gap:14px;
 }
 
 .card{
-  background:var(--panel);
+  background:linear-gradient(180deg,var(--panel2),var(--panel));
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:16px;
+  border-radius:15px;
+  padding:17px;
+  box-shadow:var(--shadow);
 }
 
-.card.gold{
-  border-color:#715a20;
+.span-12{grid-column:span 12}
+.span-8{grid-column:span 8}
+.span-6{grid-column:span 6}
+.span-4{grid-column:span 4}
+
+h1,h2,h3{
+  margin:0 0 9px;
 }
 
-.card.green{
-  border-color:#245c3b;
-}
+h1{font-size:28px}
+h2{font-size:19px}
+h3{font-size:15px}
 
-.card.blue{
-  border-color:#244e70;
-}
-
-.card.purple{
-  border-color:#503a72;
+p{
+  color:var(--muted);
+  line-height:1.55;
 }
 
 label{
   display:block;
   color:var(--muted);
   font-size:12px;
-  margin:0 0 6px;
+  margin-bottom:6px;
 }
 
 input,select,textarea{
   width:100%;
-  background:#0c0c0c;
-  color:var(--text);
-  border:1px solid var(--line);
-  border-radius:9px;
   padding:11px 12px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:#0d1014;
+  color:var(--text);
   outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
-  border-color:var(--gold);
-}
-
 textarea{
-  min-height:110px;
+  min-height:100px;
   resize:vertical;
 }
 
-.field{
-  margin-bottom:14px;
+input:focus,select:focus,textarea:focus{
+  border-color:var(--accent);
 }
 
-.row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
+
+.full{grid-column:1/-1}
 
 .btn{
   border:1px solid var(--line);
-  background:#191919;
+  background:#1b2128;
   color:var(--text);
   padding:10px 14px;
   border-radius:9px;
-  font-weight:bold;
+  font-weight:700;
 }
 
 .btn:hover{
-  filter:brightness(1.15);
+  border-color:#555f6b;
 }
 
-.btn.gold{
-  background:var(--gold);
+.btn.primary{
+  background:var(--accent);
   color:#111;
-  border-color:var(--gold);
+  border-color:var(--accent);
 }
 
 .btn.green{
-  background:var(--green);
-  color:#07150c;
-  border-color:var(--green);
+  background:rgba(98,211,155,.15);
+  border-color:rgba(98,211,155,.4);
+  color:var(--green);
 }
 
 .btn.red{
-  background:var(--red);
-  color:#170606;
-  border-color:var(--red);
+  background:rgba(239,114,114,.12);
+  border-color:rgba(239,114,114,.35);
+  color:var(--red);
 }
 
 .btn.blue{
-  background:var(--blue);
-  color:#07131d;
-  border-color:var(--blue);
+  background:rgba(114,169,239,.12);
+  border-color:rgba(114,169,239,.35);
+  color:var(--blue);
 }
 
-.btn.purple{
-  background:var(--purple);
-  color:#11081c;
-  border-color:var(--purple);
-}
-
-.btn.small{
-  padding:7px 10px;
-  font-size:12px;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.small{
-  font-size:12px;
-}
-
-.metric{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:15px;
-}
-
-.metric .number{
-  font-size:28px;
-  font-weight:bold;
-  margin-bottom:3px;
-}
-
-.metric .label{
-  color:var(--muted);
-  font-size:12px;
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:13px;
 }
 
 .badge{
-  display:inline-block;
-  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
   padding:5px 9px;
+  border-radius:20px;
   font-size:11px;
-  font-weight:bold;
+  font-weight:800;
   border:1px solid var(--line);
-  background:#1b1b1b;
+  color:var(--muted);
 }
 
-.badge.green{
+.badge.pending{
+  color:var(--accent);
+  border-color:rgba(217,181,109,.35);
+}
+
+.badge.approved{
   color:var(--green);
-  border-color:#245c3b;
+  border-color:rgba(98,211,155,.35);
 }
 
-.badge.gold{
-  color:var(--gold);
-  border-color:#715a20;
-}
-
-.badge.red{
+.badge.declined{
   color:var(--red);
-  border-color:#6d2929;
+  border-color:rgba(239,114,114,.35);
 }
 
-.badge.blue{
-  color:var(--blue);
-  border-color:#244e70;
+.badge.cancelled{
+  color:var(--muted);
 }
 
-.badge.purple{
-  color:var(--purple);
-  border-color:#503a72;
+.hero{
+  padding:30px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at top right,rgba(217,181,109,.14),transparent 40%),
+    linear-gradient(135deg,#171b21,#0e1115);
+  margin-bottom:15px;
 }
 
-.fit{
-  font-size:48px;
-  font-weight:bold;
-  line-height:1;
-  margin:8px 0;
+.hero h1{
+  font-size:36px;
 }
 
-.fit.excellent{
-  color:var(--green);
+.kicker{
+  color:var(--accent);
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.14em;
+  font-weight:800;
+  margin-bottom:9px;
 }
 
-.fit.strong{
-  color:var(--gold);
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
-.fit.potential{
-  color:var(--blue);
+.stat{
+  padding:15px;
+  border:1px solid var(--line);
+  background:#0e1216;
+  border-radius:11px;
 }
 
-.fit.low{
-  color:var(--red);
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-bottom:3px;
 }
 
-.factor{
-  margin:11px 0;
+.stat span{
+  color:var(--muted);
+  font-size:11px;
 }
 
-.factor-top{
+.event{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  background:#101419;
+  margin-bottom:10px;
+}
+
+.event:last-child{
+  margin-bottom:0;
+}
+
+.event-top{
   display:flex;
   justify-content:space-between;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-.bar{
-  height:7px;
-  background:#222;
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.bar span{
-  display:block;
-  height:100%;
-  background:var(--gold);
-}
-
-.list-item{
-  border-top:1px solid var(--line);
-  padding:15px 0;
-}
-
-.list-item:first-child{
-  border-top:0;
-  padding-top:0;
-}
-
-.event-card{
-  background:linear-gradient(145deg,#171717,#0f0f0f);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:18px;
-}
-
-.event-card h3{
-  margin:8px 0;
+  gap:10px;
+  align-items:flex-start;
 }
 
 .event-date{
-  color:var(--gold);
-  font-size:13px;
-  font-weight:bold;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
 }
 
-.event-artist{
-  font-size:21px;
-  font-weight:bold;
+.event-title{
+  font-size:17px;
+  font-weight:800;
+  margin:5px 0;
 }
 
 .event-meta{
   color:var(--muted);
-  margin:7px 0 14px;
+  font-size:12px;
 }
 
-.public-shell{
-  max-width:1050px;
-  margin:auto;
-}
-
-.public-hero{
-  background:
-    radial-gradient(circle at 85% 20%,rgba(244,185,66,.17),transparent 28%),
-    linear-gradient(145deg,#171717,#0b0b0b);
+.artist-card{
   border:1px solid var(--line);
-  border-radius:20px;
-  padding:30px;
-  margin-bottom:20px;
+  border-radius:12px;
+  padding:15px;
+  background:#101419;
 }
 
-.public-hero h2{
-  font-size:42px;
+.artist-avatar{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#252b32;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color:var(--accent);
   margin-bottom:10px;
 }
 
-.public-hero p{
-  max-width:700px;
-  color:#c5c5c5;
-  line-height:1.6;
+.empty{
+  padding:25px;
+  border:1px dashed var(--line);
+  border-radius:11px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.notice{
+  border-left:3px solid var(--accent);
+  padding:11px 13px;
+  background:rgba(217,181,109,.06);
+  color:var(--muted);
+  margin:12px 0;
+}
+
+.qr{
+  width:150px;
+  height:150px;
+  border-radius:8px;
+  background:white;
+  padding:5px;
 }
 
 .public-nav{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin:20px 0;
+  margin-top:15px;
 }
 
-.public-nav button{
-  background:#151515;
-  color:#ddd;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:8px 13px;
-}
-
-.public-section-title{
-  margin:28px 0 14px;
-  font-size:20px;
-}
-
-.spotlight{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:16px;
-}
-
-.artist-name{
-  font-size:27px;
-  font-weight:bold;
-}
-
-.social{
-  color:var(--blue);
-  word-break:break-word;
-}
-
-.qr{
-  background:white;
-  padding:12px;
-  border-radius:10px;
-  display:inline-block;
-}
-
-.qr img{
-  width:180px;
-  height:180px;
-  display:block;
-}
-
-.empty{
-  padding:25px;
-  text-align:center;
+.small{
+  font-size:11px;
   color:var(--muted);
-  border:1px dashed var(--line);
-  border-radius:12px;
 }
 
-.toast{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#eee;
-  color:#111;
-  padding:12px 15px;
-  border-radius:9px;
-  font-weight:bold;
-  z-index:100;
-  opacity:0;
-  transform:translateY(10px);
-  transition:.2s;
-  pointer-events:none;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-hr{
-  border:0;
-  border-top:1px solid var(--line);
-  margin:20px 0;
-}
-
-pre{
-  white-space:pre-wrap;
-  word-break:break-word;
-  background:#0a0a0a;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:14px;
-  color:#ddd;
-  font-size:12px;
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:16px 0;
 }
 
 @media(max-width:800px){
-  .grid,.grid3,.spotlight{
+  .span-8,.span-6,.span-4{
+    grid-column:span 12;
+  }
+
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .public-hero h2{
-    font-size:32px;
+  .stat-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  main{
-    padding-left:14px;
-    padding-right:14px;
-  }
-
-  .brand h1{
-    font-size:19px;
+  .hero h1{
+    font-size:29px;
   }
 }
 </style>
@@ -535,521 +420,504 @@ pre{
 
 <body>
 
-<header>
+<header class="header">
   <div class="header-inner">
-
     <div class="brand">
-      <div>
-        <h1>GEMINI LOUNGE</h1>
-        <span>SCANCRAFT V2.0</span>
-      </div>
-
-      <button class="btn small" onclick="showPublicHome()">
-        Customer View
-      </button>
+      GEMINI LOUNGE
+      <small>ScanCraft Booking Engine</small>
     </div>
-
-    <div class="tabs">
-
-      <button class="tab active" data-tab="booking">
-        Artist Booking
-      </button>
-
-      <button class="tab" data-tab="mybookings">
-        My Bookings
-      </button>
-
-      <button class="tab" data-tab="owner">
-        Owner Command
-      </button>
-
-      <button class="tab" data-tab="events">
-        Events
-      </button>
-
-      <button class="tab" data-tab="promotion">
-        Promotion
-      </button>
-
-      <button class="tab" data-tab="calendar">
-        Calendar
-      </button>
-
-      <button class="tab" data-tab="history">
-        History
-      </button>
-
-    </div>
+    <div class="status">SYSTEM ONLINE</div>
   </div>
 </header>
 
-<main>
+<main class="container">
 
-<!-- =========================================================
-     ARTIST BOOKING
-========================================================= -->
+  <nav class="tabs" id="mainTabs">
+    <button class="tab active" data-view="artistPortal">Artist</button>
+    <button class="tab" data-view="artistBookings">My Bookings</button>
+    <button class="tab" data-view="customer">Customer</button>
+    <button class="tab" data-view="owner">Owner</button>
+    <button class="tab" data-view="events">Events</button>
+    <button class="tab" data-view="promotion">Promotion</button>
+    <button class="tab" data-view="calendar">Calendar</button>
+    <button class="tab" data-view="history">History</button>
+  </nav>
 
-<section id="tab-booking" class="tab-panel active">
+  <!-- ========================================================= -->
+  <!-- ARTIST PORTAL -->
+  <!-- ========================================================= -->
 
-  <h2>Artist Booking</h2>
+  <section class="view active" id="artistPortal">
 
-  <div class="subtitle">
-    Build an artist profile, calculate Gemini Fit, and request a performance slot.
-  </div>
+    <div class="hero">
+      <div class="kicker">Artist Experience</div>
+      <h1>Play Gemini.</h1>
+      <p>
+        Build your artist profile, request a performance date,
+        and keep track of your shows in one simple place.
+      </p>
 
-  <div class="grid">
-
-    <div class="card">
-
-      <h3>Artist Profile</h3>
-
-      <div class="field">
-        <label>Artist / Band Name</label>
-        <input id="artistName" placeholder="Example: Coastal Signal">
+      <div class="public-nav">
+        <button class="btn primary" onclick="scrollToArtistForm()">Create / Update Artist Profile</button>
+        <button class="btn" onclick="showView('artistBookings')">View My Bookings</button>
       </div>
-
-      <div class="field">
-        <label>Genre</label>
-        <select id="genre">
-          <option value="">Select genre</option>
-          <option>Rock</option>
-          <option>Indie</option>
-          <option>Country</option>
-          <option>Blues</option>
-          <option>Folk</option>
-          <option>Acoustic</option>
-          <option>Americana</option>
-          <option>Alternative</option>
-          <option>Jazz</option>
-          <option>Pop</option>
-          <option>Electronic</option>
-          <option>DJ</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Location</label>
-        <input id="location" placeholder="Bandon, Oregon">
-      </div>
-
-      <div class="field">
-        <label>Contact</label>
-        <input id="contact" placeholder="Email or phone">
-      </div>
-
-      <div class="field">
-        <label>Performance Type</label>
-        <select id="performanceType">
-          <option value="">Select</option>
-          <option>Solo</option>
-          <option>Duo</option>
-          <option>Trio</option>
-          <option>Full Band</option>
-          <option>Acoustic Set</option>
-          <option>DJ</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Social / Music Link</label>
-        <input id="social" placeholder="Instagram, Facebook, Spotify, website...">
-      </div>
-
-      <div class="field">
-        <label>Artist Bio</label>
-        <textarea id="bio" placeholder="Tell Gemini about the artist..."></textarea>
-      </div>
-
-      <button class="btn gold" onclick="saveArtistProfile()">
-        Save Artist Profile
-      </button>
-
     </div>
-
-    <div class="card gold">
-
-      <h3>Gemini Fit Score</h3>
-
-      <div id="fitScore" class="fit">
-        0
-      </div>
-
-      <div id="fitLabel" class="muted">
-        Add artist information to calculate fit.
-      </div>
-
-      <hr>
-
-      <div id="fitFactors"></div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <h3>Request a Performance</h3>
 
     <div class="grid">
 
-      <div class="field">
-        <label>Date</label>
-        <input id="bookingDate" type="date">
+      <div class="card span-4">
+        <div class="kicker">Artist Doorway</div>
+        <h2>Your Artist Profile</h2>
+        <p>
+          This is the information Gemini can use when reviewing
+          your booking request.
+        </p>
+
+        <div id="artistSummary"></div>
       </div>
 
-      <div class="field">
-        <label>Performance Window</label>
-        <select id="bookingWindow">
-          <option value="18:00-20:00">6:00 PM – 8:00 PM</option>
-          <option value="19:00-21:00">7:00 PM – 9:00 PM</option>
-          <option value="20:00-22:00">8:00 PM – 10:00 PM</option>
-          <option value="21:00-23:00">9:00 PM – 11:00 PM</option>
-        </select>
+      <div class="card span-8" id="artistFormCard">
+        <div class="kicker">Profile</div>
+        <h2>Artist Information</h2>
+
+        <div class="form-grid">
+
+          <div>
+            <label>Artist / Band Name</label>
+            <input id="artistName" placeholder="Example: The Coastline">
+          </div>
+
+          <div>
+            <label>Genre</label>
+            <input id="artistGenre" placeholder="Rock, Country, Acoustic...">
+          </div>
+
+          <div>
+            <label>Location</label>
+            <input id="artistLocation" placeholder="Bandon, Oregon">
+          </div>
+
+          <div>
+            <label>Contact</label>
+            <input id="artistContact" placeholder="Phone or email">
+          </div>
+
+          <div>
+            <label>Performance Type</label>
+            <select id="artistType">
+              <option>Solo</option>
+              <option>Duo</option>
+              <option>Trio</option>
+              <option>Band</option>
+              <option>DJ</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Social / Website</label>
+            <input id="artistSocial" placeholder="Instagram, Facebook, website...">
+          </div>
+
+          <div class="full">
+            <label>Short Artist Bio</label>
+            <textarea id="artistBio" placeholder="Tell Gemini a little about the act..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" onclick="saveArtist()">Save Artist Profile</button>
+        </div>
+
+        <div id="artistSaveMessage"></div>
+      </div>
+
+      <div class="card span-12">
+        <div class="kicker">Request A Show</div>
+        <h2>Book a Performance</h2>
+        <p>
+          Choose a date and performance window. The system automatically
+          checks existing Gemini bookings for conflicts.
+        </p>
+
+        <div class="form-grid">
+
+          <div>
+            <label>Performance Date</label>
+            <input type="date" id="bookingDate">
+          </div>
+
+          <div>
+            <label>Performance Window</label>
+            <select id="bookingWindow">
+              <option value="18:00-20:00">6:00 PM – 8:00 PM</option>
+              <option value="19:00-21:00">7:00 PM – 9:00 PM</option>
+              <option value="20:00-22:00">8:00 PM – 10:00 PM</option>
+              <option value="21:00-23:00">9:00 PM – 11:00 PM</option>
+            </select>
+          </div>
+
+          <div class="full">
+            <label>Message to Gemini</label>
+            <textarea id="bookingMessage" placeholder="Anything Gemini should know about this performance request?"></textarea>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" onclick="submitBooking()">Request This Date</button>
+        </div>
+
+        <div id="bookingMessageBox"></div>
       </div>
 
     </div>
+  </section>
 
-    <div id="availabilityResult" class="muted">
-      Select a date and time.
+
+  <!-- ========================================================= -->
+  <!-- ARTIST BOOKINGS -->
+  <!-- ========================================================= -->
+
+  <section class="view" id="artistBookings">
+
+    <div class="hero">
+      <div class="kicker">Artist Dashboard</div>
+      <h1>My Bookings</h1>
+      <p>
+        Everything you've requested or been approved for at Gemini.
+      </p>
     </div>
 
-    <br>
+    <div id="artistBookingList"></div>
 
-    <button class="btn green" onclick="checkAvailability()">
-      Check Availability
-    </button>
+  </section>
 
-    <button class="btn gold" onclick="submitBooking()">
-      Request Booking
-    </button>
 
-  </div>
+  <!-- ========================================================= -->
+  <!-- CUSTOMER EXPERIENCE -->
+  <!-- ========================================================= -->
 
-</section>
+  <section class="view" id="customer">
 
-
-<!-- =========================================================
-     MY BOOKINGS
-========================================================= -->
-
-<section id="tab-mybookings" class="tab-panel">
-
-  <h2>My Bookings</h2>
-
-  <div class="subtitle">
-    Track submitted, approved, declined, rescheduled, and cancelled requests.
-  </div>
-
-  <div id="myBookingsList"></div>
-
-</section>
-
-
-<!-- =========================================================
-     OWNER COMMAND
-========================================================= -->
-
-<section id="tab-owner" class="tab-panel">
-
-  <h2>Owner Command</h2>
-
-  <div class="subtitle">
-    One place to review artists, approve shows, and see customer engagement.
-  </div>
-
-  <div class="grid3">
-
-    <div class="metric">
-      <div id="ownerPending" class="number">0</div>
-      <div class="label">Pending Requests</div>
-    </div>
-
-    <div class="metric">
-      <div id="ownerEvents" class="number">0</div>
-      <div class="label">Upcoming Events</div>
-    </div>
-
-    <div class="metric">
-      <div id="ownerInterest" class="number">0</div>
-      <div class="label">Customer Interests</div>
-    </div>
-
-    <div class="metric">
-      <div id="ownerViews" class="number">0</div>
-      <div class="label">Event Views</div>
-    </div>
-
-    <div class="metric">
-      <div id="ownerShares" class="number">0</div>
-      <div class="label">Event Shares</div>
-    </div>
-
-    <div class="metric">
-      <div id="ownerQR" class="number">0</div>
-      <div class="label">QR Scans</div>
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <h3>Gemini Customer Experience</h3>
-
-    <p class="muted">
-      This is the customer-facing information people see when they discover Gemini.
-    </p>
-
-    <div class="field">
-      <label>Venue Name</label>
-      <input id="venueName">
-    </div>
-
-    <div class="field">
-      <label>Tagline</label>
-      <input id="venueTagline">
-    </div>
-
-    <div class="field">
-      <label>About Gemini</label>
-      <textarea id="venueAbout"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Venue Link / Social</label>
-      <input id="venueLink">
-    </div>
-
-    <button class="btn gold" onclick="saveVenueProfile()">
-      Save Gemini Profile
-    </button>
-
-    <button class="btn blue" onclick="showPublicHome()">
-      Preview Customer Experience
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h3>Booking Requests</h3>
-
-    <div id="ownerQueue"></div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     EVENTS
-========================================================= -->
-
-<section id="tab-events" class="tab-panel">
-
-  <h2>Events</h2>
-
-  <div class="subtitle">
-    Approved performances become customer-ready Gemini events.
-  </div>
-
-  <div id="eventsList"></div>
-
-</section>
-
-
-<!-- =========================================================
-     PROMOTION
-========================================================= -->
-
-<section id="tab-promotion" class="tab-panel">
-
-  <h2>Promotion</h2>
-
-  <div class="subtitle">
-    Turn approved events into shareable promotional campaigns.
-  </div>
-
-  <div id="promotionList"></div>
-
-</section>
-
-
-<!-- =========================================================
-     CALENDAR
-========================================================= -->
-
-<section id="tab-calendar" class="tab-panel">
-
-  <h2>Calendar</h2>
-
-  <div class="subtitle">
-    Gemini's approved performance schedule.
-  </div>
-
-  <div id="calendarList"></div>
-
-</section>
-
-
-<!-- =========================================================
-     HISTORY
-========================================================= -->
-
-<section id="tab-history" class="tab-panel">
-
-  <h2>History</h2>
-
-  <div class="subtitle">
-    Activity log for the Gemini booking engine.
-  </div>
-
-  <div id="historyList"></div>
-
-</section>
-
-
-<!-- =========================================================
-     PUBLIC CUSTOMER HOME
-========================================================= -->
-
-<section id="public-home" style="display:none">
-
-  <div class="public-shell">
-
-    <div class="public-hero">
-
-      <div class="badge gold">
-        GEMINI LOUNGE
-      </div>
-
-      <h2 id="publicVenueName">
-        Gemini Lounge
-      </h2>
-
-      <p id="publicTagline">
-        Live music, local artists, and good nights at Gemini Lounge.
+    <div class="hero">
+      <div class="kicker">Public Experience</div>
+      <h1 id="customerVenueName">Gemini Lounge</h1>
+      <p id="customerVenueTagline">
+        Live music, good people, and a reason to come through the door.
       </p>
 
-      <p id="publicAbout"></p>
+      <div class="actions">
+        <button class="btn primary" onclick="showView('events')">See Upcoming Shows</button>
+      </div>
+    </div>
 
-      <div class="row">
+    <div class="grid">
 
-        <button class="btn gold" onclick="scrollPublicShows()">
-          See Upcoming Shows
-        </button>
+      <div class="card span-8">
+        <div class="kicker">What's Coming Up</div>
+        <h2>Upcoming Shows</h2>
+        <div id="customerEvents"></div>
+      </div>
 
-        <button class="btn" onclick="returnToAdmin()">
-          Owner / Artist View
-        </button>
+      <div class="card span-4">
+        <div class="kicker">Gemini</div>
+        <h2>About</h2>
+        <p id="customerAbout">
+          A local spot for live music and community.
+        </p>
 
+        <div class="stat-grid">
+          <div class="stat">
+            <strong id="customerShowCount">0</strong>
+            <span>Upcoming Shows</span>
+          </div>
+
+          <div class="stat">
+            <strong id="customerInterestCount">0</strong>
+            <span>Interested</span>
+          </div>
+        </div>
       </div>
 
     </div>
 
-    <div class="public-nav">
+  </section>
 
-      <button onclick="scrollPublicShows()">
-        Upcoming Shows
-      </button>
 
-      <button onclick="scrollPublicSpotlight()">
-        Artist Spotlight
-      </button>
+  <!-- ========================================================= -->
+  <!-- OWNER -->
+  <!-- ========================================================= -->
+
+  <section class="view" id="owner">
+
+    <div class="hero">
+      <div class="kicker">Owner Command Center</div>
+      <h1>Gemini Control</h1>
+      <p>
+        Review artist requests, approve shows, manage events,
+        and see customer engagement.
+      </p>
+    </div>
+
+    <div class="stat-grid" style="margin-bottom:15px">
+
+      <div class="stat">
+        <strong id="ownerPending">0</strong>
+        <span>Pending Requests</span>
+      </div>
+
+      <div class="stat">
+        <strong id="ownerUpcoming">0</strong>
+        <span>Upcoming Shows</span>
+      </div>
+
+      <div class="stat">
+        <strong id="ownerInterested">0</strong>
+        <span>Customer Interest</span>
+      </div>
+
+      <div class="stat">
+        <strong id="ownerPromoted">0</strong>
+        <span>Promoted Shows</span>
+      </div>
 
     </div>
 
-    <div id="publicHomeContent"></div>
+    <div class="card">
+      <div class="kicker">Requests</div>
+      <h2>Artist Requests</h2>
+      <div id="ownerRequests"></div>
+    </div>
 
-  </div>
+    <div class="card" style="margin-top:15px">
+      <div class="kicker">Venue Profile</div>
+      <h2>Gemini Public Profile</h2>
 
-</section>
+      <div class="form-grid">
+
+        <div>
+          <label>Venue Name</label>
+          <input id="venueName">
+        </div>
+
+        <div>
+          <label>Tagline</label>
+          <input id="venueTagline">
+        </div>
+
+        <div class="full">
+          <label>About Gemini</label>
+          <textarea id="venueAbout"></textarea>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" onclick="saveVenue()">Save Venue Profile</button>
+      </div>
+
+      <div id="venueMessage"></div>
+    </div>
+
+  </section>
 
 
-<!-- =========================================================
-     PUBLIC EVENT
-========================================================= -->
+  <!-- ========================================================= -->
+  <!-- EVENTS -->
+  <!-- ========================================================= -->
 
-<section id="public-event" style="display:none">
+  <section class="view" id="events">
 
-  <div class="public-shell">
+    <div class="hero">
+      <div class="kicker">Event Engine</div>
+      <h1>Shows</h1>
+      <p>
+        Approved bookings automatically become Gemini events.
+      </p>
+    </div>
 
-    <div id="publicEventContent"></div>
+    <div id="eventList"></div>
 
-  </div>
+  </section>
 
-</section>
+
+  <!-- ========================================================= -->
+  <!-- PROMOTION -->
+  <!-- ========================================================= -->
+
+  <section class="view" id="promotion">
+
+    <div class="hero">
+      <div class="kicker">Promotion</div>
+      <h1>Promote The Show</h1>
+      <p>
+        Turn approved events into simple shareable social content.
+      </p>
+    </div>
+
+    <div id="promotionList"></div>
+
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- CALENDAR -->
+  <!-- ========================================================= -->
+
+  <section class="view" id="calendar">
+
+    <div class="hero">
+      <div class="kicker">Schedule</div>
+      <h1>Gemini Calendar</h1>
+      <p>
+        See approved performances and keep overlapping bookings out.
+      </p>
+    </div>
+
+    <div id="calendarList"></div>
+
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- HISTORY -->
+  <!-- ========================================================= -->
+
+  <section class="view" id="history">
+
+    <div class="hero">
+      <div class="kicker">System History</div>
+      <h1>History</h1>
+      <p>Recent booking and promotion activity.</p>
+    </div>
+
+    <div id="historyList"></div>
+
+  </section>
 
 </main>
-
-<div id="toast" class="toast"></div>
 
 
 <script>
 
+/* =============================================================
+   GEMINI LOUNGE — SCANCRAFT V2.0 SLICE 3
+   Artist Experience Layer
+
+   IMPORTANT:
+   Storage key remains gemini_engine_v20 so existing data survives.
+============================================================= */
+
 const STORAGE_KEY = "gemini_engine_v20";
 
-let db = {
-  artist:{},
+const defaultData = {
+
+  venue:{
+    name:"Gemini Lounge",
+    tagline:"Live music, good people, and a reason to come through the door.",
+    about:"A local spot for live music and community."
+  },
+
+  artist:{
+    name:"",
+    genre:"",
+    location:"",
+    contact:"",
+    type:"Solo",
+    social:"",
+    bio:""
+  },
+
   bookings:[],
   events:[],
+  promotions:[],
   history:[],
-  analytics:{},
-  promotions:{},
-  venue:{
-    venueName:"Gemini Lounge",
-    venueTagline:"Live music, local artists, and good nights at Gemini Lounge.",
-    venueAbout:"A simple customer experience for discovering live music, local artists, and upcoming Gemini Lounge shows.",
-    venueLink:""
-  },
-  interests:[]
+
+  engagement:{
+    interests:0,
+    shares:0,
+    views:0,
+    qrScans:0
+  }
+
 };
 
 
-/* =========================================================
-   BASIC UTILITIES
-========================================================= */
+let data = loadData();
 
-function uid(prefix="id"){
-  return prefix + "_" + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
-}
 
-function saveDB(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(db));
-}
+/* =============================================================
+   STORAGE
+============================================================= */
 
-function loadDB(){
+function loadData(){
 
-  const raw = localStorage.getItem(STORAGE_KEY);
+  try{
 
-  if(raw){
+    const raw = localStorage.getItem(STORAGE_KEY);
 
-    try{
-      db = JSON.parse(raw);
-    }catch(e){
-      console.warn("Database could not be loaded.",e);
+    if(!raw){
+      return structuredClone(defaultData);
     }
 
+    const saved = JSON.parse(raw);
+
+    return {
+      ...structuredClone(defaultData),
+      ...saved,
+      venue:{
+        ...defaultData.venue,
+        ...(saved.venue || {})
+      },
+      artist:{
+        ...defaultData.artist,
+        ...(saved.artist || {})
+      },
+      bookings:Array.isArray(saved.bookings) ? saved.bookings : [],
+      events:Array.isArray(saved.events) ? saved.events : [],
+      promotions:Array.isArray(saved.promotions) ? saved.promotions : [],
+      history:Array.isArray(saved.history) ? saved.history : [],
+      engagement:{
+        ...defaultData.engagement,
+        ...(saved.engagement || {})
+      }
+    };
+
+  }catch(error){
+
+    console.error(error);
+
+    return structuredClone(defaultData);
   }
 
-  db.artist = db.artist || {};
-  db.bookings = db.bookings || [];
-  db.events = db.events || [];
-  db.history = db.history || [];
-  db.analytics = db.analytics || {};
-  db.promotions = db.promotions || {};
-
-  db.venue = db.venue || {
-    venueName:"Gemini Lounge",
-    venueTagline:"Live music, local artists, and good nights at Gemini Lounge.",
-    venueAbout:"A simple customer experience for discovering live music, local artists, and upcoming Gemini Lounge shows.",
-    venueLink:""
-  };
-
-  db.interests = db.interests || [];
-
-  saveDB();
 }
+
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =============================================================
+   UTILITIES
+============================================================= */
+
+function uid(prefix="id"){
+
+  return prefix + "_" +
+    Date.now().toString(36) +
+    "_" +
+    Math.random().toString(36).slice(2,8);
+
+}
+
 
 function escapeHTML(value){
 
@@ -1059,362 +927,42 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-}
-
-function formatDate(date){
-
-  if(!date) return "";
-
-  const d = new Date(date + "T12:00:00");
-
-  return d.toLocaleDateString(undefined,{
-    weekday:"short",
-    month:"short",
-    day:"numeric",
-    year:"numeric"
-  });
-}
-
-function formatDateTime(date,time){
-
-  if(!date) return "";
-
-  return `${formatDate(date)}${time ? " • " + formatWindow(time) : ""}`;
-}
-
-function formatWindow(window){
-
-  if(!window) return "";
-
-  const parts = window.split("-");
-
-  function f(t){
-
-    let [h,m] = t.split(":").map(Number);
-
-    const ampm = h >= 12 ? "PM" : "AM";
-
-    h = h % 12 || 12;
-
-    return `${h}:${String(m).padStart(2,"0")} ${ampm}`;
-  }
-
-  return `${f(parts[0])} – ${f(parts[1])}`;
-}
-
-function toast(message){
-
-  const el = document.getElementById("toast");
-
-  el.textContent = message;
-  el.classList.add("show");
-
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer = setTimeout(()=>{
-    el.classList.remove("show");
-  },2500);
-}
-
-function statusBadge(status){
-
-  let cls = "badge";
-
-  if(["Approved","Confirmed","Promoted","Promo Ready"].includes(status)){
-    cls += " green";
-  }
-
-  if(["Pending","Not Ready"].includes(status)){
-    cls += " gold";
-  }
-
-  if(["Declined","Cancelled"].includes(status)){
-    cls += " red";
-  }
-
-  if(["Reschedule Requested"].includes(status)){
-    cls += " blue";
-  }
-
-  return `<span class="${cls}">${escapeHTML(status)}</span>`;
-}
-
-
-/* =========================================================
-   TAB SYSTEM
-========================================================= */
-
-document.querySelectorAll(".tab").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    const tab = button.dataset.tab;
-
-    showTab(tab);
-
-  });
-
-});
-
-function showTab(tab){
-
-  document.querySelectorAll(".tab").forEach(b=>{
-    b.classList.toggle("active",b.dataset.tab === tab);
-  });
-
-  document.querySelectorAll(".tab-panel").forEach(panel=>{
-    panel.classList.remove("active");
-  });
-
-  const target = document.getElementById("tab-" + tab);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  document.getElementById("public-home").style.display = "none";
-  document.getElementById("public-event").style.display = "none";
-
-  refreshUI();
-}
-
-
-/* =========================================================
-   ARTIST PROFILE
-========================================================= */
-
-function getArtistFromForm(){
-
-  return {
-
-    name:document.getElementById("artistName").value.trim(),
-
-    genre:document.getElementById("genre").value,
-
-    location:document.getElementById("location").value.trim(),
-
-    contact:document.getElementById("contact").value.trim(),
-
-    performanceType:document.getElementById("performanceType").value,
-
-    social:document.getElementById("social").value.trim(),
-
-    bio:document.getElementById("bio").value.trim()
-
-  };
 
 }
 
-function loadArtistForm(){
 
-  const a = db.artist || {};
+function formatDate(dateString){
 
-  document.getElementById("artistName").value = a.name || "";
-  document.getElementById("genre").value = a.genre || "";
-  document.getElementById("location").value = a.location || "";
-  document.getElementById("contact").value = a.contact || "";
-  document.getElementById("performanceType").value = a.performanceType || "";
-  document.getElementById("social").value = a.social || "";
-  document.getElementById("bio").value = a.bio || "";
+  if(!dateString) return "No date";
 
-  renderFit();
-}
+  const date = new Date(dateString + "T12:00:00");
 
-function saveArtistProfile(){
-
-  db.artist = getArtistFromForm();
-
-  saveDB();
-
-  renderFit();
-
-  toast("Artist profile saved.");
-
-  refreshUI();
-}
-
-
-/* =========================================================
-   FIT SCORE
-========================================================= */
-
-function calculateFit(artist){
-
-  let genre = 0;
-  let local = 0;
-  let performance = 0;
-  let profile = 0;
-  let social = 0;
-
-  const strongGenres = [
-    "Rock",
-    "Indie",
-    "Country",
-    "Blues",
-    "Folk",
-    "Acoustic",
-    "Americana",
-    "Alternative",
-    "Jazz"
-  ];
-
-  if(strongGenres.includes(artist.genre)){
-    genre = 25;
-  }else if(artist.genre){
-    genre = 16;
-  }
-
-  const loc = (artist.location || "").toLowerCase();
-
-  const localPlaces = [
-    "bandon",
-    "coos",
-    "port orford",
-    "gold beach",
-    "coquille",
-    "brookings"
-  ];
-
-  if(localPlaces.some(x=>loc.includes(x))){
-    local = 20;
-  }else if(loc){
-    local = 12;
-  }
-
-  const performancePoints = {
-    "Solo":15,
-    "Duo":15,
-    "Trio":13,
-    "Full Band":15,
-    "Acoustic Set":15,
-    "DJ":10
-  };
-
-  performance = performancePoints[artist.performanceType] || 5;
-
-  if(artist.name) profile += 5;
-  if(artist.contact) profile += 5;
-  if(artist.bio) profile += 5;
-
-  if(artist.social){
-    social = 15;
-  }
-
-  const total = Math.min(
-    100,
-    genre + local + performance + profile + social
+  return date.toLocaleDateString(
+    undefined,
+    {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
   );
 
-  return {
-    total,
-    genre,
-    local,
-    performance,
-    profile,
-    social
-  };
 }
 
-function calculateCurrentFit(){
 
-  return calculateFit(db.artist || {});
+function todayString(){
 
-}
+  const d = new Date();
 
-function fitLabel(score){
+  const month = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
 
-  if(score >= 85){
-    return {
-      label:"Excellent Gemini Fit",
-      cls:"excellent"
-    };
-  }
-
-  if(score >= 70){
-    return {
-      label:"Strong Gemini Fit",
-      cls:"strong"
-    };
-  }
-
-  if(score >= 50){
-    return {
-      label:"Potential Gemini Fit",
-      cls:"potential"
-    };
-  }
-
-  return {
-    label:"Needs More Information",
-    cls:"low"
-  };
-}
-
-function renderFit(){
-
-  const f = calculateCurrentFit();
-
-  const info = fitLabel(f.total);
-
-  const scoreEl = document.getElementById("fitScore");
-
-  scoreEl.textContent = f.total;
-  scoreEl.className = "fit " + info.cls;
-
-  document.getElementById("fitLabel").innerHTML =
-    `<strong>${info.label}</strong>`;
-
-  const factors = [
-
-    ["Genre Fit",f.genre,25],
-
-    ["Local Draw",f.local,20],
-
-    ["Performance Fit",f.performance,15],
-
-    ["Profile Strength",f.profile,15],
-
-    ["Social Reach",f.social,15]
-
-  ];
-
-  document.getElementById("fitFactors").innerHTML =
-    factors.map(([name,value,max])=>`
-
-      <div class="factor">
-
-        <div class="factor-top">
-          <span>${name}</span>
-          <span>${value}/${max}</span>
-        </div>
-
-        <div class="bar">
-          <span style="width:${Math.min(100,(value/max)*100)}%"></span>
-        </div>
-
-      </div>
-
-    `).join("");
+  return `${d.getFullYear()}-${month}-${day}`;
 
 }
 
 
-/* =========================================================
-   BOOKING / TIME CONFLICT
-========================================================= */
-
-function parseWindow(window){
-
-  const parts = window.split("-");
-
-  return {
-    start:minutes(parts[0]),
-    end:minutes(parts[1])
-  };
-
-}
-
-function minutes(time){
+function parseTime(time){
 
   const [h,m] = time.split(":").map(Number);
 
@@ -1422,183 +970,402 @@ function minutes(time){
 
 }
 
-function windowsOverlap(a,b){
 
-  const x = parseWindow(a);
-  const y = parseWindow(b);
+function windowParts(windowString){
 
-  return x.start < y.end && y.start < x.end;
+  const [start,end] = windowString.split("-");
+
+  return {
+    start:parseTime(start),
+    end:parseTime(end)
+  };
 
 }
 
-function getConfirmedBookings(date){
 
-  return db.bookings.filter(b =>
-    b.date === date &&
-    ["Approved","Confirmed"].includes(b.status)
+function windowsOverlap(a,b){
+
+  const A = windowParts(a);
+  const B = windowParts(b);
+
+  return A.start < B.end && B.start < A.end;
+
+}
+
+
+function statusBadge(status){
+
+  const cls =
+    status === "Approved"
+      ? "approved"
+      : status === "Declined"
+      ? "declined"
+      : status === "Cancelled"
+      ? "cancelled"
+      : "pending";
+
+  return `<span class="badge ${cls}">${escapeHTML(status)}</span>`;
+
+}
+
+
+function showView(viewId){
+
+  document.querySelectorAll(".view")
+    .forEach(v => v.classList.remove("active"));
+
+  document.querySelectorAll(".tab")
+    .forEach(t => t.classList.remove("active"));
+
+  const view = document.getElementById(viewId);
+
+  if(view){
+    view.classList.add("active");
+  }
+
+  const tab = document.querySelector(
+    `.tab[data-view="${viewId}"]`
+  );
+
+  if(tab){
+    tab.classList.add("active");
+  }
+
+  renderAll();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+document.querySelectorAll(".tab").forEach(tab => {
+
+  tab.addEventListener("click",() => {
+
+    showView(tab.dataset.view);
+
+  });
+
+});
+
+
+/* =============================================================
+   ARTIST PROFILE
+============================================================= */
+
+function loadArtistForm(){
+
+  document.getElementById("artistName").value =
+    data.artist.name || "";
+
+  document.getElementById("artistGenre").value =
+    data.artist.genre || "";
+
+  document.getElementById("artistLocation").value =
+    data.artist.location || "";
+
+  document.getElementById("artistContact").value =
+    data.artist.contact || "";
+
+  document.getElementById("artistType").value =
+    data.artist.type || "Solo";
+
+  document.getElementById("artistSocial").value =
+    data.artist.social || "";
+
+  document.getElementById("artistBio").value =
+    data.artist.bio || "";
+
+}
+
+
+function saveArtist(){
+
+  data.artist = {
+
+    name:document.getElementById("artistName").value.trim(),
+
+    genre:document.getElementById("artistGenre").value.trim(),
+
+    location:document.getElementById("artistLocation").value.trim(),
+
+    contact:document.getElementById("artistContact").value.trim(),
+
+    type:document.getElementById("artistType").value,
+
+    social:document.getElementById("artistSocial").value.trim(),
+
+    bio:document.getElementById("artistBio").value.trim()
+
+  };
+
+  saveData();
+
+  document.getElementById("artistSaveMessage").innerHTML =
+    `<div class="notice">Artist profile saved.</div>`;
+
+  renderAll();
+
+}
+
+
+function artistProfileComplete(){
+
+  return !!(
+    data.artist.name &&
+    data.artist.genre &&
+    data.artist.contact
   );
 
 }
 
-function hasTimeConflict(date,window){
 
-  return getConfirmedBookings(date)
-    .some(b => windowsOverlap(b.window,window));
+function renderArtistSummary(){
 
-}
+  const box = document.getElementById("artistSummary");
 
-function getConflictingBooking(date,window){
+  if(!data.artist.name){
 
-  return getConfirmedBookings(date)
-    .find(b => windowsOverlap(b.window,window));
+    box.innerHTML = `
+      <div class="empty">
+        No artist profile yet.<br><br>
+        Create your profile to start requesting shows.
+      </div>
+    `;
 
-}
-
-function checkAvailability(){
-
-  const date = document.getElementById("bookingDate").value;
-  const window = document.getElementById("bookingWindow").value;
-
-  const result = document.getElementById("availabilityResult");
-
-  if(!date){
-
-    result.innerHTML =
-      `<span class="badge red">Choose a date first.</span>`;
-
-    return false;
+    return;
   }
 
-  const conflict = getConflictingBooking(date,window);
+  const initials =
+    data.artist.name
+      .split(/\s+/)
+      .map(x => x[0])
+      .join("")
+      .slice(0,2)
+      .toUpperCase();
 
-  if(conflict){
+  box.innerHTML = `
 
-    result.innerHTML =
-      `${statusBadge("Declined")}
-      <span class="muted">
-      That time overlaps with ${escapeHTML(conflict.artistName)}
-      (${formatWindow(conflict.window)}).
-      </span>`;
+    <div class="artist-avatar">
+      ${escapeHTML(initials)}
+    </div>
 
-    return false;
-  }
+    <h3>${escapeHTML(data.artist.name)}</h3>
 
-  result.innerHTML =
-    `${statusBadge("Approved")}
-    <span class="muted">
-    The selected performance window is available.
-    </span>`;
+    <p>
+      ${escapeHTML(data.artist.genre || "Genre not listed")}
+      ${data.artist.location ? " · " + escapeHTML(data.artist.location) : ""}
+    </p>
 
-  return true;
+    <div class="divider"></div>
+
+    <div class="small">
+      Performance: ${escapeHTML(data.artist.type || "Not listed")}
+    </div>
+
+    <div class="small" style="margin-top:5px">
+      Contact: ${escapeHTML(data.artist.contact || "Not listed")}
+    </div>
+
+    ${
+      data.artist.social
+      ? `
+        <div class="small" style="margin-top:5px">
+          Social: ${escapeHTML(data.artist.social)}
+        </div>
+      `
+      : ""
+    }
+
+    <div class="actions">
+      <span class="badge approved">
+        Profile ${artistProfileComplete() ? "Ready" : "Needs Info"}
+      </span>
+    </div>
+
+  `;
+
 }
+
+
+function scrollToArtistForm(){
+
+  document.getElementById("artistFormCard")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =============================================================
+   BOOKING ENGINE
+============================================================= */
 
 function submitBooking(){
 
-  const artist = getArtistFromForm();
+  if(!artistProfileComplete()){
 
-  if(!artist.name){
+    document.getElementById("bookingMessageBox").innerHTML =
+      `<div class="notice">
+        Complete your artist name, genre, and contact information first.
+      </div>`;
 
-    toast("Add the artist name first.");
-
-    return;
-  }
-
-  if(!artist.contact){
-
-    toast("Add a contact method first.");
+    scrollToArtistForm();
 
     return;
   }
 
-  const date = document.getElementById("bookingDate").value;
+  const date =
+    document.getElementById("bookingDate").value;
 
-  const window = document.getElementById("bookingWindow").value;
+  const performanceWindow =
+    document.getElementById("bookingWindow").value;
+
+  const message =
+    document.getElementById("bookingMessage").value.trim();
 
   if(!date){
 
-    toast("Choose a performance date.");
+    document.getElementById("bookingMessageBox").innerHTML =
+      `<div class="notice">Choose a performance date first.</div>`;
 
     return;
   }
 
-  if(hasTimeConflict(date,window)){
+  const conflictingBooking =
+    data.bookings.find(b => {
 
-    toast("That performance window is already booked.");
+      if(b.date !== date) return false;
+
+      if(
+        b.status !== "Pending" &&
+        b.status !== "Approved"
+      ){
+        return false;
+      }
+
+      return windowsOverlap(
+        b.performanceWindow,
+        performanceWindow
+      );
+
+    });
+
+  if(conflictingBooking){
+
+    document.getElementById("bookingMessageBox").innerHTML = `
+
+      <div class="notice">
+        That time overlaps with another Gemini booking.
+        Try another performance window or another date.
+      </div>
+
+    `;
 
     return;
   }
-
-  db.artist = artist;
-
-  const fit = calculateFit(artist);
 
   const booking = {
 
     id:uid("booking"),
 
-    artistName:artist.name,
+    artistName:data.artist.name,
 
-    genre:artist.genre,
-
-    location:artist.location,
-
-    contact:artist.contact,
-
-    performanceType:artist.performanceType,
-
-    social:artist.social,
-
-    bio:artist.bio,
-
-    fitScore:fit.total,
-
-    fitDetails:fit,
+    artistSnapshot:{
+      ...data.artist
+    },
 
     date,
 
-    window,
+    performanceWindow,
+
+    message,
 
     status:"Pending",
 
-    createdAt:new Date().toISOString()
+    createdAt:new Date().toISOString(),
+
+    eventId:null
 
   };
 
-  db.bookings.push(booking);
+  data.bookings.push(booking);
 
-  addHistory(
-    "Booking Request",
-    `${artist.name} requested ${formatDateTime(date,window)}.`
-  );
+  data.history.unshift({
 
-  saveDB();
+    id:uid("history"),
 
-  toast("Booking request submitted.");
+    type:"Booking Request",
 
-  refreshUI();
+    text:`${data.artist.name} requested ${formatDate(date)}.`,
+
+    date:new Date().toISOString()
+
+  });
+
+  saveData();
+
+  document.getElementById("bookingMessageBox").innerHTML = `
+
+    <div class="notice">
+      Booking request sent to Gemini.
+      The owner can now approve or decline it.
+    </div>
+
+  `;
+
+  document.getElementById("bookingMessage").value = "";
+
+  renderAll();
 
 }
 
 
-/* =========================================================
+/* =============================================================
    OWNER BOOKING ACTIONS
-========================================================= */
+============================================================= */
 
 function approveBooking(id){
 
-  const booking = db.bookings.find(b=>b.id === id);
+  const booking =
+    data.bookings.find(b => b.id === id);
 
   if(!booking) return;
 
-  if(hasTimeConflict(booking.date,booking.window)){
+  const conflict =
+    data.bookings.find(b => {
 
-    toast("Cannot approve: performance time overlaps another confirmed show.");
+      if(b.id === id) return false;
+
+      if(b.date !== booking.date) return false;
+
+      if(
+        b.status !== "Approved"
+      ){
+        return false;
+      }
+
+      return windowsOverlap(
+        b.performanceWindow,
+        booking.performanceWindow
+      );
+
+    });
+
+  if(conflict){
+
+    alert(
+      "This booking overlaps an approved Gemini performance."
+    );
 
     return;
   }
 
   booking.status = "Approved";
-  booking.approvedAt = new Date().toISOString();
 
   const event = {
 
@@ -1608,240 +1375,982 @@ function approveBooking(id){
 
     artistName:booking.artistName,
 
-    genre:booking.genre,
-
-    location:booking.location,
-
-    performanceType:booking.performanceType,
-
-    social:booking.social,
-
-    bio:booking.bio,
+    artistSnapshot:{
+      ...booking.artistSnapshot
+    },
 
     date:booking.date,
 
-    window:booking.window,
+    performanceWindow:booking.performanceWindow,
+
+    title:`Live Music — ${booking.artistName}`,
+
+    description:
+      booking.artistSnapshot.bio ||
+      `${booking.artistName} live at Gemini Lounge.`,
+
+    views:0,
+
+    shares:0,
+
+    qrScans:0,
+
+    interests:0,
 
     createdAt:new Date().toISOString()
 
   };
 
-  db.events.push(event);
+  data.events.push(event);
 
-  db.promotions[event.id] = {
+  booking.eventId = event.id;
+
+  const promotion = {
+
+    id:uid("promo"),
 
     eventId:event.id,
 
-    campaignName:`${booking.artistName} at Gemini Lounge`,
+    status:"Promo Ready",
 
-    status:"Not Ready",
+    socialPost:"",
 
-    socialPost:""
+    createdAt:new Date().toISOString()
 
   };
 
-  addHistory(
-    "Booking Approved",
-    `${booking.artistName} was approved and an event was created.`
-  );
+  data.promotions.push(promotion);
 
-  saveDB();
+  data.history.unshift({
 
-  toast("Approved. Event and promotion created.");
+    id:uid("history"),
 
-  refreshUI();
+    type:"Booking Approved",
+
+    text:`${booking.artistName} was approved for ${formatDate(booking.date)}.`,
+
+    date:new Date().toISOString()
+
+  });
+
+  saveData();
+
+  renderAll();
 
 }
 
+
 function declineBooking(id){
 
-  const booking = db.bookings.find(b=>b.id === id);
+  const booking =
+    data.bookings.find(b => b.id === id);
 
   if(!booking) return;
 
   booking.status = "Declined";
 
-  addHistory(
-    "Booking Declined",
-    `${booking.artistName} booking request was declined.`
-  );
+  data.history.unshift({
 
-  saveDB();
+    id:uid("history"),
 
-  toast("Booking declined.");
+    type:"Booking Declined",
 
-  refreshUI();
+    text:`${booking.artistName} was declined for ${formatDate(booking.date)}.`,
 
-}
+    date:new Date().toISOString()
 
-function requestReschedule(id){
+  });
 
-  const booking = db.bookings.find(b=>b.id === id);
+  saveData();
 
-  if(!booking) return;
-
-  booking.status = "Reschedule Requested";
-
-  addHistory(
-    "Reschedule Requested",
-    `${booking.artistName} requested a schedule change.`
-  );
-
-  saveDB();
-
-  toast("Reschedule request recorded.");
-
-  refreshUI();
+  renderAll();
 
 }
+
 
 function cancelBooking(id){
 
-  const booking = db.bookings.find(b=>b.id === id);
+  const booking =
+    data.bookings.find(b => b.id === id);
 
   if(!booking) return;
 
   booking.status = "Cancelled";
 
-  const event = db.events.find(e=>e.bookingId === id);
+  if(booking.eventId){
 
-  if(event){
-    event.cancelled = true;
-  }
+    const event =
+      data.events.find(e => e.id === booking.eventId);
 
-  addHistory(
-    "Booking Cancelled",
-    `${booking.artistName} booking was cancelled.`
-  );
+    if(event){
 
-  saveDB();
+      event.cancelled = true;
 
-  toast("Booking cancelled.");
-
-  refreshUI();
-
-}
-
-
-/* =========================================================
-   ANALYTICS
-========================================================= */
-
-function ensureAnalytics(eventId){
-
-  if(!db.analytics[eventId]){
-
-    db.analytics[eventId] = {
-      views:0,
-      shares:0,
-      qrScans:0
-    };
+    }
 
   }
 
-  return db.analytics[eventId];
+  data.history.unshift({
+
+    id:uid("history"),
+
+    type:"Booking Cancelled",
+
+    text:`${booking.artistName} booking was cancelled.`,
+
+    date:new Date().toISOString()
+
+  });
+
+  saveData();
+
+  renderAll();
 
 }
 
-function getMetric(eventId,key){
 
-  return ensureAnalytics(eventId)[key] || 0;
+/* =============================================================
+   ARTIST BOOKINGS VIEW
+============================================================= */
 
-}
+function renderArtistBookings(){
 
-function incrementMetric(eventId,key){
+  const box =
+    document.getElementById("artistBookingList");
 
-  const a = ensureAnalytics(eventId);
+  if(!data.artist.name){
 
-  a[key]++;
+    box.innerHTML = `
+      <div class="card empty">
+        Create an artist profile first.
+      </div>
+    `;
 
-  saveDB();
-
-}
-
-function getInterestCount(eventId){
-
-  return db.interests.filter(i=>i.eventId === eventId).length;
-
-}
-
-function trackEventView(eventId){
-
-  const key = "viewed_" + eventId;
-
-  if(sessionStorage.getItem(key)){
     return;
   }
 
-  sessionStorage.setItem(key,"1");
+  const bookings =
+    data.bookings
+      .filter(b =>
+        b.artistName.toLowerCase() ===
+        data.artist.name.toLowerCase()
+      )
+      .sort((a,b) =>
+        a.date.localeCompare(b.date)
+      );
 
-  incrementMetric(eventId,"views");
+  if(!bookings.length){
+
+    box.innerHTML = `
+      <div class="card empty">
+        You don't have any booking requests yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML = bookings.map(booking => {
+
+    const event =
+      data.events.find(e =>
+        e.id === booking.eventId
+      );
+
+    return `
+
+      <div class="card" style="margin-bottom:12px">
+
+        <div class="event-top">
+
+          <div>
+            <div class="event-date">
+              ${formatDate(booking.date)}
+            </div>
+
+            <div class="event-title">
+              Gemini Lounge
+            </div>
+
+            <div class="event-meta">
+              ${windowLabel(booking.performanceWindow)}
+            </div>
+          </div>
+
+          <div>
+            ${statusBadge(booking.status)}
+          </div>
+
+        </div>
+
+        ${
+          booking.message
+          ? `
+            <div class="notice">
+              ${escapeHTML(booking.message)}
+            </div>
+          `
+          : ""
+        }
+
+        ${
+          event && booking.status === "Approved"
+          ? `
+            <div class="actions">
+              <button
+                class="btn primary"
+                onclick="openEvent(${JSON.stringify(event.id)})">
+                View My Show
+              </button>
+
+              <button
+                class="btn"
+                onclick="copyEventLink('${event.id}')">
+                Copy Event Link
+              </button>
+            </div>
+          `
+          : ""
+        }
+
+        ${
+          booking.status === "Pending"
+          ? `
+            <div class="actions">
+              <button
+                class="btn red"
+                onclick="cancelBooking('${booking.id}')">
+                Withdraw Request
+              </button>
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+
+    `;
+
+  }).join("");
 
 }
 
-function trackEventShare(eventId){
 
-  incrementMetric(eventId,"shares");
+function windowLabel(value){
 
-}
+  if(!value) return "";
 
-function trackQRScan(eventId){
+  const [start,end] =
+    value.split("-");
 
-  incrementMetric(eventId,"qrScans");
+  function label(t){
 
-}
+    const [h,m] =
+      t.split(":").map(Number);
 
-function simulateQRScan(eventId){
+    const suffix =
+      h >= 12 ? "PM" : "AM";
 
-  trackQRScan(eventId);
+    const hour =
+      h % 12 || 12;
 
-  toast("Demo QR scan recorded.");
+    return `${hour}:${String(m).padStart(2,"0")} ${suffix}`;
 
-  refreshUI();
+  }
 
-}
-
-
-/* =========================================================
-   EVENT LINKS / QR
-========================================================= */
-
-function eventLink(event){
-
-  const base =
-    window.location.href.split("#")[0];
-
-  return `${base}#event=${encodeURIComponent(event.id)}`;
+  return `${label(start)} – ${label(end)}`;
 
 }
 
-function getEvent(id){
 
-  return db.events.find(e=>e.id === id);
+/* =============================================================
+   OWNER VIEW
+============================================================= */
+
+function renderOwner(){
+
+  const pending =
+    data.bookings.filter(
+      b => b.status === "Pending"
+    );
+
+  const approved =
+    data.bookings.filter(
+      b => b.status === "Approved"
+    );
+
+  document.getElementById("ownerPending")
+    .textContent = pending.length;
+
+  document.getElementById("ownerUpcoming")
+    .textContent =
+      approved.filter(b =>
+        b.date >= todayString()
+      ).length;
+
+  document.getElementById("ownerInterested")
+    .textContent =
+      data.engagement.interests || 0;
+
+  document.getElementById("ownerPromoted")
+    .textContent =
+      data.promotions.filter(
+        p => p.status === "Promoted"
+      ).length;
+
+  document.getElementById("venueName").value =
+    data.venue.name;
+
+  document.getElementById("venueTagline").value =
+    data.venue.tagline;
+
+  document.getElementById("venueAbout").value =
+    data.venue.about;
+
+  const box =
+    document.getElementById("ownerRequests");
+
+  if(!data.bookings.length){
+
+    box.innerHTML =
+      `<div class="empty">No booking requests yet.</div>`;
+
+    return;
+  }
+
+  const sorted =
+    [...data.bookings]
+      .sort((a,b) =>
+        new Date(b.createdAt) -
+        new Date(a.createdAt)
+      );
+
+  box.innerHTML = sorted.map(booking => `
+
+    <div class="event">
+
+      <div class="event-top">
+
+        <div>
+
+          <div class="event-date">
+            ${formatDate(booking.date)}
+          </div>
+
+          <div class="event-title">
+            ${escapeHTML(booking.artistName)}
+          </div>
+
+          <div class="event-meta">
+            ${escapeHTML(
+              booking.artistSnapshot?.genre || ""
+            )}
+            ·
+            ${escapeHTML(
+              booking.artistSnapshot?.type || ""
+            )}
+            ·
+            ${windowLabel(booking.performanceWindow)}
+          </div>
+
+        </div>
+
+        ${statusBadge(booking.status)}
+
+      </div>
+
+      ${
+        booking.artistSnapshot?.location
+        ? `
+          <p class="small">
+            Location: ${escapeHTML(
+              booking.artistSnapshot.location
+            )}
+          </p>
+        `
+        : ""
+      }
+
+      ${
+        booking.artistSnapshot?.bio
+        ? `
+          <p>
+            ${escapeHTML(
+              booking.artistSnapshot.bio
+            )}
+          </p>
+        `
+        : ""
+      }
+
+      ${
+        booking.message
+        ? `
+          <div class="notice">
+            ${escapeHTML(booking.message)}
+          </div>
+        `
+        : ""
+      }
+
+      ${
+        booking.artistSnapshot?.social
+        ? `
+          <p class="small">
+            Social: ${escapeHTML(
+              booking.artistSnapshot.social
+            )}
+          </p>
+        `
+        : ""
+      }
+
+      ${
+        booking.status === "Pending"
+        ? `
+          <div class="actions">
+
+            <button
+              class="btn green"
+              onclick="approveBooking('${booking.id}')">
+              Approve
+            </button>
+
+            <button
+              class="btn red"
+              onclick="declineBooking('${booking.id}')">
+              Decline
+            </button>
+
+          </div>
+        `
+        : ""
+      }
+
+      ${
+        booking.status === "Approved"
+        ? `
+          <div class="actions">
+
+            <button
+              class="btn primary"
+              onclick="openEvent('${booking.eventId}')">
+              Open Event
+            </button>
+
+            <button
+              class="btn red"
+              onclick="cancelBooking('${booking.id}')">
+              Cancel Show
+            </button>
+
+          </div>
+        `
+        : ""
+      }
+
+    </div>
+
+  `).join("");
 
 }
 
-function openEvent(id){
 
-  window.location.hash = "event=" + encodeURIComponent(id);
+function saveVenue(){
 
-  renderPublicEvent(id);
+  data.venue.name =
+    document.getElementById("venueName").value.trim()
+    || "Gemini Lounge";
+
+  data.venue.tagline =
+    document.getElementById("venueTagline").value.trim()
+    || "Live music, good people, and a reason to come through the door.";
+
+  data.venue.about =
+    document.getElementById("venueAbout").value.trim()
+    || "A local spot for live music and community.";
+
+  saveData();
+
+  document.getElementById("venueMessage").innerHTML =
+    `<div class="notice">Gemini profile saved.</div>`;
+
+  renderAll();
 
 }
 
-function createQR(event){
 
-  const link = eventLink(event);
+/* =============================================================
+   CUSTOMER EXPERIENCE
+============================================================= */
+
+function renderCustomer(){
+
+  document.getElementById("customerVenueName")
+    .textContent = data.venue.name;
+
+  document.getElementById("customerVenueTagline")
+    .textContent = data.venue.tagline;
+
+  document.getElementById("customerAbout")
+    .textContent = data.venue.about;
+
+  const upcoming =
+    getUpcomingEvents();
+
+  document.getElementById("customerShowCount")
+    .textContent = upcoming.length;
+
+  document.getElementById("customerInterestCount")
+    .textContent =
+      data.engagement.interests || 0;
+
+  const box =
+    document.getElementById("customerEvents");
+
+  if(!upcoming.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No upcoming shows yet.
+        Check back soon.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML =
+    upcoming.map(
+      eventCardHTML
+    ).join("");
+
+}
+
+
+function getUpcomingEvents(){
+
+  return data.events
+
+    .filter(event =>
+      !event.cancelled &&
+      event.date >= todayString()
+    )
+
+    .sort((a,b) =>
+      a.date.localeCompare(b.date)
+    );
+
+}
+
+
+function eventCardHTML(event){
 
   return `
-    <div class="qr">
-      <img
-        src="https://quickchart.io/qr?text=${encodeURIComponent(link)}&size=180"
-        alt="Event QR Code">
+
+    <div class="event">
+
+      <div class="event-top">
+
+        <div>
+
+          <div class="event-date">
+            ${formatDate(event.date)}
+          </div>
+
+          <div class="event-title">
+            ${escapeHTML(event.artistName)}
+          </div>
+
+          <div class="event-meta">
+            ${windowLabel(event.performanceWindow)}
+          </div>
+
+        </div>
+
+        <span class="badge approved">
+          LIVE MUSIC
+        </span>
+
+      </div>
+
+      <p>
+        ${escapeHTML(event.description)}
+      </p>
+
+      <div class="actions">
+
+        <button
+          class="btn primary"
+          onclick="openEvent('${event.id}')">
+          View Show
+        </button>
+
+        <button
+          class="btn"
+          onclick="interestEvent('${event.id}')">
+          I'm Interested
+        </button>
+
+        <button
+          class="btn"
+          onclick="shareEvent('${event.id}')">
+          Share
+        </button>
+
+      </div>
+
     </div>
+
   `;
 
 }
+
+
+/* =============================================================
+   EVENTS
+============================================================= */
+
+function renderEvents(){
+
+  const box =
+    document.getElementById("eventList");
+
+  const events =
+    [...data.events]
+      .sort((a,b) =>
+        a.date.localeCompare(b.date)
+      );
+
+  if(!events.length){
+
+    box.innerHTML =
+      `<div class="card empty">No events yet.</div>`;
+
+    return;
+  }
+
+  box.innerHTML = events.map(event => `
+
+    <div class="card" style="margin-bottom:12px">
+
+      ${eventCardHTML(event)}
+
+      <div class="divider"></div>
+
+      <div class="stat-grid">
+
+        <div class="stat">
+          <strong>${event.views || 0}</strong>
+          <span>Views</span>
+        </div>
+
+        <div class="stat">
+          <strong>${event.shares || 0}</strong>
+          <span>Shares</span>
+        </div>
+
+        <div class="stat">
+          <strong>${event.interests || 0}</strong>
+          <span>Interested</span>
+        </div>
+
+        <div class="stat">
+          <strong>${event.qrScans || 0}</strong>
+          <span>QR Scans</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =============================================================
+   PUBLIC EVENT EXPERIENCE
+============================================================= */
+
+function openEvent(eventId){
+
+  const event =
+    data.events.find(e => e.id === eventId);
+
+  if(!event) return;
+
+  event.views =
+    (event.views || 0) + 1;
+
+  data.engagement.views =
+    (data.engagement.views || 0) + 1;
+
+  saveData();
+
+  const url =
+    location.origin +
+    location.pathname +
+    "#event=" +
+    encodeURIComponent(eventId);
+
+  history.pushState(
+    {},
+    "",
+    "#event=" +
+    encodeURIComponent(eventId)
+  );
+
+  renderPublicEvent(event,url);
+
+}
+
+
+function renderPublicEvent(event,url){
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.id = "eventOverlay";
+
+  overlay.style.cssText = `
+    position:fixed;
+    inset:0;
+    z-index:100;
+    overflow:auto;
+    background:rgba(5,7,9,.96);
+    padding:20px;
+  `;
+
+  const qrURL =
+    "https://quickchart.io/qr?text=" +
+    encodeURIComponent(url) +
+    "&size=300";
+
+  overlay.innerHTML = `
+
+    <div style="
+      max-width:650px;
+      margin:30px auto;
+    ">
+
+      <div class="hero">
+
+        <div class="kicker">
+          GEMINI LOUNGE
+        </div>
+
+        <h1>
+          ${escapeHTML(event.artistName)}
+        </h1>
+
+        <p>
+          ${formatDate(event.date)}
+          ·
+          ${windowLabel(event.performanceWindow)}
+        </p>
+
+        <p>
+          ${escapeHTML(event.description)}
+        </p>
+
+        <div class="actions">
+
+          <button
+            class="btn primary"
+            onclick="interestEvent('${event.id}')">
+            I'm Interested
+          </button>
+
+          <button
+            class="btn"
+            onclick="shareEvent('${event.id}')">
+            Share Show
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('eventOverlay').remove()">
+            Close
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="grid">
+
+        <div class="card span-6">
+
+          <div class="kicker">
+            Artist
+          </div>
+
+          <h2>
+            ${escapeHTML(event.artistName)}
+          </h2>
+
+          <p>
+            ${escapeHTML(
+              event.artistSnapshot?.genre || ""
+            )}
+          </p>
+
+          ${
+            event.artistSnapshot?.bio
+            ? `
+              <p>
+                ${escapeHTML(
+                  event.artistSnapshot.bio
+                )}
+              </p>
+            `
+            : ""
+          }
+
+          ${
+            event.artistSnapshot?.social
+            ? `
+              <p>
+                ${escapeHTML(
+                  event.artistSnapshot.social
+                )}
+              </p>
+            `
+            : ""
+          }
+
+        </div>
+
+        <div class="card span-6">
+
+          <div class="kicker">
+            Share
+          </div>
+
+          <img
+            class="qr"
+            src="${qrURL}"
+            alt="Event QR Code"
+          >
+
+          <p class="small">
+            Scan to open this show.
+          </p>
+
+          <button
+            class="btn"
+            onclick="copyEventLink('${event.id}')">
+            Copy Link
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(overlay);
+
+}
+
+
+function interestEvent(eventId){
+
+  const event =
+    data.events.find(e => e.id === eventId);
+
+  if(!event) return;
+
+  event.interests =
+    (event.interests || 0) + 1;
+
+  data.engagement.interests =
+    (data.engagement.interests || 0) + 1;
+
+  saveData();
+
+  alert(
+    "You're marked as interested in this show."
+  );
+
+  renderAll();
+
+}
+
+
+async function shareEvent(eventId){
+
+  const event =
+    data.events.find(e => e.id === eventId);
+
+  if(!event) return;
+
+  const url =
+    location.origin +
+    location.pathname +
+    "#event=" +
+    encodeURIComponent(eventId);
+
+  event.shares =
+    (event.shares || 0) + 1;
+
+  data.engagement.shares =
+    (data.engagement.shares || 0) + 1;
+
+  saveData();
+
+  const shareData = {
+
+    title:`${event.artistName} at ${data.venue.name}`,
+
+    text:
+      `${event.artistName} live at ${data.venue.name} — ${formatDate(event.date)}.`,
+
+    url
+
+  };
+
+  if(
+    navigator.share &&
+    location.protocol !== "file:"
+  ){
+
+    try{
+
+      await navigator.share(shareData);
+
+    }catch(error){}
+
+  }else{
+
+    await copyText(url);
+
+    alert("Event link copied.");
+
+  }
+
+  renderAll();
+
+}
+
+
+async function copyEventLink(eventId){
+
+  const url =
+    location.origin +
+    location.pathname +
+    "#event=" +
+    encodeURIComponent(eventId);
+
+  await copyText(url);
+
+  alert("Event link copied.");
+
+}
+
 
 async function copyText(text){
 
@@ -1849,1210 +2358,125 @@ async function copyText(text){
 
     await navigator.clipboard.writeText(text);
 
-    toast("Copied.");
+  }catch(error){
 
-  }catch(e){
+    const area =
+      document.createElement("textarea");
 
-    toast("Copy failed on this browser.");
+    area.value = text;
 
-  }
+    document.body.appendChild(area);
 
-}
+    area.select();
 
-function copyEventLink(id){
+    document.execCommand("copy");
 
-  const event = getEvent(id);
-
-  if(event){
-    copyText(eventLink(event));
-  }
-
-}
-
-async function shareEvent(id){
-
-  const event = getEvent(id);
-
-  if(!event) return;
-
-  const link = eventLink(event);
-
-  trackEventShare(id);
-
-  if(navigator.share){
-
-    try{
-
-      await navigator.share({
-        title:`${event.artistName} at Gemini Lounge`,
-        text:`${event.artistName} live at Gemini Lounge — ${formatDate(event.date)}.`,
-        url:link
-      });
-
-      toast("Shared.");
-
-    }catch(e){}
-
-  }else{
-
-    copyText(link);
-
-    toast("Event link copied.");
+    area.remove();
 
   }
 
 }
 
 
-/* =========================================================
+/* =============================================================
    PROMOTION
-========================================================= */
-
-function generateSocialPost(eventId){
-
-  const event = getEvent(eventId);
-
-  if(!event) return;
-
-  const p = db.promotions[eventId];
-
-  if(!p) return;
-
-  p.socialPost =
-`LIVE MUSIC AT GEMINI LOUNGE 🎶
-
-${event.artistName}
-${event.genre ? event.genre + " • " : ""}${event.performanceType || "Live Music"}
-
-${formatDate(event.date)}
-${formatWindow(event.window)}
-
-Come out, support local music, and spend the night at Gemini Lounge.
-
-${eventLink(event)}`;
-
-  p.status = "Promo Ready";
-
-  saveDB();
-
-  refreshUI();
-
-  toast("Social post generated.");
-
-}
-
-function copySocialPost(eventId){
-
-  const p = db.promotions[eventId];
-
-  if(!p || !p.socialPost){
-
-    generateSocialPost(eventId);
-
-    return;
-
-  }
-
-  copyText(p.socialPost);
-
-}
-
-function setPromotionStatus(eventId,status){
-
-  const p = db.promotions[eventId];
-
-  if(!p) return;
-
-  p.status = status;
-
-  addHistory(
-    "Promotion Updated",
-    `${p.campaignName} moved to ${status}.`
-  );
-
-  saveDB();
-
-  refreshUI();
-
-}
-
-function updateCampaignName(eventId,value){
-
-  if(!db.promotions[eventId]) return;
-
-  db.promotions[eventId].campaignName = value;
-
-  saveDB();
-
-}
-
-
-/* =========================================================
-   CUSTOMER EXPERIENCE
-========================================================= */
-
-function saveVenueProfile(){
-
-  db.venue.venueName =
-    document.getElementById("venueName").value.trim() ||
-    "Gemini Lounge";
-
-  db.venue.venueTagline =
-    document.getElementById("venueTagline").value.trim() ||
-    "Live music, local artists, and good nights at Gemini Lounge.";
-
-  db.venue.venueAbout =
-    document.getElementById("venueAbout").value.trim();
-
-  db.venue.venueLink =
-    document.getElementById("venueLink").value.trim();
-
-  saveDB();
-
-  renderPublicHome();
-
-  toast("Gemini profile saved.");
-
-}
-
-function loadVenueForm(){
-
-  document.getElementById("venueName").value =
-    db.venue.venueName || "";
-
-  document.getElementById("venueTagline").value =
-    db.venue.venueTagline || "";
-
-  document.getElementById("venueAbout").value =
-    db.venue.venueAbout || "";
-
-  document.getElementById("venueLink").value =
-    db.venue.venueLink || "";
-
-}
-
-function getUpcomingEvents(){
-
-  const today = new Date();
-
-  today.setHours(0,0,0,0);
-
-  return db.events
-    .filter(e=>{
-
-      if(e.cancelled) return false;
-
-      const d = new Date(e.date + "T12:00:00");
-
-      return d >= today;
-
-    })
-    .sort((a,b)=>{
-
-      return new Date(a.date + "T12:00:00") -
-             new Date(b.date + "T12:00:00");
-
-    });
-
-}
-
-function getArtistSpotlight(){
-
-  const upcoming = getUpcomingEvents();
-
-  if(!upcoming.length){
-
-    return null;
-
-  }
-
-  return upcoming[0];
-
-}
-
-function interestAlreadyRecorded(eventId){
-
-  return db.interests.some(
-    i => i.eventId === eventId
-  );
-
-}
-
-function toggleInterest(eventId){
-
-  const existingIndex =
-    db.interests.findIndex(
-      i => i.eventId === eventId
-    );
-
-  if(existingIndex >= 0){
-
-    db.interests.splice(existingIndex,1);
-
-    saveDB();
-
-    toast("Interest removed.");
-
-  }else{
-
-    db.interests.push({
-
-      id:uid("interest"),
-
-      eventId,
-
-      createdAt:new Date().toISOString()
-
-    });
-
-    addHistory(
-      "Customer Interest",
-      `A customer marked event ${eventId} as interesting.`
-    );
-
-    saveDB();
-
-    toast("You're interested. Nice.");
-
-  }
-
-  refreshPublicView();
-
-}
-
-function publicInterestButton(eventId){
-
-  const interested =
-    interestAlreadyRecorded(eventId);
-
-  return `
-    <button
-      class="btn ${interested ? "gold" : "green"}"
-      onclick="toggleInterest('${eventId}')">
-
-      ${interested ? "✓ I'm Interested" : "I'm Interested"}
-
-    </button>
-  `;
-
-}
-
-function publicEventCard(event){
-
-  const interests = getInterestCount(event.id);
-
-  return `
-
-    <div class="event-card">
-
-      <div class="event-date">
-        ${escapeHTML(formatDate(event.date))}
-      </div>
-
-      <h3>${escapeHTML(event.artistName)}</h3>
-
-      <div class="event-artist">
-        ${escapeHTML(event.genre || "Live Music")}
-      </div>
-
-      <div class="event-meta">
-        ${escapeHTML(event.performanceType || "Live Performance")}
-        •
-        ${escapeHTML(formatWindow(event.window))}
-      </div>
-
-      <div class="row">
-
-        <button
-          class="btn gold small"
-          onclick="openEvent('${event.id}')">
-
-          View Show
-
-        </button>
-
-        ${publicInterestButton(event.id)}
-
-      </div>
-
-      <div class="small muted" style="margin-top:10px">
-        ${interests} ${interests === 1 ? "person is" : "people are"} interested
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-function showPublicHome(){
-
-  window.location.hash = "home";
-
-  document.querySelectorAll(".tab-panel").forEach(p=>{
-    p.classList.remove("active");
-  });
-
-  document.querySelectorAll(".tab").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  document.getElementById("public-home").style.display = "block";
-  document.getElementById("public-event").style.display = "none";
-
-  renderPublicHome();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-function returnToAdmin(){
-
-  window.location.hash = "";
-
-  document.getElementById("public-home").style.display = "none";
-  document.getElementById("public-event").style.display = "none";
-
-  showTab("owner");
-
-}
-
-function renderPublicHome(){
-
-  document.getElementById("publicVenueName").textContent =
-    db.venue.venueName || "Gemini Lounge";
-
-  document.getElementById("publicTagline").textContent =
-    db.venue.venueTagline ||
-    "Live music, local artists, and good nights at Gemini Lounge.";
-
-  document.getElementById("publicAbout").textContent =
-    db.venue.venueAbout || "";
-
-  const upcoming = getUpcomingEvents();
-
-  const spotlight = getArtistSpotlight();
-
-  let html = "";
-
-  html += `
-    <div id="public-shows">
-
-      <div class="public-section-title">
-        Upcoming Shows
-      </div>
-  `;
-
-  if(upcoming.length){
-
-    html += `
-      <div class="grid">
-        ${upcoming.map(publicEventCard).join("")}
-      </div>
-    `;
-
-  }else{
-
-    html += `
-      <div class="empty">
-        No upcoming shows are posted yet.
-      </div>
-    `;
-
-  }
-
-  html += `</div>`;
-
-  html += `
-    <div id="public-spotlight">
-
-      <div class="public-section-title">
-        Artist Spotlight
-      </div>
-  `;
-
-  if(spotlight){
-
-    html += `
-
-      <div class="spotlight">
-
-        <div class="card purple">
-
-          <div class="badge purple">
-            NEXT UP
-          </div>
-
-          <div class="artist-name" style="margin-top:10px">
-            ${escapeHTML(spotlight.artistName)}
-          </div>
-
-          <p class="muted">
-            ${escapeHTML(
-              spotlight.bio ||
-              "Live music coming to Gemini Lounge."
-            )}
-          </p>
-
-          ${
-            spotlight.social
-            ?
-            `<div class="social">
-              ${escapeHTML(spotlight.social)}
-            </div>`
-            :
-            ""
-          }
-
-        </div>
-
-        <div class="card">
-
-          <div class="small muted">
-            NEXT SHOW
-          </div>
-
-          <h3>
-            ${escapeHTML(formatDate(spotlight.date))}
-          </h3>
-
-          <p>
-            ${escapeHTML(formatWindow(spotlight.window))}
-          </p>
-
-          <button
-            class="btn gold"
-            onclick="openEvent('${spotlight.id}')">
-
-            View Event
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }else{
-
-    html += `
-      <div class="empty">
-        Artist spotlight will appear when the next show is approved.
-      </div>
-    `;
-
-  }
-
-  html += `</div>`;
-
-  document.getElementById("publicHomeContent").innerHTML = html;
-
-}
-
-function refreshPublicView(){
-
-  const homeVisible =
-    document.getElementById("public-home").style.display === "block";
-
-  const eventVisible =
-    document.getElementById("public-event").style.display === "block";
-
-  if(homeVisible){
-    renderPublicHome();
-  }
-
-  if(eventVisible){
-
-    const match =
-      window.location.hash.match(/^#event=(.+)$/);
-
-    if(match){
-
-      renderPublicEvent(
-        decodeURIComponent(match[1])
-      );
-
-    }
-
-  }
-
-}
-
-function scrollPublicShows(){
-
-  const el = document.getElementById("public-shows");
-
-  if(el){
-
-    el.scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-}
-
-function scrollPublicSpotlight(){
-
-  const el =
-    document.getElementById("public-spotlight");
-
-  if(el){
-
-    el.scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-}
-
-
-/* =========================================================
-   PUBLIC EVENT
-========================================================= */
-
-function renderPublicEvent(id){
-
-  const event = getEvent(id);
-
-  if(!event){
-
-    toast("Event not found.");
-
-    showPublicHome();
-
-    return;
-
-  }
-
-  document.getElementById("public-home").style.display = "none";
-
-  document.getElementById("public-event").style.display = "block";
-
-  trackEventView(id);
-
-  const analytics = ensureAnalytics(id);
-
-  const interestCount =
-    getInterestCount(id);
-
-  const social =
-    event.social
-    ?
-    `
-      <div class="social">
-        ${escapeHTML(event.social)}
-      </div>
-    `
-    :
-    "";
-
-  document.getElementById("publicEventContent").innerHTML = `
-
-    <div class="public-hero">
-
-      <div class="badge gold">
-        GEMINI LOUNGE
-      </div>
-
-      <div class="event-date" style="margin-top:15px">
-        ${escapeHTML(formatDate(event.date))}
-      </div>
-
-      <h2>
-        ${escapeHTML(event.artistName)}
-      </h2>
-
-      <p>
-        ${escapeHTML(event.genre || "Live Music")}
-        •
-        ${escapeHTML(event.performanceType || "Live Performance")}
-      </p>
-
-      <p>
-        ${escapeHTML(formatWindow(event.window))}
-      </p>
-
-      <p>
-        ${escapeHTML(
-          event.bio ||
-          "Come out for live music at Gemini Lounge."
-        )}
-      </p>
-
-      ${social}
-
-      <div class="row" style="margin-top:20px">
-
-        ${publicInterestButton(event.id)}
-
-        <button
-          class="btn blue"
-          onclick="shareEvent('${event.id}')">
-
-          Share Show
-
-        </button>
-
-        <button
-          class="btn"
-          onclick="showPublicHome()">
-
-          Back to Gemini
-
-        </button>
-
-      </div>
-
-      <div class="small muted" style="margin-top:14px">
-        ${interestCount}
-        ${interestCount === 1 ? "person is" : "people are"}
-        interested.
-      </div>
-
-    </div>
-
-    <div class="grid">
-
-      <div class="card">
-
-        <h3>Event QR</h3>
-
-        ${createQR(event)}
-
-        <p class="small muted">
-          Scan to open this show experience.
-        </p>
-
-        <button
-          class="btn small"
-          onclick="simulateQRScan('${event.id}')">
-
-          Simulate QR Scan
-
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Show Activity</h3>
-
-        <div class="grid3">
-
-          <div class="metric">
-            <div class="number">
-              ${analytics.views}
-            </div>
-            <div class="label">
-              Views
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="number">
-              ${analytics.shares}
-            </div>
-            <div class="label">
-              Shares
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="number">
-              ${analytics.qrScans}
-            </div>
-            <div class="label">
-              QR Scans
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   OWNER RENDER
-========================================================= */
-
-function renderOwner(){
-
-  const pending =
-    db.bookings.filter(b=>b.status === "Pending");
-
-  const upcoming =
-    getUpcomingEvents();
-
-  let views = 0;
-  let shares = 0;
-  let qr = 0;
-
-  Object.values(db.analytics).forEach(a=>{
-
-    views += a.views || 0;
-    shares += a.shares || 0;
-    qr += a.qrScans || 0;
-
-  });
-
-  document.getElementById("ownerPending").textContent =
-    pending.length;
-
-  document.getElementById("ownerEvents").textContent =
-    upcoming.length;
-
-  document.getElementById("ownerInterest").textContent =
-    db.interests.length;
-
-  document.getElementById("ownerViews").textContent =
-    views;
-
-  document.getElementById("ownerShares").textContent =
-    shares;
-
-  document.getElementById("ownerQR").textContent =
-    qr;
-
-  loadVenueForm();
-
-  const queue =
-    [...db.bookings]
-      .filter(b=>b.status === "Pending")
-      .sort((a,b)=>
-        (b.fitScore || 0) -
-        (a.fitScore || 0)
-      );
-
-  if(!queue.length){
-
-    document.getElementById("ownerQueue").innerHTML =
-      `<div class="empty">No pending artist requests.</div>`;
-
-    return;
-
-  }
-
-  document.getElementById("ownerQueue").innerHTML =
-    queue.map(b=>`
-
-      <div class="list-item">
-
-        <div class="row"
-             style="justify-content:space-between;align-items:flex-start">
-
-          <div>
-
-            <strong>
-              ${escapeHTML(b.artistName)}
-            </strong>
-
-            <div class="muted small">
-              ${escapeHTML(b.genre || "Genre not specified")}
-              •
-              ${escapeHTML(b.location || "Location not specified")}
-            </div>
-
-            <div class="small" style="margin-top:6px">
-              ${escapeHTML(formatDateTime(b.date,b.window))}
-            </div>
-
-          </div>
-
-          <div style="text-align:right">
-
-            <div class="fit ${
-              fitLabel(b.fitScore).cls
-            }"
-            style="font-size:30px">
-              ${b.fitScore}
-            </div>
-
-            <div class="small muted">
-              Gemini Fit
-            </div>
-
-          </div>
-
-        </div>
-
-        <p class="muted">
-          ${escapeHTML(
-            b.bio ||
-            "No artist bio provided."
-          )}
-        </p>
-
-        <div class="row">
-
-          ${b.social
-            ?
-            `<span class="badge blue">
-              Social linked
-            </span>`
-            :
-            ""
-          }
-
-          <span class="badge">
-            ${escapeHTML(b.performanceType || "Performance")}
-          </span>
-
-        </div>
-
-        <div class="row" style="margin-top:13px">
-
-          <button
-            class="btn green small"
-            onclick="approveBooking('${b.id}')">
-
-            Approve
-
-          </button>
-
-          <button
-            class="btn red small"
-            onclick="declineBooking('${b.id}')">
-
-            Decline
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   MY BOOKINGS
-========================================================= */
-
-function renderMyBookings(){
-
-  const list =
-    [...db.bookings]
-      .sort((a,b)=>
-        new Date(b.createdAt) -
-        new Date(a.createdAt)
-      );
-
-  if(!list.length){
-
-    document.getElementById("myBookingsList").innerHTML =
-      `<div class="empty">No bookings yet.</div>`;
-
-    return;
-
-  }
-
-  document.getElementById("myBookingsList").innerHTML =
-    list.map(b=>`
-
-      <div class="card">
-
-        <div class="row"
-             style="justify-content:space-between">
-
-          <div>
-
-            <h3>
-              ${escapeHTML(b.artistName)}
-            </h3>
-
-            <div class="muted">
-              ${escapeHTML(formatDateTime(b.date,b.window))}
-            </div>
-
-          </div>
-
-          ${statusBadge(b.status)}
-
-        </div>
-
-        <p>
-          Gemini Fit:
-          <strong>${b.fitScore}</strong>
-        </p>
-
-        ${
-          ["Pending","Approved"].includes(b.status)
-          ?
-          `
-          <button
-            class="btn small"
-            onclick="requestReschedule('${b.id}')">
-
-            Request Reschedule
-
-          </button>
-
-          <button
-            class="btn red small"
-            onclick="cancelBooking('${b.id}')">
-
-            Cancel
-
-          </button>
-          `
-          :
-          ""
-        }
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-function renderEvents(){
-
-  const events =
-    [...db.events]
-      .filter(e=>!e.cancelled)
-      .sort((a,b)=>
-        new Date(a.date + "T12:00:00") -
-        new Date(b.date + "T12:00:00")
-      );
-
-  if(!events.length){
-
-    document.getElementById("eventsList").innerHTML =
-      `<div class="empty">No approved events yet.</div>`;
-
-    return;
-
-  }
-
-  document.getElementById("eventsList").innerHTML =
-    events.map(e=>`
-
-      <div class="card">
-
-        <div class="row"
-             style="justify-content:space-between">
-
-          <div>
-
-            <div class="event-date">
-              ${escapeHTML(formatDate(e.date))}
-            </div>
-
-            <h3>
-              ${escapeHTML(e.artistName)}
-            </h3>
-
-            <div class="muted">
-              ${escapeHTML(formatWindow(e.window))}
-            </div>
-
-          </div>
-
-          <span class="badge green">
-            Approved Event
-          </span>
-
-        </div>
-
-        <hr>
-
-        <div class="grid3">
-
-          <div class="metric">
-
-            <div class="number">
-              ${getMetric(e.id,"views")}
-            </div>
-
-            <div class="label">
-              Views
-            </div>
-
-          </div>
-
-          <div class="metric">
-
-            <div class="number">
-              ${getMetric(e.id,"shares")}
-            </div>
-
-            <div class="label">
-              Shares
-            </div>
-
-          </div>
-
-          <div class="metric">
-
-            <div class="number">
-              ${getInterestCount(e.id)}
-            </div>
-
-            <div class="label">
-              Interested
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="row" style="margin-top:15px">
-
-          <button
-            class="btn gold"
-            onclick="openEvent('${e.id}')">
-
-            Public Event
-
-          </button>
-
-          <button
-            class="btn blue"
-            onclick="shareEvent('${e.id}')">
-
-            Share
-
-          </button>
-
-          <button
-            class="btn"
-            onclick="copyEventLink('${e.id}')">
-
-            Copy Link
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   PROMOTION RENDER
-========================================================= */
+============================================================= */
 
 function renderPromotion(){
 
-  const events =
-    db.events.filter(e=>!e.cancelled);
+  const box =
+    document.getElementById("promotionList");
 
-  if(!events.length){
+  if(!data.events.length){
 
-    document.getElementById("promotionList").innerHTML =
-      `<div class="empty">No events available for promotion.</div>`;
+    box.innerHTML =
+      `<div class="card empty">Approve an event before promoting it.</div>`;
 
     return;
-
   }
 
-  document.getElementById("promotionList").innerHTML =
-    events.map(event=>{
+  box.innerHTML =
+    data.events.map(event => {
 
-      const p =
-        db.promotions[event.id] ||
-        {
-          eventId:event.id,
-          campaignName:`${event.artistName} at Gemini Lounge`,
-          status:"Not Ready",
-          socialPost:""
-        };
+      const promotion =
+        data.promotions.find(
+          p => p.eventId === event.id
+        );
+
+      if(!promotion) return "";
 
       return `
 
-        <div class="card">
+        <div class="card" style="margin-bottom:12px">
 
-          <div class="row"
-               style="justify-content:space-between">
+          <div class="event-top">
 
             <div>
 
-              <h3>
-                ${escapeHTML(event.artistName)}
-              </h3>
+              <div class="event-date">
+                ${formatDate(event.date)}
+              </div>
 
-              <div class="muted">
-                ${escapeHTML(formatDateTime(event.date,event.window))}
+              <div class="event-title">
+                ${escapeHTML(event.artistName)}
               </div>
 
             </div>
 
-            ${statusBadge(p.status)}
+            ${statusBadge(promotion.status)}
 
           </div>
 
-          <div class="field" style="margin-top:15px">
-
-            <label>Campaign Name</label>
-
-            <input
-              value="${escapeHTML(p.campaignName)}"
-              onchange="updateCampaignName('${event.id}',this.value)">
-
-          </div>
-
-          <div class="row">
+          <div class="actions">
 
             <button
-              class="btn gold"
-              onclick="generateSocialPost('${event.id}')">
-
+              class="btn primary"
+              onclick="generateSocialPost('${promotion.id}')">
               Generate Social Post
-
             </button>
 
             <button
               class="btn"
-              onclick="copySocialPost('${event.id}')">
-
+              onclick="copySocialPost('${promotion.id}')">
               Copy Social Post
-
             </button>
 
             <button
-              class="btn green"
-              onclick="setPromotionStatus('${event.id}','Promoted')">
-
-              Mark Promoted
-
+              class="btn"
+              onclick="shareEvent('${event.id}')">
+              Share Event
             </button>
+
+            ${
+              promotion.status !== "Promoted"
+              ? `
+                <button
+                  class="btn green"
+                  onclick="markPromoted('${promotion.id}')">
+                  Mark Promoted
+                </button>
+              `
+              : ""
+            }
 
           </div>
 
-          ${
-            p.socialPost
-            ?
-            `<pre style="margin-top:15px">${escapeHTML(p.socialPost)}</pre>`
-            :
-            ""
-          }
+          <div
+            id="social_${promotion.id}"
+            style="margin-top:12px"
+          >
+
+            ${
+              promotion.socialPost
+              ? `
+                <div class="notice">
+                  ${escapeHTML(promotion.socialPost)}
+                </div>
+              `
+              : ""
+            }
+
+          </div>
 
         </div>
 
@@ -3063,284 +2487,220 @@ function renderPromotion(){
 }
 
 
-/* =========================================================
-   CALENDAR
-========================================================= */
+function generateSocialPost(promotionId){
 
-function renderCalendar(){
+  const promotion =
+    data.promotions.find(
+      p => p.id === promotionId
+    );
 
-  const events =
-    getUpcomingEvents();
+  if(!promotion) return;
 
-  if(!events.length){
+  const event =
+    data.events.find(
+      e => e.id === promotion.eventId
+    );
 
-    document.getElementById("calendarList").innerHTML =
-      `<div class="empty">Calendar is open.</div>`;
+  if(!event) return;
 
-    return;
+  promotion.socialPost =
+`Live music at ${data.venue.name} 🎶
+
+${event.artistName} is coming through ${formatDate(event.date)}.
+
+${windowLabel(event.performanceWindow)}
+
+Come hang out, listen to some live music, and enjoy the night.
+
+📍 ${data.venue.name}`;
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+async function copySocialPost(promotionId){
+
+  const promotion =
+    data.promotions.find(
+      p => p.id === promotionId
+    );
+
+  if(!promotion) return;
+
+  if(!promotion.socialPost){
+
+    generateSocialPost(promotionId);
 
   }
 
-  document.getElementById("calendarList").innerHTML =
-    events.map(e=>`
+  const updated =
+    data.promotions.find(
+      p => p.id === promotionId
+    );
 
-      <div class="list-item">
+  await copyText(updated.socialPost);
 
-        <div class="row"
-             style="justify-content:space-between">
+  alert("Social post copied.");
 
-          <div>
+}
 
-            <strong>
-              ${escapeHTML(formatDate(e.date))}
-            </strong>
+
+function markPromoted(promotionId){
+
+  const promotion =
+    data.promotions.find(
+      p => p.id === promotionId
+    );
+
+  if(!promotion) return;
+
+  if(!promotion.socialPost){
+
+    generateSocialPost(promotionId);
+
+  }
+
+  promotion.status = "Promoted";
+
+  data.history.unshift({
+
+    id:uid("history"),
+
+    type:"Promotion",
+
+    text:"An event was marked Promoted.",
+
+    date:new Date().toISOString()
+
+  });
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* =============================================================
+   CALENDAR
+============================================================= */
+
+function renderCalendar(){
+
+  const box =
+    document.getElementById("calendarList");
+
+  const approved =
+    data.bookings
+      .filter(b =>
+        b.status === "Approved"
+      )
+      .sort((a,b) =>
+        a.date.localeCompare(b.date)
+      );
+
+  if(!approved.length){
+
+    box.innerHTML =
+      `<div class="card empty">No approved shows yet.</div>`;
+
+    return;
+  }
+
+  box.innerHTML = approved.map(booking => `
+
+    <div class="event">
+
+      <div class="event-top">
+
+        <div>
+
+          <div class="event-date">
+            ${formatDate(booking.date)}
+          </div>
+
+          <div class="event-title">
+            ${escapeHTML(booking.artistName)}
+          </div>
+
+          <div class="event-meta">
+            ${windowLabel(booking.performanceWindow)}
+          </div>
+
+        </div>
+
+        ${statusBadge(booking.status)}
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =============================================================
+   HISTORY
+============================================================= */
+
+function renderHistory(){
+
+  const box =
+    document.getElementById("historyList");
+
+  if(!data.history.length){
+
+    box.innerHTML =
+      `<div class="card empty">No activity yet.</div>`;
+
+    return;
+  }
+
+  box.innerHTML =
+    data.history
+      .slice(0,50)
+      .map(item => `
+
+        <div class="event">
+
+          <div class="event-top">
 
             <div>
-              ${escapeHTML(e.artistName)}
+              <div class="event-title">
+                ${escapeHTML(item.type)}
+              </div>
+
+              <div class="event-meta">
+                ${escapeHTML(item.text)}
+              </div>
+            </div>
+
+            <div class="small">
+              ${new Date(item.date).toLocaleString()}
             </div>
 
           </div>
 
-          <div class="muted">
-            ${escapeHTML(formatWindow(e.window))}
-          </div>
-
         </div>
 
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function addHistory(type,description){
-
-  db.history.unshift({
-
-    id:uid("history"),
-
-    type,
-
-    description,
-
-    createdAt:new Date().toISOString()
-
-  });
-
-}
-
-function renderHistory(){
-
-  if(!db.history.length){
-
-    document.getElementById("historyList").innerHTML =
-      `<div class="empty">No activity yet.</div>`;
-
-    return;
-
-  }
-
-  document.getElementById("historyList").innerHTML =
-    db.history.map(h=>`
-
-      <div class="list-item">
-
-        <div class="row"
-             style="justify-content:space-between">
-
-          <strong>
-            ${escapeHTML(h.type)}
-          </strong>
-
-          <span class="small muted">
-            ${new Date(h.createdAt).toLocaleString()}
-          </span>
-
-        </div>
-
-        <div class="muted" style="margin-top:6px">
-          ${escapeHTML(h.description)}
-        </div>
-
-      </div>
-
-    `).join("");
+      `)
+      .join("");
 
 }
 
 
-/* =========================================================
-   DEMO DATA
-========================================================= */
-
-function loadDemoData(){
-
-  if(db.events.length || db.bookings.length){
-
-    toast("Demo data already exists.");
-
-    return;
-
-  }
-
-  const future =
-    new Date();
-
-  future.setDate(
-    future.getDate() + 7
-  );
-
-  const date =
-    future.toISOString().slice(0,10);
-
-  const artist = {
-
-    name:"Coastal Signal",
-
-    genre:"Americana",
-
-    location:"Bandon, Oregon",
-
-    contact:"artist@example.com",
-
-    performanceType:"Trio",
-
-    social:"@coastalsignal",
-
-    bio:"Local Americana trio bringing an easygoing live set built for a good night out."
-
-  };
-
-  db.artist = artist;
-
-  const fit =
-    calculateFit(artist);
-
-  const booking = {
-
-    id:uid("booking"),
-
-    artistName:artist.name,
-
-    genre:artist.genre,
-
-    location:artist.location,
-
-    contact:artist.contact,
-
-    performanceType:artist.performanceType,
-
-    social:artist.social,
-
-    bio:artist.bio,
-
-    fitScore:fit.total,
-
-    fitDetails:fit,
-
-    date,
-
-    window:"20:00-22:00",
-
-    status:"Approved",
-
-    createdAt:new Date().toISOString()
-
-  };
-
-  db.bookings.push(booking);
-
-  const event = {
-
-    id:uid("event"),
-
-    bookingId:booking.id,
-
-    artistName:booking.artistName,
-
-    genre:booking.genre,
-
-    location:booking.location,
-
-    performanceType:booking.performanceType,
-
-    social:booking.social,
-
-    bio:booking.bio,
-
-    date:booking.date,
-
-    window:booking.window,
-
-    createdAt:new Date().toISOString()
-
-  };
-
-  db.events.push(event);
-
-  db.promotions[event.id] = {
-
-    eventId:event.id,
-
-    campaignName:`${event.artistName} at Gemini Lounge`,
-
-    status:"Promo Ready",
-
-    socialPost:""
-
-  };
-
-  addHistory(
-    "Demo Loaded",
-    "Coastal Signal demo booking created."
-  );
-
-  saveDB();
-
-  loadArtistForm();
-
-  refreshUI();
-
-  toast("Demo data loaded.");
-
-}
-
-function resetDemo(){
-
-  if(!confirm(
-    "Reset Gemini V2.0 data? This removes the current local demo data."
-  )){
-    return;
-  }
-
-  localStorage.removeItem(STORAGE_KEY);
-
-  location.reload();
-
-}
-
-
-/* =========================================================
-   HASH ROUTING
-========================================================= */
+/* =============================================================
+   ROUTING / EVENT HASH
+============================================================= */
 
 function checkHash(){
 
   const hash =
-    window.location.hash;
-
-  if(hash === "#home"){
-
-    showPublicHome();
-
-    return;
-
-  }
+    location.hash;
 
   if(hash.startsWith("#event=")){
 
@@ -3349,27 +2709,183 @@ function checkHash(){
         hash.substring(7)
       );
 
-    renderPublicEvent(id);
+    const event =
+      data.events.find(
+        e => e.id === id
+      );
+
+    if(event){
+
+      const url =
+        location.origin +
+        location.pathname +
+        hash;
+
+      renderPublicEvent(event,url);
+
+    }
 
   }
 
 }
 
-window.addEventListener(
-  "hashchange",
-  checkHash
-);
+
+/* =============================================================
+   DEMO DATA
+============================================================= */
+
+function loadDemoData(){
+
+  if(data.events.length || data.bookings.length){
+
+    const proceed =
+      confirm(
+        "Demo data will add sample records. Continue?"
+      );
+
+    if(!proceed) return;
+
+  }
+
+  const demoArtist = {
+
+    name:"The Coastline",
+
+    genre:"Acoustic / Rock",
+
+    location:"Bandon, Oregon",
+
+    contact:"artist@example.com",
+
+    type:"Duo",
+
+    social:"@thecoastline",
+
+    bio:"A local acoustic duo built for relaxed coastal nights."
+
+  };
+
+  const booking = {
+
+    id:uid("booking"),
+
+    artistName:demoArtist.name,
+
+    artistSnapshot:demoArtist,
+
+    date:getFutureDate(5),
+
+    performanceWindow:"19:00-21:00",
+
+    message:"We'd love to play an evening set at Gemini.",
+
+    status:"Approved",
+
+    createdAt:new Date().toISOString(),
+
+    eventId:null
+
+  };
+
+  const event = {
+
+    id:uid("event"),
+
+    bookingId:booking.id,
+
+    artistName:demoArtist.name,
+
+    artistSnapshot:demoArtist,
+
+    date:booking.date,
+
+    performanceWindow:booking.performanceWindow,
+
+    title:`Live Music — ${demoArtist.name}`,
+
+    description:demoArtist.bio,
+
+    views:12,
+
+    shares:4,
+
+    qrScans:3,
+
+    interests:7,
+
+    createdAt:new Date().toISOString()
+
+  };
+
+  booking.eventId = event.id;
+
+  data.bookings.push(booking);
+
+  data.events.push(event);
+
+  data.promotions.push({
+
+    id:uid("promo"),
+
+    eventId:event.id,
+
+    status:"Promo Ready",
+
+    socialPost:"",
+
+    createdAt:new Date().toISOString()
+
+  });
+
+  data.history.unshift({
+
+    id:uid("history"),
+
+    type:"Demo Event",
+
+    text:"Demo event added to Gemini.",
+
+    date:new Date().toISOString()
+
+  });
+
+  saveData();
+
+  renderAll();
+
+}
 
 
-/* =========================================================
-   REFRESH
-========================================================= */
+function getFutureDate(days){
 
-function refreshUI(){
+  const d = new Date();
 
-  renderFit();
+  d.setDate(d.getDate()+days);
 
-  renderMyBookings();
+  const month =
+    String(d.getMonth()+1).padStart(2,"0");
+
+  const day =
+    String(d.getDate()).padStart(2,"0");
+
+  return `${d.getFullYear()}-${month}-${day}`;
+
+}
+
+
+/* =============================================================
+   MASTER RENDER
+============================================================= */
+
+function renderAll(){
+
+  loadArtistForm();
+
+  renderArtistSummary();
+
+  renderArtistBookings();
+
+  renderCustomer();
 
   renderOwner();
 
@@ -3381,38 +2897,47 @@ function refreshUI(){
 
   renderHistory();
 
-  refreshPublicView();
-
 }
 
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+/* =============================================================
+   INITIALIZE
+============================================================= */
 
-loadDB();
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-loadArtistForm();
+    renderAll();
 
-loadVenueForm();
+    checkHash();
 
-const defaultDate =
-  new Date();
-
-defaultDate.setDate(
-  defaultDate.getDate() + 7
+  }
 );
 
-if(!document.getElementById("bookingDate").value){
+window.addEventListener(
+  "hashchange",
+  checkHash
+);
 
-  document.getElementById("bookingDate").value =
-    defaultDate.toISOString().slice(0,10);
 
-}
+/* =============================================================
+   OPTIONAL DEMO ACCESS
+   Console:
+   loadDemoData()
+============================================================= */
 
-refreshUI();
+window.GeminiScanCraft = {
 
-checkHash();
+  data,
+
+  saveData,
+
+  loadDemoData,
+
+  renderAll
+
+};
 
 </script>
 
