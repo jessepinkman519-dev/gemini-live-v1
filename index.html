@@ -21,9 +21,7 @@
   --shadow:0 12px 30px rgba(0,0,0,.28);
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -32,16 +30,8 @@ body{
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
 .app{
   max-width:1200px;
@@ -104,9 +94,7 @@ nav{
   scrollbar-width:none;
 }
 
-nav::-webkit-scrollbar{
-  display:none;
-}
+nav::-webkit-scrollbar{display:none}
 
 nav button{
   flex:0 0 auto;
@@ -124,13 +112,8 @@ nav button.active{
   font-weight:800;
 }
 
-.view{
-  display:none;
-}
-
-.view.active{
-  display:block;
-}
+.view{display:none}
+.view.active{display:block}
 
 .hero{
   background:
@@ -192,19 +175,14 @@ nav button.active{
   box-shadow:var(--shadow);
 }
 
-.card h3,
-.card h4{
-  margin:0 0 8px;
-}
+.card h3,.card h4{margin:0 0 8px}
 
 .card p{
   color:var(--muted);
   line-height:1.5;
 }
 
-.stat{
-  min-height:105px;
-}
+.stat{min-height:105px}
 
 .stat .number{
   font-size:31px;
@@ -224,13 +202,9 @@ nav button.active{
     var(--panel);
 }
 
-.request{
-  border-left:4px solid var(--accent);
-}
+.request{border-left:4px solid var(--accent)}
 
-.event-card{
-  position:relative;
-}
+.event-card{position:relative}
 
 .event-date{
   display:inline-flex;
@@ -302,9 +276,7 @@ nav button.active{
   font-weight:700;
 }
 
-.btn:hover{
-  filter:brightness(1.12);
-}
+.btn:hover{filter:brightness(1.12)}
 
 .btn.primary{
   background:var(--accent);
@@ -355,9 +327,7 @@ label{
   font-size:12px;
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
   width:100%;
   border:1px solid var(--line);
   background:#0f1317;
@@ -367,9 +337,7 @@ textarea{
   outline:none;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
+input:focus,select:focus,textarea:focus{
   border-color:var(--accent);
 }
 
@@ -384,9 +352,7 @@ textarea{
   gap:12px;
 }
 
-.full{
-  grid-column:1/-1;
-}
+.full{grid-column:1/-1}
 
 .profile-summary{
   display:flex;
@@ -473,9 +439,7 @@ textarea{
   z-index:5000;
 }
 
-.overlay.show{
-  display:flex;
-}
+.overlay.show{display:flex}
 
 .modal{
   width:min(700px,100%);
@@ -528,8 +492,7 @@ pre.social{
   border-collapse:collapse;
 }
 
-.table th,
-.table td{
+.table th,.table td{
   text-align:left;
   padding:10px 8px;
   border-bottom:1px solid var(--line);
@@ -541,68 +504,23 @@ pre.social{
   font-weight:700;
 }
 
-.muted{
-  color:var(--muted);
-}
-
-.highlight{
-  color:var(--accent);
-}
-
-.success-text{
-  color:var(--green);
-}
-
-.warning-text{
-  color:var(--orange);
-}
-
-.danger-text{
-  color:var(--red);
-}
+.muted{color:var(--muted)}
+.highlight{color:var(--accent)}
+.success-text{color:var(--green)}
+.warning-text{color:var(--orange)}
+.danger-text{color:var(--red)}
 
 @media(max-width:760px){
-  .app{
-    padding:12px;
-  }
-
-  header{
-    align-items:flex-start;
-  }
-
-  .mode-pill{
-    display:none;
-  }
-
-  .hero{
-    padding:18px;
-  }
-
-  .hero h2{
-    font-size:23px;
-  }
-
-  .grid,
-  .grid-3,
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .metric-row{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .btn{
-    flex:1 1 auto;
-  }
-
-  .actions .btn{
-    min-width:120px;
-  }
-
-  .section-title{
-    margin-top:20px;
-  }
+  .app{padding:12px}
+  header{align-items:flex-start}
+  .mode-pill{display:none}
+  .hero{padding:18px}
+  .hero h2{font-size:23px}
+  .grid,.grid-3,.form-grid{grid-template-columns:1fr}
+  .metric-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .btn{flex:1 1 auto}
+  .actions .btn{min-width:120px}
+  .section-title{margin-top:20px}
 }
 </style>
 </head>
@@ -635,10 +553,6 @@ pre.social{
   <button data-view="calendar">Calendar</button>
   <button data-view="history">History</button>
 </nav>
-
-<!-- ========================================================= -->
-<!-- ARTIST -->
-<!-- ========================================================= -->
 
 <section id="artist" class="view">
 
@@ -767,10 +681,6 @@ pre.social{
 
 </section>
 
-<!-- ========================================================= -->
-<!-- MY BOOKINGS -->
-<!-- ========================================================= -->
-
 <section id="bookings" class="view">
 
   <div class="hero">
@@ -784,10 +694,6 @@ pre.social{
   <div id="artistBookingsList"></div>
 
 </section>
-
-<!-- ========================================================= -->
-<!-- CUSTOMER -->
-<!-- ========================================================= -->
 
 <section id="customer" class="view">
 
@@ -833,10 +739,6 @@ pre.social{
 
 </section>
 
-<!-- ========================================================= -->
-<!-- OWNER -->
-<!-- ========================================================= -->
-
 <section id="owner" class="view active">
 
   <div class="hero">
@@ -846,8 +748,6 @@ pre.social{
       Here's what needs your attention first.
     </p>
   </div>
-
-  <!-- TOP ACTION STATS -->
 
   <div class="grid-3">
 
@@ -868,16 +768,12 @@ pre.social{
 
   </div>
 
-  <!-- NEEDS ATTENTION -->
-
   <div class="section-title">
     <h3>Needs Attention</h3>
     <span>Handle these first.</span>
   </div>
 
   <div id="ownerRequests"></div>
-
-  <!-- NEXT SHOW -->
 
   <div class="section-title">
     <h3>Next Show</h3>
@@ -886,16 +782,12 @@ pre.social{
 
   <div id="ownerNextShow"></div>
 
-  <!-- UPCOMING -->
-
   <div class="section-title">
     <h3>Upcoming Shows</h3>
     <span>Quick view.</span>
   </div>
 
   <div id="ownerUpcomingEvents"></div>
-
-  <!-- SIMPLE BUSINESS SIGNAL -->
 
   <div class="section-title">
     <h3>Gemini Activity</h3>
@@ -930,8 +822,6 @@ pre.social{
 
   </div>
 
-  <!-- QUICK CONTROLS -->
-
   <div class="section-title">
     <h3>Quick Controls</h3>
   </div>
@@ -964,10 +854,6 @@ pre.social{
 
 </section>
 
-<!-- ========================================================= -->
-<!-- EVENTS -->
-<!-- ========================================================= -->
-
 <section id="events" class="view">
 
   <div class="hero">
@@ -981,10 +867,6 @@ pre.social{
   <div id="eventsList"></div>
 
 </section>
-
-<!-- ========================================================= -->
-<!-- PROMOTION -->
-<!-- ========================================================= -->
 
 <section id="promotion" class="view">
 
@@ -1000,10 +882,6 @@ pre.social{
 
 </section>
 
-<!-- ========================================================= -->
-<!-- CALENDAR -->
-<!-- ========================================================= -->
-
 <section id="calendar" class="view">
 
   <div class="hero">
@@ -1017,10 +895,6 @@ pre.social{
   <div id="calendarList"></div>
 
 </section>
-
-<!-- ========================================================= -->
-<!-- HISTORY -->
-<!-- ========================================================= -->
 
 <section id="history" class="view">
 
@@ -1037,10 +911,6 @@ pre.social{
 </section>
 
 </div>
-
-<!-- ========================================================= -->
-<!-- EVENT MODAL -->
-<!-- ========================================================= -->
 
 <div id="eventOverlay" class="overlay">
 
@@ -1060,10 +930,6 @@ pre.social{
   </div>
 
 </div>
-
-<!-- ========================================================= -->
-<!-- VENUE MODAL -->
-<!-- ========================================================= -->
 
 <div id="venueOverlay" class="overlay">
 
@@ -1124,12 +990,6 @@ pre.social{
 
 <script>
 
-/* =========================================================
-   SCANCRAFT GEMINI LOUNGE
-   V2.0 — SLICE 4
-   OWNER EXPERIENCE LAYER
-   ========================================================= */
-
 const STORAGE_KEY = "gemini_engine_v20";
 
 const defaultState = {
@@ -1159,6 +1019,10 @@ const defaultState = {
 
 let state = loadState();
 
+/* =========================================================
+   STATE / STORAGE
+   ========================================================= */
+
 function loadState(){
 
   try{
@@ -1182,14 +1046,20 @@ function loadState(){
         ...defaultState.artist,
         ...(parsed.artist || {})
       },
-      bookings:parsed.bookings || [],
-      events:parsed.events || [],
-      history:parsed.history || []
+      bookings:Array.isArray(parsed.bookings)
+        ? parsed.bookings
+        : [],
+      events:Array.isArray(parsed.events)
+        ? parsed.events
+        : [],
+      history:Array.isArray(parsed.history)
+        ? parsed.history
+        : []
     };
 
   }catch(error){
 
-    console.error(error);
+    console.error("ScanCraft load error:",error);
 
     return structuredClone(defaultState);
 
@@ -1197,14 +1067,103 @@ function loadState(){
 
 }
 
-function saveState(){
+/*
+  IMPORTANT:
+  Refresh the in-memory state from localStorage.
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(state)
-  );
+  This is what fixes the Artist -> Owner sync problem
+  when separate tabs/windows are using the same app.
+*/
+function syncStateFromStorage(){
+
+  try{
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(!saved) return false;
+
+    const parsed = JSON.parse(saved);
+
+    state = {
+      ...structuredClone(defaultState),
+      ...parsed,
+      venue:{
+        ...defaultState.venue,
+        ...(parsed.venue || {})
+      },
+      artist:{
+        ...defaultState.artist,
+        ...(parsed.artist || {})
+      },
+      bookings:Array.isArray(parsed.bookings)
+        ? parsed.bookings
+        : [],
+      events:Array.isArray(parsed.events)
+        ? parsed.events
+        : [],
+      history:Array.isArray(parsed.history)
+        ? parsed.history
+        : []
+    };
+
+    return true;
+
+  }catch(error){
+
+    console.error("ScanCraft sync error:",error);
+
+    return false;
+
+  }
 
 }
+
+function saveState(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
+    );
+
+  }catch(error){
+
+    console.error("ScanCraft save error:",error);
+
+  }
+
+}
+
+/*
+  If another tab/window changes the Gemini data,
+  immediately pull the new state into this page.
+*/
+window.addEventListener("storage",function(event){
+
+  if(event.key !== STORAGE_KEY) return;
+
+  syncStateFromStorage();
+
+  renderAll();
+
+});
+
+/*
+  Before every major render, make sure the page is
+  looking at the newest saved state.
+*/
+function refreshAndRender(){
+
+  syncStateFromStorage();
+
+  renderAll();
+
+}
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
 function uid(prefix="id"){
 
@@ -1257,6 +1216,8 @@ function formatDate(dateString){
 
 function formatWindow(windowValue){
 
+  if(!windowValue) return "";
+
   const parts = windowValue.split("-");
 
   if(parts.length !== 2) return windowValue;
@@ -1290,6 +1251,8 @@ function parseTime(time){
 }
 
 function overlaps(windowA,windowB){
+
+  if(!windowA || !windowB) return false;
 
   const a = windowA.split("-").map(parseTime);
   const b = windowB.split("-").map(parseTime);
@@ -1364,7 +1327,9 @@ function logHistory(type,message){
 
 function bookingStatusBadge(status){
 
-  const label = status.charAt(0).toUpperCase()+status.slice(1);
+  const label =
+    status.charAt(0).toUpperCase() +
+    status.slice(1);
 
   return `<span class="badge ${status}">${escapeHTML(label)}</span>`;
 
@@ -1387,6 +1352,13 @@ document
   });
 
 function setView(view){
+
+  /*
+    Critical sync point:
+    Whenever someone changes sections, pull the newest
+    shared browser state before showing the new section.
+  */
+  syncStateFromStorage();
 
   document
     .querySelectorAll(".view")
@@ -1566,6 +1538,13 @@ document
 
     event.preventDefault();
 
+    /*
+      Pull the newest state before checking availability.
+      This prevents an old tab from making a decision using
+      stale booking data.
+    */
+    syncStateFromStorage();
+
     if(!state.artist.name){
 
       showToast("Save your artist profile first.");
@@ -1593,7 +1572,7 @@ document
 
     }
 
-    const conflicting =
+    const conflictingBooking =
       state.bookings.some(b=>
         b.status !== "declined" &&
         b.status !== "cancelled" &&
@@ -1601,7 +1580,14 @@ document
         overlaps(b.window,windowValue)
       );
 
-    if(conflicting){
+    const conflictingEvent =
+      state.events.some(e=>
+        e.status !== "cancelled" &&
+        e.date === date &&
+        overlaps(e.window,windowValue)
+      );
+
+    if(conflictingBooking || conflictingEvent){
 
       showToast(
         "That time overlaps another Gemini booking."
@@ -1633,16 +1619,26 @@ document
 
     state.bookings.push(booking);
 
+    /*
+      SAVE IMMEDIATELY.
+      This is the important handoff:
+      the Owner tab can now see this booking.
+    */
+    saveState();
+
     logHistory(
       "booking",
       `${state.artist.name} requested ${formatDate(date)} at ${formatWindow(windowValue)}.`
     );
 
-    saveState();
+    /*
+      logHistory() also saves, so the complete booking +
+      history record is persisted before rendering.
+    */
 
     this.reset();
 
-    renderAll();
+    refreshAndRender();
 
     showToast("Booking request sent to Gemini.");
 
@@ -1734,6 +1730,12 @@ function renderArtistBookings(){
 
 function renderOwner(){
 
+  /*
+    Sync immediately before calculating owner stats.
+    This is the second major part of the fix.
+  */
+  syncStateFromStorage();
+
   const pending =
     pendingBookings();
 
@@ -1756,11 +1758,8 @@ function renderOwner(){
     .textContent = interests;
 
   renderOwnerRequests();
-
   renderOwnerNextShow();
-
   renderOwnerUpcoming();
-
   renderOwnerMetrics();
 
 }
@@ -1810,12 +1809,13 @@ function renderOwnerRequests(){
 
         <div style="margin-top:10px">
 
-          ${b.artist.social
-            ? `<div class="event-meta">
-                Social:
-                ${escapeHTML(b.artist.social)}
-              </div>`
-            : ""
+          ${
+            b.artist.social
+              ? `<div class="event-meta">
+                  Social:
+                  ${escapeHTML(b.artist.social)}
+                </div>`
+              : ""
           }
 
           ${
@@ -2033,6 +2033,8 @@ function renderOwnerMetrics(){
 
 function approveBooking(id){
 
+  syncStateFromStorage();
+
   const booking =
     state.bookings.find(b=>b.id === id);
 
@@ -2094,13 +2096,15 @@ function approveBooking(id){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("Booking approved. Event created.");
 
 }
 
 function declineBooking(id){
+
+  syncStateFromStorage();
 
   const booking =
     state.bookings.find(b=>b.id === id);
@@ -2116,13 +2120,15 @@ function declineBooking(id){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("Booking declined.");
 
 }
 
 function showArtistRequest(id){
+
+  syncStateFromStorage();
 
   const booking =
     state.bookings.find(b=>b.id === id);
@@ -2337,7 +2343,7 @@ function renderEvents(){
 }
 
 /* =========================================================
-   CUSTOMER EXPERIENCE
+   CUSTOMER
    ========================================================= */
 
 function renderCustomer(){
@@ -2413,9 +2419,7 @@ function renderCustomer(){
 }
 
 function showUpcomingCustomer(){
-
   setView("customer");
-
 }
 
 /* =========================================================
@@ -2424,18 +2428,20 @@ function showUpcomingCustomer(){
 
 function openEventFromBooking(bookingId){
 
+  syncStateFromStorage();
+
   const event =
     state.events.find(e=>e.bookingId === bookingId);
 
   if(event){
-
     openEventModal(event.id);
-
   }
 
 }
 
 function openEventModal(eventId,customerView=false){
+
+  syncStateFromStorage();
 
   const event =
     state.events.find(e=>e.id === eventId);
@@ -2587,9 +2593,7 @@ document
   .addEventListener("click",function(event){
 
     if(event.target === this){
-
       closeEventModal();
-
     }
 
   });
@@ -2599,6 +2603,8 @@ document
    ========================================================= */
 
 function markInterested(eventId){
+
+  syncStateFromStorage();
 
   const event =
     state.events.find(e=>e.id === eventId);
@@ -2615,7 +2621,7 @@ function markInterested(eventId){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   openEventModal(eventId,true);
 
@@ -2624,6 +2630,8 @@ function markInterested(eventId){
 }
 
 function shareEvent(eventId){
+
+  syncStateFromStorage();
 
   const event =
     state.events.find(e=>e.id === eventId);
@@ -2666,11 +2674,13 @@ function shareEvent(eventId){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
 }
 
 function copyEventLink(eventId){
+
+  syncStateFromStorage();
 
   const url =
     location.href.split("#")[0] +
@@ -2689,7 +2699,7 @@ function copyEventLink(eventId){
 
     saveState();
 
-    renderAll();
+    refreshAndRender();
 
   }
 
@@ -2725,6 +2735,8 @@ function copyText(text){
 
 function recordQRScan(eventId){
 
+  syncStateFromStorage();
+
   const event =
     state.events.find(e=>e.id === eventId);
 
@@ -2735,7 +2747,7 @@ function recordQRScan(eventId){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("QR scan recorded.");
 
@@ -2746,6 +2758,8 @@ function recordQRScan(eventId){
    ========================================================= */
 
 function cancelEvent(eventId){
+
+  syncStateFromStorage();
 
   const event =
     state.events.find(e=>e.id === eventId);
@@ -2758,9 +2772,7 @@ function cancelEvent(eventId){
     getBookingForEvent(event);
 
   if(booking){
-
     booking.status = "cancelled";
-
   }
 
   logHistory(
@@ -2772,7 +2784,7 @@ function cancelEvent(eventId){
 
   closeEventModal();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("Event cancelled.");
 
@@ -2897,6 +2909,8 @@ Come out, support local music, and bring somebody with you.
 
 function copySocialPost(eventId){
 
+  syncStateFromStorage();
+
   const event =
     state.events.find(e=>e.id === eventId);
 
@@ -2912,6 +2926,8 @@ function copySocialPost(eventId){
 
 function markPromoted(eventId){
 
+  syncStateFromStorage();
+
   const event =
     state.events.find(e=>e.id === eventId);
 
@@ -2926,7 +2942,7 @@ function markPromoted(eventId){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("Show marked as promoted.");
 
@@ -3064,6 +3080,8 @@ function renderHistory(){
 
 function openVenueEditor(){
 
+  syncStateFromStorage();
+
   document.getElementById("venueName").value =
     state.venue.name;
 
@@ -3125,7 +3143,7 @@ document
 
     closeVenueEditor();
 
-    renderAll();
+    refreshAndRender();
 
     showToast("Gemini profile updated.");
 
@@ -3148,6 +3166,8 @@ function checkHashRoute(){
       decodeURIComponent(
         hash.replace("#event=","")
       );
+
+    syncStateFromStorage();
 
     const event =
       state.events.find(e=>e.id === eventId);
@@ -3177,22 +3197,21 @@ window.addEventListener(
 
 function renderAll(){
 
+  /*
+    Always synchronize first.
+    This guarantees every visible section is based on
+    the newest saved browser state.
+  */
+  syncStateFromStorage();
+
   populateArtistForm();
-
   renderArtistProfile();
-
   renderArtistBookings();
-
   renderCustomer();
-
   renderOwner();
-
   renderEvents();
-
   renderPromotion();
-
   renderCalendar();
-
   renderHistory();
 
 }
@@ -3295,7 +3314,7 @@ function loadDemoData(){
 
   saveState();
 
-  renderAll();
+  refreshAndRender();
 
   showToast("Demo data loaded.");
 
@@ -3322,9 +3341,17 @@ function getFutureDate(days){
 
 window.GeminiScanCraft = {
 
-  getState:()=>state,
+  getState:()=>{
+
+    syncStateFromStorage();
+
+    return state;
+
+  },
 
   save:saveState,
+
+  sync:syncStateFromStorage,
 
   loadDemoData:loadDemoData,
 
@@ -3346,6 +3373,8 @@ window.GeminiScanCraft = {
 /* =========================================================
    INITIALIZE
    ========================================================= */
+
+syncStateFromStorage();
 
 renderAll();
 
