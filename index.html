@@ -3,260 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini Lounge — ScanCraft V2.1</title>
+
+<title>Gemini Lounge — ScanCraft V2.2</title>
 
 <style>
 :root{
-  --bg:#05070b;
-  --panel:rgba(5,8,13,.90);
-  --panel2:rgba(10,13,20,.88);
-  --pink:#ff4f91;
-  --pink2:#ff78aa;
-  --gold:#f5c451;
-  --green:#20d89b;
-  --blue:#63b9ff;
-  --red:#ff5c6c;
-  --text:#f7f7fa;
-  --muted:#9ba4b5;
-  --line:rgba(255,255,255,.13);
-  --shadow:0 18px 55px rgba(0,0,0,.45);
+  --bg:#08090d;
+  --panel:rgba(15,17,24,.94);
+  --panel2:rgba(22,24,32,.96);
+  --line:rgba(255,255,255,.10);
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --gold:#d8a84e;
+  --gold2:#f1c76b;
+  --green:#45d483;
+  --red:#ff5d67;
+  --blue:#55a9ff;
+  --orange:#ff9d4d;
+  --shadow:0 18px 50px rgba(0,0,0,.42);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
-html,body{
-  margin:0;
-  padding:0;
-  min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
-  background:#05070b;
+html{
+  scroll-behavior:smooth;
 }
 
 body{
+  margin:0;
   min-height:100vh;
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  background:#050609;
   overflow-x:hidden;
 }
-
-/* =========================================================
-   GEMINI BACKGROUND
-   ========================================================= */
 
 body:before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-3;
-  background-image:
+  background:
     linear-gradient(
-      90deg,
-      rgba(2,4,8,.96) 0%,
-      rgba(2,4,8,.84) 18%,
-      rgba(2,4,8,.48) 48%,
-      rgba(2,4,8,.66) 100%
+      rgba(4,5,8,.78),
+      rgba(4,5,8,.90)
     ),
-    url("gemini-lounge-background.jpg");
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-  filter:saturate(1.08);
+    url("gemini-lounge-background.jpg") center/cover no-repeat;
+  filter:saturate(.82);
+  z-index:-2;
 }
 
 body:after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-2;
+  background:radial-gradient(
+    circle at 50% 0%,
+    rgba(216,168,78,.10),
+    transparent 45%
+  );
+  z-index:-1;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 75% 20%,rgba(255,40,110,.15),transparent 30%),
-    linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.72));
 }
 
-/* =========================================================
-   APP SHELL
-   ========================================================= */
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:var(--gold2);
+}
 
 .app{
-  display:flex;
-  min-height:100vh;
+  width:min(1180px,calc(100% - 24px));
+  margin:0 auto;
+  padding:18px 0 40px;
 }
-
-.sidebar{
-  width:250px;
-  flex:0 0 250px;
-  min-height:100vh;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  background:rgba(2,5,9,.93);
-  border-right:1px solid var(--line);
-  z-index:20;
-  display:flex;
-  flex-direction:column;
-}
-
-.brand{
-  padding:22px 22px 18px;
-  border-bottom:1px solid var(--line);
-}
-
-.brand-title{
-  color:var(--pink2);
-  font-family:Georgia,serif;
-  font-size:25px;
-  letter-spacing:1px;
-}
-
-.brand-sub{
-  color:#f2a9c7;
-  font-family:Georgia,serif;
-  font-size:14px;
-  margin-top:4px;
-  letter-spacing:.5px;
-}
-
-.brand-line{
-  height:2px;
-  width:100%;
-  background:linear-gradient(90deg,var(--pink),transparent);
-  margin-top:10px;
-}
-
-.nav{
-  padding:18px 14px;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.nav button{
-  border:1px solid transparent;
-  background:transparent;
-  color:#dce2ed;
-  text-align:left;
-  padding:13px 14px;
-  border-radius:10px;
-  font-size:15px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.nav button:hover{
-  background:rgba(255,255,255,.06);
-}
-
-.nav button.active{
-  background:linear-gradient(90deg,rgba(255,79,145,.24),rgba(255,79,145,.07));
-  border-color:rgba(255,79,145,.38);
-  color:#fff;
-}
-
-.nav-icon{
-  display:inline-block;
-  width:25px;
-  color:var(--pink);
-}
-
-.sidebar-note{
-  margin:auto 16px 18px;
-  padding:16px;
-  border:1px solid rgba(255,79,145,.25);
-  border-radius:14px;
-  background:rgba(255,30,100,.05);
-}
-
-.script{
-  color:var(--pink2);
-  font-family:"Brush Script MT","Segoe Script",cursive;
-  font-size:23px;
-  line-height:1.1;
-}
-
-.main{
-  margin-left:250px;
-  width:calc(100% - 250px);
-  min-height:100vh;
-}
-
-.topbar{
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  padding:0 28px;
-  border-bottom:1px solid var(--line);
-  background:rgba(2,5,9,.55);
-  backdrop-filter:blur(12px);
-}
-
-.version{
-  border:1px solid rgba(255,79,145,.55);
-  color:#fff;
-  padding:8px 13px;
-  border-radius:999px;
-  font-size:12px;
-  letter-spacing:.6px;
-}
-
-.content{
-  width:min(1250px,calc(100% - 34px));
-  margin:24px auto 70px;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
 
 .hero{
   position:relative;
-  min-height:205px;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:18px;
+  min-height:180px;
+  border:1px solid var(--line);
+  border-radius:24px;
   overflow:hidden;
-  margin-bottom:20px;
-  background:
-    linear-gradient(90deg,rgba(2,5,9,.96),rgba(2,5,9,.62),rgba(2,5,9,.40)),
-    url("gemini-lounge-background.jpg");
-  background-size:cover;
-  background-position:center 47%;
+  display:flex;
+  align-items:flex-end;
+  padding:28px;
+  margin-bottom:16px;
   box-shadow:var(--shadow);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5,6,9,.95),
+      rgba(5,6,9,.58),
+      rgba(5,6,9,.84)
+    ),
+    url("gemini-lounge-background.jpg") center/cover no-repeat;
 }
 
-.hero-inner{
-  padding:36px 32px;
-  max-width:720px;
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    135deg,
+    transparent 45%,
+    rgba(216,168,78,.10)
+  );
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
 }
 
 .kicker{
-  color:var(--pink2);
-  text-transform:uppercase;
-  font-size:13px;
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:800;
   letter-spacing:2px;
-  font-weight:bold;
-}
-
-h1,h2,h3{
-  font-family:Georgia,"Times New Roman",serif;
+  text-transform:uppercase;
+  margin-bottom:7px;
 }
 
 .hero h1{
-  margin:8px 0 8px;
-  font-size:42px;
-  line-height:1.05;
+  margin:0;
+  font-size:clamp(30px,6vw,56px);
+  letter-spacing:2px;
+  line-height:1;
 }
 
 .hero p{
-  color:#d6dce7;
-  max-width:650px;
-  line-height:1.55;
-  margin:0;
+  margin:12px 0 0;
+  color:#d4d4d8;
+  max-width:680px;
+  line-height:1.5;
 }
 
-/* =========================================================
-   PANELS
-   ========================================================= */
+.layout{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:16px;
+  align-items:start;
+}
+
+.sidebar{
+  position:sticky;
+  top:12px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  padding:10px;
+  background:rgba(10,11,15,.92);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+
+.tab{
+  width:100%;
+  text-align:left;
+  border:1px solid transparent;
+  background:transparent;
+  color:#b9bbc2;
+  padding:12px 13px;
+  border-radius:11px;
+  font-weight:700;
+  transition:.18s ease;
+}
+
+.tab:hover{
+  background:rgba(255,255,255,.05);
+  color:#fff;
+}
+
+.tab.active{
+  background:rgba(216,168,78,.13);
+  color:var(--gold2);
+  border-color:rgba(216,168,78,.30);
+}
+
+.main{
+  min-width:0;
+}
 
 .view{
   display:none;
@@ -266,54 +204,429 @@ h1,h2,h3{
   display:block;
 }
 
-.grid{
-  display:grid;
-  gap:18px;
-}
-
-.grid.two{
-  grid-template-columns:1.35fr .85fr;
-}
-
-.grid.three{
-  grid-template-columns:repeat(3,1fr);
-}
-
 .panel{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:16px;
+  border-radius:18px;
   padding:20px;
   box-shadow:var(--shadow);
-  backdrop-filter:blur(10px);
+  margin-bottom:16px;
 }
 
-.panel-title{
+.panel:last-child{
+  margin-bottom:0;
+}
+
+.panel-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:17px;
+  align-items:flex-start;
+  gap:14px;
+  margin-bottom:18px;
 }
 
-.panel-title h2,
-.panel-title h3{
+.panel-head h2,
+.panel-head h3{
   margin:0;
 }
 
-.panel-title h2{
-  font-size:22px;
+.panel-head p{
+  margin:5px 0 0;
+  color:var(--muted);
+  line-height:1.45;
 }
 
-.panel-title h3{
-  font-size:18px;
+h2{
+  font-size:23px;
 }
 
-.muted{
+h3{
+  font-size:17px;
+}
+
+.grid{
+  display:grid;
+  gap:14px;
+}
+
+.grid.two{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid.three{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field:last-child{
+  margin-bottom:0;
+}
+
+label{
+  display:block;
+  color:#d4d4d8;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#0c0e13;
+  color:#fff;
+  padding:12px 13px;
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:rgba(216,168,78,.65);
+  box-shadow:0 0 0 3px rgba(216,168,78,.08);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:14px;
+}
+
+.btn{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px 15px;
+  background:#151820;
+  color:#fff;
+  font-weight:800;
+}
+
+.btn:hover{
+  filter:brightness(1.12);
+}
+
+.btn.primary{
+  background:linear-gradient(135deg,#c99637,#e4b95f);
+  color:#15110a;
+  border-color:#e4b95f;
+}
+
+.btn.success{
+  background:rgba(69,212,131,.13);
+  color:var(--green);
+  border-color:rgba(69,212,131,.28);
+}
+
+.btn.danger{
+  background:rgba(255,93,103,.11);
+  color:#ff8188;
+  border-color:rgba(255,93,103,.25);
+}
+
+.btn.info{
+  background:rgba(85,169,255,.12);
+  color:#79bcff;
+  border-color:rgba(85,169,255,.25);
+}
+
+.btn.small{
+  padding:8px 11px;
+  font-size:12px;
+}
+
+.notice{
+  border-radius:12px;
+  padding:13px 14px;
+  margin:12px 0;
+  line-height:1.45;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+}
+
+.notice.success{
+  color:#b9f4d0;
+  border-color:rgba(69,212,131,.28);
+  background:rgba(69,212,131,.08);
+}
+
+.notice.warning{
+  color:#ffe0ad;
+  border-color:rgba(255,157,77,.28);
+  background:rgba(255,157,77,.08);
+}
+
+.notice.error{
+  color:#ffc1c5;
+  border-color:rgba(255,93,103,.28);
+  background:rgba(255,93,103,.08);
+}
+
+.availability{
+  border-radius:13px;
+  padding:13px 15px;
+  border:1px solid var(--line);
+  background:#0c0e13;
+  margin-top:5px;
+  font-weight:800;
+}
+
+.availability.available{
+  color:var(--green);
+  border-color:rgba(69,212,131,.35);
+  background:rgba(69,212,131,.08);
+}
+
+.availability.occupied{
+  color:#ff8a91;
+  border-color:rgba(255,93,103,.35);
+  background:rgba(255,93,103,.08);
+}
+
+.availability.neutral{
   color:var(--muted);
 }
 
-.small{
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:15px;
+  background:rgba(255,255,255,.025);
+}
+
+.card + .card{
+  margin-top:10px;
+}
+
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.card-title strong{
+  font-size:16px;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+
+.status.pending{
+  color:#ffd58e;
+  background:rgba(255,184,77,.12);
+}
+
+.status.approved{
+  color:#9cebbd;
+  background:rgba(69,212,131,.12);
+}
+
+.status.declined,
+.status.cancelled{
+  color:#ff969c;
+  background:rgba(255,93,103,.11);
+}
+
+.status.ready{
+  color:#a9d5ff;
+  background:rgba(85,169,255,.12);
+}
+
+.metric-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+
+.metric{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+}
+
+.metric .num{
+  font-size:28px;
+  font-weight:900;
+  color:var(--gold2);
+}
+
+.metric .label{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.artist-profile{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+}
+
+.artist-avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  flex:none;
+  background:linear-gradient(135deg,#17191f,#30333c);
+  border:1px solid rgba(216,168,78,.35);
+  color:var(--gold2);
+  font-size:22px;
+  font-weight:900;
+}
+
+.artist-profile h3{
+  margin:0 0 4px;
+}
+
+.artist-profile p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.socials{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:8px;
+}
+
+.socials a{
+  font-size:12px;
+  text-decoration:none;
+}
+
+.empty{
+  padding:26px 15px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed rgba(255,255,255,.12);
+  border-radius:14px;
+}
+
+.event-preview{
+  border-radius:16px;
+  border:1px solid rgba(216,168,78,.25);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(216,168,78,.10),
+      rgba(255,255,255,.025)
+    );
+  padding:20px;
+}
+
+.event-preview .event-date{
+  color:var(--gold2);
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.event-preview h2{
+  margin:8px 0 7px;
+  font-size:28px;
+}
+
+.event-preview p{
+  color:#d0d0d5;
+  line-height:1.55;
+}
+
+.share-url{
+  display:flex;
+  gap:8px;
+}
+
+.share-url input{
+  min-width:0;
+}
+
+.calendar{
+  overflow:auto;
+}
+
+.calendar table{
+  width:100%;
+  min-width:620px;
+  border-collapse:collapse;
+}
+
+.calendar th,
+.calendar td{
+  border:1px solid var(--line);
+  padding:10px;
+  vertical-align:top;
+}
+
+.calendar th{
+  color:var(--gold2);
+  font-size:12px;
+  text-transform:uppercase;
+}
+
+.day-number{
+  color:#ddd;
+  font-weight:900;
+}
+
+.calendar-event{
+  margin-top:6px;
+  padding:7px;
+  border-radius:8px;
+  background:rgba(216,168,78,.10);
+  border:1px solid rgba(216,168,78,.20);
+  font-size:11px;
+}
+
+.history-item{
+  border-left:2px solid rgba(216,168,78,.35);
+  padding:8px 0 8px 13px;
+  margin-left:4px;
+}
+
+.history-item strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+.history-item span{
+  color:var(--muted);
   font-size:12px;
 }
 
@@ -323,494 +636,66 @@ h1,h2,h3{
   margin:18px 0;
 }
 
-/* =========================================================
-   FORMS
-   ========================================================= */
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-label{
-  font-size:12px;
-  color:#c6cedb;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  background:rgba(1,5,10,.84);
-  border:1px solid rgba(255,255,255,.15);
-  color:#fff;
-  border-radius:9px;
-  padding:12px;
-  font:inherit;
-  outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:rgba(255,79,145,.75);
-  box-shadow:0 0 0 3px rgba(255,79,145,.08);
-}
-
-textarea{
-  min-height:92px;
-  resize:vertical;
-}
-
-button{
-  font:inherit;
-}
-
-.btn{
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.05);
-  color:#fff;
-  padding:11px 15px;
-  border-radius:9px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-  background:rgba(255,255,255,.09);
-}
-
-.btn.primary{
-  background:linear-gradient(135deg,#ff3f83,#ff72a9);
-  border-color:#ff6da5;
-  color:#13050b;
-  font-weight:bold;
-}
-
-.btn.gold{
-  background:linear-gradient(135deg,#f2bd40,#ffd76d);
-  color:#1a1202;
-  border-color:#ffd86e;
-  font-weight:bold;
-}
-
-.btn.success{
-  border-color:rgba(32,216,155,.5);
-  color:#4ff0b7;
-}
-
-.btn.danger{
-  border-color:rgba(255,92,108,.5);
-  color:#ff8792;
-}
-
-.btn.blue{
-  border-color:rgba(99,185,255,.5);
-  color:#8acbff;
-}
-
-.actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-
-/* =========================================================
-   PROFILE / CARDS
-   ========================================================= */
-
-.profile-card{
-  display:grid;
-  grid-template-columns:90px 1fr;
-  gap:18px;
-  align-items:start;
-}
-
-.avatar{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  border:2px solid var(--pink);
-  background:
-    radial-gradient(circle at 40% 35%,#ff80af,transparent 23%),
-    linear-gradient(135deg,#260b18,#090b10);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:Georgia,serif;
-  font-size:25px;
-  color:#fff;
-}
-
-.profile-name{
-  font-family:Georgia,serif;
-  font-size:25px;
-  margin-bottom:4px;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:10px;
-}
-
-.tag{
-  font-size:11px;
-  border:1px solid rgba(255,255,255,.16);
-  padding:5px 8px;
-  border-radius:999px;
-  color:#d9dfeb;
-}
-
-.event-card{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  border-radius:13px;
-  padding:15px;
-}
-
-.event-top{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.event-name{
-  font-weight:bold;
-  font-size:16px;
-}
-
-.event-date{
-  color:var(--pink2);
-  font-size:13px;
-  margin-top:4px;
-}
-
-.event-meta{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:7px;
-  line-height:1.5;
-}
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  border-radius:999px;
-  padding:5px 9px;
-  font-size:11px;
-  white-space:nowrap;
-}
-
-.status.pending{
-  color:#ffd76c;
-  border:1px solid rgba(245,196,81,.35);
-  background:rgba(245,196,81,.08);
-}
-
-.status.approved{
-  color:#54eeb8;
-  border:1px solid rgba(32,216,155,.35);
-  background:rgba(32,216,155,.08);
-}
-
-.status.declined{
-  color:#ff8792;
-  border:1px solid rgba(255,92,108,.35);
-  background:rgba(255,92,108,.08);
-}
-
-.status.cancelled{
-  color:#b9c0cb;
-  border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.04);
-}
-
-.status.ready{
-  color:#7fc7ff;
-  border:1px solid rgba(99,185,255,.35);
-  background:rgba(99,185,255,.08);
-}
-
-/* =========================================================
-   METRICS
-   ========================================================= */
-
-.metric{
-  padding:17px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:rgba(255,255,255,.035);
-}
-
-.metric-value{
-  font-size:30px;
-  font-weight:bold;
-  margin-bottom:4px;
-}
-
-.metric-label{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.metric.gold .metric-value{color:var(--gold)}
-.metric.green .metric-value{color:var(--green)}
-.metric.blue .metric-value{color:var(--blue)}
-.metric.pink .metric-value{color:var(--pink2)}
-
-/* =========================================================
-   OWNER
-   ========================================================= */
-
-.attention{
-  border-left:3px solid var(--gold);
-}
-
-.attention h3{
-  margin:0 0 6px;
-}
-
-.quick-link{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-  cursor:pointer;
-}
-
-.quick-link:last-child{
-  border-bottom:0;
-}
-
-.quick-link:hover{
-  color:var(--pink2);
-}
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-.calendar{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:7px;
-}
-
-.cal-head{
-  color:var(--muted);
-  font-size:11px;
-  text-align:center;
-  padding:8px 2px;
-}
-
-.cal-day{
-  min-height:95px;
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:7px;
-  background:rgba(255,255,255,.025);
-}
-
-.cal-day.today{
-  border-color:rgba(255,79,145,.65);
-}
-
-.cal-num{
-  font-size:12px;
-  color:#dbe1ec;
-}
-
-.cal-event{
-  margin-top:8px;
-  padding:5px;
-  border-radius:5px;
-  background:rgba(255,79,145,.15);
-  color:#ff9fc1;
-  font-size:10px;
-  overflow:hidden;
-}
-
-/* =========================================================
-   EMPTY
-   ========================================================= */
-
-.empty{
-  padding:35px 20px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed rgba(255,255,255,.15);
-  border-radius:13px;
-}
-
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-#toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:100;
-  background:#111720;
-  color:#fff;
-  border:1px solid rgba(255,79,145,.45);
-  padding:13px 17px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-  transform:translateY(120px);
-  opacity:0;
-  transition:.25s;
-}
-
-#toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.76);
-  z-index:90;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.modal-backdrop.show{
-  display:flex;
-}
-
-.modal{
-  width:min(650px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#080c12;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:17px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
-  padding:22px;
-}
-
-.modal h2{
-  margin-top:0;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
 .footer{
+  margin-top:16px;
   text-align:center;
-  color:#8993a4;
+  color:#71717a;
   font-size:11px;
-  padding:25px;
 }
 
-.footer strong{
-  color:#c9d0dc;
+.hidden{
+  display:none !important;
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-.mobile-nav{
-  display:none;
-}
-
-@media(max-width:900px){
+@media(max-width:820px){
+  .layout{
+    grid-template-columns:1fr;
+  }
 
   .sidebar{
-    width:100%;
-    height:auto;
-    min-height:auto;
-    position:fixed;
-    top:auto;
-    bottom:0;
-    left:0;
-    right:0;
-    border-right:0;
-    border-top:1px solid var(--line);
-    z-index:50;
+    position:static;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
 
-  .brand,
-  .sidebar-note{
-    display:none;
-  }
-
-  .nav{
-    padding:7px;
-    flex-direction:row;
-    justify-content:space-around;
-    gap:3px;
-  }
-
-  .nav button{
-    flex:1;
+  .tab{
     text-align:center;
-    padding:10px 3px;
-    font-size:10px;
+    padding:10px 6px;
+    font-size:11px;
   }
 
-  .nav-icon{
-    display:block;
-    width:auto;
-    margin-bottom:3px;
+  .grid.three{
+    grid-template-columns:1fr 1fr;
   }
 
-  .main{
-    margin-left:0;
-    width:100%;
-    padding-bottom:70px;
+  .metric-grid{
+    grid-template-columns:1fr 1fr;
   }
+}
 
-  .topbar{
-    height:58px;
-    padding:0 14px;
-  }
-
-  .content{
-    width:calc(100% - 20px);
-    margin-top:12px;
+@media(max-width:560px){
+  .app{
+    width:min(100% - 12px,1180px);
+    padding-top:7px;
   }
 
   .hero{
-    min-height:220px;
-  }
-
-  .hero-inner{
-    padding:25px 20px;
+    min-height:165px;
+    border-radius:17px;
+    padding:20px;
   }
 
   .hero h1{
-    font-size:31px;
+    font-size:35px;
+  }
+
+  .panel{
+    padding:15px;
+    border-radius:15px;
+  }
+
+  .sidebar{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .grid.two,
@@ -818,25 +703,12 @@ button{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
+  .metric-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .field.full{
-    grid-column:auto;
-  }
-
-  .profile-card{
-    grid-template-columns:1fr;
-  }
-
-  .calendar{
-    grid-template-columns:repeat(7,minmax(42px,1fr));
-    overflow-x:auto;
-  }
-
-  .cal-day{
-    min-height:70px;
+  .share-url{
+    flex-direction:column;
   }
 }
 </style>
@@ -846,230 +718,176 @@ button{
 
 <div class="app">
 
-  <!-- =====================================================
-       SIDEBAR
-       ===================================================== -->
-
-  <aside class="sidebar">
-
-    <div class="brand">
-      <div class="brand-title">GEMINI LOUNGE</div>
-      <div class="brand-line"></div>
-      <div class="brand-sub">Bar &amp; Social Club</div>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="kicker">ScanCraft V2.2</div>
+      <h1>GEMINI LOUNGE</h1>
+      <p>
+        Live Music Booking & Promotion Engine
+      </p>
     </div>
+  </header>
 
-    <nav class="nav">
+  <div class="layout">
 
-      <button data-view="artist" onclick="setView('artist')">
-        <span class="nav-icon">♙</span>Artist
-      </button>
+    <nav class="sidebar">
 
-      <button data-view="bookings" onclick="setView('bookings')">
-        <span class="nav-icon">▣</span>My Bookings
-      </button>
-
-      <button data-view="customer" onclick="setView('customer')">
-        <span class="nav-icon">♧</span>Customer
-      </button>
-
-      <button data-view="owner" onclick="setView('owner')">
-        <span class="nav-icon">♢</span>Owner
-      </button>
-
-      <button data-view="events" onclick="setView('events')">
-        <span class="nav-icon">♫</span>Events
-      </button>
-
-      <button data-view="promotion" onclick="setView('promotion')">
-        <span class="nav-icon">◈</span>Promotion
-      </button>
-
-      <button data-view="calendar" onclick="setView('calendar')">
-        <span class="nav-icon">▦</span>Calendar
-      </button>
-
-      <button data-view="history" onclick="setView('history')">
-        <span class="nav-icon">◷</span>History
-      </button>
+      <button class="tab active" data-view="artist">Artist</button>
+      <button class="tab" data-view="bookings">My Bookings</button>
+      <button class="tab" data-view="customer">Customer</button>
+      <button class="tab" data-view="owner">Owner</button>
+      <button class="tab" data-view="events">Events</button>
+      <button class="tab" data-view="promotion">Promotion</button>
+      <button class="tab" data-view="calendar">Calendar</button>
+      <button class="tab" data-view="history">History</button>
 
     </nav>
 
-    <div class="sidebar-note">
-      <div class="script">
-        Live Music<br>
-        Local Artists<br>
-        Good Nights
-      </div>
-    </div>
+    <main class="main">
 
-  </aside>
+      <!-- ========================================================= -->
+      <!-- ARTIST -->
+      <!-- ========================================================= -->
 
-  <!-- =====================================================
-       MAIN
-       ===================================================== -->
+      <section id="view-artist" class="view active">
 
-  <main class="main">
+        <div class="panel">
 
-    <div class="topbar">
-      <div class="version">
-        GEMINI EXPERIENCE • SCANCRAFT V2.1
-      </div>
-    </div>
-
-    <div class="content">
-
-      <!-- =================================================
-           HERO
-           ================================================= -->
-
-      <section class="hero">
-
-        <div class="hero-inner">
-
-          <div class="kicker">Gemini Lounge Artist Portal</div>
-
-          <h1 id="heroTitle">
-            Book a Show at Gemini.
-          </h1>
-
-          <p id="heroText">
-            Build your artist profile, choose an available performance
-            slot, and send Gemini a booking request.
-          </p>
-
-        </div>
-
-      </section>
-
-      <!-- =================================================
-           ARTIST
-           ================================================= -->
-
-      <section id="view-artist" class="view">
-
-        <div class="grid two">
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h2>Artist Profile</h2>
-              <button class="btn" onclick="editArtistProfile()">
-                Edit Profile
-              </button>
-            </div>
-
-            <div id="artistProfileCard"></div>
-
-          </div>
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h2>Gemini Experience</h2>
-            </div>
-
-            <div class="event-card">
-
-              <div class="script">
-                Local Music<br>
-                Builds Community
-              </div>
-
-              <p class="muted">
-                Gemini gives local artists a simple way to
-                introduce themselves, request a performance,
-                and stay connected.
-              </p>
-
-              <div class="divider"></div>
-
-              <div class="quick-link" onclick="setView('events')">
-                <span>View upcoming shows</span>
-                <span>›</span>
-              </div>
-
-              <div class="quick-link" onclick="setView('customer')">
-                <span>See customer experience</span>
-                <span>›</span>
-              </div>
-
-              <div class="quick-link" onclick="setView('promotion')">
-                <span>Explore promotion</span>
-                <span>›</span>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel" style="margin-top:18px">
-
-          <div class="panel-title">
+          <div class="panel-head">
             <div>
-              <h2>Request a Performance</h2>
-              <div class="muted small">
-                Choose a date and performance window.
-              </div>
+              <h2>Artist Booking</h2>
+              <p>
+                Request an available performance slot at Gemini Lounge.
+              </p>
             </div>
           </div>
+
+          <div class="artist-profile">
+
+            <div class="artist-avatar">A</div>
+
+            <div>
+              <h3 id="artistNameDisplay">Alex Rivers</h3>
+              <p id="artistGenreDisplay">Acoustic • Singer / Songwriter</p>
+
+              <div class="socials">
+                <a id="artistInstagram" href="#" target="_blank">Instagram</a>
+                <a id="artistFacebook" href="#" target="_blank">Facebook</a>
+                <a id="artistWebsite" href="#" target="_blank">Website</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="divider"></div>
 
           <form id="bookingForm">
 
-            <div class="form-grid">
+            <div class="grid two">
 
               <div class="field">
-                <label>Performance Date</label>
-                <input id="bookingDate" type="date" required>
+                <label for="bookingArtist">Artist / Act Name</label>
+                <input
+                  id="bookingArtist"
+                  type="text"
+                  placeholder="Artist or band name"
+                  required
+                >
               </div>
 
               <div class="field">
-                <label>Performance Window</label>
+                <label for="bookingEmail">Contact Email</label>
+                <input
+                  id="bookingEmail"
+                  type="email"
+                  placeholder="artist@email.com"
+                  required
+                >
+              </div>
+
+            </div>
+
+            <div class="grid two">
+
+              <div class="field">
+                <label for="bookingDate">Performance Date</label>
+                <input
+                  id="bookingDate"
+                  type="date"
+                  required
+                >
+              </div>
+
+              <div class="field">
+
+                <label for="bookingTime">
+                  Performance Window
+                </label>
 
                 <select id="bookingTime" required>
+
+                  <option value="">
+                    Select a performance window
+                  </option>
+
                   <option value="6:00 PM - 8:00 PM">
                     6:00 PM - 8:00 PM
                   </option>
+
                   <option value="7:00 PM - 9:00 PM">
                     7:00 PM - 9:00 PM
                   </option>
+
                   <option value="8:00 PM - 10:00 PM">
                     8:00 PM - 10:00 PM
                   </option>
+
                   <option value="9:00 PM - 11:00 PM">
                     9:00 PM - 11:00 PM
                   </option>
+
                 </select>
 
-              </div>
-
-              <div class="field full">
-
-                <label>
-                  Message to Gemini
-                </label>
-
-                <textarea id="bookingMessage"
-                  placeholder="Anything Gemini should know about the show?"></textarea>
-
-              </div>
-
-              <div class="field full">
-
-                <div class="actions">
-
-                  <button
-                    type="submit"
-                    class="btn primary"
-                    style="width:100%;padding:14px"
-                  >
-                    ✈ Send Booking Request
-                  </button>
-
+                <div
+                  id="availabilityIndicator"
+                  class="availability neutral"
+                >
+                  Choose a date and performance window to check availability.
                 </div>
 
               </div>
+
+            </div>
+
+            <div class="field">
+
+              <label for="bookingNotes">
+                Notes / Performance Details
+              </label>
+
+              <textarea
+                id="bookingNotes"
+                placeholder="Tell Gemini Lounge about the act, setup needs, style, etc."
+              ></textarea>
+
+            </div>
+
+            <div class="actions">
+
+              <button
+                type="button"
+                class="btn info"
+                id="checkAvailabilityBtn"
+              >
+                Check Availability
+              </button>
+
+              <button
+                type="submit"
+                class="btn primary"
+              >
+                Request Booking
+              </button>
 
             </div>
 
@@ -1077,209 +895,229 @@ button{
 
         </div>
 
+        <div id="artistMessage"></div>
+
       </section>
 
-      <!-- =================================================
-           MY BOOKINGS
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- MY BOOKINGS -->
+      <!-- ========================================================= -->
 
       <section id="view-bookings" class="view">
 
         <div class="panel">
 
-          <div class="panel-title">
+          <div class="panel-head">
+
             <div>
               <h2>My Bookings</h2>
-              <div class="muted small">
-                Track requests and confirmed performances.
-              </div>
+              <p>
+                Track your booking requests and confirmed performances.
+              </p>
             </div>
+
           </div>
 
-          <div id="myBookings"></div>
+          <div id="myBookingsList"></div>
 
         </div>
 
       </section>
 
-      <!-- =================================================
-           CUSTOMER
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- CUSTOMER -->
+      <!-- ========================================================= -->
 
       <section id="view-customer" class="view">
 
-        <div class="grid two">
+        <div class="panel">
 
-          <div class="panel">
+          <div class="panel-head">
 
-            <div class="panel-title">
-              <div>
-                <div class="kicker">Customer Experience</div>
-                <h2>What's Happening at Gemini</h2>
-              </div>
-            </div>
-
-            <p class="muted">
-              Discover upcoming live music, learn about the artists,
-              and let Gemini know which shows you're interested in.
-            </p>
-
-            <div id="customerEvents"></div>
-
-          </div>
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h2>Gemini Lounge</h2>
-            </div>
-
-            <div class="event-card">
-
-              <div class="script">
-                Support Local Music
-              </div>
-
+            <div>
+              <h2>Customer Interest</h2>
               <p>
-                Real artists. Real people.
-                A stronger community.
+                Capture customer interest around upcoming Gemini Lounge events.
               </p>
+            </div>
 
-              <div class="divider"></div>
+          </div>
 
-              <div class="actions">
-                <button class="btn primary" onclick="customerShareVenue()">
-                  Share Gemini
-                </button>
+          <form id="customerForm">
 
-                <button class="btn" onclick="openVenueModal()">
-                  Venue Info
-                </button>
+            <div class="grid two">
+
+              <div class="field">
+                <label for="customerName">Customer Name</label>
+                <input
+                  id="customerName"
+                  required
+                  placeholder="Customer name"
+                >
+              </div>
+
+              <div class="field">
+                <label for="customerEmail">Email</label>
+                <input
+                  id="customerEmail"
+                  type="email"
+                  required
+                  placeholder="customer@email.com"
+                >
               </div>
 
             </div>
 
-          </div>
+            <div class="field">
+
+              <label for="customerEvent">
+                Event / Artist
+              </label>
+
+              <select id="customerEvent"></select>
+
+            </div>
+
+            <div class="field">
+
+              <label for="customerNotes">
+                Message
+              </label>
+
+              <textarea
+                id="customerNotes"
+                placeholder="What would you like to know?"
+              ></textarea>
+
+            </div>
+
+            <div class="actions">
+
+              <button class="btn primary" type="submit">
+                Submit Interest
+              </button>
+
+            </div>
+
+          </form>
 
         </div>
 
+        <div id="customerMessage"></div>
+
       </section>
 
-      <!-- =================================================
-           OWNER
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- OWNER -->
+      <!-- ========================================================= -->
 
       <section id="view-owner" class="view">
 
-        <div class="grid three">
+        <div class="panel">
 
-          <div class="metric gold">
-            <div class="metric-value" id="metricRequests">0</div>
-            <div class="metric-label">Requests Needing Attention</div>
-          </div>
+          <div class="panel-head">
 
-          <div class="metric blue">
-            <div class="metric-value" id="metricUpcoming">0</div>
-            <div class="metric-label">Upcoming Shows</div>
-          </div>
-
-          <div class="metric green">
-            <div class="metric-value" id="metricInterest">0</div>
-            <div class="metric-label">Customer Interests</div>
-          </div>
-
-        </div>
-
-        <div class="grid two" style="margin-top:18px">
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <div>
-                <div class="kicker">Owner Command Center</div>
-                <h2>Needs Attention</h2>
-              </div>
-
-              <button class="btn" onclick="renderOwner()">
-                Refresh
-              </button>
+            <div>
+              <h2>Owner Dashboard</h2>
+              <p>
+                Gemini Lounge booking and promotion command center.
+              </p>
             </div>
 
-            <div id="ownerRequests"></div>
+            <button
+              class="btn small"
+              id="loadDemoBtn"
+            >
+              Load Demo Data
+            </button>
 
           </div>
 
-          <div>
+          <div class="metric-grid">
 
-            <div class="panel">
-
-              <div class="panel-title">
-                <h3>Next Show</h3>
-                <button class="btn" onclick="setView('calendar')">
-                  Calendar
-                </button>
-              </div>
-
-              <div id="ownerNextShow"></div>
-
+            <div class="metric">
+              <div class="num" id="metricPending">0</div>
+              <div class="label">Pending Requests</div>
             </div>
 
-            <div class="panel" style="margin-top:18px">
+            <div class="metric">
+              <div class="num" id="metricConfirmed">0</div>
+              <div class="label">Confirmed Events</div>
+            </div>
 
-              <div class="panel-title">
-                <h3>Quick Controls</h3>
-              </div>
+            <div class="metric">
+              <div class="num" id="metricCustomers">0</div>
+              <div class="label">Customer Interests</div>
+            </div>
 
-              <div class="quick-link" onclick="setView('events')">
-                <span>Manage Events</span>
-                <span>›</span>
-              </div>
-
-              <div class="quick-link" onclick="setView('promotion')">
-                <span>Promotion Center</span>
-                <span>›</span>
-              </div>
-
-              <div class="quick-link" onclick="openVenueModal()">
-                <span>Edit Gemini Profile</span>
-                <span>›</span>
-              </div>
-
+            <div class="metric">
+              <div class="num" id="metricPromotions">0</div>
+              <div class="label">Promotions</div>
             </div>
 
           </div>
 
         </div>
 
-        <div class="panel" style="margin-top:18px">
+        <div class="panel">
 
-          <div class="panel-title">
-            <h3>Upcoming Shows</h3>
+          <div class="panel-head">
+
+            <div>
+              <h3>Booking Requests</h3>
+              <p>
+                Approve, decline, or manage incoming artist requests.
+              </p>
+            </div>
+
           </div>
 
-          <div id="ownerUpcoming"></div>
+          <div id="ownerBookingsList"></div>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="panel-head">
+
+            <div>
+              <h3>Customer Interest</h3>
+            </div>
+
+          </div>
+
+          <div id="ownerCustomersList"></div>
 
         </div>
 
       </section>
 
-      <!-- =================================================
-           EVENTS
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- EVENTS -->
+      <!-- ========================================================= -->
 
       <section id="view-events" class="view">
 
         <div class="panel">
 
-          <div class="panel-title">
+          <div class="panel-head">
 
             <div>
-              <div class="kicker">Public Experience</div>
-              <h2>Upcoming Events</h2>
+              <h2>Events</h2>
+              <p>
+                Public-facing confirmed Gemini Lounge events.
+              </p>
             </div>
 
-            <button class="btn primary" onclick="createDemoEvent()">
-              + Demo Event
+            <button
+              class="btn small"
+              id="createDemoEventBtn"
+            >
+              Create Demo Event
             </button>
 
           </div>
@@ -1288,33 +1126,32 @@ button{
 
         </div>
 
+        <div
+          id="publicEventPreview"
+          class="panel hidden"
+        ></div>
+
       </section>
 
-      <!-- =================================================
-           PROMOTION
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- PROMOTION -->
+      <!-- ========================================================= -->
 
       <section id="view-promotion" class="view">
 
         <div class="panel">
 
-          <div class="panel-title">
+          <div class="panel-head">
 
             <div>
-              <div class="kicker">Promotion Engine</div>
-              <h2>Promotion Center</h2>
+              <h2>Promotion Engine</h2>
+              <p>
+                Turn confirmed events into ready-to-share promotional assets.
+              </p>
             </div>
 
-            <button class="btn" onclick="generateAllPromotions()">
-              Generate Posts
-            </button>
-
           </div>
-
-          <p class="muted">
-            Turn confirmed Gemini events into ready-to-share
-            promotional content.
-          </p>
 
           <div id="promotionList"></div>
 
@@ -1322,47 +1159,68 @@ button{
 
       </section>
 
-      <!-- =================================================
-           CALENDAR
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- CALENDAR -->
+      <!-- ========================================================= -->
 
       <section id="view-calendar" class="view">
 
         <div class="panel">
 
-          <div class="panel-title">
+          <div class="panel-head">
 
             <div>
-              <div class="kicker">Schedule</div>
-              <h2>Gemini Calendar</h2>
+              <h2>Calendar</h2>
+              <p>
+                Confirmed Gemini Lounge performances.
+              </p>
             </div>
 
-            <button class="btn" onclick="setView('artist')">
-              Request a Show
+            <button
+              class="btn small"
+              id="calendarTodayBtn"
+            >
+              Today
             </button>
 
           </div>
 
-          <div id="calendar"></div>
+          <div class="calendar">
+
+            <div id="calendarContainer"></div>
+
+          </div>
 
         </div>
 
       </section>
 
-      <!-- =================================================
-           HISTORY
-           ================================================= -->
+
+      <!-- ========================================================= -->
+      <!-- HISTORY -->
+      <!-- ========================================================= -->
 
       <section id="view-history" class="view">
 
         <div class="panel">
 
-          <div class="panel-title">
+          <div class="panel-head">
 
             <div>
-              <div class="kicker">System Record</div>
               <h2>History</h2>
+              <p>
+                System activity and booking changes.
+              </p>
+
             </div>
+
+            <button
+              class="btn small danger"
+              id="clearHistoryBtn"
+            >
+              Clear History
+            </button>
 
           </div>
 
@@ -1372,172 +1230,89 @@ button{
 
       </section>
 
-      <div class="footer">
-        <strong>GEMINI LOUNGE</strong>
-        &nbsp; | &nbsp;
-        ScanCraft Booking &amp; Experience Engine
-        &nbsp; | &nbsp;
-        Live • Local • Community
-      </div>
+    </main>
 
-    </div>
-  </main>
-</div>
+  </div>
 
-<!-- =======================================================
-     MODAL
-     ======================================================= -->
-
-<div id="modalBackdrop" class="modal-backdrop" onclick="closeModal(event)">
-
-  <div class="modal" id="modalContent"></div>
+  <div class="footer">
+    Gemini Lounge • ScanCraft V2.2 • Booking + Promotion Engine
+  </div>
 
 </div>
 
-<div id="toast"></div>
 
 <script>
+/* ================================================================
+   GEMINI LOUNGE — SCANCRAFT V2.2
+   ================================================================ */
 
-/* =========================================================
-   GEMINI SCANCRAFT V2.1
-   ========================================================= */
+/*
+   IMPORTANT:
+   V2.2 intentionally uses a NEW storage key.
 
-const STORAGE_KEY = "gemini_engine_v20";
+   This prevents old V2.0 / V2.1 test bookings from incorrectly
+   occupying slots in the new booking engine.
+*/
+
+const STORAGE_KEY = "gemini_engine_v22";
+
+
+/* ================================================================
+   DEFAULT STATE
+   ================================================================ */
+
+const defaultState = {
+
+  artistProfile:{
+    name:"Alex Rivers",
+    genre:"Acoustic • Singer / Songwriter",
+    instagram:"https://instagram.com/",
+    facebook:"https://facebook.com/",
+    website:"https://example.com/"
+  },
+
+  bookings:[],
+
+  customers:[],
+
+  events:[],
+
+  promotions:[],
+
+  history:[]
+
+};
+
+
+/* ================================================================
+   STATE
+   ================================================================ */
 
 let state = loadState();
 
-function defaultState(){
+let calendarDate = new Date();
 
-  return {
+let currentView = "artist";
 
-    venue:{
-      name:"Gemini Lounge",
-      subtitle:"Bar & Social Club",
-      location:"Bandon, Oregon",
-      description:
-        "A local bar and social club built around good nights, community, and live music.",
-      social:""
-    },
 
-    artistProfile:{
-      name:"Coastal Echo",
-      genre:"Acoustic Rock",
-      location:"Bandon, OR",
-      contact:"coastalecho@example.com",
-      performanceType:"Duo",
-      social:"instagram.com/coastalecho",
-      bio:
-        "A local acoustic duo bringing familiar songs and original music to the coast."
-    },
+/* ================================================================
+   BASIC HELPERS
+   ================================================================ */
 
-    bookings:[],
+function uid(prefix="id"){
 
-    events:[],
-
-    promotions:[],
-
-    history:[],
-
-    customerInterests:11
-
-  };
-
-}
-
-/* =========================================================
-   STORAGE
-   ========================================================= */
-
-function loadState(){
-
-  try{
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-
-      const parsed = JSON.parse(saved);
-
-      return {
-        ...defaultState(),
-        ...parsed
-      };
-
-    }
-
-  }catch(e){
-
-    console.error(e);
-
-  }
-
-  return defaultState();
-
-}
-
-function saveState(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(state)
+  return (
+    prefix +
+    "_" +
+    Date.now().toString(36) +
+    "_" +
+    Math.random().toString(36).slice(2,8)
   );
 
 }
 
-function syncStateFromStorage(){
 
-  try{
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-
-      state = {
-        ...defaultState(),
-        ...JSON.parse(saved)
-      };
-
-    }
-
-  }catch(e){
-
-    console.error(e);
-
-  }
-
-}
-
-/* =========================================================
-   CROSS-TAB SYNC
-   ========================================================= */
-
-window.addEventListener("storage",function(event){
-
-  if(event.key === STORAGE_KEY){
-
-    syncStateFromStorage();
-
-    renderAll();
-
-    showToast("Gemini system updated.");
-
-  }
-
-});
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
-
-function uid(prefix="id"){
-
-  return prefix + "_" +
-    Date.now().toString(36) +
-    Math.random().toString(36).slice(2,7);
-
-}
-
-function escapeHTML(value){
+function escapeHtml(value){
 
   return String(value ?? "")
     .replace(/&/g,"&amp;")
@@ -1548,13 +1323,33 @@ function escapeHTML(value){
 
 }
 
-function formatDate(date){
 
-  if(!date) return "";
+function formatDate(dateString){
 
-  const d = new Date(date + "T12:00:00");
+  if(!dateString) return "";
 
-  return d.toLocaleDateString(
+  const date = new Date(dateString + "T12:00:00");
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      weekday:"long",
+      month:"long",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function shortDate(dateString){
+
+  if(!dateString) return "";
+
+  const date = new Date(dateString + "T12:00:00");
+
+  return date.toLocaleDateString(
     undefined,
     {
       month:"short",
@@ -1565,126 +1360,561 @@ function formatDate(date){
 
 }
 
-function todayISO(){
+
+function todayString(){
 
   const d = new Date();
 
-  const offset =
-    d.getTimezoneOffset();
+  const y = d.getFullYear();
 
-  const local =
-    new Date(d.getTime() - offset*60000);
+  const m = String(d.getMonth()+1).padStart(2,"0");
 
-  return local.toISOString().slice(0,10);
+  const day = String(d.getDate()).padStart(2,"0");
 
-}
-
-function normalizeTime(time){
-
-  const lower = time.toLowerCase();
-
-  if(lower.includes("6:00")) return 18;
-
-  if(lower.includes("7:00")) return 19;
-
-  if(lower.includes("8:00")) return 20;
-
-  if(lower.includes("9:00")) return 21;
-
-  return 18;
+  return `${y}-${m}-${day}`;
 
 }
 
-function timeOverlaps(a,b){
 
-  const aStart = normalizeTime(a);
-  const bStart = normalizeTime(b);
+/* ================================================================
+   STORAGE
+   ================================================================ */
 
-  return Math.abs(aStart-bStart) < 2;
+function loadState(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
+
+    if(!saved){
+
+      return structuredClone(defaultState);
+
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    return {
+
+      ...structuredClone(defaultState),
+
+      ...parsed,
+
+      artistProfile:{
+        ...defaultState.artistProfile,
+        ...(parsed.artistProfile || {})
+      },
+
+      bookings:Array.isArray(parsed.bookings)
+        ? parsed.bookings
+        : [],
+
+      customers:Array.isArray(parsed.customers)
+        ? parsed.customers
+        : [],
+
+      events:Array.isArray(parsed.events)
+        ? parsed.events
+        : [],
+
+      promotions:Array.isArray(parsed.promotions)
+        ? parsed.promotions
+        : [],
+
+      history:Array.isArray(parsed.history)
+        ? parsed.history
+        : []
+
+    };
+
+  }catch(error){
+
+    console.error(error);
+
+    return structuredClone(defaultState);
+
+  }
 
 }
 
-function statusClass(status){
 
-  return String(status || "")
-    .toLowerCase()
-    .replace(/\s+/g,"-");
+function saveState(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
 
 }
 
-function logHistory(action,detail){
+
+function syncStateFromStorage(){
+
+  state = loadState();
+
+}
+
+
+/* ================================================================
+   HISTORY
+   ================================================================ */
+
+function addHistory(message){
 
   state.history.unshift({
 
     id:uid("history"),
 
-    timestamp:new Date().toISOString(),
+    message,
 
-    action,
-
-    detail
+    timestamp:new Date().toISOString()
 
   });
 
+  if(state.history.length > 100){
+
+    state.history =
+      state.history.slice(0,100);
+
+  }
+
 }
 
-/* =========================================================
-   TOAST
-   ========================================================= */
 
-let toastTimer;
+/* ================================================================
+   TRUE TIME RANGE PARSING
+   ================================================================ */
 
-function showToast(message){
+/*
+   Converts:
+     "6:00 PM"  -> 1080
+     "8:00 PM"  -> 1200
 
-  const toast =
-    document.getElementById("toast");
+   Minutes since midnight.
+*/
 
-  toast.textContent = message;
+function parseClock(value){
 
-  toast.classList.add("show");
+  if(!value) return null;
 
-  clearTimeout(toastTimer);
+  const match =
+    value
+      .trim()
+      .match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
 
-  toastTimer = setTimeout(
-    ()=>{
-      toast.classList.remove("show");
-    },
-    2600
+  if(!match){
+
+    return null;
+
+  }
+
+  let hour =
+    Number(match[1]);
+
+  const minute =
+    Number(match[2]);
+
+  const meridiem =
+    match[3].toUpperCase();
+
+  if(hour < 1 || hour > 12){
+
+    return null;
+
+  }
+
+  if(minute < 0 || minute > 59){
+
+    return null;
+
+  }
+
+  if(meridiem === "AM"){
+
+    if(hour === 12){
+
+      hour = 0;
+
+    }
+
+  }else{
+
+    if(hour !== 12){
+
+      hour += 12;
+
+    }
+
+  }
+
+  return hour * 60 + minute;
+
+}
+
+
+/*
+   Converts:
+     "6:00 PM - 8:00 PM"
+
+   into:
+     { start:1080, end:1200 }
+*/
+
+function parseTimeRange(time){
+
+  if(!time) return null;
+
+  const pieces =
+    time.split(/\s*-\s*/);
+
+  if(pieces.length !== 2){
+
+    return null;
+
+  }
+
+  const start =
+    parseClock(pieces[0]);
+
+  const end =
+    parseClock(pieces[1]);
+
+  if(
+    start === null ||
+    end === null ||
+    end <= start
+  ){
+
+    return null;
+
+  }
+
+  return {
+    start,
+    end
+  };
+
+}
+
+
+/*
+   TRUE overlap test.
+
+   Example:
+
+   6-8 and 8-10
+   false
+
+   6-8 and 7-9
+   true
+*/
+
+function timeOverlaps(a,b){
+
+  const rangeA =
+    parseTimeRange(a);
+
+  const rangeB =
+    parseTimeRange(b);
+
+  if(!rangeA || !rangeB){
+
+    return false;
+
+  }
+
+  return (
+    rangeA.start < rangeB.end &&
+    rangeB.start < rangeA.end
   );
 
 }
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
 
-function setView(view){
+/* ================================================================
+   OCCUPANCY ENGINE
+   ================================================================ */
 
-  syncStateFromStorage();
+function isBlockingBooking(booking){
 
-  document.querySelectorAll(".view")
-    .forEach(v=>v.classList.remove("active"));
+  return [
+    "pending",
+    "approved"
+  ].includes(
+    String(booking.status || "").toLowerCase()
+  );
 
-  const target =
-    document.getElementById("view-"+view);
+}
 
-  if(target){
 
-    target.classList.add("active");
+function isBlockingEvent(event){
+
+  return String(event.status || "")
+    .toLowerCase() === "confirmed";
+
+}
+
+
+/*
+   Central availability engine.
+
+   Everything that wants to know whether a slot is occupied
+   should come through this function.
+*/
+
+function getSlotConflicts(
+  date,
+  time,
+  excludeBookingId=null
+){
+
+  const conflicts = [];
+
+  /*
+     Check artist bookings.
+  */
+
+  state.bookings.forEach(booking=>{
+
+    if(
+      booking.id === excludeBookingId
+    ){
+
+      return;
+
+    }
+
+    if(
+      booking.date !== date
+    ){
+
+      return;
+
+    }
+
+    if(
+      !isBlockingBooking(booking)
+    ){
+
+      return;
+
+    }
+
+    if(
+      timeOverlaps(
+        booking.time,
+        time
+      )
+    ){
+
+      conflicts.push({
+
+        type:"booking",
+
+        id:booking.id,
+
+        name:
+          booking.artist ||
+          "Artist booking",
+
+        time:booking.time,
+
+        status:booking.status
+
+      });
+
+    }
+
+  });
+
+
+  /*
+     Check confirmed events.
+
+     This is important because a confirmed event may exist
+     without being attached to an artist booking.
+  */
+
+  state.events.forEach(event=>{
+
+    if(
+      event.date !== date
+    ){
+
+      return;
+
+    }
+
+    if(
+      !isBlockingEvent(event)
+    ){
+
+      return;
+
+    }
+
+    if(
+      timeOverlaps(
+        event.time,
+        time
+      )
+    ){
+
+      conflicts.push({
+
+        type:"event",
+
+        id:event.id,
+
+        name:
+          event.title ||
+          "Confirmed event",
+
+        time:event.time,
+
+        status:event.status
+
+      });
+
+    }
+
+  });
+
+
+  return conflicts;
+
+}
+
+
+function isSlotAvailable(
+  date,
+  time,
+  excludeBookingId=null
+){
+
+  if(!date || !time){
+
+    return false;
 
   }
 
-  document.querySelectorAll(".nav button")
-    .forEach(button=>{
+  return (
+    getSlotConflicts(
+      date,
+      time,
+      excludeBookingId
+    ).length === 0
+  );
 
-      button.classList.toggle(
+}
+
+
+/* ================================================================
+   AVAILABILITY UI
+   ================================================================ */
+
+function updateBookingAvailability(){
+
+  const date =
+    document.getElementById(
+      "bookingDate"
+    ).value;
+
+  const time =
+    document.getElementById(
+      "bookingTime"
+    ).value;
+
+  const indicator =
+    document.getElementById(
+      "availabilityIndicator"
+    );
+
+  if(!indicator){
+
+    return;
+
+  }
+
+  if(!date || !time){
+
+    indicator.className =
+      "availability neutral";
+
+    indicator.innerHTML =
+      "Choose a date and performance window to check availability.";
+
+    return;
+
+  }
+
+  const conflicts =
+    getSlotConflicts(
+      date,
+      time
+    );
+
+  if(conflicts.length === 0){
+
+    indicator.className =
+      "availability available";
+
+    indicator.innerHTML =
+      "✓ AVAILABLE — This performance window is currently open.";
+
+    return;
+
+  }
+
+  indicator.className =
+    "availability occupied";
+
+  const names =
+    conflicts
+      .map(c=>
+        `${escapeHtml(c.name)} (${escapeHtml(c.time)})`
+      )
+      .join(", ");
+
+  indicator.innerHTML =
+    `✕ OCCUPIED — Conflicts with ${names}.`;
+
+}
+
+
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
+
+function setView(view){
+
+  currentView = view;
+
+  document
+    .querySelectorAll(".view")
+    .forEach(section=>{
+
+      section.classList.toggle(
         "active",
-        button.dataset.view === view
+        section.id === `view-${view}`
       );
 
     });
 
-  updateHero(view);
+  document
+    .querySelectorAll(".tab")
+    .forEach(tab=>{
+
+      tab.classList.toggle(
+        "active",
+        tab.dataset.view === view
+      );
+
+    });
+
+  syncStateFromStorage();
 
   renderAll();
 
@@ -1695,755 +1925,612 @@ function setView(view){
 
 }
 
-function updateHero(view){
 
-  const title =
-    document.getElementById("heroTitle");
-
-  const text =
-    document.getElementById("heroText");
-
-  const data = {
-
-    artist:[
-      "Book a Show at Gemini.",
-      "Build your artist profile, choose an available performance slot, and send Gemini a booking request."
-    ],
-
-    bookings:[
-      "Your Gemini Bookings.",
-      "Track booking requests, confirmations, and performance details."
-    ],
-
-    customer:[
-      "Live Music at Gemini.",
-      "Discover local artists, upcoming shows, and nights worth sharing."
-    ],
-
-    owner:[
-      "Gemini Owner Command Center.",
-      "One place to manage requests, shows, events, and promotion."
-    ],
-
-    events:[
-      "What's Happening at Gemini.",
-      "Confirmed performances become public Gemini experiences."
-    ],
-
-    promotion:[
-      "Promote the Night.",
-      "Turn confirmed shows into ready-to-share promotional content."
-    ],
-
-    calendar:[
-      "Gemini Performance Calendar.",
-      "See the schedule at a glance and protect available performance slots."
-    ],
-
-    history:[
-      "System History.",
-      "A simple record of booking, event, and promotion activity."
-    ]
-
-  };
-
-  if(data[view]){
-
-    title.textContent = data[view][0];
-
-    text.textContent = data[view][1];
-
-  }
-
-}
-
-/* =========================================================
+/* ================================================================
    ARTIST PROFILE
-   ========================================================= */
+   ================================================================ */
 
 function renderArtistProfile(){
 
-  const p = state.artistProfile;
+  document.getElementById(
+    "artistNameDisplay"
+  ).textContent =
+    state.artistProfile.name;
 
   document.getElementById(
-    "artistProfileCard"
-  ).innerHTML = `
-
-    <div class="profile-card">
-
-      <div class="avatar">
-        ${escapeHTML(
-          p.name
-            .split(" ")
-            .map(x=>x[0])
-            .slice(0,2)
-            .join("")
-        )}
-      </div>
-
-      <div>
-
-        <div class="profile-name">
-          ${escapeHTML(p.name)}
-        </div>
-
-        <div class="muted">
-          ${escapeHTML(p.genre)}
-        </div>
-
-        <div class="tags">
-
-          <span class="tag">
-            ${escapeHTML(p.location)}
-          </span>
-
-          <span class="tag">
-            ${escapeHTML(p.performanceType)}
-          </span>
-
-          ${
-            p.social
-            ?
-            `<span class="tag">
-              ${escapeHTML(p.social)}
-            </span>`
-            :
-            ""
-          }
-
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="small muted">
-          Contact
-        </div>
-
-        <div style="margin-top:4px">
-          ${escapeHTML(p.contact)}
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="small muted">
-          Artist Bio
-        </div>
-
-        <div style="margin-top:6px;line-height:1.5">
-          ${escapeHTML(p.bio)}
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-function editArtistProfile(){
-
-  const p = state.artistProfile;
-
-  openModal(`
-
-    <h2>Edit Artist Profile</h2>
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>Artist / Band Name</label>
-        <input id="editName" value="${escapeHTML(p.name)}">
-      </div>
-
-      <div class="field">
-        <label>Genre</label>
-        <input id="editGenre" value="${escapeHTML(p.genre)}">
-      </div>
-
-      <div class="field">
-        <label>Location</label>
-        <input id="editLocation" value="${escapeHTML(p.location)}">
-      </div>
-
-      <div class="field">
-        <label>Contact</label>
-        <input id="editContact" value="${escapeHTML(p.contact)}">
-      </div>
-
-      <div class="field">
-        <label>Performance Type</label>
-        <select id="editPerformance">
-          <option ${p.performanceType==="Solo"?"selected":""}>Solo</option>
-          <option ${p.performanceType==="Duo"?"selected":""}>Duo</option>
-          <option ${p.performanceType==="Band"?"selected":""}>Band</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Social Link</label>
-        <input id="editSocial" value="${escapeHTML(p.social)}">
-      </div>
-
-      <div class="field full">
-        <label>Artist Bio</label>
-        <textarea id="editBio">${escapeHTML(p.bio)}</textarea>
-      </div>
-
-    </div>
-
-    <div class="actions" style="margin-top:18px">
-
-      <button class="btn" onclick="closeModal()">
-        Cancel
-      </button>
-
-      <button class="btn primary" onclick="saveArtistProfile()">
-        Save Profile
-      </button>
-
-    </div>
-
-  `);
-
-}
-
-function saveArtistProfile(){
-
-  syncStateFromStorage();
-
-  state.artistProfile = {
-
-    name:
-      document.getElementById("editName").value.trim(),
-
-    genre:
-      document.getElementById("editGenre").value.trim(),
-
-    location:
-      document.getElementById("editLocation").value.trim(),
-
-    contact:
-      document.getElementById("editContact").value.trim(),
-
-    performanceType:
-      document.getElementById("editPerformance").value,
-
-    social:
-      document.getElementById("editSocial").value.trim(),
-
-    bio:
-      document.getElementById("editBio").value.trim()
-
-  };
-
-  logHistory(
-    "Artist Profile Updated",
-    state.artistProfile.name
-  );
-
-  saveState();
-
-  closeModal();
-
-  renderAll();
-
-  showToast("Artist profile updated.");
-
-}
-
-/* =========================================================
-   BOOKING
-   ========================================================= */
-
-document.getElementById("bookingForm")
-  .addEventListener("submit",function(event){
-
-    event.preventDefault();
-
-    syncStateFromStorage();
-
-    const date =
-      document.getElementById("bookingDate").value;
-
-    const time =
-      document.getElementById("bookingTime").value;
-
-    const message =
-      document.getElementById("bookingMessage").value.trim();
-
-    if(!date){
-
-      showToast("Choose a performance date.");
-
-      return;
-
-    }
-
-    const activeBookings =
-      state.bookings.filter(b=>
-        ["pending","approved"].includes(b.status) &&
-        b.date === date
-      );
-
-    const conflict =
-      activeBookings.some(
-        b=>timeOverlaps(b.time,time)
-      );
-
-    if(conflict){
-
-      showToast(
-        "That performance window is already occupied."
-      );
-
-      return;
-
-    }
-
-    const booking = {
-
-      id:uid("booking"),
-
-      artist:{
-        ...state.artistProfile
-      },
-
-      date,
-
-      time,
-
-      message,
-
-      status:"pending",
-
-      createdAt:
-        new Date().toISOString()
-
-    };
-
-    state.bookings.push(booking);
-
-    logHistory(
-      "Booking Request",
-      `${booking.artist.name} requested ${formatDate(date)}`
+    "artistGenreDisplay"
+  ).textContent =
+    state.artistProfile.genre;
+
+  const instagram =
+    document.getElementById(
+      "artistInstagram"
     );
 
-    saveState();
-
-    renderAll();
-
-    document.getElementById("bookingMessage").value = "";
-
-    setView("bookings");
-
-    showToast(
-      "Booking request sent to Gemini."
+  const facebook =
+    document.getElementById(
+      "artistFacebook"
     );
 
-  });
+  const website =
+    document.getElementById(
+      "artistWebsite"
+    );
 
-/* =========================================================
-   BOOKINGS
-   ========================================================= */
+  instagram.href =
+    state.artistProfile.instagram || "#";
 
-function renderMyBookings(){
+  facebook.href =
+    state.artistProfile.facebook || "#";
 
-  const container =
-    document.getElementById("myBookings");
+  website.href =
+    state.artistProfile.website || "#";
 
-  const bookings =
-    [...state.bookings]
-      .sort((a,b)=>
-        a.date.localeCompare(b.date)
-      );
+}
 
-  if(!bookings.length){
 
-    container.innerHTML = `
-      <div class="empty">
-        No booking requests yet.
-      </div>
-    `;
+/* ================================================================
+   BOOKING FORM
+   ================================================================ */
+
+function handleBookingSubmit(event){
+
+  event.preventDefault();
+
+  const artist =
+    document.getElementById(
+      "bookingArtist"
+    ).value.trim();
+
+  const email =
+    document.getElementById(
+      "bookingEmail"
+    ).value.trim();
+
+  const date =
+    document.getElementById(
+      "bookingDate"
+    ).value;
+
+  const time =
+    document.getElementById(
+      "bookingTime"
+    ).value;
+
+  const notes =
+    document.getElementById(
+      "bookingNotes"
+    ).value.trim();
+
+  const message =
+    document.getElementById(
+      "artistMessage"
+    );
+
+
+  if(!artist || !email || !date || !time){
+
+    message.innerHTML =
+      `<div class="notice error">
+        Please complete the required booking fields.
+      </div>`;
 
     return;
 
   }
 
-  container.innerHTML =
-    bookings.map(booking=>`
 
-      <div class="event-card" style="margin-bottom:12px">
+  /*
+     FINAL server-like recheck immediately before
+     accepting the request.
 
-        <div class="event-top">
+     This protects against a slot becoming occupied
+     after the artist initially checked availability.
+  */
 
-          <div>
+  const conflicts =
+    getSlotConflicts(
+      date,
+      time
+    );
 
-            <div class="event-name">
-              ${escapeHTML(booking.artist.name)}
-            </div>
+  if(conflicts.length > 0){
 
-            <div class="event-date">
-              ${formatDate(booking.date)}
-              •
-              ${escapeHTML(booking.time)}
-            </div>
+    updateBookingAvailability();
 
-          </div>
+    message.innerHTML =
+      `<div class="notice error">
+        That performance window is no longer available.
+        Please choose another slot.
+      </div>`;
 
-          <span class="status ${statusClass(booking.status)}">
-            ${escapeHTML(
-              booking.status
-            )}
-          </span>
+    return;
 
-        </div>
+  }
 
-        ${
-          booking.message
-          ?
-          `<div class="event-meta">
-            ${escapeHTML(booking.message)}
-          </div>`
-          :
-          ""
-        }
 
-        ${
-          booking.status==="approved"
-          ?
-          `<div class="actions" style="margin-top:12px">
-            <button class="btn blue"
-              onclick="openEventForBooking('${booking.id}')">
-              View Event
-            </button>
-            <button class="btn danger"
-              onclick="artistCancelBooking('${booking.id}')">
-              Cancel
-            </button>
-          </div>`
-          :
-          ""
-        }
+  const booking = {
 
-        ${
-          booking.status==="pending"
-          ?
-          `<div class="actions" style="margin-top:12px">
-            <button class="btn danger"
-              onclick="artistCancelBooking('${booking.id}')">
-              Cancel Request
-            </button>
-          </div>`
-          :
-          ""
-        }
+    id:uid("booking"),
 
-      </div>
+    artist,
 
-    `).join("");
+    email,
 
-}
+    date,
 
-/* =========================================================
-   OWNER
-   ========================================================= */
+    time,
 
-function pendingBookings(){
+    notes,
 
-  return state.bookings.filter(
-    b=>b.status==="pending"
+    status:"pending",
+
+    createdAt:new Date().toISOString()
+
+  };
+
+
+  state.bookings.push(
+    booking
   );
 
-}
 
-function approvedBookings(){
-
-  return state.bookings.filter(
-    b=>b.status==="approved"
+  addHistory(
+    `${artist} submitted a booking request for ${formatDate(date)} at ${time}.`
   );
 
+
+  saveState();
+
+  document
+    .getElementById("bookingForm")
+    .reset();
+
+
+  updateBookingAvailability();
+
+  message.innerHTML =
+    `<div class="notice success">
+      ✓ Booking request submitted for
+      <strong>${escapeHtml(formatDate(date))}</strong>
+      at
+      <strong>${escapeHtml(time)}</strong>.
+      The slot is now held pending owner review.
+    </div>`;
+
+
+  renderAll();
+
 }
 
-function renderOwner(){
 
-  syncStateFromStorage();
+function checkAvailability(){
 
-  const pending =
-    pendingBookings();
+  updateBookingAvailability();
 
-  const approved =
-    approvedBookings();
+  const date =
+    document.getElementById(
+      "bookingDate"
+    ).value;
 
-  document.getElementById(
-    "metricRequests"
-  ).textContent = pending.length;
+  const time =
+    document.getElementById(
+      "bookingTime"
+    ).value;
 
-  document.getElementById(
-    "metricUpcoming"
-  ).textContent =
-    state.events.filter(e=>e.status==="confirmed").length;
+  const message =
+    document.getElementById(
+      "artistMessage"
+    );
 
-  document.getElementById(
-    "metricInterest"
-  ).textContent =
-    state.customerInterests;
 
-  const requestContainer =
-    document.getElementById("ownerRequests");
+  if(!date || !time){
 
-  if(!pending.length){
+    message.innerHTML =
+      `<div class="notice warning">
+        Select a date and performance window first.
+      </div>`;
 
-    requestContainer.innerHTML = `
-      <div class="empty">
-        No booking requests need attention.
-      </div>
-    `;
+    return;
+
+  }
+
+
+  const conflicts =
+    getSlotConflicts(
+      date,
+      time
+    );
+
+
+  if(conflicts.length === 0){
+
+    message.innerHTML =
+      `<div class="notice success">
+        ✓ Good news — that slot is currently open.
+      </div>`;
 
   }else{
 
-    requestContainer.innerHTML =
-      pending.map(booking=>`
+    message.innerHTML =
+      `<div class="notice error">
+        That slot is occupied. Please select another performance window.
+      </div>`;
 
-        <div class="event-card attention"
-          style="margin-bottom:12px">
+  }
 
-          <div class="event-top">
+}
 
-            <div>
 
-              <div class="event-name">
-                ${escapeHTML(
-                  booking.artist.name
-                )}
-              </div>
+/* ================================================================
+   MY BOOKINGS
+   ================================================================ */
 
-              <div class="event-date">
-                ${formatDate(booking.date)}
-                •
-                ${escapeHTML(booking.time)}
-              </div>
+function renderMyBookings(){
 
-            </div>
+  const container =
+    document.getElementById(
+      "myBookingsList"
+    );
 
-            <span class="status pending">
-              Pending
+  if(state.bookings.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        No booking requests yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const sorted =
+    [...state.bookings]
+      .sort(
+        (a,b)=>
+          String(a.date).localeCompare(
+            String(b.date)
+          )
+      );
+
+
+  container.innerHTML =
+    sorted.map(booking=>{
+
+      const status =
+        String(
+          booking.status || ""
+        ).toLowerCase();
+
+      return `
+        <div class="card">
+
+          <div class="card-title">
+
+            <strong>
+              ${escapeHtml(booking.artist)}
+            </strong>
+
+            <span class="status ${escapeHtml(status)}">
+              ${escapeHtml(
+                booking.status
+              )}
             </span>
 
           </div>
 
-          <div class="event-meta">
+          <div class="meta">
 
-            ${escapeHTML(
-              booking.artist.genre
-            )}
+            <strong>
+              ${escapeHtml(
+                formatDate(booking.date)
+              )}
+            </strong>
 
-            •
+            <br>
 
-            ${escapeHTML(
-              booking.artist.location
+            ${escapeHtml(booking.time)}
+
+            <br>
+
+            ${escapeHtml(booking.email)}
+
+            ${
+              booking.notes
+                ? `<br><br>${escapeHtml(booking.notes)}`
+                : ""
+            }
+
+          </div>
+
+          <div class="actions">
+
+            ${
+              ["pending","approved"]
+                .includes(status)
+              ? `
+                <button
+                  class="btn small danger"
+                  onclick="cancelBooking('${booking.id}')"
+                >
+                  Cancel Booking
+                </button>
+              `
+              : ""
+            }
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* ================================================================
+   CANCEL BOOKING
+   ================================================================ */
+
+function cancelBooking(id){
+
+  syncStateFromStorage();
+
+  const booking =
+    state.bookings.find(
+      b=>b.id === id
+    );
+
+  if(!booking){
+
+    return;
+
+  }
+
+  if(
+    !["pending","approved"]
+      .includes(
+        String(
+          booking.status
+        ).toLowerCase()
+      )
+  ){
+
+    return;
+
+  }
+
+
+  booking.status =
+    "cancelled";
+
+
+  /*
+     If the booking created a linked event,
+     cancel that event as well.
+  */
+
+  state.events.forEach(event=>{
+
+    if(
+      event.bookingId === id &&
+      event.status === "confirmed"
+    ){
+
+      event.status =
+        "cancelled";
+
+    }
+
+  });
+
+
+  addHistory(
+    `${booking.artist} cancelled the booking for ${formatDate(booking.date)} at ${booking.time}.`
+  );
+
+
+  saveState();
+
+  renderAll();
+
+}
+
+
+/* ================================================================
+   OWNER BOOKINGS
+   ================================================================ */
+
+function renderOwnerBookings(){
+
+  const container =
+    document.getElementById(
+      "ownerBookingsList"
+    );
+
+  if(state.bookings.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        No booking requests.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const sorted =
+    [...state.bookings]
+      .sort(
+        (a,b)=>
+          String(a.date).localeCompare(
+            String(b.date)
+          )
+      );
+
+
+  container.innerHTML =
+    sorted.map(booking=>{
+
+      const status =
+        String(
+          booking.status || ""
+        ).toLowerCase();
+
+
+      return `
+        <div class="card">
+
+          <div class="card-title">
+
+            <strong>
+              ${escapeHtml(booking.artist)}
+            </strong>
+
+            <span class="status ${escapeHtml(status)}">
+              ${escapeHtml(booking.status)}
+            </span>
+
+          </div>
+
+          <div class="meta">
+
+            ${escapeHtml(
+              formatDate(booking.date)
             )}
 
             <br>
 
-            ${escapeHTML(
-              booking.artist.contact
-            )}
+            ${escapeHtml(booking.time)}
+
+            <br>
+
+            ${escapeHtml(booking.email)}
+
+            ${
+              booking.notes
+                ? `<br><br>
+                   <strong>Notes:</strong>
+                   ${escapeHtml(booking.notes)}`
+                : ""
+            }
 
           </div>
 
-          ${
-            booking.message
-            ?
-            `<div class="divider"></div>
-             <div class="small">
-               ${escapeHTML(booking.message)}
-             </div>`
-            :
-            ""
-          }
+          <div class="actions">
 
-          <div class="actions" style="margin-top:13px">
+            ${
+              status === "pending"
+              ? `
+                <button
+                  class="btn small success"
+                  onclick="approveBooking('${booking.id}')"
+                >
+                  Approve
+                </button>
 
-            <button
-              class="btn success"
-              onclick="approveBooking('${booking.id}')">
-              ✓ Approve
-            </button>
+                <button
+                  class="btn small danger"
+                  onclick="declineBooking('${booking.id}')"
+                >
+                  Decline
+                </button>
+              `
+              : ""
+            }
 
-            <button
-              class="btn danger"
-              onclick="declineBooking('${booking.id}')">
-              ✕ Decline
-            </button>
-
-            <button
-              class="btn"
-              onclick="viewBookingDetails('${booking.id}')">
-              Details
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
-
-  /* Next show */
-
-  const upcoming =
-    [...state.events]
-      .filter(e=>e.status==="confirmed")
-      .sort((a,b)=>
-        a.date.localeCompare(b.date)
-      );
-
-  const next =
-    upcoming[0];
-
-  const nextContainer =
-    document.getElementById("ownerNextShow");
-
-  if(!next){
-
-    nextContainer.innerHTML = `
-      <div class="empty">
-        No confirmed shows yet.
-      </div>
-    `;
-
-  }else{
-
-    nextContainer.innerHTML = `
-      <div class="event-card">
-
-        <div class="event-name">
-          ${escapeHTML(next.artistName)}
-        </div>
-
-        <div class="event-date">
-          ${formatDate(next.date)}
-          •
-          ${escapeHTML(next.time)}
-        </div>
-
-        <div class="event-meta">
-          ${escapeHTML(next.genre || "")}
-          <br>
-          ${escapeHTML(state.venue.location)}
-        </div>
-
-        <div class="actions" style="margin-top:12px">
-
-          <button class="btn primary"
-            onclick="openEventModal('${next.id}')">
-            View Event
-          </button>
-
-          <button class="btn"
-            onclick="setView('promotion')">
-            Promote
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }
-
-  /* Upcoming */
-
-  const upcomingContainer =
-    document.getElementById("ownerUpcoming");
-
-  if(!upcoming.length){
-
-    upcomingContainer.innerHTML = `
-      <div class="empty">
-        No upcoming confirmed shows.
-      </div>
-    `;
-
-  }else{
-
-    upcomingContainer.innerHTML =
-      upcoming.map(e=>`
-
-        <div class="event-card"
-          style="margin-bottom:10px">
-
-          <div class="event-top">
-
-            <div>
-
-              <div class="event-name">
-                ${escapeHTML(e.artistName)}
-              </div>
-
-              <div class="event-date">
-                ${formatDate(e.date)}
-                •
-                ${escapeHTML(e.time)}
-              </div>
-
-            </div>
-
-            <span class="status approved">
-              Confirmed
-            </span>
+            ${
+              ["pending","approved"]
+                .includes(status)
+              ? `
+                <button
+                  class="btn small danger"
+                  onclick="ownerCancelBooking('${booking.id}')"
+                >
+                  Cancel
+                </button>
+              `
+              : ""
+            }
 
           </div>
 
         </div>
+      `;
 
-      `).join("");
-
-  }
+    }).join("");
 
 }
 
-/* =========================================================
-   APPROVE
-   ========================================================= */
+
+/* ================================================================
+   APPROVE BOOKING
+   ================================================================ */
 
 function approveBooking(id){
 
   syncStateFromStorage();
 
   const booking =
-    state.bookings.find(b=>b.id===id);
-
-  if(!booking) return;
-
-  /* Recheck conflicts before approval */
-
-  const conflict =
-    state.bookings.some(b=>
-      b.id!==id &&
-      b.date===booking.date &&
-      ["approved"].includes(b.status) &&
-      timeOverlaps(b.time,booking.time)
+    state.bookings.find(
+      b=>b.id === id
     );
 
-  if(conflict){
-
-    showToast(
-      "That time is already booked."
-    );
+  if(!booking){
 
     return;
 
   }
 
-  booking.status="approved";
+
+  /*
+     FINAL OWNER-SIDE CONFLICT CHECK.
+
+     Exclude the booking itself so its own record
+     cannot conflict with itself.
+  */
+
+  const conflicts =
+    getSlotConflicts(
+      booking.date,
+      booking.time,
+      booking.id
+    );
+
+
+  if(conflicts.length > 0){
+
+    alert(
+      "Cannot approve this booking because the performance window is already occupied."
+    );
+
+    renderAll();
+
+    return;
+
+  }
+
+
+  booking.status =
+    "approved";
+
+
+  /*
+     Create the confirmed event.
+
+     This event will also participate in availability
+     checks from this point forward.
+  */
 
   const existingEvent =
     state.events.find(
-      e=>e.bookingId===booking.id
+      event =>
+        event.bookingId === booking.id
     );
+
 
   if(!existingEvent){
 
@@ -2453,11 +2540,11 @@ function approveBooking(id){
 
       bookingId:booking.id,
 
-      artistName:
-        booking.artist.name,
+      title:
+        `${booking.artist} Live at Gemini Lounge`,
 
-      genre:
-        booking.artist.genre,
+      artist:
+        booking.artist,
 
       date:
         booking.date,
@@ -2465,296 +2552,396 @@ function approveBooking(id){
       time:
         booking.time,
 
+      description:
+        `Live music performance by ${booking.artist} at Gemini Lounge.`,
+
       status:"confirmed",
 
-      description:
-        booking.artist.bio,
-
-      createdAt:
-        new Date().toISOString()
+      createdAt:new Date().toISOString()
 
     });
 
+  }else{
+
+    existingEvent.status =
+      "confirmed";
+
   }
 
-  logHistory(
-    "Booking Approved",
-    `${booking.artist.name} • ${formatDate(booking.date)}`
+
+  addHistory(
+    `${booking.artist} was approved for ${formatDate(booking.date)} at ${booking.time}.`
   );
+
 
   saveState();
 
   renderAll();
 
-  showToast(
-    "Booking approved and event created."
-  );
-
 }
 
-/* =========================================================
-   DECLINE
-   ========================================================= */
 
 function declineBooking(id){
 
   syncStateFromStorage();
 
   const booking =
-    state.bookings.find(b=>b.id===id);
-
-  if(!booking) return;
-
-  booking.status="declined";
-
-  logHistory(
-    "Booking Declined",
-    `${booking.artist.name} • ${formatDate(booking.date)}`
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Booking request declined."
-  );
-
-}
-
-/* =========================================================
-   ARTIST CANCEL
-   ========================================================= */
-
-function artistCancelBooking(id){
-
-  syncStateFromStorage();
-
-  const booking =
-    state.bookings.find(b=>b.id===id);
-
-  if(!booking) return;
-
-  booking.status="cancelled";
-
-  const event =
-    state.events.find(
-      e=>e.bookingId===id
+    state.bookings.find(
+      b=>b.id === id
     );
 
-  if(event){
-
-    event.status="cancelled";
-
-  }
-
-  logHistory(
-    "Booking Cancelled",
-    booking.artist.name
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Booking cancelled."
-  );
-
-}
-
-/* =========================================================
-   BOOKING DETAILS
-   ========================================================= */
-
-function viewBookingDetails(id){
-
-  const booking =
-    state.bookings.find(b=>b.id===id);
-
-  if(!booking) return;
-
-  openModal(`
-
-    <h2>Booking Request</h2>
-
-    <div class="event-card">
-
-      <div class="event-name">
-        ${escapeHTML(booking.artist.name)}
-      </div>
-
-      <div class="event-date">
-        ${formatDate(booking.date)}
-        •
-        ${escapeHTML(booking.time)}
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="small muted">Genre</div>
-      <div>${escapeHTML(booking.artist.genre)}</div>
-
-      <div class="divider"></div>
-
-      <div class="small muted">Location</div>
-      <div>${escapeHTML(booking.artist.location)}</div>
-
-      <div class="divider"></div>
-
-      <div class="small muted">Contact</div>
-      <div>${escapeHTML(booking.artist.contact)}</div>
-
-      <div class="divider"></div>
-
-      <div class="small muted">Performance Type</div>
-      <div>${escapeHTML(booking.artist.performanceType)}</div>
-
-      <div class="divider"></div>
-
-      <div class="small muted">Artist Bio</div>
-      <div style="line-height:1.5">
-        ${escapeHTML(booking.artist.bio)}
-      </div>
-
-      ${
-        booking.message
-        ?
-        `
-          <div class="divider"></div>
-          <div class="small muted">
-            Message to Gemini
-          </div>
-          <div style="line-height:1.5;margin-top:5px">
-            ${escapeHTML(booking.message)}
-          </div>
-        `
-        :
-        ""
-      }
-
-    </div>
-
-    <div class="actions" style="margin-top:18px">
-
-      <button class="btn" onclick="closeModal()">
-        Close
-      </button>
-
-      ${
-        booking.status==="pending"
-        ?
-        `
-        <button class="btn success"
-          onclick="closeModal();approveBooking('${booking.id}')">
-          ✓ Approve
-        </button>
-
-        <button class="btn danger"
-          onclick="closeModal();declineBooking('${booking.id}')">
-          ✕ Decline
-        </button>
-        `
-        :
-        ""
-      }
-
-    </div>
-
-  `);
-
-}
-
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-function renderEvents(){
-
-  const container =
-    document.getElementById("eventsList");
-
-  const events =
-    [...state.events]
-      .filter(e=>e.status==="confirmed")
-      .sort((a,b)=>
-        a.date.localeCompare(b.date)
-      );
-
-  if(!events.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No confirmed events yet.
-      </div>
-    `;
+  if(!booking){
 
     return;
 
   }
 
+
+  booking.status =
+    "declined";
+
+
+  addHistory(
+    `${booking.artist}'s booking request was declined.`
+  );
+
+
+  saveState();
+
+  renderAll();
+
+}
+
+
+function ownerCancelBooking(id){
+
+  syncStateFromStorage();
+
+  const booking =
+    state.bookings.find(
+      b=>b.id === id
+    );
+
+  if(!booking){
+
+    return;
+
+  }
+
+
+  booking.status =
+    "cancelled";
+
+
+  state.events.forEach(event=>{
+
+    if(
+      event.bookingId === id
+    ){
+
+      event.status =
+        "cancelled";
+
+    }
+
+  });
+
+
+  addHistory(
+    `${booking.artist}'s booking was cancelled by the owner.`
+  );
+
+
+  saveState();
+
+  renderAll();
+
+}
+
+
+/* ================================================================
+   CUSTOMER
+   ================================================================ */
+
+function renderCustomerEvents(){
+
+  const select =
+    document.getElementById(
+      "customerEvent"
+    );
+
+  const confirmed =
+    state.events.filter(
+      e=>e.status === "confirmed"
+    );
+
+
+  if(confirmed.length === 0){
+
+    select.innerHTML =
+      `<option value="">
+        No confirmed events currently available
+      </option>`;
+
+    return;
+
+  }
+
+
+  select.innerHTML =
+    `<option value="">
+      Select an event
+    </option>` +
+
+    confirmed.map(event=>`
+
+      <option value="${escapeHtml(event.id)}">
+
+        ${escapeHtml(event.title)}
+        —
+        ${escapeHtml(shortDate(event.date))}
+        —
+        ${escapeHtml(event.time)}
+
+      </option>
+
+    `).join("");
+
+}
+
+
+function handleCustomerSubmit(event){
+
+  event.preventDefault();
+
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+  const email =
+    document.getElementById(
+      "customerEmail"
+    ).value.trim();
+
+  const eventId =
+    document.getElementById(
+      "customerEvent"
+    ).value;
+
+  const notes =
+    document.getElementById(
+      "customerNotes"
+    ).value.trim();
+
+  const message =
+    document.getElementById(
+      "customerMessage"
+    );
+
+
+  if(!name || !email){
+
+    message.innerHTML =
+      `<div class="notice error">
+        Please enter your name and email.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const selectedEvent =
+    state.events.find(
+      e=>e.id === eventId
+    );
+
+
+  state.customers.push({
+
+    id:uid("customer"),
+
+    name,
+
+    email,
+
+    eventId,
+
+    eventTitle:
+      selectedEvent
+        ? selectedEvent.title
+        : "General Interest",
+
+    notes,
+
+    createdAt:new Date().toISOString()
+
+  });
+
+
+  addHistory(
+    `${name} submitted customer interest.`
+  );
+
+
+  saveState();
+
+  document
+    .getElementById("customerForm")
+    .reset();
+
+
+  message.innerHTML =
+    `<div class="notice success">
+      ✓ Customer interest captured.
+    </div>`;
+
+
+  renderAll();
+
+}
+
+
+/* ================================================================
+   OWNER CUSTOMERS
+   ================================================================ */
+
+function renderOwnerCustomers(){
+
+  const container =
+    document.getElementById(
+      "ownerCustomersList"
+    );
+
+
+  if(state.customers.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        No customer interest captured yet.
+      </div>`;
+
+    return;
+
+  }
+
+
   container.innerHTML =
-    events.map(e=>`
+    state.customers.map(customer=>`
 
-      <div class="event-card"
-        style="margin-bottom:12px">
+      <div class="card">
 
-        <div class="event-top">
+        <div class="card-title">
 
-          <div>
+          <strong>
+            ${escapeHtml(customer.name)}
+          </strong>
 
-            <div class="event-name">
-              ${escapeHTML(e.artistName)}
-            </div>
+        </div>
 
-            <div class="event-date">
-              ${formatDate(e.date)}
-              •
-              ${escapeHTML(e.time)}
-            </div>
+        <div class="meta">
 
-          </div>
+          ${escapeHtml(customer.email)}
+
+          <br>
+
+          <strong>Event:</strong>
+          ${escapeHtml(customer.eventTitle)}
+
+          ${
+            customer.notes
+              ? `<br><br>${escapeHtml(customer.notes)}`
+              : ""
+          }
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* ================================================================
+   EVENTS
+   ================================================================ */
+
+function renderEvents(){
+
+  const container =
+    document.getElementById(
+      "eventsList"
+    );
+
+
+  const confirmed =
+    state.events.filter(
+      e=>e.status === "confirmed"
+    );
+
+
+  if(confirmed.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        No confirmed events yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    confirmed.map(event=>`
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <strong>
+            ${escapeHtml(event.title)}
+          </strong>
 
           <span class="status approved">
-            Live
+            Confirmed
           </span>
 
         </div>
 
-        <div class="event-meta">
-          ${escapeHTML(e.genre || "Live Music")}
+        <div class="meta">
+
+          ${escapeHtml(
+            formatDate(event.date)
+          )}
+
           <br>
-          ${escapeHTML(state.venue.name)}
-          •
-          ${escapeHTML(state.venue.location)}
+
+          ${escapeHtml(event.time)}
+
+          <br><br>
+
+          ${escapeHtml(event.description || "")}
+
         </div>
 
-        ${
-          e.description
-          ?
-          `<div class="divider"></div>
-           <div class="small">
-             ${escapeHTML(e.description)}
-           </div>`
-          :
-          ""
-        }
+        <div class="actions">
 
-        <div class="actions" style="margin-top:13px">
-
-          <button class="btn primary"
-            onclick="openEventModal('${e.id}')">
-            View Event
+          <button
+            class="btn small primary"
+            onclick="previewEvent('${event.id}')"
+          >
+            Public Preview
           </button>
 
-          <button class="btn"
-            onclick="shareEvent('${e.id}')">
-            Share
-          </button>
-
-          <button class="btn"
-            onclick="eventInterest('${e.id}')">
-            I'm Interested
+          <button
+            class="btn small info"
+            onclick="shareEvent('${event.id}')"
+          >
+            Share Event
           </button>
 
         </div>
@@ -2765,496 +2952,400 @@ function renderEvents(){
 
 }
 
-function openEventForBooking(bookingId){
 
-  const event =
-    state.events.find(
-      e=>e.bookingId===bookingId
-    );
-
-  if(event){
-
-    openEventModal(event.id);
-
-  }
-
-}
-
-function openEventModal(id){
-
-  const event =
-    state.events.find(e=>e.id===id);
-
-  if(!event) return;
-
-  const promotion =
-    state.promotions.find(
-      p=>p.eventId===id
-    );
-
-  openModal(`
-
-    <div class="kicker">
-      GEMINI LOUNGE • LIVE MUSIC
-    </div>
-
-    <h2>
-      ${escapeHTML(event.artistName)}
-    </h2>
-
-    <div class="event-date">
-      ${formatDate(event.date)}
-      •
-      ${escapeHTML(event.time)}
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="event-card">
-
-      <div class="event-name">
-        ${escapeHTML(state.venue.name)}
-      </div>
-
-      <div class="event-meta">
-        ${escapeHTML(state.venue.location)}
-        <br>
-        ${escapeHTML(event.genre || "Live Music")}
-      </div>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <p class="muted">
-      ${escapeHTML(
-        event.description ||
-        "Live music at Gemini Lounge."
-      )}
-    </p>
-
-    <div class="actions">
-
-      <button class="btn primary"
-        onclick="eventInterest('${event.id}')">
-        I'm Interested
-      </button>
-
-      <button class="btn"
-        onclick="shareEvent('${event.id}')">
-        Share Event
-      </button>
-
-      <button class="btn"
-        onclick="copyEventLink('${event.id}')">
-        Copy Event Link
-      </button>
-
-      <button class="btn"
-        onclick="closeModal()">
-        Close
-      </button>
-
-    </div>
-
-    ${
-      promotion
-      ?
-      `
-      <div class="divider"></div>
-
-      <div class="small muted">
-        Promotion Status
-      </div>
-
-      <div style="margin-top:7px">
-        ${escapeHTML(promotion.status)}
-      </div>
-      `
-      :
-      ""
-    }
-
-  `);
-
-}
+/* ================================================================
+   CREATE DEMO EVENT
+   ================================================================ */
 
 function createDemoEvent(){
 
-  syncStateFromStorage();
-
   const date =
-    new Date(
-      Date.now()+7*86400000
-    )
-    .toISOString()
-    .slice(0,10);
+    new Date();
 
-  state.events.push({
+  date.setDate(
+    date.getDate() + 7
+  );
+
+
+  const dateString =
+    date.toISOString()
+      .slice(0,10);
+
+
+  /*
+     Don't create the demo event if the slot is occupied.
+  */
+
+  const conflicts =
+    getSlotConflicts(
+      dateString,
+      "8:00 PM - 10:00 PM"
+    );
+
+
+  if(conflicts.length > 0){
+
+    alert(
+      "The demo event slot is already occupied."
+    );
+
+    return;
+
+  }
+
+
+  const event = {
 
     id:uid("event"),
 
     bookingId:null,
 
-    artistName:"Harbor Lights",
+    title:
+      "Live Music Saturday at Gemini Lounge",
 
-    genre:"Indie Folk",
+    artist:
+      "Alex Rivers",
 
-    date,
+    date:
+      dateString,
 
-    time:"8:00 PM - 10:00 PM",
+    time:
+      "8:00 PM - 10:00 PM",
+
+    description:
+      "An intimate evening of live acoustic music at Gemini Lounge.",
 
     status:"confirmed",
 
-    description:
-      "A coastal evening of live local music at Gemini Lounge.",
+    createdAt:new Date().toISOString()
 
-    createdAt:
-      new Date().toISOString()
+  };
 
-  });
 
-  logHistory(
-    "Demo Event Created",
-    `Harbor Lights • ${formatDate(date)}`
+  state.events.push(event);
+
+
+  addHistory(
+    `Created demo event for ${formatDate(dateString)} at ${event.time}.`
   );
+
 
   saveState();
 
   renderAll();
 
-  showToast("Demo event created.");
-
 }
 
-/* =========================================================
-   CUSTOMER
-   ========================================================= */
 
-function renderCustomer(){
+/* ================================================================
+   PUBLIC EVENT PREVIEW
+   ================================================================ */
 
-  const container =
-    document.getElementById("customerEvents");
+function previewEvent(id){
 
-  const events =
-    state.events
-      .filter(e=>e.status==="confirmed")
-      .sort((a,b)=>
-        a.date.localeCompare(b.date)
-      );
+  const event =
+    state.events.find(
+      e=>e.id === id
+    );
 
-  if(!events.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No upcoming shows yet.
-      </div>
-    `;
+  if(!event){
 
     return;
 
   }
 
-  container.innerHTML =
-    events.map(e=>`
 
-      <div class="event-card"
-        style="margin-top:12px">
+  const container =
+    document.getElementById(
+      "publicEventPreview"
+    );
 
-        <div class="event-name">
-          ${escapeHTML(e.artistName)}
-        </div>
 
-        <div class="event-date">
-          ${formatDate(e.date)}
-          •
-          ${escapeHTML(e.time)}
-        </div>
+  container.classList.remove(
+    "hidden"
+  );
 
-        <div class="event-meta">
-          ${escapeHTML(e.genre || "Live Music")}
-          <br>
-          ${escapeHTML(state.venue.location)}
-        </div>
 
-        <div class="actions" style="margin-top:12px">
+  const url =
+    buildEventUrl(
+      event.id
+    );
 
-          <button class="btn primary"
-            onclick="eventInterest('${e.id}')">
-            I'm Interested
-          </button>
 
-          <button class="btn"
-            onclick="shareEvent('${e.id}')">
-            Share
-          </button>
+  container.innerHTML = `
 
-        </div>
+    <div class="panel-head">
+
+      <div>
+        <h2>Public Event Preview</h2>
+        <p>
+          This is what a customer-facing event page can look like.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="event-preview">
+
+      <div class="event-date">
+        ${escapeHtml(
+          formatDate(event.date)
+        )}
+        •
+        ${escapeHtml(event.time)}
+      </div>
+
+      <h2>
+        ${escapeHtml(event.title)}
+      </h2>
+
+      <p>
+        ${escapeHtml(
+          event.description || ""
+        )}
+      </p>
+
+      <div class="share-url">
+
+        <input
+          value="${escapeHtml(url)}"
+          readonly
+        >
+
+        <button
+          class="btn small primary"
+          onclick="copyText('${escapeJs(url)}')"
+        >
+          Copy Link
+        </button>
 
       </div>
 
-    `).join("");
+    </div>
+  `;
 
 }
 
-function eventInterest(id){
 
-  syncStateFromStorage();
+function buildEventUrl(id){
 
-  const event =
-    state.events.find(e=>e.id===id);
+  const base =
+    window.location.href
+      .split("?")[0]
+      .split("#")[0];
 
-  if(!event) return;
-
-  state.customerInterests++;
-
-  event.interestCount =
-    (event.interestCount || 0) + 1;
-
-  logHistory(
-    "Customer Interest",
-    event.artistName
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Interest recorded for this show."
+  return (
+    base +
+    "?event=" +
+    encodeURIComponent(id)
   );
 
 }
 
-function customerShareVenue(){
-
-  if(
-    navigator.share
-  ){
-
-    navigator.share({
-
-      title:"Gemini Lounge",
-
-      text:
-        "Live music and good nights at Gemini Lounge."
-
-    }).catch(()=>{});
-
-  }else{
-
-    copyText(
-      "Gemini Lounge — Bar & Social Club"
-    );
-
-  }
-
-}
 
 function shareEvent(id){
 
-  const event =
-    state.events.find(e=>e.id===id);
-
-  if(!event) return;
-
-  const text =
-    `${event.artistName} live at ${state.venue.name} — ${formatDate(event.date)} ${event.time}`;
-
-  if(navigator.share){
-
-    navigator.share({
-
-      title:
-        `${event.artistName} at Gemini Lounge`,
-
-      text
-
-    }).catch(()=>{});
-
-  }else{
-
-    copyText(text);
-
-  }
-
-  logHistory(
-    "Event Shared",
-    event.artistName
-  );
-
-  saveState();
-
-}
-
-function copyEventLink(id){
-
   const url =
-    location.href.split("#")[0] +
-    "#event=" +
-    encodeURIComponent(id);
+    buildEventUrl(id);
 
   copyText(url);
 
+  alert(
+    "Event link copied."
+  );
+
 }
 
-function copyText(text){
 
-  if(navigator.clipboard){
+async function copyText(text){
 
-    navigator.clipboard.writeText(text)
-      .then(()=>{
-        showToast("Copied.");
-      })
-      .catch(()=>{
-        showToast(text);
-      });
+  try{
 
-  }else{
+    await navigator.clipboard.writeText(
+      text
+    );
 
-    showToast(text);
+  }catch(error){
+
+    /*
+       Fallback for environments where
+       clipboard permissions are unavailable.
+    */
+
+    const textarea =
+      document.createElement("textarea");
+
+    textarea.value =
+      text;
+
+    document.body.appendChild(
+      textarea
+    );
+
+    textarea.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    textarea.remove();
 
   }
 
 }
 
-/* =========================================================
-   PROMOTION
-   ========================================================= */
+
+function escapeJs(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+/* ================================================================
+   PROMOTION ENGINE
+   ================================================================ */
 
 function renderPromotion(){
 
   const container =
-    document.getElementById("promotionList");
+    document.getElementById(
+      "promotionList"
+    );
 
-  const events =
-    state.events
-      .filter(e=>e.status==="confirmed")
-      .sort((a,b)=>
-        a.date.localeCompare(b.date)
-      );
 
-  if(!events.length){
+  const confirmed =
+    state.events.filter(
+      e=>e.status === "confirmed"
+    );
 
-    container.innerHTML = `
-      <div class="empty">
-        Confirm a show first, then promotion can begin.
-      </div>
-    `;
+
+  if(confirmed.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        Confirm an event to generate promotional material.
+      </div>`;
 
     return;
 
   }
 
-  container.innerHTML =
-    events.map(event=>{
 
-      let promo =
+  /*
+     Ensure every confirmed event has a promotion record.
+  */
+
+  confirmed.forEach(event=>{
+
+    let promo =
+      state.promotions.find(
+        p=>p.eventId === event.id
+      );
+
+
+    if(!promo){
+
+      state.promotions.push({
+
+        id:uid("promo"),
+
+        eventId:event.id,
+
+        status:"Not Ready",
+
+        headline:
+          event.title,
+
+        copy:
+          `Join us at Gemini Lounge for ${event.title} on ${formatDate(event.date)} from ${event.time}.`,
+
+        createdAt:new Date().toISOString()
+
+      });
+
+    }
+
+  });
+
+
+  saveState();
+
+
+  container.innerHTML =
+    confirmed.map(event=>{
+
+      const promo =
         state.promotions.find(
-          p=>p.eventId===event.id
+          p=>p.eventId === event.id
         );
 
-      if(!promo){
-
-        promo = {
-          id:uid("promo"),
-          eventId:event.id,
-          status:"Not Ready",
-          views:0,
-          shares:0,
-          qrScans:0,
-          post:""
-        };
-
-        state.promotions.push(promo);
-
-      }
 
       return `
 
-        <div class="event-card"
-          style="margin-bottom:13px">
+        <div class="card">
 
-          <div class="event-top">
+          <div class="card-title">
 
-            <div>
+            <strong>
+              ${escapeHtml(event.title)}
+            </strong>
 
-              <div class="event-name">
-                ${escapeHTML(event.artistName)}
-              </div>
-
-              <div class="event-date">
-                ${formatDate(event.date)}
-                •
-                ${escapeHTML(event.time)}
-              </div>
-
-            </div>
-
-            <span class="status ${
-              promo.status==="Promoted"
-              ?
-              "approved"
-              :
-              promo.status==="Promo Ready"
-              ?
-              "ready"
-              :
-              "pending"
-            }">
-
-              ${escapeHTML(promo.status)}
-
+            <span class="status ready">
+              ${escapeHtml(
+                promo?.status || "Not Ready"
+              )}
             </span>
 
           </div>
 
-          <div class="event-meta">
+          <div class="meta">
 
-            Views:
-            ${promo.views || 0}
+            ${escapeHtml(
+              formatDate(event.date)
+            )}
 
-            • Shares:
-            ${promo.shares || 0}
+            <br>
 
-            • QR Scans:
-            ${promo.qrScans || 0}
+            ${escapeHtml(event.time)}
 
           </div>
 
-          ${
-            promo.post
-            ?
-            `
-            <div class="divider"></div>
+          <div class="divider"></div>
 
-            <div style="
-              white-space:pre-line;
-              line-height:1.5;
-              font-size:13px;
-            ">
-              ${escapeHTML(promo.post)}
-            </div>
-            `
-            :
-            ""
-          }
+          <div>
 
-          <div class="actions" style="margin-top:13px">
+            <strong>
+              ${escapeHtml(
+                promo?.headline || event.title
+              )}
+            </strong>
 
-            <button class="btn blue"
-              onclick="generatePromotion('${event.id}')">
-              Generate Promo
+            <p class="meta">
+              ${escapeHtml(
+                promo?.copy || ""
+              )}
+            </p>
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="btn small primary"
+              onclick="markPromoReady('${promo.id}')"
+            >
+              Mark Promo Ready
             </button>
 
-            <button class="btn primary"
-              onclick="markPromoted('${event.id}')">
-              ${promo.status==="Promoted" ? "Promoted ✓" : "Mark Promoted"}
-            </button>
-
-            <button class="btn"
-              onclick="openEventModal('${event.id}')">
-              Preview Event
+            <button
+              class="btn small success"
+              onclick="markPromoted('${promo.id}')"
+            >
+              Mark Promoted
             </button>
 
           </div>
@@ -3265,493 +3356,606 @@ function renderPromotion(){
 
     }).join("");
 
-  saveState();
-
 }
 
-function generatePromotion(eventId){
 
-  syncStateFromStorage();
-
-  const event =
-    state.events.find(e=>e.id===eventId);
-
-  if(!event) return;
-
-  let promo =
-    state.promotions.find(
-      p=>p.eventId===eventId
-    );
-
-  if(!promo){
-
-    promo = {
-      id:uid("promo"),
-      eventId,
-      status:"Not Ready",
-      views:0,
-      shares:0,
-      qrScans:0,
-      post:""
-    };
-
-    state.promotions.push(promo);
-
-  }
-
-  promo.status="Promo Ready";
-
-  promo.post =
-`🎵 LIVE MUSIC AT GEMINI LOUNGE
-
-${event.artistName}
-${event.genre || "Live Music"}
-
-📅 ${formatDate(event.date)}
-⏰ ${event.time}
-
-📍 ${state.venue.name}
-${state.venue.location}
-
-Come out for a night of local music, good people, and good nights.
-
-#GeminiLounge #LiveMusic #Bandon #LocalMusic`;
-
-  logHistory(
-    "Promotion Generated",
-    event.artistName
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast("Promotion package ready.");
-
-}
-
-function generateAllPromotions(){
-
-  state.events
-    .filter(e=>e.status==="confirmed")
-    .forEach(e=>generatePromotionSilent(e.id));
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Promotion packages generated."
-  );
-
-}
-
-function generatePromotionSilent(eventId){
-
-  const event =
-    state.events.find(e=>e.id===eventId);
-
-  if(!event) return;
-
-  let promo =
-    state.promotions.find(
-      p=>p.eventId===eventId
-    );
-
-  if(!promo){
-
-    promo = {
-
-      id:uid("promo"),
-
-      eventId,
-
-      status:"Promo Ready",
-
-      views:0,
-
-      shares:0,
-
-      qrScans:0,
-
-      post:""
-
-    };
-
-    state.promotions.push(promo);
-
-  }
-
-  promo.status="Promo Ready";
-
-  promo.post =
-`🎵 LIVE MUSIC AT GEMINI LOUNGE
-
-${event.artistName}
-${event.genre || "Live Music"}
-
-📅 ${formatDate(event.date)}
-⏰ ${event.time}
-
-📍 ${state.venue.name}
-${state.venue.location}
-
-Come out for a night of local music, good people, and good nights.
-
-#GeminiLounge #LiveMusic #Bandon #LocalMusic`;
-
-}
-
-function markPromoted(eventId){
-
-  syncStateFromStorage();
+function markPromoReady(id){
 
   const promo =
     state.promotions.find(
-      p=>p.eventId===eventId
+      p=>p.id === id
     );
 
   if(!promo){
-
-    generatePromotionSilent(eventId);
-
-  }
-
-  const target =
-    state.promotions.find(
-      p=>p.eventId===eventId
-    );
-
-  target.status="Promoted";
-
-  logHistory(
-    "Event Promoted",
-    eventId
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Event marked as promoted."
-  );
-
-}
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-function renderCalendar(){
-
-  const container =
-    document.getElementById("calendar");
-
-  const now = new Date();
-
-  const year =
-    now.getFullYear();
-
-  const month =
-    now.getMonth();
-
-  const first =
-    new Date(year,month,1);
-
-  const last =
-    new Date(year,month+1,0);
-
-  const startDay =
-    first.getDay();
-
-  const total =
-    last.getDate();
-
-  let html = `
-
-    <div style="
-      text-align:center;
-      font-family:Georgia,serif;
-      font-size:22px;
-      margin-bottom:12px;
-    ">
-      ${now.toLocaleDateString(
-        undefined,
-        {
-          month:"long",
-          year:"numeric"
-        }
-      )}
-    </div>
-
-    <div class="calendar">
-
-      ${[
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat"
-      ].map(day=>
-        `<div class="cal-head">${day}</div>`
-      ).join("")}
-
-  `;
-
-  for(let i=0;i<startDay;i++){
-
-    html += `<div></div>`;
-
-  }
-
-  for(let day=1;day<=total;day++){
-
-    const date =
-      `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-
-    const isToday =
-      date===todayISO();
-
-    const events =
-      state.events.filter(
-        e=>
-          e.status==="confirmed" &&
-          e.date===date
-      );
-
-    html += `
-
-      <div class="cal-day ${
-        isToday ? "today" : ""
-      }">
-
-        <div class="cal-num">
-          ${day}
-        </div>
-
-        ${
-          events.map(e=>
-            `<div class="cal-event"
-              onclick="openEventModal('${e.id}')">
-              ${escapeHTML(e.artistName)}
-            </div>`
-          ).join("")
-        }
-
-      </div>
-
-    `;
-
-  }
-
-  html += `</div>`;
-
-  container.innerHTML=html;
-
-}
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-function renderHistory(){
-
-  const container =
-    document.getElementById("historyList");
-
-  if(!state.history.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No system activity yet.
-      </div>
-    `;
 
     return;
 
   }
 
-  container.innerHTML =
-    state.history
-      .slice(0,100)
-      .map(item=>`
+  promo.status =
+    "Promo Ready";
 
-        <div class="event-card"
-          style="margin-bottom:9px">
 
-          <div class="event-top">
-
-            <div>
-
-              <div class="event-name">
-                ${escapeHTML(item.action)}
-              </div>
-
-              <div class="event-meta">
-                ${escapeHTML(item.detail)}
-              </div>
-
-            </div>
-
-            <div class="small muted">
-              ${new Date(
-                item.timestamp
-              ).toLocaleString()}
-            </div>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-}
-
-/* =========================================================
-   VENUE MODAL
-   ========================================================= */
-
-function openVenueModal(){
-
-  const v = state.venue;
-
-  openModal(`
-
-    <div class="kicker">
-      GEMINI LOUNGE
-    </div>
-
-    <h2>Venue Profile</h2>
-
-    <div class="form-grid">
-
-      <div class="field full">
-        <label>Venue Name</label>
-        <input id="venueName"
-          value="${escapeHTML(v.name)}">
-      </div>
-
-      <div class="field full">
-        <label>Subtitle</label>
-        <input id="venueSubtitle"
-          value="${escapeHTML(v.subtitle)}">
-      </div>
-
-      <div class="field full">
-        <label>Location</label>
-        <input id="venueLocation"
-          value="${escapeHTML(v.location)}">
-      </div>
-
-      <div class="field full">
-        <label>Description</label>
-        <textarea id="venueDescription">${escapeHTML(v.description)}</textarea>
-      </div>
-
-      <div class="field full">
-        <label>Social Link</label>
-        <input id="venueSocial"
-          value="${escapeHTML(v.social)}">
-      </div>
-
-    </div>
-
-    <div class="actions" style="margin-top:18px">
-
-      <button class="btn"
-        onclick="closeModal()">
-        Cancel
-      </button>
-
-      <button class="btn primary"
-        onclick="saveVenue()">
-        Save Venue
-      </button>
-
-    </div>
-
-  `);
-
-}
-
-function saveVenue(){
-
-  syncStateFromStorage();
-
-  state.venue = {
-
-    name:
-      document.getElementById("venueName").value.trim(),
-
-    subtitle:
-      document.getElementById("venueSubtitle").value.trim(),
-
-    location:
-      document.getElementById("venueLocation").value.trim(),
-
-    description:
-      document.getElementById("venueDescription").value.trim(),
-
-    social:
-      document.getElementById("venueSocial").value.trim()
-
-  };
-
-  logHistory(
-    "Venue Profile Updated",
-    state.venue.name
+  addHistory(
+    `Promotion prepared for ${promo.headline}.`
   );
+
 
   saveState();
 
-  closeModal();
+  renderAll();
+
+}
+
+
+function markPromoted(id){
+
+  const promo =
+    state.promotions.find(
+      p=>p.id === id
+    );
+
+  if(!promo){
+
+    return;
+
+  }
+
+  promo.status =
+    "Promoted";
+
+
+  addHistory(
+    `Promotion marked as promoted for ${promo.headline}.`
+  );
+
+
+  saveState();
 
   renderAll();
 
-  showToast("Gemini venue profile updated.");
+}
+
+
+/* ================================================================
+   CALENDAR
+   ================================================================ */
+
+function renderCalendar(){
+
+  const container =
+    document.getElementById(
+      "calendarContainer"
+    );
+
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+
+  const first =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+  const last =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+
+  const monthName =
+    calendarDate.toLocaleDateString(
+      undefined,
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+
+  const weekdays =
+    [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ];
+
+
+  let html = `
+
+    <div
+      style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:12px;
+      "
+    >
+
+      <button
+        class="btn small"
+        onclick="changeCalendarMonth(-1)"
+      >
+        ←
+      </button>
+
+      <strong>
+        ${escapeHtml(monthName)}
+      </strong>
+
+      <button
+        class="btn small"
+        onclick="changeCalendarMonth(1)"
+      >
+        →
+      </button>
+
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          ${weekdays.map(day=>`
+            <th>${day}</th>
+          `).join("")}
+        </tr>
+      </thead>
+
+      <tbody>
+  `;
+
+
+  let dayOfWeek =
+    first.getDay();
+
+
+  let day =
+    1;
+
+
+  const totalDays =
+    last.getDate();
+
+
+  for(
+    let row=0;
+    row<6;
+    row++
+  ){
+
+    html += "<tr>";
+
+
+    for(
+      let col=0;
+      col<7;
+      col++
+    ){
+
+      if(
+        (row === 0 && col < dayOfWeek) ||
+        day > totalDays
+      ){
+
+        html += "<td></td>";
+
+        continue;
+
+      }
+
+
+      const dateString =
+        `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+
+      const events =
+        state.events.filter(
+          event =>
+            event.date === dateString &&
+            event.status === "confirmed"
+        );
+
+
+      html += `
+
+        <td>
+
+          <div class="day-number">
+            ${day}
+          </div>
+
+          ${events.map(event=>`
+
+            <div class="calendar-event">
+
+              <strong>
+                ${escapeHtml(event.artist || event.title)}
+              </strong>
+
+              <br>
+
+              ${escapeHtml(event.time)}
+
+            </div>
+
+          `).join("")}
+
+        </td>
+
+      `;
+
+
+      day++;
+
+    }
+
+
+    html += "</tr>";
+
+
+    if(day > totalDays){
+
+      break;
+
+    }
+
+  }
+
+
+  html += `
+      </tbody>
+    </table>
+  `;
+
+
+  container.innerHTML =
+    html;
 
 }
 
-/* =========================================================
-   MODAL
-   ========================================================= */
 
-function openModal(html){
+function changeCalendarMonth(amount){
 
-  document.getElementById(
-    "modalContent"
-  ).innerHTML = html;
+  calendarDate.setMonth(
+    calendarDate.getMonth() + amount
+  );
 
-  document.getElementById(
-    "modalBackdrop"
-  ).classList.add("show");
+  renderCalendar();
 
 }
 
-function closeModal(event){
+
+function calendarToday(){
+
+  calendarDate =
+    new Date();
+
+  renderCalendar();
+
+}
+
+
+/* ================================================================
+   HISTORY
+   ================================================================ */
+
+function renderHistory(){
+
+  const container =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  if(state.history.length === 0){
+
+    container.innerHTML =
+      `<div class="empty">
+        No activity recorded yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    state.history.map(item=>{
+
+      const date =
+        new Date(
+          item.timestamp
+        );
+
+
+      return `
+
+        <div class="history-item">
+
+          <strong>
+            ${escapeHtml(item.message)}
+          </strong>
+
+          <span>
+            ${escapeHtml(
+              date.toLocaleString()
+            )}
+          </span>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+function clearHistory(){
 
   if(
-    event &&
-    event.target !==
-    document.getElementById("modalBackdrop")
+    !confirm(
+      "Clear system history?"
+    )
   ){
 
     return;
 
   }
 
-  document.getElementById(
-    "modalBackdrop"
-  ).classList.remove("show");
+
+  state.history = [];
+
+  saveState();
+
+  renderAll();
 
 }
 
-/* =========================================================
+
+/* ================================================================
+   METRICS
+   ================================================================ */
+
+function renderMetrics(){
+
+  const pending =
+    state.bookings.filter(
+      b=>b.status === "pending"
+    ).length;
+
+
+  const confirmed =
+    state.events.filter(
+      e=>e.status === "confirmed"
+    ).length;
+
+
+  const customers =
+    state.customers.length;
+
+
+  const promotions =
+    state.promotions.length;
+
+
+  document.getElementById(
+    "metricPending"
+  ).textContent =
+    pending;
+
+
+  document.getElementById(
+    "metricConfirmed"
+  ).textContent =
+    confirmed;
+
+
+  document.getElementById(
+    "metricCustomers"
+  ).textContent =
+    customers;
+
+
+  document.getElementById(
+    "metricPromotions"
+  ).textContent =
+    promotions;
+
+}
+
+
+/* ================================================================
+   DEMO DATA
+   ================================================================ */
+
+function loadDemoData(){
+
+  /*
+     Clear old demo state in the V2.2 environment.
+  */
+
+  const base =
+    new Date();
+
+
+  const pendingDate =
+    new Date(base);
+
+  pendingDate.setDate(
+    pendingDate.getDate() + 12
+  );
+
+
+  const confirmedDate =
+    new Date(base);
+
+  confirmedDate.setDate(
+    confirmedDate.getDate() + 5
+  );
+
+
+  const pendingDateString =
+    pendingDate
+      .toISOString()
+      .slice(0,10);
+
+
+  const confirmedDateString =
+    confirmedDate
+      .toISOString()
+      .slice(0,10);
+
+
+  /*
+     Don't duplicate demo data.
+  */
+
+  const hasDemoBooking =
+    state.bookings.some(
+      b=>b.demo === true
+    );
+
+
+  const hasDemoEvent =
+    state.events.some(
+      e=>e.demo === true
+    );
+
+
+  if(!hasDemoBooking){
+
+    state.bookings.push({
+
+      id:uid("booking"),
+
+      artist:"Alex Rivers",
+
+      email:"alex@example.com",
+
+      date:pendingDateString,
+
+      time:"8:00 PM - 10:00 PM",
+
+      notes:
+        "Demo booking request.",
+
+      status:"pending",
+
+      demo:true,
+
+      createdAt:new Date().toISOString()
+
+    });
+
+  }
+
+
+  if(!hasDemoEvent){
+
+    /*
+       Confirmed event at 7-9 demonstrates the
+       overlap engine correctly.
+    */
+
+    state.events.push({
+
+      id:uid("event"),
+
+      bookingId:null,
+
+      title:
+        "Friday Night Live at Gemini Lounge",
+
+      artist:
+        "The Coastliners",
+
+      date:confirmedDateString,
+
+      time:"7:00 PM - 9:00 PM",
+
+      description:
+        "A demo Gemini Lounge live music event.",
+
+      status:"confirmed",
+
+      demo:true,
+
+      createdAt:new Date().toISOString()
+
+    });
+
+  }
+
+
+  addHistory(
+    "Loaded Gemini Lounge V2.2 demo data."
+  );
+
+
+  saveState();
+
+  renderAll();
+
+}
+
+
+/* ================================================================
+   RESET SYSTEM
+   ================================================================ */
+
+function resetSystem(){
+
+  if(
+    !confirm(
+      "Reset the Gemini Lounge V2.2 demo and remove all saved data?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+
+  state =
+    structuredClone(
+      defaultState
+    );
+
+
+  addHistory(
+    "Gemini Lounge V2.2 system was reset."
+  );
+
+
+  saveState();
+
+  renderAll();
+
+}
+
+
+/* ================================================================
    RENDER ALL
-   ========================================================= */
+   ================================================================ */
 
 function renderAll(){
 
@@ -3761,9 +3965,11 @@ function renderAll(){
 
   renderMyBookings();
 
-  renderCustomer();
+  renderCustomerEvents();
 
-  renderOwner();
+  renderOwnerBookings();
+
+  renderOwnerCustomers();
 
   renderEvents();
 
@@ -3773,193 +3979,248 @@ function renderAll(){
 
   renderHistory();
 
-}
+  renderMetrics();
 
-/* =========================================================
-   HASH EVENT ROUTING
-   ========================================================= */
-
-function handleHash(){
-
-  const hash =
-    location.hash;
-
-  if(hash.startsWith("#event=")){
-
-    const id =
-      decodeURIComponent(
-        hash.replace("#event=","")
-      );
-
-    setTimeout(()=>{
-      openEventModal(id);
-    },250);
-
-  }
+  updateBookingAvailability();
 
 }
 
-window.addEventListener(
-  "hashchange",
-  handleHash
-);
 
-/* =========================================================
-   DEMO DATA
-   ========================================================= */
+/* ================================================================
+   URL EVENT PARAMETER
+   ================================================================ */
 
-function loadDemoData(){
+function loadPublicEventFromUrl(){
 
-  syncStateFromStorage();
-
-  if(state.bookings.length ||
-     state.events.length){
-
-    showToast(
-      "Demo data already exists."
+  const params =
+    new URLSearchParams(
+      window.location.search
     );
+
+  const eventId =
+    params.get("event");
+
+
+  if(!eventId){
 
     return;
 
   }
 
-  const today =
-    new Date();
 
-  const eventDate =
-    new Date(
-      today.getTime()+5*86400000
-    )
-    .toISOString()
-    .slice(0,10);
+  const event =
+    state.events.find(
+      e=>e.id === eventId
+    );
 
-  const requestDate =
-    new Date(
-      today.getTime()+12*86400000
-    )
-    .toISOString()
-    .slice(0,10);
 
-  state.bookings.push({
+  if(!event){
 
-    id:uid("booking"),
+    return;
 
-    artist:{
+  }
 
-      name:"Harbor Lights",
 
-      genre:"Indie Folk",
+  setView("events");
 
-      location:"Coos Bay, OR",
-
-      contact:"harborlights@example.com",
-
-      performanceType:"Duo",
-
-      social:"instagram.com/harborlights",
-
-      bio:
-        "An acoustic coastal duo focused on intimate live sets."
-
-    },
-
-    date:requestDate,
-
-    time:"8:00 PM - 10:00 PM",
-
-    message:
-      "We would love to play a relaxed Saturday evening set.",
-
-    status:"pending",
-
-    createdAt:
-      new Date().toISOString()
-
-  });
-
-  state.events.push({
-
-    id:uid("event"),
-
-    bookingId:null,
-
-    artistName:"Coastal Echo",
-
-    genre:"Acoustic Rock",
-
-    date:eventDate,
-
-    time:"7:00 PM - 9:00 PM",
-
-    status:"confirmed",
-
-    description:
-      "A local acoustic duo bringing familiar songs and original music to the coast.",
-
-    createdAt:
-      new Date().toISOString()
-
-  });
-
-  logHistory(
-    "Demo Data Loaded",
-    "Gemini Lounge experience demo"
-  );
-
-  saveState();
-
-  renderAll();
-
-  showToast(
-    "Demo data loaded."
-  );
+  previewEvent(eventId);
 
 }
 
-/* =========================================================
-   OPTIONAL CONSOLE ACCESS
-   ========================================================= */
+
+/* ================================================================
+   EVENT LISTENERS
+   ================================================================ */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(tab=>{
+
+    tab.addEventListener(
+      "click",
+      ()=>{
+
+        setView(
+          tab.dataset.view
+        );
+
+      }
+    );
+
+  });
+
+
+document
+  .getElementById(
+    "bookingForm"
+  )
+  .addEventListener(
+    "submit",
+    handleBookingSubmit
+  );
+
+
+document
+  .getElementById(
+    "bookingDate"
+  )
+  .addEventListener(
+    "change",
+    updateBookingAvailability
+  );
+
+
+document
+  .getElementById(
+    "bookingTime"
+  )
+  .addEventListener(
+    "change",
+    updateBookingAvailability
+  );
+
+
+document
+  .getElementById(
+    "checkAvailabilityBtn"
+  )
+  .addEventListener(
+    "click",
+    checkAvailability
+  );
+
+
+document
+  .getElementById(
+    "customerForm"
+  )
+  .addEventListener(
+    "submit",
+    handleCustomerSubmit
+  );
+
+
+document
+  .getElementById(
+    "loadDemoBtn"
+  )
+  .addEventListener(
+    "click",
+    loadDemoData
+  );
+
+
+document
+  .getElementById(
+    "createDemoEventBtn"
+  )
+  .addEventListener(
+    "click",
+    createDemoEvent
+  );
+
+
+document
+  .getElementById(
+    "calendarTodayBtn"
+  )
+  .addEventListener(
+    "click",
+    calendarToday
+  );
+
+
+document
+  .getElementById(
+    "clearHistoryBtn"
+  )
+  .addEventListener(
+    "click",
+    clearHistory
+  );
+
+
+/* ================================================================
+   CROSS-TAB STORAGE SYNC
+   ================================================================ */
+
+window.addEventListener(
+  "storage",
+  event=>{
+
+    if(
+      event.key === STORAGE_KEY
+    ){
+
+      syncStateFromStorage();
+
+      renderAll();
+
+    }
+
+  }
+);
+
+
+/* ================================================================
+   PUBLIC RESET API
+   ================================================================ */
 
 window.GeminiScanCraft = {
 
-  getState:()=>{
+  reset:resetSystem,
+
+  state:()=>{
+
     syncStateFromStorage();
+
     return state;
-  },
-
-  reset:()=>{
-
-    localStorage.removeItem(
-      STORAGE_KEY
-    );
-
-    state=defaultState();
-
-    saveState();
-
-    renderAll();
-
-    showToast(
-      "Gemini system reset."
-    );
 
   },
 
-  demo:loadDemoData
+  checkAvailability:(
+    date,
+    time
+  )=>{
+
+    syncStateFromStorage();
+
+    return {
+
+      available:
+        isSlotAvailable(
+          date,
+          time
+        ),
+
+      conflicts:
+        getSlotConflicts(
+          date,
+          time
+        )
+
+    };
+
+  }
 
 };
 
-/* =========================================================
-   INITIALIZE
-   ========================================================= */
 
-document.getElementById(
-  "bookingDate"
-).min = todayISO();
+/* ================================================================
+   INITIALIZATION
+   ================================================================ */
 
-setView("artist");
+document
+  .getElementById(
+    "bookingDate"
+  )
+  .min =
+    todayString();
 
-handleHash();
+
+renderAll();
+
+loadPublicEventFromUrl();
 
 </script>
 
