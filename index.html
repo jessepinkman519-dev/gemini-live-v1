@@ -151,5 +151,38 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+
+<!-- SC-V274-QUICK-LINKS -->
+<script>
+(function(){
+  function install(){
+    const items=[...document.querySelectorAll('.quick-item')];
+    if(!items.length) return;
+    const routes=['bookings','events','calendar','owner','promotion'];
+    const go=name=>{
+      const btn=[...document.querySelectorAll('.nav button')].find(b=>b.dataset.tab===name);
+      if(btn) btn.click();
+    };
+    items.forEach((el,i)=>{
+      const route=routes[i];
+      if(!route || el.dataset.scV274Bound) return;
+      el.dataset.scV274Bound='1';
+      el.dataset.action=route;
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.style.cursor='pointer';
+      const run=e=>{
+        if(e) e.stopImmediatePropagation();
+        go(route);
+      };
+      el.addEventListener('click',run,true);
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();run(e)}});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install); else install();
+  setTimeout(install,300);
+  setTimeout(install,1000);
+})();
+</script>
 </body>
 </html>
