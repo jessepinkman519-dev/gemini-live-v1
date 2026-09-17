@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Gemini Lounge — ScanCraft V2.7.1</title>
+<title>Gemini Lounge — ScanCraft V2.7.3</title>
 <style>
 :root{--red:#f21d3b;--red2:#ff3d5a;--black:#020306;--nav:#030508;--panel:rgba(2,8,13,.82);--line:rgba(115,155,180,.30);--text:#f4f6f8;--muted:#a9b5bf;--green:#32d49b;--blue:#66c4f5;--gold:#ffb347;--shadow:0 22px 65px rgba(0,0,0,.68)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#010204;color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(0,0,0,.97) 0 238px,rgba(0,0,0,.28) 238px 100%),linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.28) 48%,rgba(0,0,0,.84)),url("gemini-lounge-background.jpg") center top/cover fixed no-repeat;filter:saturate(1.16) contrast(1.08)}body:after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 73% 12%,rgba(255,22,52,.22),transparent 27%),radial-gradient(circle at 82% 48%,rgba(255,18,45,.11),transparent 28%),linear-gradient(90deg,rgba(0,0,0,.92) 0 238px,transparent 238px),radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.55) 100%);pointer-events:none}
@@ -123,5 +123,33 @@ function renderAll(){ensureStateIntegrity();renderArtistDashboard();renderBookin
 window.addEventListener("storage",e=>{if(e.key!==STORAGE_KEY)return;const x=readState(STORAGE_KEY);if(!x)return;state=normalizeState(x);ensureStateIntegrity();renderAll()});window.GeminiScanCraft={reset(){localStorage.removeItem(STORAGE_KEY);location.reload()},state(){return JSON.parse(JSON.stringify(state))},checkSlot:(d,t)=>checkSlot(d,t)};
 loadState();publicEventRoot.classList.add("hidden");renderAll();checkPublicEvent();
 </script>
+<!-- SC-V273-INTERACTION -->
+<style>
+.sc-v273-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+.sc-v273-clickable:hover{transform:translateY(-2px);border-color:rgba(255,61,90,.62)!important;box-shadow:0 12px 30px rgba(0,0,0,.34),0 0 18px rgba(242,29,59,.12)!important}
+.sc-v273-clickable:active{transform:translateY(0)}
+.sc-v273-clickable:focus-visible{outline:2px solid #ff3d5a;outline-offset:2px}
+.quick-item.sc-v273-clickable{padding-left:9px;padding-right:9px;border-radius:7px}
+.mini-card.sc-v273-clickable,.card.sc-v273-clickable{position:relative}
+</style>
+<script>
+(function(){
+const nav=name=>{const b=[...document.querySelectorAll('.nav button')].find(x=>(x.dataset.tab||'')===name);if(b)b.click()};
+const safe=(el,fn)=>{if(!el||el.dataset.scV273Bound)return;el.dataset.scV273Bound='1';el.classList.add('sc-v273-clickable');el.tabIndex=0;el.addEventListener('click',e=>{if(e.target.closest('button,a,input,select,textarea'))return;fn()});el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();fn()}})};
+const text=el=>(el?.textContent||'').toLowerCase();
+function bind(){
+ document.querySelectorAll('.quick-item').forEach(el=>{const t=text(el);if(t.includes('book')||t.includes('artist'))safe(el,()=>nav('bookings'));else if(t.includes('upcoming')||t.includes('show'))safe(el,()=>nav('events'));else if(t.includes('calendar'))safe(el,()=>nav('calendar'));else if(t.includes('owner')||t.includes('command'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
+ document.querySelectorAll('.profile').forEach(el=>safe(el,()=>nav('artist')));
+ document.querySelectorAll('.request').forEach(el=>safe(el,()=>nav('bookings')));
+ document.querySelectorAll('.command,.attention').forEach(el=>safe(el,()=>nav('owner')));
+ document.querySelectorAll('.upcoming,.next').forEach(el=>safe(el,()=>nav('events')));
+ document.querySelectorAll('.promo-art').forEach(el=>safe(el,()=>nav('promotion')));
+ document.querySelectorAll('.mini-card,.card').forEach(el=>{const t=text(el);if(t.includes('upcoming')||t.includes('next show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('attention')||t.includes('pending')||t.includes('reschedule')||t.includes('booking'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
+ document.querySelectorAll('.link').forEach(el=>{const t=text(el);if(t.includes('book'))safe(el,()=>nav('bookings'));else if(t.includes('show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('owner'))safe(el,()=>nav('owner'));else if(t.includes('promo'))safe(el,()=>nav('promotion'))});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',bind);
+})();
+</script>
+
 </body>
 </html>
