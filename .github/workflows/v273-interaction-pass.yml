@@ -1,0 +1,123 @@
+name: Gemini Lounge V2.7.3 Interaction Pass
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/v273-interaction-pass.yml'
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Patch interaction layer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          if 'SC-V273-INTERACTION' in s:
+              print('V2.7.3 interaction layer already present')
+          else:
+              s = s.replace('<title>Gemini Lounge — ScanCraft V2.7.1</title>', '<title>Gemini Lounge — ScanCraft V2.7.3</title>', 1)
+
+              patch = r'''
+<!-- SC-V273-INTERACTION -->
+<style>
+  .sc-v273-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+  .sc-v273-clickable:hover{transform:translateY(-2px);border-color:rgba(255,61,90,.62)!important;box-shadow:0 12px 30px rgba(0,0,0,.34),0 0 18px rgba(242,29,59,.12)!important}
+  .sc-v273-clickable:active{transform:translateY(0)}
+  .sc-v273-clickable:focus-visible{outline:2px solid #ff3d5a;outline-offset:2px}
+  .quick-item.sc-v273-clickable{padding-left:9px;padding-right:9px;border-radius:7px}
+  .mini-card.sc-v273-clickable,.card.sc-v273-clickable{position:relative}
+  .sc-v273-hint{color:#ff536a;font-size:.65rem;margin-left:8px;opacity:.9;white-space:nowrap}
+</style>
+<script>
+(function(){
+  const nav=(name)=>{
+    const b=[...document.querySelectorAll('.nav button')].find(x=>(x.dataset.tab||'')===name);
+    if(b) b.click();
+  };
+  const safeClick=(el,fn)=>{
+    if(!el || el.dataset.scV273Bound) return;
+    el.dataset.scV273Bound='1';
+    el.classList.add('sc-v273-clickable');
+    el.tabIndex=0;
+    el.addEventListener('click',e=>{
+      if(e.target.closest('button,a,input,select,textarea')) return;
+      fn(e);
+    });
+    el.addEventListener('keydown',e=>{
+      if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();fn(e)}
+    });
+  };
+  const text=el=>(el?.textContent||'').trim().toLowerCase();
+
+  function bindQuickLinks(){
+    document.querySelectorAll('.quick-item').forEach(item=>{
+      const t=text(item);
+      if(t.includes('book')||t.includes('artist')) safeClick(item,()=>nav('bookings'));
+      else if(t.includes('upcoming')||t.includes('show')) safeClick(item,()=>nav('events'));
+      else if(t.includes('calendar')) safeClick(item,()=>nav('calendar'));
+      else if(t.includes('owner')||t.includes('command')) safeClick(item,()=>nav('owner'));
+      else if(t.includes('promotion')||t.includes('promo')) safeClick(item,()=>nav('promotion'));
+    });
+  }
+
+  function bindDashboard(){
+    document.querySelectorAll('.profile').forEach(el=>safeClick(el,()=>nav('artist')));
+    document.querySelectorAll('.request').forEach(el=>safeClick(el,()=>nav('bookings')));
+    document.querySelectorAll('.command').forEach(el=>safeClick(el,()=>nav('owner')));
+    document.querySelectorAll('.upcoming').forEach(el=>safeClick(el,()=>nav('events')));
+    document.querySelectorAll('.attention').forEach(el=>safeClick(el,()=>nav('owner')));
+    document.querySelectorAll('.next').forEach(el=>safeClick(el,()=>nav('events')));
+    document.querySelectorAll('.quick').forEach(el=>safeClick(el,()=>nav('events')));
+    document.querySelectorAll('.promo-art').forEach(el=>safeClick(el,()=>nav('promotion')));
+  }
+
+  function bindCards(){
+    document.querySelectorAll('.mini-card,.card').forEach(el=>{
+      const t=text(el);
+      if(t.includes('upcoming')||t.includes('next show')||t.includes('event')) safeClick(el,()=>nav('events'));
+      else if(t.includes('attention')||t.includes('pending')||t.includes('reschedule')||t.includes('booking')) safeClick(el,()=>nav('owner'));
+      else if(t.includes('promotion')||t.includes('promo')) safeClick(el,()=>nav('promotion'));
+    });
+  }
+
+  function bindButtons(){
+    document.querySelectorAll('.link').forEach(el=>{
+      const t=text(el);
+      if(t.includes('book')) safeClick(el,()=>nav('bookings'));
+      else if(t.includes('show')||t.includes('event')) safeClick(el,()=>nav('events'));
+      else if(t.includes('owner')) safeClick(el,()=>nav('owner'));
+      else if(t.includes('promo')) safeClick(el,()=>nav('promotion'));
+    });
+  }
+
+  function bind(){bindQuickLinks();bindDashboard();bindCards();bindButtons();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind);
+  else bind();
+  window.addEventListener('load',bind);
+})();
+</script>
+'''
+              s = s.replace('</body>', patch + '\n</body>', 1)
+              p.write_text(s, encoding='utf-8')
+              print('Applied V2.7.3 interaction layer')
+          PY
+
+      - name: Commit and remove one-time workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git rm -f .github/workflows/v273-interaction-pass.yml
+          git commit -m 'Build Gemini Lounge V2.7.3 interaction pass'
+          git push
