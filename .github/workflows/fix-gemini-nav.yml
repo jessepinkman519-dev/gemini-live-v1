@@ -1,0 +1,46 @@
+name: Fix Gemini Lounge Navigation
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-navigation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fix My Bookings / Customer active state
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+
+          old = '''function showTab(name,focusId=null){document.querySelectorAll(".nav button").forEach(t=>t.classList.toggle("active",t.dataset.tab===name));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===name));activeActionId=focusId;renderAll();if(focusId)setTimeout(()=>{const el=document.getElementById(focusId);if(el)el.scrollIntoView({behavior:"smooth",block:"center"})},80)}
+document.querySelectorAll(".nav button").forEach(t=>t.addEventListener("click",()=>showTab(t.dataset.tab)));'''
+
+          new = '''function showTab(name,focusId=null,navButton=null){document.querySelectorAll(".nav button").forEach(t=>t.classList.toggle("active",navButton?t===navButton:t.dataset.tab===name));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===name));activeActionId=focusId;renderAll();if(focusId)setTimeout(()=>{const el=document.getElementById(focusId);if(el)el.scrollIntoView({behavior:"smooth",block:"center"})},80)}
+document.querySelectorAll(".nav button").forEach(t=>t.addEventListener("click",()=>showTab(t.dataset.tab,null,t)));'''
+
+          if old not in text:
+              raise SystemExit("Target navigation code was not found; no changes made.")
+
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          print("Navigation fix applied.")
+          PY
+
+      - name: Commit fix and remove one-time workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/fix-gemini-nav.yml
+          git add index.html .github/workflows/fix-gemini-nav.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix Gemini Lounge navigation active state"
+          git push
