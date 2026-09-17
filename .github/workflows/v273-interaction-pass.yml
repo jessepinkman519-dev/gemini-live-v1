@@ -1,123 +1,34 @@
 name: Gemini Lounge V2.7.3 Interaction Pass
-
 on:
   push:
     branches: [main]
     paths-ignore:
       - '.github/workflows/v273-interaction-pass.yml'
-
 jobs:
   patch:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Patch interaction layer
-        run: |
+      - uses: actions/checkout@v4
+      - name: Patch index
+        env:
+          PATCH_B64: PCEtLSBTQy1WMjczLUlOVEVSQUNUSU9OIC0tPgo8c3R5bGU+Ci5zYy12MjczLWNsaWNrYWJsZXtjdXJzb3I6cG9pbnRlciFpbXBvcnRhbnQ7dHJhbnNpdGlvbjp0cmFuc2Zvcm0gLjE2cyBlYXNlLGJveC1zaGFkb3cgLjE2cyBlYXNlLGJvcmRlci1jb2xvciAuMTZzIGVhc2UsYmFja2dyb3VuZCAuMTZzIGVhc2V9Ci5zYy12MjczLWNsaWNrYWJsZTpob3Zlcnt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtMnB4KTtib3JkZXItY29sb3I6cmdiYSgyNTUsNjEsOTAsLjYyKSFpbXBvcnRhbnQ7Ym94LXNoYWRvdzowIDEycHggMzBweCByZ2JhKDAsMCwwLC4zNCksMCAwIDE4cHggcmdiYSgyNDIsMjksNTksLjEyKSFpbXBvcnRhbnR9Ci5zYy12MjczLWNsaWNrYWJsZTphY3RpdmV7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoMCl9Ci5zYy12MjczLWNsaWNrYWJsZTpmb2N1cy12aXNpYmxle291dGxpbmU6MnB4IHNvbGlkICNmZjNkNWE7b3V0bGluZS1vZmZzZXQ6MnB4fQoucXVpY2staXRlbS5zYy12MjczLWNsaWNrYWJsZXtwYWRkaW5nLWxlZnQ6OXB4O3BhZGRpbmctcmlnaHQ6OXB4O2JvcmRlci1yYWRpdXM6N3B4fQoubWluaS1jYXJkLnNjLXYyNzMtY2xpY2thYmxlLC5jYXJkLnNjLXYyNzMtY2xpY2thYmxlIHtwb3NpdGlvbjpyZWxhdGl2ZX0KPC9zdHlsZT4KPHNjcmlwdD4KKGZ1bmN0aW9uKCl7CmNvbnN0IG5hdj1uYW1lPT57Y29uc3QgYj1bLi4uZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLm5hdiBidXR0b24nKV0uZmluZCh4PT4oeC5kYXRhc2V0LnRhYnx8JycpPT09bmFtZSk7aWYoYil.iY2xpY2soKX07CmNvbnN0IHNhZmU9KGVsLGZuKT0+e2lmKCFlbHx8ZWwuZGF0YXNldC5zY1YyNzNCb3VuZClyZXR1cm47ZWwuZGF0YXNldC5zY1YyNzNCb3VuZD0nMSc7ZWwuY2xhc3NMaXN0LmFkZCgnc2MtdjI3My1jbGlja2FibGUnKTtlbC50YWJJbmRleD0wO2VsLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxlPT57aWYoZS50YXJnZXQuY2xvc2VzdCgnYnV0dG9uLGEsaW5wdXQsc2VsZWN0LHRleHRhcmVhJykpcmV0dXJuO2ZuKCl9KTtlbC5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJyxlPT57aWYoKGUua2V5PT09J0VudGVyJ3x8ZS5rZXk9PT0nICcpJiYhZS50YXJnZXQuY2xvc2VzdCgnYnV0dG9uLGEsaW5wdXQsc2VsZWN0LHRleHRhcmVhJykpe2UucHJldmVudERlZmF1bHQoKTtmbigpfX0pfTsKY29uc3QgdGV4dD1lbD0+KGVsPy50ZXh0Q29udGVudHx8JycpLnRvTG93ZXJDYXNlKCk7CmZ1bmN0aW9uIGJpbmQoKXsKZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnF1aWNrLWl0ZW0nKS5mb3JFYWNoKGVsPT57Y29uc3QgdD10ZXh0KGVsKTtpZih0LmluY2x1ZGVzKCdib29rJyl8fHQuaW5jbHVkZXMoJ2FydGlzdCcpKXNhZmUoZWwsKCk9Pm5hdignYm9va2luZ3MnKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCd1cGNvbWluZycpfHx0LmluY2x1ZGVzKCdzaG93Jykpc2FmZShlbCwoKT0+bmF2KCdldmVudHMnKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCdjYWxlbmRhcicpKXNhZmUoZWwsKCk9Pm5hdignY2FsZW5kYXInKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCdvd25lcicpfHx0LmluY2x1ZGVzKCdjb21tYW5kJykpc2FmZShlbCwoKT0+bmF2KCdvd25lcicpKTtlbHNlIGlmKHQuaW5jbHVkZXMoJ3Byb21vdGlvbicpfHx0LmluY2x1ZGVzKCdwcm9tbycpKXNhZmUoZWwsKCk9Pm5hdigncHJvbW90aW9uJykpfSk7CmRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5wcm9maWxlJykuZm9yRWFjaChlbD0+c2FmZShlbD0+bmF2KCdhcnRpc3QnKSkpOwpkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcucmVxdWVzdCcpLmZvckVhY2goZWw9PnNhZmUoZWwsKCk9Pm5hdignYm9va2luZ3MnKSkpOwpkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcuY29tbWFuZCwuYXR0ZW50aW9uJykuZm9yRWFjaChlbD0+c2FmZShlbD0+bmF2KCdvd25lcicpKSk7CmRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy51cGNvbWluZywubmV4dCcpLmZvckVhY2goZWw9PnNhZmUoZWwsKCk9Pm5hdignZXZlbnRzJykpKTsKZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnByb21vLWFydCcpLmZvckVhY2goZWw9PnNhZmUoZWwsKCk9Pm5hdigncHJvbW90aW9uJykpKTsKZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLm1pbmktY2FyZCwuY2FyZCcpLmZvckVhY2goZWw9Pntjb25zdCB0PXRleHQoZWwpO2lmKHQuaW5jbHVkZXMoJ3VwY29taW5nJyl8fHQuaW5jbHVkZXMoJ25leHQgc2hvdycpfHx0LmluY2x1ZGVzKCdldmVudCcpKXNhZmUoZWwsKCk9Pm5hdignZXZlbnRzJykpO2Vsc2UgaWYodC5pbmNsdWRlcygnYXR0ZW50aW9uJyl8fHQuaW5jbHVkZXMoJ3BlbmRpbmcnKXx8dC5pbmNsdWRlcygncmVzY2hlZHVsZScpfHx0LmluY2x1ZGVzKCdib29raW5nJykpc2FmZShlbD0+bmF2KCdvd25lcicpKTtlbHNlIGlmKHQuaW5jbHVkZXMoJ3Byb21vdGlvbicpfHx0LmluY2x1ZGVzKCdwcm9tbycpKXNhZmUoZWwsKCk9Pm5hdigncHJvbW90aW9uJykpfSk7CmRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5saW5rJykuZm9yRWFjaChlbD0+e2NvbnN0IHQ9dGV4dChlbCk7aWYodC5pbmNsdWRlcygnYm9vaycpKXNhZmUoZWwsKCk9Pm5hdignYm9va2luZ3MnKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCdzaG93Jyl8fHQuaW5jbHVkZXMoJ2V2ZW50Jylpc2FmZShlbD0+bmF2KCdldmVudHMnKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCdvd25lcicpKXNhZmUoZWw9Pm5hdignb3duZXInKSk7ZWxzZSBpZih0LmluY2x1ZGVzKCdwcm9tbycpKXNhZmUoZWw9PnNhdmUoZWwsKCk9Pm5hdigncHJvbW90aW9uJykpfSk7Cn0KaWYoZG9jdW1lbnQucmVhZHlTdGF0ZT09PSdsb2FkaW5nJylkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdET01Db250ZW50TG9hZGVkJyxiaW5kKTtlbHNlIGJpbmQoKTt3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsYmluZCk7Cn0pKCk7Cjwvc2NyaXB0Pgo=
           python - <<'PY'
+          import base64
           from pathlib import Path
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-
-          if 'SC-V273-INTERACTION' in s:
-              print('V2.7.3 interaction layer already present')
-          else:
-              s = s.replace('<title>Gemini Lounge — ScanCraft V2.7.1</title>', '<title>Gemini Lounge — ScanCraft V2.7.3</title>', 1)
-
-              patch = r'''
-<!-- SC-V273-INTERACTION -->
-<style>
-  .sc-v273-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
-  .sc-v273-clickable:hover{transform:translateY(-2px);border-color:rgba(255,61,90,.62)!important;box-shadow:0 12px 30px rgba(0,0,0,.34),0 0 18px rgba(242,29,59,.12)!important}
-  .sc-v273-clickable:active{transform:translateY(0)}
-  .sc-v273-clickable:focus-visible{outline:2px solid #ff3d5a;outline-offset:2px}
-  .quick-item.sc-v273-clickable{padding-left:9px;padding-right:9px;border-radius:7px}
-  .mini-card.sc-v273-clickable,.card.sc-v273-clickable{position:relative}
-  .sc-v273-hint{color:#ff536a;font-size:.65rem;margin-left:8px;opacity:.9;white-space:nowrap}
-</style>
-<script>
-(function(){
-  const nav=(name)=>{
-    const b=[...document.querySelectorAll('.nav button')].find(x=>(x.dataset.tab||'')===name);
-    if(b) b.click();
-  };
-  const safeClick=(el,fn)=>{
-    if(!el || el.dataset.scV273Bound) return;
-    el.dataset.scV273Bound='1';
-    el.classList.add('sc-v273-clickable');
-    el.tabIndex=0;
-    el.addEventListener('click',e=>{
-      if(e.target.closest('button,a,input,select,textarea')) return;
-      fn(e);
-    });
-    el.addEventListener('keydown',e=>{
-      if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();fn(e)}
-    });
-  };
-  const text=el=>(el?.textContent||'').trim().toLowerCase();
-
-  function bindQuickLinks(){
-    document.querySelectorAll('.quick-item').forEach(item=>{
-      const t=text(item);
-      if(t.includes('book')||t.includes('artist')) safeClick(item,()=>nav('bookings'));
-      else if(t.includes('upcoming')||t.includes('show')) safeClick(item,()=>nav('events'));
-      else if(t.includes('calendar')) safeClick(item,()=>nav('calendar'));
-      else if(t.includes('owner')||t.includes('command')) safeClick(item,()=>nav('owner'));
-      else if(t.includes('promotion')||t.includes('promo')) safeClick(item,()=>nav('promotion'));
-    });
-  }
-
-  function bindDashboard(){
-    document.querySelectorAll('.profile').forEach(el=>safeClick(el,()=>nav('artist')));
-    document.querySelectorAll('.request').forEach(el=>safeClick(el,()=>nav('bookings')));
-    document.querySelectorAll('.command').forEach(el=>safeClick(el,()=>nav('owner')));
-    document.querySelectorAll('.upcoming').forEach(el=>safeClick(el,()=>nav('events')));
-    document.querySelectorAll('.attention').forEach(el=>safeClick(el,()=>nav('owner')));
-    document.querySelectorAll('.next').forEach(el=>safeClick(el,()=>nav('events')));
-    document.querySelectorAll('.quick').forEach(el=>safeClick(el,()=>nav('events')));
-    document.querySelectorAll('.promo-art').forEach(el=>safeClick(el,()=>nav('promotion')));
-  }
-
-  function bindCards(){
-    document.querySelectorAll('.mini-card,.card').forEach(el=>{
-      const t=text(el);
-      if(t.includes('upcoming')||t.includes('next show')||t.includes('event')) safeClick(el,()=>nav('events'));
-      else if(t.includes('attention')||t.includes('pending')||t.includes('reschedule')||t.includes('booking')) safeClick(el,()=>nav('owner'));
-      else if(t.includes('promotion')||t.includes('promo')) safeClick(el,()=>nav('promotion'));
-    });
-  }
-
-  function bindButtons(){
-    document.querySelectorAll('.link').forEach(el=>{
-      const t=text(el);
-      if(t.includes('book')) safeClick(el,()=>nav('bookings'));
-      else if(t.includes('show')||t.includes('event')) safeClick(el,()=>nav('events'));
-      else if(t.includes('owner')) safeClick(el,()=>nav('owner'));
-      else if(t.includes('promo')) safeClick(el,()=>nav('promotion'));
-    });
-  }
-
-  function bind(){bindQuickLinks();bindDashboard();bindCards();bindButtons();}
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind);
-  else bind();
-  window.addEventListener('load',bind);
-})();
-</script>
-'''
-              s = s.replace('</body>', patch + '\n</body>', 1)
-              p.write_text(s, encoding='utf-8')
-              print('Applied V2.7.3 interaction layer')
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'SC-V273-INTERACTION' not in s:
+              patch=base64.b64decode(__import__('os').environ['PATCH_B64']).decode()
+              s=s.replace('<title>Gemini Lounge — ScanCraft V2.7.1</title>','<title>Gemini Lounge — ScanCraft V2.7.3</title>',1)
+              s=s.replace('</body>',patch+'\n</body>',1)
+              p.write_text(s,encoding='utf-8')
           PY
-
-      - name: Commit and remove one-time workflow
+      - name: Commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git rm -f .github/workflows/v273-interaction-pass.yml
-          git commit -m 'Build Gemini Lounge V2.7.3 interaction pass'
+          git commit -m 'Build Gemini Lounge V2.7.3 interaction pass' || exit 0
           git push
