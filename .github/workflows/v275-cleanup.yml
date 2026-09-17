@@ -1,8 +1,5 @@
 name: Gemini Lounge V2.7.5 Clean Architecture
-on:
-  push:
-    paths:
-      - '.github/workflows/v275-cleanup.yml'
+on: push
 permissions:
   contents: write
 jobs:
@@ -11,16 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply V2.7.5 cleanup
-        shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
           s = s.replace('<title>Gemini Lounge — ScanCraft V2.7.3</title>', '<title>Gemini Lounge — ScanCraft V2.7.5</title>')
-          s = s.replace('<!-- SC-V273-INTERACTION -->', '<!-- SC-V273-INTERACTION-OLD -->')
-          s = s.replace('<!-- SC-V274-QUICK-LINKS -->', '<!-- SC-V274-QUICK-LINKS-OLD -->')
-          for marker in ('<!-- SC-V273-INTERACTION-OLD -->', '<!-- SC-V274-QUICK-LINKS-OLD -->'):
+          for marker in ('<!-- SC-V273-INTERACTION -->', '<!-- SC-V274-QUICK-LINKS -->'):
               while marker in s:
                   start = s.find(marker)
                   end = s.find('</body>', start)
@@ -35,7 +29,7 @@ jobs:
           s = s.replace('<span class="small">View All</span>', '<button class="link" data-action="attention">View All</button>', 1)
           s = s.replace('<span class="small">View Calendar</span>', '<button class="link" data-action="calendar">View Calendar</button>', 1)
           s = s.replace('<span class="small">View All</span>', '<button class="link" data-action="events">View All</button>', 1)
-          s = s.replace('onclick=\"loadDemoBooking()\">✎ Edit Profile', 'data-action=\"profile\">✎ Edit Profile')
+          s = s.replace('onclick="loadDemoBooking()">✎ Edit Profile', 'data-action="profile">✎ Edit Profile')
           layer = r'''<!-- SC-V275-INTERACTION -->
 <style>
 .sc-v275-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
@@ -49,57 +43,56 @@ jobs:
 (function(){
 'use strict';
 const actions={
-  artist:()=>showTab('artist'),
-  profile:()=>{showTab('artist');setTimeout(()=>{const el=document.getElementById('bookingForm');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});loadDemoBooking()},80)},
-  bookings:()=>showTab('bookings'),
-  events:()=>showTab('events'),
-  calendar:()=>showTab('calendar'),
-  owner:()=>showTab('owner'),
-  attention:()=>showTab('owner'),
-  promotion:()=>showTab('promotion'),
-  share:()=>shareGemini(),
-  social:()=>visitSocial(),
-  directions:()=>openDirections()
+ artist:()=>showTab('artist'),
+ profile:()=>{showTab('artist');setTimeout(()=>{const el=document.getElementById('bookingForm');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},80)},
+ bookings:()=>showTab('bookings'),
+ events:()=>showTab('events'),
+ calendar:()=>showTab('calendar'),
+ owner:()=>showTab('owner'),
+ attention:()=>showTab('owner'),
+ promotion:()=>showTab('promotion'),
+ share:()=>shareGemini(),
+ social:()=>visitSocial(),
+ directions:()=>openDirections()
 };
 function activate(el){const name=el&&el.dataset&&el.dataset.action;if(name&&actions[name])actions[name]();}
 function shareGemini(){
-  const data={title:'Gemini Lounge',text:'Gemini Lounge — Live Music • Good Drinks • Good People',url:location.href.split('#')[0]};
-  if(navigator.share){navigator.share(data).catch(()=>{});return}
-  copyText(data.url,'Gemini Lounge link copied.');
+ const u=new URL(location.href);u.hash='';u.search='';
+ const data={title:'Gemini Lounge',text:'Gemini Lounge — Live Music • Good Drinks • Good People',url:u.href};
+ if(navigator.share){navigator.share(data).catch(()=>{});return}
+ if(typeof copyText==='function'){copyText(data.url,'Gemini Lounge link copied.');return}
+ if(navigator.clipboard)navigator.clipboard.writeText(data.url).then(()=>alert('Gemini Lounge link copied.'));
 }
 function visitSocial(){
-  const profile=window.GeminiScanCraft&&window.GeminiScanCraft.state?window.GeminiScanCraft.state().artistProfile:null;
-  const raw=(profile&&profile.social||'').trim();
-  const url=safeUrl(raw);
-  if(url){window.open(url,'_blank','noopener,noreferrer');return}
-  alert('No valid social media URL is configured yet. Add an http:// or https:// social URL to the profile.');
+ const profile=window.GeminiScanCraft&&window.GeminiScanCraft.state?window.GeminiScanCraft.state().artistProfile:null;
+ const raw=(profile&&profile.social||'').trim();
+ const url=typeof safeUrl==='function'?safeUrl(raw):(/^https?:\\/\\//i.test(raw)?raw:'');
+ if(url){window.open(url,'_blank','noopener,noreferrer');return}
+ alert('No valid social media URL is configured yet. Add an http:// or https:// social URL to the profile.');
 }
 function openDirections(){
-  const q=encodeURIComponent('Gemini Lounge, Bandon, Oregon');
-  window.open('https://www.google.com/maps/search/?api=1&query='+q,'_blank','noopener,noreferrer');
+ const q=encodeURIComponent('Gemini Lounge, Bandon, Oregon');
+ window.open('https://www.google.com/maps/search/?api=1&query='+q,'_blank','noopener,noreferrer');
 }
 function decorate(){
-  document.querySelectorAll('[data-action]').forEach(el=>{
-    if(!actions[el.dataset.action])return;
-    el.classList.add('sc-v275-clickable');
-    if(!el.getAttribute('role'))el.setAttribute('role','button');
-    if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
-  });
+ document.querySelectorAll('[data-action]').forEach(el=>{
+  if(!actions[el.dataset.action])return;
+  el.classList.add('sc-v275-clickable');
+  if(!el.getAttribute('role'))el.setAttribute('role','button');
+  if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
+ });
 }
 document.addEventListener('click',e=>{
-  const el=e.target.closest('[data-action]');
-  if(!el)return;
-  if(e.target.closest('button:not([data-action]),a,input,select,textarea'))return;
-  e.preventDefault();
-  e.stopPropagation();
-  activate(el);
+ const el=e.target.closest('[data-action]');
+ if(!el)return;
+ if(e.target.closest('button:not([data-action]),a,input,select,textarea'))return;
+ e.preventDefault();e.stopPropagation();activate(el);
 },true);
 document.addEventListener('keydown',e=>{
-  if(e.key!=='Enter'&&e.key!==' ')return;
-  const el=e.target.closest('[data-action]');
-  if(!el)return;
-  e.preventDefault();
-  activate(el);
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const el=e.target.closest('[data-action]');
+ if(!el)return;
+ e.preventDefault();activate(el);
 });
 decorate();
 window.addEventListener('load',decorate);
@@ -107,12 +100,13 @@ new MutationObserver(decorate).observe(document.body,{childList:true,subtree:tru
 })();
 </script>
 '''
+          if '<!-- SC-V275-INTERACTION -->' in s:
+              s = s[:s.find('<!-- SC-V275-INTERACTION -->')] + s[s.find('</body>'):]
           s = s.replace('</body>', layer + '</body>')
           p.write_text(s, encoding='utf-8')
           print('V2.7.5 cleanup applied')
           PY
-      - name: Commit and remove workflow
-        shell: bash
+      - name: Commit V2.7.5 and remove workflow
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
