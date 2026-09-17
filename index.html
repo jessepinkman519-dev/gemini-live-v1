@@ -3,186 +3,5756 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Gemini Lounge — ScanCraft V2.7.3</title>
+<title>Gemini Lounge — ScanCraft V2.7.5</title>
+
 <style>
-:root{--red:#f21d3b;--red2:#ff3d5a;--black:#020306;--nav:#030508;--panel:rgba(2,8,13,.82);--line:rgba(115,155,180,.30);--text:#f4f6f8;--muted:#a9b5bf;--green:#32d49b;--blue:#66c4f5;--gold:#ffb347;--shadow:0 22px 65px rgba(0,0,0,.68)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#010204;color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(0,0,0,.97) 0 238px,rgba(0,0,0,.28) 238px 100%),linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.28) 48%,rgba(0,0,0,.84)),url("gemini-lounge-background.jpg") center top/cover fixed no-repeat;filter:saturate(1.16) contrast(1.08)}body:after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 73% 12%,rgba(255,22,52,.22),transparent 27%),radial-gradient(circle at 82% 48%,rgba(255,18,45,.11),transparent 28%),linear-gradient(90deg,rgba(0,0,0,.92) 0 238px,transparent 238px),radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.55) 100%);pointer-events:none}
-.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:238px;z-index:20;background:linear-gradient(180deg,rgba(1,3,6,.98),rgba(3,5,9,.96) 72%,rgba(0,2,4,.99));border-right:1px solid rgba(118,153,176,.26);box-shadow:16px 0 55px rgba(0,0,0,.66);backdrop-filter:blur(16px);padding:18px 15px;display:flex;flex-direction:column}.brand{height:100px;border-bottom:1px solid rgba(255,44,67,.24);display:flex;align-items:center;gap:11px;padding:0 5px 15px}.brand-mark{font-size:3rem;color:var(--red);line-height:1;text-shadow:0 0 20px rgba(255,26,55,.35)}.brand-title{font-family:Georgia,serif;color:#ff334f;font-size:1.22rem;letter-spacing:.04em;white-space:nowrap;text-shadow:0 0 13px rgba(255,32,57,.22)}.brand-sub{font-family:Georgia,serif;color:#ff7a88;font-size:.72rem;margin-top:5px;letter-spacing:.08em}.nav{display:grid;gap:5px;padding-top:16px}.nav button{border:1px solid transparent;background:transparent;color:#d6dde3;border-radius:9px;padding:11px 12px;text-align:left;font-size:.91rem;cursor:pointer;transition:.18s}.nav button:before{display:inline-block;width:24px;color:#e8edf2;font-size:1rem}.nav button:nth-child(1):before{content:'♙'}.nav button:nth-child(2):before{content:'▣'}.nav button:nth-child(3):before{content:'♧'}.nav button:nth-child(4):before{content:'♜'}.nav button:nth-child(5):before{content:'♫'}.nav button:nth-child(6):before{content:'⚑'}.nav button:nth-child(7):before{content:'▦'}.nav button:nth-child(8):before{content:'◷'}.nav button:hover{background:rgba(242,29,59,.08);border-color:rgba(255,61,90,.28);color:#fff}.nav button.active{background:linear-gradient(90deg,#f21d3b,#ff344f);border-color:#ff6679;color:#fff;font-weight:800;box-shadow:0 9px 26px rgba(242,29,59,.28)}.sidebar-note{margin-top:auto;padding:14px 8px 5px;color:#ff6074;font-family:"Brush Script MT",cursive;font-size:1.42rem;line-height:1.15;transform:rotate(-4deg);text-shadow:0 0 12px rgba(255,33,61,.16)}
-.main{margin-left:238px;min-height:100vh;padding:0 18px 32px}.topbar{height:64px;display:flex;justify-content:flex-end;align-items:center;gap:14px}.experience{border:1px solid #ff4a64;border-radius:999px;padding:9px 18px;color:#fff;background:rgba(0,0,0,.45);font-size:.76rem;letter-spacing:.08em;box-shadow:0 0 18px rgba(255,38,62,.16)}.gear{font-size:1.45rem;color:#fff}.hero{min-height:154px;border:1px solid rgba(101,151,179,.42);border-radius:12px;overflow:hidden;position:relative;padding:25px 25px;background:linear-gradient(90deg,rgba(2,7,12,.92) 0%,rgba(2,7,12,.67) 43%,rgba(5,6,10,.30) 100%),url("gemini-lounge-background.jpg") center 35%/cover;box-shadow:0 24px 70px rgba(0,0,0,.65),0 0 38px rgba(242,29,59,.10)}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 55%,rgba(245,25,52,.12) 74%,transparent),linear-gradient(0deg,rgba(0,0,0,.38),transparent 45%);pointer-events:none}.eyebrow{position:relative;color:#ff3d59;font-weight:800;letter-spacing:.12em;font-size:.78rem}.hero h1{position:relative;margin:7px 0 6px;font:700 clamp(2rem,4vw,2.65rem) Georgia,serif;text-shadow:0 3px 18px #000}.hero p{position:relative;margin:0;max-width:720px;color:#d9e2e8;line-height:1.5}.hero-points{position:absolute;right:25px;top:30px;display:grid;gap:10px;z-index:2;color:#e8edf1;font-size:.82rem}.hero-points span:before{color:var(--red);margin-right:10px}.hero-points span:nth-child(1):before{content:'♫'}.hero-points span:nth-child(2):before{content:'♧'}.hero-points span:nth-child(3):before{content:'♧'}.hero-points span:nth-child(4):before{content:'♡'}
-.dashboard{display:grid;grid-template-columns:minmax(360px,1.45fr) minmax(250px,.82fr) minmax(300px,1fr);gap:12px;margin-top:12px;align-items:start}.col{display:grid;gap:12px}.panel{background:linear-gradient(145deg,rgba(1,8,14,.86),rgba(2,5,9,.70));border:1px solid rgba(103,150,178,.35);border-radius:11px;padding:16px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.045);backdrop-filter:blur(13px);overflow:hidden}.panel.red-edge{border-color:rgba(255,43,67,.48)}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.head h2,.head h3{margin:0;color:#f5f7f8;font-size:1rem}.head h2:before,.head h3:before{color:var(--red);margin-right:9px}.profile .head h2:before{content:'♙'}.request .head h2:before{content:'▣'}.command .head h2:before{content:'♛'}.attention .head h2:before{content:'♧'}.next .head h2:before{content:'▣'}.upcoming .head h2:before{content:'♫'}.quick .head h2:before{content:'↗'}.link{color:#fff;font-size:.76rem;border:1px solid var(--red);border-radius:7px;padding:6px 9px;background:rgba(255,25,50,.06);cursor:pointer}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.profile-field{padding:7px 0;border-bottom:1px solid rgba(103,150,178,.17);font-size:.78rem}.profile-field label{display:block;color:#d4dde3;margin-bottom:4px}.profile-field span{color:#fff}.profile-bio{grid-column:1/-1;padding-top:9px;color:#d3dce2;font-size:.78rem;line-height:1.4}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:.74rem;color:#d3dce2}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(106,157,188,.28);border-radius:8px;background:rgba(0,3,7,.78);color:#fff;padding:10px;font:inherit;outline:none}.field textarea{min-height:68px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#ff3c58;box-shadow:0 0 0 2px rgba(255,31,57,.10)}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.btn{border:1px solid rgba(110,155,180,.30);background:rgba(0,4,8,.68);color:#f1f4f6;border-radius:8px;padding:9px 12px;font-size:.78rem;cursor:pointer}.btn.primary{background:linear-gradient(90deg,#f21d3b,#ff304d);border-color:#ff6173;font-weight:800;color:#fff;box-shadow:0 0 18px rgba(242,29,59,.22)}.btn.success{color:#a5f5d2;border-color:rgba(50,212,155,.48);background:rgba(22,121,86,.16)}.btn.danger{color:#ffb6c1;border-color:rgba(255,89,109,.44);background:rgba(151,18,38,.14)}.btn.info{color:#bde8ff;border-color:rgba(102,196,245,.42);background:rgba(30,100,142,.14)}.btn.warn{color:#ffd08e;border-color:rgba(255,179,71,.44);background:rgba(150,88,15,.13)}
-.promo-art{height:210px;border-radius:9px;border:1px solid rgba(255,49,71,.30);background:linear-gradient(rgba(3,4,7,.10),rgba(3,4,7,.62)),url("gemini-lounge-background.jpg") center/cover;display:flex;align-items:flex-end;padding:16px;box-shadow:inset 0 -50px 70px rgba(0,0,0,.65)}.promo-art h2{margin:0;color:#ff4b63;font:700 1.6rem Georgia,serif;text-shadow:0 2px 12px #000}.promo-art p{margin:5px 0 0;color:#fff;font-family:"Brush Script MT",cursive;font-size:1.05rem}.quick-list{display:grid;gap:0}.quick-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(103,150,178,.14);font-size:.79rem;color:#e4eaee}.quick-item:last-child{border-bottom:0}.support{text-align:center;min-height:126px;display:flex;flex-direction:column;justify-content:center}.script{font-family:"Brush Script MT",cursive;color:#ff5269;font-size:1.65rem;line-height:1.1}.support p{margin:10px 0 0;color:#dce4e9;font-size:.8rem}.underline{width:70px;height:3px;background:var(--red);margin:12px auto 0;border-radius:99px;box-shadow:0 0 12px rgba(255,35,60,.35)}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.metric{padding:12px 9px;border-radius:8px;border:1px solid rgba(103,150,178,.25);background:rgba(0,5,10,.55);min-height:70px}.metric strong{font-size:1.65rem;display:block}.metric:nth-child(1) strong{color:#ffbd48}.metric:nth-child(2) strong{color:#66c4f5}.metric:nth-child(3) strong{color:#35e0aa}.metric span{font-size:.67rem;color:#d2dce3}.mini-card{border:1px solid rgba(103,150,178,.24);border-radius:8px;padding:10px;background:rgba(0,5,10,.52);margin-top:8px}.mini-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.mini-title{font-weight:700;font-size:.82rem}.mini-meta{color:#c7d2d9;font-size:.7rem;line-height:1.45;margin-top:5px}.badge{display:inline-flex;border-radius:999px;padding:5px 9px;font-size:.66rem;font-weight:800}.badge.pending{color:#ffd58b;background:rgba(255,179,71,.16);border:1px solid rgba(255,179,71,.36)}.badge.approved,.badge.confirmed{color:#a2f2ce;background:rgba(50,212,155,.11);border:1px solid rgba(50,212,155,.38)}.badge.declined,.badge.cancelled{color:#ffb4c0;background:rgba(255,73,95,.11);border:1px solid rgba(255,73,95,.34)}.badge.reschedule{color:#bfe8ff;background:rgba(102,196,245,.10);border:1px solid rgba(102,196,245,.34)}.badge.promo-ready{color:#bfe8ff;border:1px solid rgba(102,196,245,.34)}.badge.promoted{color:#a2f2ce;border:1px solid rgba(50,212,155,.38)}.badge.not-ready{color:#ffd18e}.empty{padding:18px;text-align:center;border:1px dashed rgba(103,150,178,.24);border-radius:8px;color:var(--muted);font-size:.8rem}.card-list{display:grid;gap:10px}.card{background:rgba(0,5,10,.55);border:1px solid rgba(103,150,178,.23);border-radius:9px;padding:13px}.card-top{display:flex;justify-content:space-between;gap:10px}.card-title{font-weight:800;color:#ff536a;font-size:.9rem}.card-meta{color:#c7d2d9;font-size:.76rem;line-height:1.45;margin-top:4px}.small{font-size:.72rem;color:var(--muted)}.notice{padding:11px;border:1px solid rgba(255,45,68,.20);border-radius:8px;background:rgba(210,20,48,.07);font-size:.75rem;color:#dce4e9;margin-bottom:12px}.footer{margin-top:14px;border-top:1px solid rgba(103,150,178,.20);padding:11px 8px;color:#8d9ba5;font-size:.68rem;display:flex;justify-content:space-between}.footer b{color:#fff}.footer .live{color:#dbe5ea}.footer .live:before{content:'●';color:#f21d3b;margin-right:6px}
-.view{display:none}.view.active{display:block}.standard{max-width:1220px;margin:0 auto}.standard .panel{margin-top:12px}.event-public{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.72)),url("gemini-lounge-background.jpg") center/cover fixed}.public-card{width:min(720px,100%);padding:34px;text-align:center;background:rgba(2,7,12,.84);border:1px solid rgba(255,57,82,.45);border-radius:16px;box-shadow:0 25px 80px #000;backdrop-filter:blur(14px)}.public-brand{font:700 1.2rem Georgia,serif;color:#ff405b;letter-spacing:.08em}.public-card h1{font:700 3rem Georgia,serif;margin:15px 0 8px}.public-date{color:#ff536a;font-weight:800}.public-time{margin-top:6px}.public-notes{max-width:560px;margin:20px auto;color:#ccd6dd;line-height:1.5}
-@media(max-width:1080px){.dashboard{grid-template-columns:1fr 1fr}.col.right{grid-column:1/-1}.hero-points{display:none}.promo-art{height:230px}}
-@media(max-width:760px){.sidebar{position:relative;width:100%;height:auto;padding:12px}.brand{height:70px}.brand-mark{font-size:2rem}.brand-title{font-size:1rem}.nav{grid-template-columns:repeat(4,1fr);padding-top:10px}.nav button{text-align:center;padding:9px 5px;font-size:.72rem}.nav button:before{display:block;width:auto;margin-bottom:3px}.sidebar-note{display:none}.main{margin-left:0;padding:0 10px 20px}.topbar{height:48px}.dashboard{grid-template-columns:1fr}.col.right{grid-column:auto}.form-grid,.profile-grid{grid-template-columns:1fr}.field.full,.profile-bio{grid-column:auto}.hero{min-height:180px;padding:20px}.footer{flex-direction:column;gap:6px}.promo-art{height:200px}}
+:root{
+  --red:#f21d3b;
+  --red2:#ff3d5a;
+  --black:#020306;
+  --nav:#030508;
+  --panel:rgba(2,8,13,.82);
+  --line:rgba(115,155,180,.30);
+  --text:#f4f6f8;
+  --muted:#a9b5bf;
+  --green:#32d49b;
+  --blue:#66c4f5;
+  --gold:#ffb347;
+  --shadow:0 22px 65px rgba(0,0,0,.68);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:#010204;
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.97) 0 238px,
+      rgba(0,0,0,.28) 238px 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.06),
+      rgba(0,0,0,.28) 48%,
+      rgba(0,0,0,.84)
+    ),
+    url("gemini-lounge-background.jpg") center top/cover fixed no-repeat;
+  filter:saturate(1.16) contrast(1.08);
+}
+
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(
+      circle at 73% 12%,
+      rgba(255,22,52,.22),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 82% 48%,
+      rgba(255,18,45,.11),
+      transparent 28%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.92) 0 238px,
+      transparent 238px
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 38%,
+      rgba(0,0,0,.55) 100%
+    );
+  pointer-events:none;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.app{
+  min-height:100vh;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:238px;
+  z-index:20;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(1,3,6,.98),
+      rgba(3,5,9,.96) 72%,
+      rgba(0,2,4,.99)
+    );
+  border-right:1px solid rgba(118,153,176,.26);
+  box-shadow:16px 0 55px rgba(0,0,0,.66);
+  backdrop-filter:blur(16px);
+  padding:18px 15px;
+  display:flex;
+  flex-direction:column;
+}
+
+.brand{
+  height:100px;
+  border-bottom:1px solid rgba(255,44,67,.24);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 5px 15px;
+}
+
+.brand-mark{
+  font-size:3rem;
+  color:var(--red);
+  line-height:1;
+  text-shadow:0 0 20px rgba(255,26,55,.35);
+}
+
+.brand-title{
+  font-family:Georgia,serif;
+  color:#ff334f;
+  font-size:1.22rem;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  text-shadow:0 0 13px rgba(255,32,57,.22);
+}
+
+.brand-sub{
+  font-family:Georgia,serif;
+  color:#ff7a88;
+  font-size:.72rem;
+  margin-top:5px;
+  letter-spacing:.08em;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+  padding-top:16px;
+}
+
+.nav button{
+  border:1px solid transparent;
+  background:transparent;
+  color:#d6dde3;
+  border-radius:9px;
+  padding:11px 12px;
+  text-align:left;
+  font-size:.91rem;
+  cursor:pointer;
+  transition:.18s;
+}
+
+.nav button:before{
+  display:inline-block;
+  width:24px;
+  color:#e8edf2;
+  font-size:1rem;
+}
+
+.nav button:nth-child(1):before{content:'♙'}
+.nav button:nth-child(2):before{content:'▣'}
+.nav button:nth-child(3):before{content:'♧'}
+.nav button:nth-child(4):before{content:'♜'}
+.nav button:nth-child(5):before{content:'♫'}
+.nav button:nth-child(6):before{content:'⚑'}
+.nav button:nth-child(7):before{content:'▦'}
+.nav button:nth-child(8):before{content:'◷'}
+
+.nav button:hover{
+  background:rgba(242,29,59,.08);
+  border-color:rgba(255,61,90,.28);
+  color:#fff;
+}
+
+.nav button.active{
+  background:linear-gradient(90deg,#f21d3b,#ff344f);
+  border-color:#ff6679;
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 9px 26px rgba(242,29,59,.28);
+}
+
+.sidebar-note{
+  margin-top:auto;
+  padding:14px 8px 5px;
+  color:#ff6074;
+  font-family:"Brush Script MT",cursive;
+  font-size:1.42rem;
+  line-height:1.15;
+  transform:rotate(-4deg);
+  text-shadow:0 0 12px rgba(255,33,61,.16);
+}
+
+.main{
+  margin-left:238px;
+  min-height:100vh;
+  padding:0 18px 32px;
+}
+
+.topbar{
+  height:64px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:14px;
+}
+
+.experience{
+  border:1px solid #ff4a64;
+  border-radius:999px;
+  padding:9px 18px;
+  color:#fff;
+  background:rgba(0,0,0,.45);
+  font-size:.76rem;
+  letter-spacing:.08em;
+  box-shadow:0 0 18px rgba(255,38,62,.16);
+}
+
+.gear{
+  font-size:1.45rem;
+  color:#fff;
+}
+
+.hero{
+  min-height:154px;
+  border:1px solid rgba(101,151,179,.42);
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+  padding:25px 25px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2,7,12,.92) 0%,
+      rgba(2,7,12,.67) 43%,
+      rgba(5,6,10,.30) 100%
+    ),
+    url("gemini-lounge-background.jpg") center 35%/cover;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.65),
+    0 0 38px rgba(242,29,59,.10);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 55%,
+      rgba(245,25,52,.12) 74%,
+      transparent
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.38),
+      transparent 45%
+    );
+  pointer-events:none;
+}
+
+.eyebrow{
+  position:relative;
+  color:#ff3d59;
+  font-weight:800;
+  letter-spacing:.12em;
+  font-size:.78rem;
+}
+
+.hero h1{
+  position:relative;
+  margin:7px 0 6px;
+  font:700 clamp(2rem,4vw,2.65rem) Georgia,serif;
+  text-shadow:0 3px 18px #000;
+}
+
+.hero p{
+  position:relative;
+  margin:0;
+  max-width:720px;
+  color:#d9e2e8;
+  line-height:1.5;
+}
+
+.hero-points{
+  position:absolute;
+  right:25px;
+  top:30px;
+  display:grid;
+  gap:10px;
+  z-index:2;
+  color:#e8edf1;
+  font-size:.82rem;
+}
+
+.hero-points span:before{
+  color:var(--red);
+  margin-right:10px;
+}
+
+.hero-points span:nth-child(1):before{content:'♫'}
+.hero-points span:nth-child(2):before{content:'♧'}
+.hero-points span:nth-child(3):before{content:'♧'}
+.hero-points span:nth-child(4):before{content:'♡'}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:
+    minmax(360px,1.45fr)
+    minmax(250px,.82fr)
+    minmax(300px,1fr);
+  gap:12px;
+  margin-top:12px;
+  align-items:start;
+}
+
+.col{
+  display:grid;
+  gap:12px;
+}
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(1,8,14,.86),
+      rgba(2,5,9,.70)
+    );
+  border:1px solid rgba(103,150,178,.35);
+  border-radius:11px;
+  padding:16px;
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,.045);
+  backdrop-filter:blur(13px);
+  overflow:hidden;
+}
+
+.panel.red-edge{
+  border-color:rgba(255,43,67,.48);
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:13px;
+}
+
+.head h2,
+.head h3{
+  margin:0;
+  color:#f5f7f8;
+  font-size:1rem;
+}
+
+.head h2:before,
+.head h3:before{
+  color:var(--red);
+  margin-right:9px;
+}
+
+.profile .head h2:before{content:'♙'}
+.request .head h2:before{content:'▣'}
+.command .head h2:before{content:'♛'}
+.attention .head h2:before{content:'♧'}
+.next .head h2:before{content:'▣'}
+.upcoming .head h2:before{content:'♫'}
+.quick .head h2:before{content:'↗'}
+
+.link{
+  color:#fff;
+  font-size:.76rem;
+  border:1px solid var(--red);
+  border-radius:7px;
+  padding:6px 9px;
+  background:rgba(255,25,50,.06);
+  cursor:pointer;
+  transition:.18s;
+}
+
+.link:hover{
+  background:rgba(255,25,50,.16);
+  box-shadow:0 0 14px rgba(242,29,59,.15);
+}
+
+.profile-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 15px;
+}
+
+.profile-field{
+  padding:7px 0;
+  border-bottom:1px solid rgba(103,150,178,.17);
+  font-size:.78rem;
+}
+
+.profile-field label{
+  display:block;
+  color:#d4dde3;
+  margin-bottom:4px;
+}
+
+.profile-field span{
+  color:#fff;
+}
+
+.profile-bio{
+  grid-column:1/-1;
+  padding-top:9px;
+  color:#d3dce2;
+  font-size:.78rem;
+  line-height:1.4;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:.74rem;
+  color:#d3dce2;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid rgba(106,157,188,.28);
+  border-radius:8px;
+  background:rgba(0,3,7,.78);
+  color:#fff;
+  padding:10px;
+  font:inherit;
+  outline:none;
+}
+
+.field textarea{
+  min-height:68px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#ff3c58;
+  box-shadow:0 0 0 2px rgba(255,31,57,.10);
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.btn{
+  border:1px solid rgba(110,155,180,.30);
+  background:rgba(0,4,8,.68);
+  color:#f1f4f6;
+  border-radius:8px;
+  padding:9px 12px;
+  font-size:.78rem;
+  cursor:pointer;
+  transition:.18s;
+}
+
+.btn:hover{
+  border-color:rgba(255,61,90,.55);
+  transform:translateY(-1px);
+}
+
+.btn.primary{
+  background:linear-gradient(90deg,#f21d3b,#ff304d);
+  border-color:#ff6173;
+  font-weight:800;
+  color:#fff;
+  box-shadow:0 0 18px rgba(242,29,59,.22);
+}
+
+.btn.success{
+  color:#a5f5d2;
+  border-color:rgba(50,212,155,.48);
+  background:rgba(22,121,86,.16);
+}
+
+.btn.danger{
+  color:#ffb6c1;
+  border-color:rgba(255,89,109,.44);
+  background:rgba(151,18,38,.14);
+}
+
+.btn.info{
+  color:#bde8ff;
+  border-color:rgba(102,196,245,.42);
+  background:rgba(30,100,142,.14);
+}
+
+.btn.warn{
+  color:#ffd08e;
+  border-color:rgba(255,179,71,.44);
+  background:rgba(150,88,15,.13);
+}
+
+.promo-art{
+  height:210px;
+  border-radius:9px;
+  border:1px solid rgba(255,49,71,.30);
+  background:
+    linear-gradient(
+      rgba(3,4,7,.10),
+      rgba(3,4,7,.62)
+    ),
+    url("gemini-lounge-background.jpg") center/cover;
+  display:flex;
+  align-items:flex-end;
+  padding:16px;
+  box-shadow:inset 0 -50px 70px rgba(0,0,0,.65);
+}
+
+.promo-art h2{
+  margin:0;
+  color:#ff4b63;
+  font:700 1.6rem Georgia,serif;
+  text-shadow:0 2px 12px #000;
+}
+
+.promo-art p{
+  margin:5px 0 0;
+  color:#fff;
+  font-family:"Brush Script MT",cursive;
+  font-size:1.05rem;
+}
+
+.quick-list{
+  display:grid;
+  gap:0;
+}
+
+.quick-item{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid rgba(103,150,178,.14);
+  font-size:.79rem;
+  color:#e4eaee;
+}
+
+.quick-item:last-child{
+  border-bottom:0;
+}
+
+.quick-item[data-action]{
+  cursor:pointer;
+  transition:.18s;
+  border-radius:7px;
+  padding-left:9px;
+  padding-right:9px;
+}
+
+.quick-item[data-action]:hover{
+  background:rgba(242,29,59,.08);
+  color:#fff;
+  border-color:rgba(255,61,90,.35);
+}
+
+.quick-item[data-action]:focus-visible{
+  outline:2px solid var(--red2);
+  outline-offset:2px;
+}
+
+.support{
+  text-align:center;
+  min-height:126px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.script{
+  font-family:"Brush Script MT",cursive;
+  color:#ff5269;
+  font-size:1.65rem;
+  line-height:1.1;
+}
+
+.support p{
+  margin:10px 0 0;
+  color:#dce4e9;
+  font-size:.8rem;
+}
+
+.underline{
+  width:70px;
+  height:3px;
+  background:var(--red);
+  margin:12px auto 0;
+  border-radius:99px;
+  box-shadow:0 0 12px rgba(255,35,60,.35);
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.metric{
+  padding:12px 9px;
+  border-radius:8px;
+  border:1px solid rgba(103,150,178,.25);
+  background:rgba(0,5,10,.55);
+  min-height:70px;
+}
+
+.metric strong{
+  font-size:1.65rem;
+  display:block;
+}
+
+.metric:nth-child(1) strong{color:#ffbd48}
+.metric:nth-child(2) strong{color:#66c4f5}
+.metric:nth-child(3) strong{color:#35e0aa}
+
+.metric span{
+  font-size:.67rem;
+  color:#d2dce3;
+}
+
+.mini-card{
+  border:1px solid rgba(103,150,178,.24);
+  border-radius:8px;
+  padding:10px;
+  background:rgba(0,5,10,.52);
+  margin-top:8px;
+  transition:.18s;
+}
+
+.mini-card[data-action]{
+  cursor:pointer;
+}
+
+.mini-card[data-action]:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,61,90,.52);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+}
+
+.mini-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.mini-title{
+  font-weight:700;
+  font-size:.82rem;
+}
+
+.mini-meta{
+  color:#c7d2d9;
+  font-size:.7rem;
+  line-height:1.45;
+  margin-top:5px;
+}
+
+.badge{
+  display:inline-flex;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:.66rem;
+  font-weight:800;
+}
+
+.badge.pending{
+  color:#ffd58b;
+  background:rgba(255,179,71,.16);
+  border:1px solid rgba(255,179,71,.36);
+}
+
+.badge.approved,
+.badge.confirmed{
+  color:#a2f2ce;
+  background:rgba(50,212,155,.11);
+  border:1px solid rgba(50,212,155,.38);
+}
+
+.badge.declined,
+.badge.cancelled{
+  color:#ffb4c0;
+  background:rgba(255,73,95,.11);
+  border:1px solid rgba(255,73,95,.34);
+}
+
+.badge.reschedule{
+  color:#bfe8ff;
+  background:rgba(102,196,245,.10);
+  border:1px solid rgba(102,196,245,.34);
+}
+
+.badge.promo-ready{
+  color:#bfe8ff;
+  border:1px solid rgba(102,196,245,.34);
+}
+
+.badge.promoted{
+  color:#a2f2ce;
+  border:1px solid rgba(50,212,155,.38);
+}
+
+.badge.not-ready{
+  color:#ffd18e;
+}
+
+.empty{
+  padding:18px;
+  text-align:center;
+  border:1px dashed rgba(103,150,178,.24);
+  border-radius:8px;
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+.card-list{
+  display:grid;
+  gap:10px;
+}
+
+.card{
+  background:rgba(0,5,10,.55);
+  border:1px solid rgba(103,150,178,.23);
+  border-radius:9px;
+  padding:13px;
+  transition:.18s;
+}
+
+.card[data-action]{
+  cursor:pointer;
+}
+
+.card[data-action]:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,61,90,.52);
+  box-shadow:0 12px 30px rgba(0,0,0,.30);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.card-title{
+  font-weight:800;
+  color:#ff536a;
+  font-size:.9rem;
+}
+
+.card-meta{
+  color:#c7d2d9;
+  font-size:.76rem;
+  line-height:1.45;
+  margin-top:4px;
+}
+
+.small{
+  font-size:.72rem;
+  color:var(--muted);
+}
+
+.notice{
+  padding:11px;
+  border:1px solid rgba(255,45,68,.20);
+  border-radius:8px;
+  background:rgba(210,20,48,.07);
+  font-size:.75rem;
+  color:#dce4e9;
+  margin-bottom:12px;
+}
+
+.footer{
+  margin-top:14px;
+  border-top:1px solid rgba(103,150,178,.20);
+  padding:11px 8px;
+  color:#8d9ba5;
+  font-size:.68rem;
+  display:flex;
+  justify-content:space-between;
+}
+
+.footer b{
+  color:#fff;
+}
+
+.footer .live{
+  color:#dbe5ea;
+}
+
+.footer .live:before{
+  content:'●';
+  color:#f21d3b;
+  margin-right:6px;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.standard{
+  max-width:1220px;
+  margin:0 auto;
+}
+
+.standard .panel{
+  margin-top:12px;
+}
+
+.event-public{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:
+    linear-gradient(
+      rgba(0,0,0,.25),
+      rgba(0,0,0,.72)
+    ),
+    url("gemini-lounge-background.jpg") center/cover fixed;
+}
+
+.public-card{
+  width:min(720px,100%);
+  padding:34px;
+  text-align:center;
+  background:rgba(2,7,12,.84);
+  border:1px solid rgba(255,57,82,.45);
+  border-radius:16px;
+  box-shadow:0 25px 80px #000;
+  backdrop-filter:blur(14px);
+}
+
+.public-brand{
+  font:700 1.2rem Georgia,serif;
+  color:#ff405b;
+  letter-spacing:.08em;
+}
+
+.public-card h1{
+  font:700 3rem Georgia,serif;
+  margin:15px 0 8px;
+}
+
+.public-date{
+  color:#ff536a;
+  font-weight:800;
+}
+
+.public-time{
+  margin-top:6px;
+}
+
+.public-notes{
+  max-width:560px;
+  margin:20px auto;
+  color:#ccd6dd;
+  line-height:1.5;
+}
+
+@media(max-width:1080px){
+  .dashboard{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .col.right{
+    grid-column:1/-1;
+  }
+
+  .hero-points{
+    display:none;
+  }
+
+  .promo-art{
+    height:230px;
+  }
+}
+
+@media(max-width:760px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+    padding:12px;
+  }
+
+  .brand{
+    height:70px;
+  }
+
+  .brand-mark{
+    font-size:2rem;
+  }
+
+  .brand-title{
+    font-size:1rem;
+  }
+
+  .nav{
+    grid-template-columns:repeat(4,1fr);
+    padding-top:10px;
+  }
+
+  .nav button{
+    text-align:center;
+    padding:9px 5px;
+    font-size:.72rem;
+  }
+
+  .nav button:before{
+    display:block;
+    width:auto;
+    margin-bottom:3px;
+  }
+
+  .sidebar-note{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    padding:0 10px 20px;
+  }
+
+  .topbar{
+    height:48px;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .col.right{
+    grid-column:auto;
+  }
+
+  .form-grid,
+  .profile-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full,
+  .profile-bio{
+    grid-column:auto;
+  }
+
+  .hero{
+    min-height:180px;
+    padding:20px;
+  }
+
+  .footer{
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .promo-art{
+    height:200px;
+  }
+
+  .public-card h1{
+    font-size:2.2rem;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div id="publicEventRoot"></div>
+
 <div id="app" class="app">
+
 <aside class="sidebar">
-  <div class="brand"><div class="brand-mark">♟</div><div><div class="brand-title">GEMINI LOUNGE</div><div class="brand-sub">Bar &amp; Social Club</div></div></div>
+
+  <div class="brand">
+    <div class="brand-mark">♟</div>
+    <div>
+      <div class="brand-title">GEMINI LOUNGE</div>
+      <div class="brand-sub">Bar &amp; Social Club</div>
+    </div>
+  </div>
+
   <nav class="nav">
-    <button class="active" data-tab="artist">Artist</button><button data-tab="bookings">My Bookings</button><button data-tab="bookings">Customer</button><button data-tab="owner">Owner</button><button data-tab="events">Events</button><button data-tab="promotion">Promotion</button><button data-tab="calendar">Calendar</button><button data-tab="history">History</button>
+    <button class="active" data-tab="artist">Artist</button>
+    <button data-tab="bookings">My Bookings</button>
+    <button data-tab="bookings">Customer</button>
+    <button data-tab="owner">Owner</button>
+    <button data-tab="events">Events</button>
+    <button data-tab="promotion">Promotion</button>
+    <button data-tab="calendar">Calendar</button>
+    <button data-tab="history">History</button>
   </nav>
-  <div class="sidebar-note">Live Music<br>Local Artists<br>Good Nights</div>
+
+  <div class="sidebar-note">
+    Live Music<br>
+    Local Artists<br>
+    Good Nights
+  </div>
+
 </aside>
+
 <main class="main">
-  <div class="topbar"><div class="experience">OWNER EXPERIENCE · SLICE 4</div><div class="gear">⚙</div></div>
+
+  <div class="topbar">
+    <div class="experience">OWNER EXPERIENCE · V2.7.5</div>
+    <div class="gear">⚙</div>
+  </div>
+
   <div class="standard">
+
+    <!-- =========================================================
+         ARTIST / DASHBOARD
+         ========================================================= -->
+
     <section id="artist" class="view active">
-      <div class="hero"><div class="eyebrow">ARTIST PORTAL</div><h1>Book a Show at Gemini.</h1><p>Build your artist profile, choose an available performance slot, and send Gemini a booking request.</p><div class="hero-points"><span>Live Music</span><span>Local Artists</span><span>Stronger Community</span><span>Good Nights</span></div></div>
-      <div class="dashboard">
-        <div class="col left">
-          <div class="panel profile red-edge" id="artistProfileCard"></div>
-          <div class="panel request"><div class="head"><h2>Request a Performance</h2></div><form id="bookingForm"><div class="form-grid"><div class="field"><label for="artistName">Artist / Band Name</label><input id="artistName" required></div><div class="field"><label for="artistEmail">Email</label><input id="artistEmail" type="email" required></div><div class="field"><label for="artistPhone">Phone</label><input id="artistPhone"></div><div class="field"><label for="artistGenre">Genre</label><input id="artistGenre" placeholder="Acoustic Rock"></div><div class="field"><label for="bookingDate">Performance Date</label><input id="bookingDate" type="date" required></div><div class="field"><label for="bookingTime">Performance Window</label><select id="bookingTime" required><option value="">Select a window</option><option>5:00 PM - 7:00 PM</option><option>6:00 PM - 8:00 PM</option><option>7:00 PM - 9:00 PM</option><option>8:00 PM - 10:00 PM</option><option>9:00 PM - 11:00 PM</option></select></div><div class="field full"><label for="artistSocial">Social Links</label><input id="artistSocial" placeholder="https://instagram.com/..." ></div><div class="field full"><label for="artistNotes">Message to Gemini</label><textarea id="artistNotes" placeholder="Tell Gemini about the performance."></textarea></div></div><div class="actions"><button type="submit" class="btn primary">➤ Send Booking Request</button><button type="button" class="btn" onclick="loadDemoBooking()">Load Demo</button></div></form></div>
-        </div>
-        <div class="col center">
-          <div class="panel"><div class="promo-art"><div><h2>GEMINI LOUNGE</h2><p>Local Music Builds Community</p></div></div></div>
-          <div class="panel quick"><div class="head"><h2>Quick Links</h2></div><div class="quick-list"><div class="quick-item"><span>View Upcoming Shows</span><b>›</b></div><div class="quick-item"><span>Share Gemini</span><b>›</b></div><div class="quick-item"><span>Visit Social Media</span><b>›</b></div><div class="quick-item"><span>Get Directions</span><b>›</b></div></div></div>
-          <div class="panel support"><div class="script">Support Local Music</div><p>Real artists. Real people.<br>A stronger community.</p><div class="underline"></div></div>
-        </div>
-        <div class="col right">
-          <div class="panel command red-edge"><div class="head"><h2>Owner Command Center</h2></div><div id="dashboardMetrics" class="metrics"></div></div>
-          <div class="panel attention"><div class="head"><h2>Needs Attention</h2><span class="small">View All</span></div><div id="dashboardAttention"></div></div>
-          <div class="panel next"><div class="head"><h2>Next Show</h2><span class="small">View Calendar</span></div><div id="dashboardNext"></div></div>
-          <div class="panel upcoming"><div class="head"><h2>Upcoming Shows</h2><span class="small">View All</span></div><div id="dashboardUpcoming"></div></div>
+
+      <div class="hero">
+        <div class="eyebrow">ARTIST PORTAL</div>
+
+        <h1>Book a Show at Gemini.</h1>
+
+        <p>
+          Build your artist profile, choose an available performance slot,
+          and send Gemini a booking request.
+        </p>
+
+        <div class="hero-points">
+          <span>Live Music</span>
+          <span>Local Artists</span>
+          <span>Stronger Community</span>
+          <span>Good Nights</span>
         </div>
       </div>
+
+      <div class="dashboard">
+
+        <!-- LEFT COLUMN -->
+
+        <div class="col left">
+
+          <div class="panel profile red-edge" id="artistProfileCard"></div>
+
+          <div class="panel request">
+
+            <div class="head">
+              <h2>Request a Performance</h2>
+            </div>
+
+            <form id="bookingForm">
+
+              <div class="form-grid">
+
+                <div class="field">
+                  <label for="artistName">Artist / Band Name</label>
+                  <input id="artistName" required>
+                </div>
+
+                <div class="field">
+                  <label for="artistEmail">Email</label>
+                  <input id="artistEmail" type="email" required>
+                </div>
+
+                <div class="field">
+                  <label for="artistPhone">Phone</label>
+                  <input id="artistPhone">
+                </div>
+
+                <div class="field">
+                  <label for="artistGenre">Genre</label>
+                  <input
+                    id="artistGenre"
+                    placeholder="Acoustic Rock"
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="bookingDate">Performance Date</label>
+                  <input
+                    id="bookingDate"
+                    type="date"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="bookingTime">Performance Window</label>
+
+                  <select id="bookingTime" required>
+                    <option value="">Select a window</option>
+                    <option>5:00 PM - 7:00 PM</option>
+                    <option>6:00 PM - 8:00 PM</option>
+                    <option>7:00 PM - 9:00 PM</option>
+                    <option>8:00 PM - 10:00 PM</option>
+                    <option>9:00 PM - 11:00 PM</option>
+                  </select>
+                </div>
+
+                <div class="field full">
+                  <label for="artistSocial">Social Links</label>
+                  <input
+                    id="artistSocial"
+                    placeholder="https://instagram.com/..."
+                  >
+                </div>
+
+                <div class="field full">
+                  <label for="artistNotes">Message to Gemini</label>
+                  <textarea
+                    id="artistNotes"
+                    placeholder="Tell Gemini about the performance."
+                  ></textarea>
+                </div>
+
+              </div>
+
+              <div class="actions">
+
+                <button
+                  type="submit"
+                  class="btn primary"
+                >
+                  ➤ Send Booking Request
+                </button>
+
+                <button
+                  type="button"
+                  class="btn"
+                  onclick="loadDemoBooking()"
+                >
+                  Load Demo
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+        <!-- CENTER COLUMN -->
+
+        <div class="col center">
+
+          <div class="panel">
+
+            <div
+              class="promo-art"
+              data-action="promotion"
+              role="button"
+              tabindex="0"
+            >
+              <div>
+                <h2>GEMINI LOUNGE</h2>
+                <p>Local Music Builds Community</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="panel quick">
+
+            <div class="head">
+              <h2>Quick Links</h2>
+            </div>
+
+            <div class="quick-list">
+
+              <div
+                class="quick-item"
+                data-action="events"
+                role="button"
+                tabindex="0"
+              >
+                <span>View Upcoming Shows</span>
+                <b>›</b>
+              </div>
+
+              <div
+                class="quick-item"
+                data-action="share"
+                role="button"
+                tabindex="0"
+              >
+                <span>Share Gemini</span>
+                <b>›</b>
+              </div>
+
+              <div
+                class="quick-item"
+                data-action="social"
+                role="button"
+                tabindex="0"
+              >
+                <span>Visit Social Media</span>
+                <b>›</b>
+              </div>
+
+              <div
+                class="quick-item"
+                data-action="directions"
+                role="button"
+                tabindex="0"
+              >
+                <span>Get Directions</span>
+                <b>›</b>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="panel support">
+
+            <div class="script">
+              Support Local Music
+            </div>
+
+            <p>
+              Real artists. Real people.<br>
+              A stronger community.
+            </p>
+
+            <div class="underline"></div>
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+
+        <div class="col right">
+
+          <div
+            class="panel command red-edge"
+            data-action="owner"
+          >
+
+            <div class="head">
+              <h2>Owner Command Center</h2>
+            </div>
+
+            <div
+              id="dashboardMetrics"
+              class="metrics"
+            ></div>
+
+          </div>
+
+          <div class="panel attention">
+
+            <div class="head">
+              <h2>Needs Attention</h2>
+
+              <button
+                class="link"
+                data-action="attention"
+              >
+                View All
+              </button>
+            </div>
+
+            <div id="dashboardAttention"></div>
+
+          </div>
+
+          <div class="panel next">
+
+            <div class="head">
+              <h2>Next Show</h2>
+
+              <button
+                class="link"
+                data-action="calendar"
+              >
+                View Calendar
+              </button>
+            </div>
+
+            <div id="dashboardNext"></div>
+
+          </div>
+
+          <div class="panel upcoming">
+
+            <div class="head">
+              <h2>Upcoming Shows</h2>
+
+              <button
+                class="link"
+                data-action="events"
+              >
+                View All
+              </button>
+            </div>
+
+            <div id="dashboardUpcoming"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
-    <section id="bookings" class="view"><div class="panel"><div class="head"><h2>My Bookings</h2></div><div id="bookingList" class="card-list"></div></div></section>
-    <section id="owner" class="view"><div class="hero"><div class="eyebrow">OWNER EXPERIENCE</div><h1>Owner Command Center</h1><p>Requests, reschedules, confirmed events, promotion and activity in one operational view.</p></div><div class="panel"><div id="metrics" class="metrics"></div></div><div class="panel red-edge"><div class="head"><h2>Owner Action Center</h2></div><div id="actionCenter"></div></div><div class="panel"><div class="head"><h2>Booking Requests</h2></div><div id="ownerBookingList" class="card-list"></div></div><div class="panel"><div class="head"><h2>Reschedule Requests</h2></div><div id="ownerRescheduleList" class="card-list"></div></div><div class="panel"><div class="actions"><button class="btn warn" onclick="createDemoEvent()">Create Demo Event</button><button class="btn danger" onclick="resetDemo()">Reset Demo Data</button></div></div></section>
-    <section id="events" class="view"><div class="panel"><div class="head"><h2>Events</h2></div><div id="eventList" class="card-list"></div></div></section>
-    <section id="promotion" class="view"><div class="hero"><div class="eyebrow">PROMOTION ENGINE</div><h1>Promotion Workspace</h1><p>Turn a confirmed Gemini Lounge event into social copy, a public event page and QR-ready destination.</p></div><div class="panel"><div id="promotionList" class="card-list"></div></div></section>
-    <section id="calendar" class="view"><div class="panel"><div class="head"><h2>Calendar</h2></div><div class="notice">Confirmed events are the authoritative scheduled records.</div><div id="calendarList" class="card-list"></div></div></section>
-    <section id="history" class="view"><div class="panel"><div class="head"><h2>History</h2></div><div id="historyList" class="card-list"></div></div></section>
-    <div class="footer"><span><b>GEMINI LOUNGE</b> &nbsp; | &nbsp; ScanCraft Booking &amp; Experience Engine</span><span class="live">Live · Local · Community</span></div>
+
+    <!-- =========================================================
+         BOOKINGS
+         ========================================================= -->
+
+    <section id="bookings" class="view">
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>My Bookings</h2>
+        </div>
+
+        <div
+          id="bookingList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         OWNER
+         ========================================================= -->
+
+    <section id="owner" class="view">
+
+      <div class="hero">
+
+        <div class="eyebrow">
+          OWNER EXPERIENCE
+        </div>
+
+        <h1>
+          Owner Command Center
+        </h1>
+
+        <p>
+          Requests, reschedules, confirmed events,
+          promotion and activity in one operational view.
+        </p>
+
+      </div>
+
+      <div class="panel">
+
+        <div
+          id="metrics"
+          class="metrics"
+        ></div>
+
+      </div>
+
+      <div class="panel red-edge">
+
+        <div class="head">
+          <h2>Owner Action Center</h2>
+        </div>
+
+        <div id="actionCenter"></div>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>Booking Requests</h2>
+        </div>
+
+        <div
+          id="ownerBookingList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>Reschedule Requests</h2>
+        </div>
+
+        <div
+          id="ownerRescheduleList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="actions">
+
+          <button
+            class="btn warn"
+            onclick="createDemoEvent()"
+          >
+            Create Demo Event
+          </button>
+
+          <button
+            class="btn danger"
+            onclick="resetDemo()"
+          >
+            Reset Demo Data
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         EVENTS
+         ========================================================= -->
+
+    <section id="events" class="view">
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>Events</h2>
+        </div>
+
+        <div
+          id="eventList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         PROMOTION
+         ========================================================= -->
+
+    <section id="promotion" class="view">
+
+      <div class="hero">
+
+        <div class="eyebrow">
+          PROMOTION ENGINE
+        </div>
+
+        <h1>
+          Promotion Workspace
+        </h1>
+
+        <p>
+          Turn a confirmed Gemini Lounge event into
+          social copy, a public event page and
+          QR-ready destination.
+        </p>
+
+      </div>
+
+      <div class="panel">
+
+        <div
+          id="promotionList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         CALENDAR
+         ========================================================= -->
+
+    <section id="calendar" class="view">
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>Calendar</h2>
+        </div>
+
+        <div class="notice">
+          Confirmed events are the authoritative scheduled records.
+        </div>
+
+        <div
+          id="calendarList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         HISTORY
+         ========================================================= -->
+
+    <section id="history" class="view">
+
+      <div class="panel">
+
+        <div class="head">
+          <h2>History</h2>
+        </div>
+
+        <div
+          id="historyList"
+          class="card-list"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <div class="footer">
+
+      <span>
+        <b>GEMINI LOUNGE</b>
+        &nbsp; | &nbsp;
+        ScanCraft Booking &amp; Experience Engine
+      </span>
+
+      <span class="live">
+        Live · Local · Community
+      </span>
+
+    </div>
+
   </div>
-</main></div>
+
+</main>
+
+</div>
+
 <script>
 "use strict";
-const STORAGE_KEY="gemini_engine_v26_2",LEGACY_KEYS=["gemini_engine_v26_1","gemini_engine_v26","gemini_engine_v25","gemini_engine_v23","gemini_engine_v16"],EVENT_PARAM="event",PUBLIC_EVENT_PARAM="publicEvent",ALLOWED_TIMES=["5:00 PM - 7:00 PM","6:00 PM - 8:00 PM","7:00 PM - 9:00 PM","8:00 PM - 10:00 PM","9:00 PM - 11:00 PM"];
-let state={artistProfile:{name:"",email:"",phone:"",genre:"",social:"",notes:""},bookings:[],rescheduleRequests:[],events:[],promotions:[],history:[]};let activeActionId=null;
-function uid(p){return p+"_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
-function escapeHtml(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
-function safeUrl(v){const raw=String(v||"").trim();if(!raw)return"";try{const u=new URL(raw);return u.protocol==="http:"||u.protocol==="https:"?u.href:""}catch(e){return""}}
-function formatDate(s){if(!s)return"No date";const d=new Date(s+"T12:00:00");return Number.isNaN(d.getTime())?s:d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric",year:"numeric"})}
-function todayISO(){const d=new Date(),o=d.getTimezoneOffset();return new Date(d.getTime()-o*60000).toISOString().slice(0,10)}
-function validDate(s){return /^\d{4}-\d{2}-\d{2}$/.test(String(s||""))&&String(s)>=todayISO()}
-function parseStartHour(s){const m=String(s||"").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);if(!m)return null;let h=+m[1];const min=+m[2],ap=m[3].toUpperCase();if(ap==="PM"&&h!==12)h+=12;if(ap==="AM"&&h===12)h=0;return h+min/60}
-function parseEndHour(s){const a=[...String(s||"").matchAll(/(\d{1,2}):(\d{2})\s*(AM|PM)/gi)];if(a.length<2)return null;let h=+a[1][1];const min=+a[1][2],ap=a[1][3].toUpperCase();if(ap==="PM"&&h!==12)h+=12;if(ap==="AM"&&h===12)h=0;return h+min/60}
-function windowsOverlap(a,b){const as=parseStartHour(a),ae=parseEndHour(a),bs=parseStartHour(b),be=parseEndHour(b);return as!==null&&ae!==null&&bs!==null&&be!==null&&as<be&&bs<ae}
-function isBlockingBooking(b){return b&&(b.status==="Pending"||b.status==="Approved"||b.status==="Reschedule")}
-function sortByDateTime(a,b){const d=String(a.date||"").localeCompare(String(b.date||""));return d||String(a.time||"").localeCompare(String(b.time||""))}
-function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-function readState(k){try{const x=JSON.parse(localStorage.getItem(k)||"null");return x&&typeof x==="object"?x:null}catch(e){return null}}
-function normalizeState(s){return{artistProfile:{name:s?.artistProfile?.name||"",email:s?.artistProfile?.email||"",phone:s?.artistProfile?.phone||"",genre:s?.artistProfile?.genre||"",social:s?.artistProfile?.social||"",notes:s?.artistProfile?.notes||""},bookings:Array.isArray(s?.bookings)?s.bookings:[],rescheduleRequests:Array.isArray(s?.rescheduleRequests)?s.rescheduleRequests:[],events:Array.isArray(s?.events)?s.events:[],promotions:Array.isArray(s?.promotions)?s.promotions:[],history:Array.isArray(s?.history)?s.history:[]}}
-function ensurePromotionForEvent(e){if(!e)return null;let p=state.promotions.find(x=>x.eventId===e.id);if(!p){p={id:uid("promo"),eventId:e.id,status:"Not Ready",headline:"",socialPost:"",campaignNote:"",channels:{social:false,eventLink:false,qr:false},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};state.promotions.push(p)}return p}
-function ensureStateIntegrity(){state.bookings.forEach(b=>{b.id=b.id||uid("booking");b.status=b.status||"Pending";b.createdAt=b.createdAt||new Date().toISOString();b.eventId=b.eventId||null});state.events.forEach(e=>{e.id=e.id||uid("event");e.status=e.status||"Confirmed";e.createdAt=e.createdAt||new Date().toISOString();e.bookingId=e.bookingId||null});state.rescheduleRequests.forEach(r=>{r.id=r.id||uid("reschedule");r.status=r.status||"Pending";r.createdAt=r.createdAt||new Date().toISOString()});state.events.filter(e=>e.status==="Confirmed").forEach(ensurePromotionForEvent);state.events.forEach(e=>{if(e.bookingId){const b=state.bookings.find(x=>x.id===e.bookingId);if(b)b.eventId=e.id}});state.bookings.forEach(b=>{const e=state.events.find(x=>x.id===b.eventId&&x.status!=="Cancelled")||state.events.find(x=>x.bookingId===b.id&&x.status!=="Cancelled");if(e)b.eventId=e.id})}
-function loadState(){let x=readState(STORAGE_KEY);if(x){state=normalizeState(x);ensureStateIntegrity();saveState();return}for(const k of LEGACY_KEYS){x=readState(k);if(x){state=normalizeState(x);ensureStateIntegrity();saveState();return}}loadDemoData();ensureStateIntegrity();saveState()}
-function addHistory(type,title,details){state.history.unshift({id:uid("history"),type,title,details,createdAt:new Date().toISOString()})}
-function checkSlot(date,time,ignoreBookingId=null,ignoreEventId=null){const conflicts=[];if(!validDate(date)||!ALLOWED_TIMES.includes(time))return{available:false,conflicts:[{type:"validation",name:"Invalid date or performance window"}]};state.bookings.forEach(b=>{if(b.id===ignoreBookingId||!isBlockingBooking(b))return;if(b.date===date&&windowsOverlap(b.time,time))conflicts.push({type:"booking",id:b.id,name:b.artistName,status:b.status})});state.events.forEach(e=>{if(e.id===ignoreEventId||e.status!=="Confirmed")return;if(e.date===date&&windowsOverlap(e.time,time))conflicts.push({type:"event",id:e.id,name:e.artistName,status:e.status})});return{available:conflicts.length===0,conflicts}}
-function showTab(name,focusId=null,navButton=null){document.querySelectorAll(".nav button").forEach(t=>t.classList.toggle("active",navButton?t===navButton:t.dataset.tab===name));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===name));activeActionId=focusId;renderAll();if(focusId)setTimeout(()=>{const el=document.getElementById(focusId);if(el)el.scrollIntoView({behavior:"smooth",block:"center"})},80)}
-document.querySelectorAll(".nav button").forEach(t=>t.addEventListener("click",()=>showTab(t.dataset.tab,null,t)));
-function artistNameEl(){return document.getElementById("artistName")}
-document.getElementById("bookingForm").addEventListener("submit",e=>{e.preventDefault();const artistName=artistNameEl().value.trim(),email=artistEmail.value.trim(),phone=artistPhone.value.trim(),genre=artistGenre.value.trim(),date=bookingDate.value,time=bookingTime.value,social=artistSocial.value.trim(),notes=artistNotes.value.trim();if(!artistName||!email||!validDate(date)||!ALLOWED_TIMES.includes(time)){alert("Please provide a valid artist, email, future date, and performance window.");return}if(safeUrl(social)===""&&social){alert("Artist social link must use http:// or https://.");return}if(!checkSlot(date,time).available){alert("That performance window conflicts with an existing booking or confirmed event.");return}const b={id:uid("booking"),artistName,email,phone,genre,date,time,social,notes,status:"Pending",eventId:null,createdAt:new Date().toISOString()};state.bookings.push(b);state.artistProfile={name:artistName,email,phone,genre,social,notes};addHistory("Booking","New booking request submitted.",`${artistName} • ${formatDate(date)} • ${time}`);saveState();renderAll();alert("Booking request submitted. It is now waiting for owner approval.");showTab("bookings")});
-function approveBooking(id){const b=state.bookings.find(x=>x.id===id);if(!b||b.status!=="Pending")return;if(!checkSlot(b.date,b.time,b.id).available){alert("This booking can no longer be approved because the requested window is occupied.");return}b.status="Approved";let e=state.events.find(x=>x.bookingId===b.id&&x.status!=="Cancelled");if(!e){e={id:uid("event"),bookingId:b.id,artistName:b.artistName,genre:b.genre,date:b.date,time:b.time,social:b.social,notes:b.notes,status:"Confirmed",createdAt:new Date().toISOString()};state.events.push(e)}else Object.assign(e,{artistName:b.artistName,genre:b.genre,date:b.date,time:b.time,social:b.social,notes:b.notes,status:"Confirmed"});b.eventId=e.id;ensurePromotionForEvent(e);addHistory("Approval","Booking approved.",`${b.artistName} • ${formatDate(e.date)} • ${e.time}`);saveState();renderAll()}
-function declineBooking(id){const b=state.bookings.find(x=>x.id===id);if(!b||b.status==="Cancelled"||b.status==="Declined")return;b.status="Declined";state.rescheduleRequests.filter(r=>r.bookingId===id&&r.status==="Pending").forEach(r=>r.status="Declined");addHistory("Booking","Booking declined.",`${b.artistName} • ${formatDate(b.date)} • ${b.time}`);saveState();renderAll()}
-function cancelBooking(id){const b=state.bookings.find(x=>x.id===id);if(!b||b.status==="Cancelled"||b.status==="Declined")return;b.status="Cancelled";const e=state.events.find(x=>x.id===b.eventId);if(e)e.status="Cancelled";addHistory("Booking","Booking cancelled.",`${b.artistName} • ${formatDate(b.date)} • ${b.time}`);saveState();renderAll()}
-function requestReschedule(id){const b=state.bookings.find(x=>x.id===id);if(!b||!["Pending","Approved"].includes(b.status))return;const d=prompt("Enter the new date as YYYY-MM-DD:",b.date);if(!d)return;const t=prompt("Enter the new performance window:\n\n"+ALLOWED_TIMES.join("\n"),b.time);if(!t||!validDate(d)||!ALLOWED_TIMES.includes(t)){if(t)alert("Please use a valid future date and performance window.");return}if(!checkSlot(d,t,b.id,b.eventId).available){alert("That reschedule window conflicts with another booking or event.");return}state.rescheduleRequests.filter(r=>r.bookingId===id&&r.status==="Pending").forEach(r=>r.status="Declined");state.rescheduleRequests.push({id:uid("reschedule"),bookingId:id,oldDate:b.date,oldTime:b.time,newDate:d,newTime:t,status:"Pending",createdAt:new Date().toISOString()});b.status="Reschedule";addHistory("Reschedule","Reschedule requested.",`${b.artistName} • ${formatDate(d)} • ${t}`);saveState();renderAll()}
-function approveReschedule(id){const r=state.rescheduleRequests.find(x=>x.id===id);if(!r||r.status!=="Pending")return;const b=state.bookings.find(x=>x.id===r.bookingId);if(!b){r.status="Declined";saveState();renderAll();return}if(!checkSlot(r.newDate,r.newTime,b.id,b.eventId).available){alert("The requested reschedule window is no longer available.");return}b.date=r.newDate;b.time=r.newTime;b.status="Approved";let e=state.events.find(x=>x.id===b.eventId&&x.status!=="Cancelled");if(e)Object.assign(e,{date:b.date,time:b.time,status:"Confirmed"});else{e={id:uid("event"),bookingId:b.id,artistName:b.artistName,genre:b.genre,date:b.date,time:b.time,social:b.social,notes:b.notes,status:"Confirmed",createdAt:new Date().toISOString()};state.events.push(e)}b.eventId=e.id;ensurePromotionForEvent(e);r.status="Approved";addHistory("Reschedule","Reschedule approved.",`${b.artistName} • ${formatDate(b.date)} • ${b.time}`);saveState();renderAll()}
-function declineReschedule(id){const r=state.rescheduleRequests.find(x=>x.id===id);if(!r||r.status!=="Pending")return;const b=state.bookings.find(x=>x.id===r.bookingId);r.status="Declined";if(b)b.status=state.events.some(e=>e.id===b.eventId&&e.status==="Confirmed")?"Approved":"Pending";addHistory("Reschedule","Reschedule declined.",b?`${b.artistName} • ${formatDate(r.newDate)} • ${r.newTime}`:"Booking unavailable");saveState();renderAll()}
-function createDemoEvent(){const d=new Date();d.setDate(d.getDate()+7);const date=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10),time="8:00 PM - 10:00 PM";if(!checkSlot(date,time).available){alert("The demo event could not be created because the selected window is occupied.");return}const e={id:uid("event"),bookingId:null,artistName:"Gemini House Band",genre:"Live Lounge",date,time,social:"",notes:"Demo confirmed event for ScanCraft presentation.",status:"Confirmed",createdAt:new Date().toISOString()};state.events.push(e);ensurePromotionForEvent(e);addHistory("Event","Demo event created.",`${e.artistName} • ${formatDate(e.date)} • ${e.time}`);saveState();renderAll()}
-function cancelEvent(id){const e=state.events.find(x=>x.id===id);if(!e||e.status!=="Confirmed")return;e.status="Cancelled";if(e.bookingId){const b=state.bookings.find(x=>x.id===e.bookingId);if(b)b.status="Cancelled"}addHistory("Event","Event cancelled.",`${e.artistName} • ${formatDate(e.date)} • ${e.time}`);saveState();renderAll()}
-function getEventUrl(e){const u=new URL(location.href);u.searchParams.set(EVENT_PARAM,e.id);u.searchParams.set(PUBLIC_EVENT_PARAM,encodeURIComponent(JSON.stringify({id:e.id,artistName:e.artistName,genre:e.genre,date:e.date,time:e.time,social:e.social,notes:e.notes,status:e.status})));return u.toString()}
-function copyText(text,success){if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert(success)).catch(()=>prompt("Copy this text:",text));else prompt("Copy this text:",text)}function copyEventUrl(id){const e=state.events.find(x=>x.id===id);if(e&&e.status==="Confirmed")copyText(getEventUrl(e),"Public event URL copied.")}
-function buildPromotion(e,p){p.headline=`LIVE MUSIC AT GEMINI LOUNGE — ${e.artistName}`;p.socialPost=`LIVE MUSIC AT GEMINI LOUNGE\n\n🎶 ${e.artistName}\n📅 ${formatDate(e.date)}\n🕗 ${e.time}\n\nJoin us at Gemini Lounge for a night of ${(e.genre||"live music").toLowerCase()} and good company.\n\nGEMINI LOUNGE\nLive music • Good drinks • Good people`;p.campaignNote=`Promote ${e.artistName} at Gemini Lounge on ${formatDate(e.date)} from ${e.time}.`;p.updatedAt=new Date().toISOString();p.generatedAt=new Date().toISOString();return p}
-function generatePromotion(id){const e=state.events.find(x=>x.id===id);if(!e||e.status!=="Confirmed"){alert("Only confirmed events can be promoted.");return}const p=ensurePromotionForEvent(e);buildPromotion(e,p);p.status="Promo Ready";addHistory("Promotion","Promotion package generated.",`${e.artistName} • ${formatDate(e.date)}`);saveState();renderAll()}
-function regeneratePromotion(id){const p=state.promotions.find(x=>x.id===id),e=p&&state.events.find(x=>x.id===p.eventId);if(!p||!e)return;buildPromotion(e,p);p.status="Promo Ready";saveState();renderAll()}
-function setPromotionStatus(id,status){const p=state.promotions.find(x=>x.id===id),e=p&&state.events.find(x=>x.id===p.eventId);if(!p||!e)return;p.status=status;p.updatedAt=new Date().toISOString();saveState();renderAll()}
-function markChannel(id,channel){const p=state.promotions.find(x=>x.id===id);if(!p)return;p.channels=p.channels||{};p.channels[channel]=true;p.updatedAt=new Date().toISOString();saveState();renderAll()}
-function getActionItems(){const items=[];state.bookings.filter(b=>b.status==="Pending").sort(sortByDateTime).forEach(b=>items.push({priority:1,title:"Review booking request",meta:`${b.artistName} • ${formatDate(b.date)} • ${b.time}`,button:"Review Request",id:"booking-"+b.id,tab:"owner"}));state.rescheduleRequests.filter(r=>r.status==="Pending").forEach(r=>{const b=state.bookings.find(x=>x.id===r.bookingId);items.push({priority:2,title:"Review reschedule request",meta:b?`${b.artistName} • ${formatDate(r.newDate)} • ${r.newTime}`:"Booking record unavailable",button:"Review Reschedule",id:"reschedule-"+r.id,tab:"owner"})});state.promotions.filter(p=>p.status==="Promo Ready").forEach(p=>{const e=state.events.find(x=>x.id===p.eventId);if(e)items.push({priority:3,title:"Promotion ready",meta:`${e.artistName} • ${formatDate(e.date)}`,button:"Open Promotion",id:"promotion-"+p.id,tab:"promotion"})});return items.sort((a,b)=>a.priority-b.priority).slice(0,12)}
-function renderArtistDashboard(){const p=state.artistProfile||{};artistProfileCard.innerHTML=`<div class="head"><h2>Artist Profile</h2><button class="link" onclick="loadDemoBooking()">✎ Edit Profile</button></div><div class="profile-grid"><div class="profile-field"><label>Artist / Band Name</label><span>${escapeHtml(p.name||"Coastal Echo")}</span></div><div class="profile-field"><label>Genre</label><span>${escapeHtml(p.genre||"Acoustic Rock")}</span></div><div class="profile-field"><label>Location</label><span>Bandon, OR</span></div><div class="profile-field"><label>Contact</label><span>${escapeHtml(p.email||"coastalecho@example.com")}</span></div><div class="profile-field"><label>Performance Type</label><span>Duo</span></div><div class="profile-field"><label>Social Links</label><span>${escapeHtml(p.social||"instagram.com/coastalecho")}</span></div><div class="profile-bio"><label>Artist Bio</label>${escapeHtml(p.notes||"A local acoustic duo bringing familiar songs and original music to the coast.")}</div></div>`;const actions=getActionItems(),pending=state.bookings.filter(b=>b.status==="Pending"),upcoming=state.events.filter(e=>e.status==="Confirmed"&&e.date>=todayISO()).sort(sortByDateTime),interests=Math.max(11,state.bookings.length+state.events.length+9);dashboardMetrics.innerHTML=`<div class="metric"><strong>${actions.length}</strong><span>Requests Needing Attention</span></div><div class="metric"><strong>${upcoming.length}</strong><span>Upcoming Shows</span></div><div class="metric"><strong>${interests}</strong><span>Customer Interests</span></div>`;dashboardAttention.innerHTML=pending.length?pending.slice(0,1).map(b=>`<div class="mini-card"><div class="mini-top"><div class="mini-title">${escapeHtml(b.artistName)}</div><span class="badge pending">Pending</span></div><div class="mini-meta">▣ ${escapeHtml(formatDate(b.date))} · ${escapeHtml(b.time)}<br>${escapeHtml(b.genre||"Live Music")}</div><div class="actions"><button class="btn success" onclick="showTab('owner','booking-${b.id}')">✓ Approve</button><button class="btn danger" onclick="showTab('owner','booking-${b.id}')">✕ Decline</button><button class="btn" onclick="showTab('owner','booking-${b.id}')">Details</button></div></div>`).join(""):"<div class=\"empty\">No immediate requests.</div>";const next=upcoming[0];dashboardNext.innerHTML=next?`<div class="mini-card"><div class="mini-top"><div class="mini-title">${escapeHtml(next.artistName)}</div><span class="badge confirmed">Approved</span></div><div class="mini-meta">${escapeHtml(next.genre||"Live Music")} · Bandon, OR<br>▣ ${escapeHtml(formatDate(next.date))} · ${escapeHtml(next.time)}</div></div>`:"<div class=\"empty\">No confirmed shows yet.</div>";dashboardUpcoming.innerHTML=upcoming.length?upcoming.slice(0,3).map(e=>`<div class="mini-card"><div class="mini-top"><div class="mini-title">${escapeHtml(e.artistName)}</div><span class="badge confirmed">Approved</span></div><div class="mini-meta">▣ ${escapeHtml(formatDate(e.date))} · ${escapeHtml(e.time)}</div></div>`).join(""):"<div class=\"empty\">No upcoming shows.</div>"}
-function renderBookings(){bookingList.innerHTML=state.bookings.length?[...state.bookings].sort(sortByDateTime).map(b=>`<div class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(b.artistName)}</div><div class="card-meta">${escapeHtml(formatDate(b.date))} • ${escapeHtml(b.time)}<br>${escapeHtml(b.genre||"Live Music")}</div></div><span class="badge ${badgeClass(b.status)}">${escapeHtml(b.status)}</span></div>${b.status==="Pending"||b.status==="Approved"?`<div class="actions"><button class="btn info" onclick="requestReschedule('${b.id}')">Request Reschedule</button><button class="btn danger" onclick="cancelBooking('${b.id}')">Cancel Booking</button></div>`:""}</div>`).join(""):"<div class=\"empty\">No bookings yet.</div>"}
-function renderOwner(){const pending=state.bookings.filter(b=>b.status==="Pending").length,res=state.rescheduleRequests.filter(r=>r.status==="Pending").length,up=state.events.filter(e=>e.status==="Confirmed"&&e.date>=todayISO()).length,pr=state.promotions.filter(p=>p.status==="Promo Ready").length,cf=state.events.filter(e=>e.status==="Confirmed").length;metrics.innerHTML=[[''+pending,'Pending Bookings'],[''+res,'Reschedule Requests'],[''+up,'Upcoming Events'],[''+pr,'Promo Ready'],[''+cf,'Confirmed Events'],[''+state.history.length,'Booking Activity']].map(x=>`<div class="metric"><strong>${x[0]}</strong><span>${x[1]}</span></div>`).join("");const a=getActionItems();window.__actionItems=a;actionCenter.innerHTML=a.length?a.map((x,i)=>`<div class="mini-card"><div class="mini-top"><div><div class="mini-title">${escapeHtml(x.title)}</div><div class="mini-meta">${escapeHtml(x.meta)}</div></div><button class="btn primary" onclick="runAction(${i})">${escapeHtml(x.button)}</button></div></div>`).join(""):"<div class=\"empty\">No immediate actions required.</div>";renderOwnerBookings();renderOwnerReschedules()}
-function runAction(i){const a=window.__actionItems?.[i];if(a)showTab(a.tab,a.id)}
-function renderOwnerBookings(){const arr=[...state.bookings].sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));ownerBookingList.innerHTML=arr.length?arr.map(b=>{let buttons="";if(b.status==="Pending")buttons=`<button class="btn success" onclick="approveBooking('${b.id}')">Approve</button><button class="btn danger" onclick="declineBooking('${b.id}')">Decline</button>`;else if(b.status==="Reschedule"){const rr=state.rescheduleRequests.find(r=>r.bookingId===b.id&&r.status==="Pending");buttons=`<button class="btn info" onclick="showTab('owner','${rr?`reschedule-${rr.id}`:`booking-${b.id}`}')">Review Reschedule</button>`}else if(b.status==="Approved")buttons=`<button class="btn danger" onclick="cancelBooking('${b.id}')">Cancel</button>`;return `<div id="booking-${b.id}" class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(b.artistName)}</div><div class="card-meta"><strong>${escapeHtml(formatDate(b.date))}</strong> • ${escapeHtml(b.time)}<br>${escapeHtml(b.genre||"Live Music")}<br>${escapeHtml(b.email||"")}</div></div><span class="badge ${badgeClass(b.status)}">${escapeHtml(b.status)}</span></div>${buttons?`<div class="actions">${buttons}</div>`:""}</div>`}).join(""):"<div class=\"empty\">No booking requests yet.</div>"}
-function renderOwnerReschedules(){ownerRescheduleList.innerHTML=state.rescheduleRequests.length?state.rescheduleRequests.map(r=>{const b=state.bookings.find(x=>x.id===r.bookingId);return `<div id="reschedule-${r.id}" class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(b?.artistName||"Unknown Artist")}</div><div class="card-meta">Current: ${escapeHtml(formatDate(r.oldDate))} • ${escapeHtml(r.oldTime)}<br>Requested: <strong>${escapeHtml(formatDate(r.newDate))} • ${escapeHtml(r.newTime)}</strong></div></div><span class="badge ${badgeClass(r.status)}">${escapeHtml(r.status)}</span></div>${r.status==="Pending"?`<div class="actions"><button class="btn success" onclick="approveReschedule('${r.id}')">Approve Reschedule</button><button class="btn danger" onclick="declineReschedule('${r.id}')">Decline</button></div>`:""}</div>`}).join(""):"<div class=\"empty\">No reschedule requests yet.</div>"}
-function renderEvents(){const active=state.events.filter(e=>e.status==="Confirmed").sort(sortByDateTime);eventList.innerHTML=active.length?active.map(e=>`<div class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(e.artistName)}</div><div class="card-meta">${escapeHtml(formatDate(e.date))} • ${escapeHtml(e.time)}<br>${escapeHtml(e.genre||"Live Music")}</div></div><span class="badge confirmed">Confirmed</span></div><div class="actions"><button class="btn primary" onclick="copyEventUrl('${e.id}')">Copy Public Event URL</button><button class="btn warn" onclick="showTab('promotion')">Open Promotion</button><button class="btn danger" onclick="cancelEvent('${e.id}')">Cancel Event</button></div></div>`).join(""):"<div class=\"empty\">No active confirmed events.</div>"}
-function renderPromotion(){const arr=state.promotions.map(p=>({p,e:state.events.find(e=>e.id===p.eventId)})).filter(x=>x.e);promotionList.innerHTML=arr.length?arr.map(({p,e})=>`<div class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(e.artistName)}</div><div class="card-meta">${escapeHtml(formatDate(e.date))} • ${escapeHtml(e.time)}</div></div><span class="badge ${badgeClass(p.status)}">${escapeHtml(p.status)}</span></div><div class="actions">${e.status==="Confirmed"&&p.status!=="Promoted"?`<button class="btn primary" onclick="generatePromotion('${e.id}')">${p.socialPost?"Regenerate Promotion":"Generate Promotion"}</button>`:""}${p.socialPost?`<button class="btn info" onclick="copyText(${JSON.stringify(p.socialPost)},'Social post copied.')">Copy Social Post</button>`:""}${p.status==="Promo Ready"?`<button class="btn success" onclick="setPromotionStatus('${p.id}','Promoted')">Mark Promoted</button>`:""}</div></div>`).join(""):"<div class=\"empty\">No promotion records yet.</div>"}
-function renderCalendar(){const items=state.events.filter(e=>e.status==="Confirmed").sort(sortByDateTime);calendarList.innerHTML=items.length?items.map(e=>`<div class="card"><div class="card-title">${escapeHtml(formatDate(e.date))}</div><div class="card-meta"><strong>${escapeHtml(e.time)}</strong> — ${escapeHtml(e.artistName)} <span class="badge confirmed">Confirmed</span></div></div>`).join(""):"<div class=\"empty\">No scheduled activity.</div>"}
-function renderHistory(){historyList.innerHTML=state.history.length?state.history.map(x=>`<div class="card"><div class="card-top"><div><div class="card-title">${escapeHtml(x.title)}</div><div class="card-meta">${escapeHtml(x.details||"")}</div></div><span class="badge">${escapeHtml(x.type)}</span></div></div>`).join(""):"<div class=\"empty\">No history yet.</div>"}
-function badgeClass(s){return({Pending:"pending",Approved:"approved",Confirmed:"confirmed",Reschedule:"reschedule","Promo Ready":"promo-ready",Promoted:"promoted",Declined:"declined",Cancelled:"cancelled","Not Ready":"not-ready"}[s]||"")}
-function loadDemoBooking(){const b=state.bookings.find(x=>x.status==="Pending");const d=new Date();d.setDate(d.getDate()+10);const date=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10),v=b||{artistName:"Coastal Echo",email:"coastalecho@example.com",phone:"(555) 555-0199",genre:"Acoustic Rock",date,time:"7:00 PM - 9:00 PM",social:"instagram.com/coastalecho",notes:"A local acoustic duo bringing familiar songs and original music to the coast."};artistName.value=v.artistName||"";artistEmail.value=v.email||"";artistPhone.value=v.phone||"";artistGenre.value=v.genre||"";bookingDate.value=v.date||date;bookingTime.value=v.time||"7:00 PM - 9:00 PM";artistSocial.value=v.social&&v.social.startsWith("http")?v.social:"";artistNotes.value=v.notes||""}
-function loadDemoData(){const d=new Date();d.setDate(d.getDate()+19);const bd=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);const eD=new Date();eD.setDate(eD.getDate()+7);const ed=new Date(eD.getTime()-eD.getTimezoneOffset()*60000).toISOString().slice(0,10);const pending={id:uid("booking"),artistName:"Harbor Lights",email:"harborlights@example.com",phone:"(555) 555-0144",genre:"Indie Folk",date:bd,time:"8:00 PM - 10:00 PM",social:"",notes:"Saturday night set request for Gemini Lounge.",status:"Pending",eventId:null,createdAt:new Date().toISOString()};const e={id:uid("event"),bookingId:null,artistName:"Coastal Echo",genre:"Acoustic Rock",date:ed,time:"7:00 PM - 9:00 PM",social:"",notes:"Demo confirmed Gemini Lounge event.",status:"Confirmed",createdAt:new Date().toISOString()};state.artistProfile={name:"Coastal Echo",email:"coastalecho@example.com",phone:"(555) 555-0199",genre:"Acoustic Rock",social:"instagram.com/coastalecho",notes:"A local acoustic duo bringing familiar songs and original music to the coast."};state.bookings=[pending];state.events=[e];state.promotions=[];ensurePromotionForEvent(e);state.history=[{id:uid("history"),type:"Demo",title:"Gemini Lounge dashboard initialized.",details:`${e.artistName} • ${formatDate(e.date)} • ${e.time}`,createdAt:new Date().toISOString()}]}
-function resetDemo(){if(!confirm("Reset Gemini Lounge demo data and reload the demonstration?"))return;localStorage.removeItem(STORAGE_KEY);LEGACY_KEYS.forEach(k=>localStorage.removeItem(k));location.reload()}
-function renderPublicEventPage(e){const root=publicEventRoot,app=document.getElementById("app");if(e.status!=="Confirmed"){root.innerHTML=`<div class="event-public"><div class="public-card"><div class="public-brand">GEMINI LOUNGE</div><h1>Event Unavailable</h1><div class="public-notes">This event is no longer an active confirmed Gemini Lounge event.</div><button class="btn" onclick="closePublicEvent()">Open Booking Engine</button></div></div>`;app.classList.add("hidden");return true}root.innerHTML=`<div class="event-public"><div class="public-card"><div class="public-brand">GEMINI LOUNGE</div><h1>${escapeHtml(e.artistName)}</h1><div class="public-date">${escapeHtml(formatDate(e.date))}</div><div class="public-time">${escapeHtml(e.time)}</div>${e.genre?`<div class="public-notes">${escapeHtml(e.genre)}</div>`:""}<div class="actions" style="justify-content:center"><button class="btn" onclick="closePublicEvent()">Open Booking Engine</button></div></div></div>`;app.classList.add("hidden");root.classList.remove("hidden");return true}
-function closePublicEvent(){publicEventRoot.innerHTML="";publicEventRoot.classList.add("hidden");document.getElementById("app").classList.remove("hidden");const u=new URL(location.href);u.searchParams.delete(EVENT_PARAM);u.searchParams.delete(PUBLIC_EVENT_PARAM);history.replaceState({},"",u.toString())}
-function checkPublicEvent(){const p=new URLSearchParams(location.search),id=p.get(EVENT_PARAM),encoded=p.get(PUBLIC_EVENT_PARAM);if(id){const e=state.events.find(x=>x.id===id);if(e)return renderPublicEventPage(e)}if(encoded){try{const e=JSON.parse(decodeURIComponent(encoded));if(e&&e.artistName)return renderPublicEventPage(e)}catch(e){}}return false}
-function renderAll(){ensureStateIntegrity();renderArtistDashboard();renderBookings();renderOwner();renderEvents();renderPromotion();renderCalendar();renderHistory();saveState()}
-window.addEventListener("storage",e=>{if(e.key!==STORAGE_KEY)return;const x=readState(STORAGE_KEY);if(!x)return;state=normalizeState(x);ensureStateIntegrity();renderAll()});window.GeminiScanCraft={reset(){localStorage.removeItem(STORAGE_KEY);location.reload()},state(){return JSON.parse(JSON.stringify(state))},checkSlot:(d,t)=>checkSlot(d,t)};
-loadState();publicEventRoot.classList.add("hidden");renderAll();checkPublicEvent();
-</script>
-<!-- SC-V273-INTERACTION -->
-<style>
-.sc-v273-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
-.sc-v273-clickable:hover{transform:translateY(-2px);border-color:rgba(255,61,90,.62)!important;box-shadow:0 12px 30px rgba(0,0,0,.34),0 0 18px rgba(242,29,59,.12)!important}
-.sc-v273-clickable:active{transform:translateY(0)}
-.sc-v273-clickable:focus-visible{outline:2px solid #ff3d5a;outline-offset:2px}
-.quick-item.sc-v273-clickable{padding-left:9px;padding-right:9px;border-radius:7px}
-.mini-card.sc-v273-clickable,.card.sc-v273-clickable{position:relative}
-</style>
-<script>
-(function(){
-const nav=name=>{const b=[...document.querySelectorAll('.nav button')].find(x=>(x.dataset.tab||'')===name);if(b)b.click()};
-const safe=(el,fn)=>{if(!el||el.dataset.scV273Bound)return;el.dataset.scV273Bound='1';el.classList.add('sc-v273-clickable');el.tabIndex=0;el.addEventListener('click',e=>{if(e.target.closest('button,a,input,select,textarea'))return;fn()});el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();fn()}})};
-const text=el=>(el?.textContent||'').toLowerCase();
-function bind(){
- document.querySelectorAll('.quick-item').forEach(el=>{const t=text(el);if(t.includes('book')||t.includes('artist'))safe(el,()=>nav('bookings'));else if(t.includes('upcoming')||t.includes('show'))safe(el,()=>nav('events'));else if(t.includes('calendar'))safe(el,()=>nav('calendar'));else if(t.includes('owner')||t.includes('command'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
- document.querySelectorAll('.profile').forEach(el=>safe(el,()=>nav('artist')));
- document.querySelectorAll('.request').forEach(el=>safe(el,()=>nav('bookings')));
- document.querySelectorAll('.command,.attention').forEach(el=>safe(el,()=>nav('owner')));
- document.querySelectorAll('.upcoming,.next').forEach(el=>safe(el,()=>nav('events')));
- document.querySelectorAll('.promo-art').forEach(el=>safe(el,()=>nav('promotion')));
- document.querySelectorAll('.mini-card,.card').forEach(el=>{const t=text(el);if(t.includes('upcoming')||t.includes('next show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('attention')||t.includes('pending')||t.includes('reschedule')||t.includes('booking'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
- document.querySelectorAll('.link').forEach(el=>{const t=text(el);if(t.includes('book'))safe(el,()=>nav('bookings'));else if(t.includes('show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('owner'))safe(el,()=>nav('owner'));else if(t.includes('promo'))safe(el,()=>nav('promotion'))});
+
+/* ================================================================
+   CORE CONFIGURATION
+   ================================================================ */
+
+const STORAGE_KEY = "gemini_engine_v26_2";
+
+const LEGACY_KEYS = [
+  "gemini_engine_v26_1",
+  "gemini_engine_v26",
+  "gemini_engine_v25",
+  "gemini_engine_v23",
+  "gemini_engine_v16"
+];
+
+const EVENT_PARAM = "event";
+const PUBLIC_EVENT_PARAM = "publicEvent";
+
+const ALLOWED_TIMES = [
+  "5:00 PM - 7:00 PM",
+  "6:00 PM - 8:00 PM",
+  "7:00 PM - 9:00 PM",
+  "8:00 PM - 10:00 PM",
+  "9:00 PM - 11:00 PM"
+];
+
+let state = {
+  artistProfile:{
+    name:"",
+    email:"",
+    phone:"",
+    genre:"",
+    social:"",
+    notes:""
+  },
+  bookings:[],
+  rescheduleRequests:[],
+  events:[],
+  promotions:[],
+  history:[]
+};
+
+let activeActionId = null;
+
+/* ================================================================
+   UTILITIES
+   ================================================================ */
+
+function uid(prefix){
+  return (
+    prefix +
+    "_" +
+    Date.now().toString(36) +
+    "_" +
+    Math.random().toString(36).slice(2,8)
+  );
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',bind);
-})();
-</script>
 
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-<!-- SC-V274-QUICK-LINKS -->
-<script>
-(function(){
-  function install(){
-    const items=[...document.querySelectorAll('.quick-item')];
-    if(!items.length) return;
-    const routes=['bookings','events','calendar','owner','promotion'];
-    const go=name=>{
-      const btn=[...document.querySelectorAll('.nav button')].find(b=>b.dataset.tab===name);
-      if(btn) btn.click();
-    };
-    items.forEach((el,i)=>{
-      const route=routes[i];
-      if(!route || el.dataset.scV274Bound) return;
-      el.dataset.scV274Bound='1';
-      el.dataset.action=route;
-      el.setAttribute('role','button');
-      el.setAttribute('tabindex','0');
-      el.style.cursor='pointer';
-      const run=e=>{
-        if(e) e.stopImmediatePropagation();
-        go(route);
-      };
-      el.addEventListener('click',run,true);
-      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();run(e)}});
-    });
+function safeUrl(value){
+  const raw = String(value || "").trim();
+
+  if(!raw){
+    return "";
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install); else install();
-  setTimeout(install,300);
-  setTimeout(install,1000);
-})();
+
+  try{
+    const url = new URL(raw);
+
+    if(
+      url.protocol === "http:" ||
+      url.protocol === "https:"
+    ){
+      return url.href;
+    }
+
+    return "";
+  }catch(error){
+    return "";
+  }
+}
+
+function formatDate(value){
+  if(!value){
+    return "No date";
+  }
+
+  const date = new Date(value + "T12:00:00");
+
+  if(Number.isNaN(date.getTime())){
+    return value;
+  }
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+}
+
+function todayISO(){
+  const date = new Date();
+
+  const offset =
+    date.getTimezoneOffset();
+
+  return new Date(
+    date.getTime() -
+    offset * 60000
+  )
+  .toISOString()
+  .slice(0,10);
+}
+
+function validDate(value){
+  return (
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      String(value || "")
+    ) &&
+    String(value) >= todayISO()
+  );
+}
+
+function parseStartHour(value){
+  const match = String(value || "").match(
+    /(\d{1,2}):(\d{2})\s*(AM|PM)/i
+  );
+
+  if(!match){
+    return null;
+  }
+
+  let hour = +match[1];
+
+  const minute = +match[2];
+
+  const period =
+    match[3].toUpperCase();
+
+  if(period === "PM" && hour !== 12){
+    hour += 12;
+  }
+
+  if(period === "AM" && hour === 12){
+    hour = 0;
+  }
+
+  return hour + minute / 60;
+}
+
+function parseEndHour(value){
+  const matches = [
+    ...String(value || "").matchAll(
+      /(\d{1,2}):(\d{2})\s*(AM|PM)/gi
+    )
+  ];
+
+  if(matches.length < 2){
+    return null;
+  }
+
+  let hour = +matches[1][1];
+
+  const minute = +matches[1][2];
+
+  const period =
+    matches[1][3].toUpperCase();
+
+  if(period === "PM" && hour !== 12){
+    hour += 12;
+  }
+
+  if(period === "AM" && hour === 12){
+    hour = 0;
+  }
+
+  return hour + minute / 60;
+}
+
+function windowsOverlap(a,b){
+  const as = parseStartHour(a);
+  const ae = parseEndHour(a);
+  const bs = parseStartHour(b);
+  const be = parseEndHour(b);
+
+  return (
+    as !== null &&
+    ae !== null &&
+    bs !== null &&
+    be !== null &&
+    as < be &&
+    bs < ae
+  );
+}
+
+function isBlockingBooking(booking){
+  return (
+    booking &&
+    (
+      booking.status === "Pending" ||
+      booking.status === "Approved" ||
+      booking.status === "Reschedule"
+    )
+  );
+}
+
+function sortByDateTime(a,b){
+  const dateCompare =
+    String(a.date || "")
+      .localeCompare(
+        String(b.date || "")
+      );
+
+  return (
+    dateCompare ||
+    String(a.time || "")
+      .localeCompare(
+        String(b.time || "")
+      )
+  );
+}
+
+/* ================================================================
+   STORAGE
+   ================================================================ */
+
+function saveState(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
+}
+
+function readState(key){
+  try{
+    const parsed =
+      JSON.parse(
+        localStorage.getItem(key) || "null"
+      );
+
+    return (
+      parsed &&
+      typeof parsed === "object"
+    )
+      ? parsed
+      : null;
+
+  }catch(error){
+    return null;
+  }
+}
+
+function normalizeState(source){
+  return {
+    artistProfile:{
+      name:source?.artistProfile?.name || "",
+      email:source?.artistProfile?.email || "",
+      phone:source?.artistProfile?.phone || "",
+      genre:source?.artistProfile?.genre || "",
+      social:source?.artistProfile?.social || "",
+      notes:source?.artistProfile?.notes || ""
+    },
+
+    bookings:
+      Array.isArray(source?.bookings)
+        ? source.bookings
+        : [],
+
+    rescheduleRequests:
+      Array.isArray(source?.rescheduleRequests)
+        ? source.rescheduleRequests
+        : [],
+
+    events:
+      Array.isArray(source?.events)
+        ? source.events
+        : [],
+
+    promotions:
+      Array.isArray(source?.promotions)
+        ? source.promotions
+        : [],
+
+    history:
+      Array.isArray(source?.history)
+        ? source.history
+        : []
+  };
+}
+
+function ensurePromotionForEvent(event){
+  if(!event){
+    return null;
+  }
+
+  let promotion =
+    state.promotions.find(
+      item => item.eventId === event.id
+    );
+
+  if(!promotion){
+
+    promotion = {
+      id:uid("promo"),
+      eventId:event.id,
+      status:"Not Ready",
+      headline:"",
+      socialPost:"",
+      campaignNote:"",
+      channels:{
+        social:false,
+        eventLink:false,
+        qr:false
+      },
+      createdAt:new Date().toISOString(),
+      updatedAt:new Date().toISOString()
+    };
+
+    state.promotions.push(
+      promotion
+    );
+  }
+
+  return promotion;
+}
+
+function ensureStateIntegrity(){
+
+  state.bookings.forEach(
+    booking => {
+
+      booking.id =
+        booking.id ||
+        uid("booking");
+
+      booking.status =
+        booking.status ||
+        "Pending";
+
+      booking.createdAt =
+        booking.createdAt ||
+        new Date().toISOString();
+
+      booking.eventId =
+        booking.eventId ||
+        null;
+    }
+  );
+
+  state.events.forEach(
+    event => {
+
+      event.id =
+        event.id ||
+        uid("event");
+
+      event.status =
+        event.status ||
+        "Confirmed";
+
+      event.createdAt =
+        event.createdAt ||
+        new Date().toISOString();
+
+      event.bookingId =
+        event.bookingId ||
+        null;
+    }
+  );
+
+  state.rescheduleRequests.forEach(
+    request => {
+
+      request.id =
+        request.id ||
+        uid("reschedule");
+
+      request.status =
+        request.status ||
+        "Pending";
+
+      request.createdAt =
+        request.createdAt ||
+        new Date().toISOString();
+    }
+  );
+
+  state.events
+    .filter(
+      event =>
+        event.status === "Confirmed"
+    )
+    .forEach(
+      ensurePromotionForEvent
+    );
+
+  state.events.forEach(
+    event => {
+
+      if(event.bookingId){
+
+        const booking =
+          state.bookings.find(
+            item =>
+              item.id === event.bookingId
+          );
+
+        if(booking){
+          booking.eventId =
+            event.id;
+        }
+      }
+    }
+  );
+
+  state.bookings.forEach(
+    booking => {
+
+      const event =
+        state.events.find(
+          item =>
+            item.id === booking.eventId &&
+            item.status !== "Cancelled"
+        ) ||
+        state.events.find(
+          item =>
+            item.bookingId === booking.id &&
+            item.status !== "Cancelled"
+        );
+
+      if(event){
+        booking.eventId =
+          event.id;
+      }
+    }
+  );
+}
+
+function loadState(){
+
+  let stored =
+    readState(STORAGE_KEY);
+
+  if(stored){
+
+    state =
+      normalizeState(stored);
+
+    ensureStateIntegrity();
+    saveState();
+
+    return;
+  }
+
+  for(
+    const legacyKey of LEGACY_KEYS
+  ){
+
+    stored =
+      readState(legacyKey);
+
+    if(stored){
+
+      state =
+        normalizeState(stored);
+
+      ensureStateIntegrity();
+      saveState();
+
+      return;
+    }
+  }
+
+  loadDemoData();
+  ensureStateIntegrity();
+  saveState();
+}
+
+/* ================================================================
+   HISTORY
+   ================================================================ */
+
+function addHistory(
+  type,
+  title,
+  details
+){
+  state.history.unshift({
+    id:uid("history"),
+    type,
+    title,
+    details,
+    createdAt:new Date().toISOString()
+  });
+}
+
+/* ================================================================
+   SLOT VALIDATION
+   ================================================================ */
+
+function checkSlot(
+  date,
+  time,
+  ignoreBookingId = null,
+  ignoreEventId = null
+){
+
+  const conflicts = [];
+
+  if(
+    !validDate(date) ||
+    !ALLOWED_TIMES.includes(time)
+  ){
+
+    return {
+      available:false,
+      conflicts:[
+        {
+          type:"validation",
+          name:
+            "Invalid date or performance window"
+        }
+      ]
+    };
+  }
+
+  state.bookings.forEach(
+    booking => {
+
+      if(
+        booking.id === ignoreBookingId ||
+        !isBlockingBooking(booking)
+      ){
+        return;
+      }
+
+      if(
+        booking.date === date &&
+        windowsOverlap(
+          booking.time,
+          time
+        )
+      ){
+
+        conflicts.push({
+          type:"booking",
+          id:booking.id,
+          name:booking.artistName,
+          status:booking.status
+        });
+      }
+    }
+  );
+
+  state.events.forEach(
+    event => {
+
+      if(
+        event.id === ignoreEventId ||
+        event.status !== "Confirmed"
+      ){
+        return;
+      }
+
+      if(
+        event.date === date &&
+        windowsOverlap(
+          event.time,
+          time
+        )
+      ){
+
+        conflicts.push({
+          type:"event",
+          id:event.id,
+          name:event.artistName,
+          status:event.status
+        });
+      }
+    }
+  );
+
+  return {
+    available:
+      conflicts.length === 0,
+    conflicts
+  };
+}
+
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
+
+function showTab(
+  name,
+  focusId = null,
+  navButton = null
+){
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          navButton
+            ? button === navButton
+            : button.dataset.tab === name
+        );
+      }
+    );
+
+  document
+    .querySelectorAll(".view")
+    .forEach(
+      view => {
+
+        view.classList.toggle(
+          "active",
+          view.id === name
+        );
+      }
+    );
+
+  activeActionId =
+    focusId;
+
+  renderAll();
+
+  if(focusId){
+
+    setTimeout(
+      () => {
+
+        const element =
+          document.getElementById(
+            focusId
+          );
+
+        if(element){
+
+          element.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+          });
+        }
+      },
+      80
+    );
+  }
+}
+
+document
+  .querySelectorAll(".nav button")
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          showTab(
+            button.dataset.tab,
+            null,
+            button
+          );
+        }
+      );
+    }
+  );
+
+/* ================================================================
+   BOOKING FORM
+   ================================================================ */
+
+function artistNameEl(){
+  return document.getElementById(
+    "artistName"
+  );
+}
+
+document
+  .getElementById("bookingForm")
+  .addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+      const artistName =
+        artistNameEl()
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("artistEmail")
+          .value
+          .trim();
+
+      const phone =
+        document
+          .getElementById("artistPhone")
+          .value
+          .trim();
+
+      const genre =
+        document
+          .getElementById("artistGenre")
+          .value
+          .trim();
+
+      const date =
+        document
+          .getElementById("bookingDate")
+          .value;
+
+      const time =
+        document
+          .getElementById("bookingTime")
+          .value;
+
+      const social =
+        document
+          .getElementById("artistSocial")
+          .value
+          .trim();
+
+      const notes =
+        document
+          .getElementById("artistNotes")
+          .value
+          .trim();
+
+      if(
+        !artistName ||
+        !email ||
+        !validDate(date) ||
+        !ALLOWED_TIMES.includes(time)
+      ){
+
+        alert(
+          "Please provide a valid artist, email, future date, and performance window."
+        );
+
+        return;
+      }
+
+      if(
+        safeUrl(social) === "" &&
+        social
+      ){
+
+        alert(
+          "Artist social link must use http:// or https://."
+        );
+
+        return;
+      }
+
+      if(
+        !checkSlot(
+          date,
+          time
+        ).available
+      ){
+
+        alert(
+          "That performance window conflicts with an existing booking or confirmed event."
+        );
+
+        return;
+      }
+
+      const booking = {
+        id:uid("booking"),
+        artistName,
+        email,
+        phone,
+        genre,
+        date,
+        time,
+        social,
+        notes,
+        status:"Pending",
+        eventId:null,
+        createdAt:
+          new Date().toISOString()
+      };
+
+      state.bookings.push(
+        booking
+      );
+
+      state.artistProfile = {
+        name:artistName,
+        email,
+        phone,
+        genre,
+        social,
+        notes
+      };
+
+      addHistory(
+        "Booking",
+        "New booking request submitted.",
+        `${artistName} • ${formatDate(date)} • ${time}`
+      );
+
+      saveState();
+      renderAll();
+
+      alert(
+        "Booking request submitted. It is now waiting for owner approval."
+      );
+
+      showTab(
+        "bookings"
+      );
+    }
+  );
+
+/* ================================================================
+   BOOKING ACTIONS
+   ================================================================ */
+
+function approveBooking(id){
+
+  const booking =
+    state.bookings.find(
+      item => item.id === id
+    );
+
+  if(
+    !booking ||
+    booking.status !== "Pending"
+  ){
+    return;
+  }
+
+  if(
+    !checkSlot(
+      booking.date,
+      booking.time,
+      booking.id
+    ).available
+  ){
+
+    alert(
+      "This booking can no longer be approved because the requested window is occupied."
+    );
+
+    return;
+  }
+
+  booking.status =
+    "Approved";
+
+  let event =
+    state.events.find(
+      item =>
+        item.bookingId === booking.id &&
+        item.status !== "Cancelled"
+    );
+
+  if(!event){
+
+    event = {
+      id:uid("event"),
+      bookingId:booking.id,
+      artistName:booking.artistName,
+      genre:booking.genre,
+      date:booking.date,
+      time:booking.time,
+      social:booking.social,
+      notes:booking.notes,
+      status:"Confirmed",
+      createdAt:
+        new Date().toISOString()
+    };
+
+    state.events.push(
+      event
+    );
+
+  }else{
+
+    Object.assign(
+      event,
+      {
+        artistName:booking.artistName,
+        genre:booking.genre,
+        date:booking.date,
+        time:booking.time,
+        social:booking.social,
+        notes:booking.notes,
+        status:"Confirmed"
+      }
+    );
+  }
+
+  booking.eventId =
+    event.id;
+
+  ensurePromotionForEvent(
+    event
+  );
+
+  addHistory(
+    "Approval",
+    "Booking approved.",
+    `${booking.artistName} • ${formatDate(event.date)} • ${event.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function declineBooking(id){
+
+  const booking =
+    state.bookings.find(
+      item => item.id === id
+    );
+
+  if(
+    !booking ||
+    booking.status === "Cancelled" ||
+    booking.status === "Declined"
+  ){
+    return;
+  }
+
+  booking.status =
+    "Declined";
+
+  state.rescheduleRequests
+    .filter(
+      request =>
+        request.bookingId === id &&
+        request.status === "Pending"
+    )
+    .forEach(
+      request =>
+        request.status = "Declined"
+    );
+
+  addHistory(
+    "Booking",
+    "Booking declined.",
+    `${booking.artistName} • ${formatDate(booking.date)} • ${booking.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function cancelBooking(id){
+
+  const booking =
+    state.bookings.find(
+      item => item.id === id
+    );
+
+  if(
+    !booking ||
+    booking.status === "Cancelled" ||
+    booking.status === "Declined"
+  ){
+    return;
+  }
+
+  booking.status =
+    "Cancelled";
+
+  const event =
+    state.events.find(
+      item =>
+        item.id === booking.eventId
+    );
+
+  if(event){
+    event.status =
+      "Cancelled";
+  }
+
+  addHistory(
+    "Booking",
+    "Booking cancelled.",
+    `${booking.artistName} • ${formatDate(booking.date)} • ${booking.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+/* ================================================================
+   RESCHEDULING
+   ================================================================ */
+
+function requestReschedule(id){
+
+  const booking =
+    state.bookings.find(
+      item => item.id === id
+    );
+
+  if(
+    !booking ||
+    !["Pending","Approved"].includes(
+      booking.status
+    )
+  ){
+    return;
+  }
+
+  const newDate =
+    prompt(
+      "Enter the new date as YYYY-MM-DD:",
+      booking.date
+    );
+
+  if(!newDate){
+    return;
+  }
+
+  const newTime =
+    prompt(
+      "Enter the new performance window:\n\n" +
+      ALLOWED_TIMES.join("\n"),
+      booking.time
+    );
+
+  if(
+    !newTime ||
+    !validDate(newDate) ||
+    !ALLOWED_TIMES.includes(newTime)
+  ){
+
+    if(newTime){
+
+      alert(
+        "Please use a valid future date and performance window."
+      );
+    }
+
+    return;
+  }
+
+  if(
+    !checkSlot(
+      newDate,
+      newTime,
+      booking.id,
+      booking.eventId
+    ).available
+  ){
+
+    alert(
+      "That reschedule window conflicts with another booking or event."
+    );
+
+    return;
+  }
+
+  state.rescheduleRequests
+    .filter(
+      request =>
+        request.bookingId === id &&
+        request.status === "Pending"
+    )
+    .forEach(
+      request =>
+        request.status = "Declined"
+    );
+
+  state.rescheduleRequests.push({
+    id:uid("reschedule"),
+    bookingId:id,
+    oldDate:booking.date,
+    oldTime:booking.time,
+    newDate,
+    newTime,
+    status:"Pending",
+    createdAt:
+      new Date().toISOString()
+  });
+
+  booking.status =
+    "Reschedule";
+
+  addHistory(
+    "Reschedule",
+    "Reschedule requested.",
+    `${booking.artistName} • ${formatDate(newDate)} • ${newTime}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function approveReschedule(id){
+
+  const request =
+    state.rescheduleRequests.find(
+      item => item.id === id
+    );
+
+  if(
+    !request ||
+    request.status !== "Pending"
+  ){
+    return;
+  }
+
+  const booking =
+    state.bookings.find(
+      item =>
+        item.id === request.bookingId
+    );
+
+  if(!booking){
+
+    request.status =
+      "Declined";
+
+    saveState();
+    renderAll();
+
+    return;
+  }
+
+  if(
+    !checkSlot(
+      request.newDate,
+      request.newTime,
+      booking.id,
+      booking.eventId
+    ).available
+  ){
+
+    alert(
+      "The requested reschedule window is no longer available."
+    );
+
+    return;
+  }
+
+  booking.date =
+    request.newDate;
+
+  booking.time =
+    request.newTime;
+
+  booking.status =
+    "Approved";
+
+  let event =
+    state.events.find(
+      item =>
+        item.id === booking.eventId &&
+        item.status !== "Cancelled"
+    );
+
+  if(event){
+
+    Object.assign(
+      event,
+      {
+        date:booking.date,
+        time:booking.time,
+        status:"Confirmed"
+      }
+    );
+
+  }else{
+
+    event = {
+      id:uid("event"),
+      bookingId:booking.id,
+      artistName:booking.artistName,
+      genre:booking.genre,
+      date:booking.date,
+      time:booking.time,
+      social:booking.social,
+      notes:booking.notes,
+      status:"Confirmed",
+      createdAt:
+        new Date().toISOString()
+    };
+
+    state.events.push(
+      event
+    );
+  }
+
+  booking.eventId =
+    event.id;
+
+  ensurePromotionForEvent(
+    event
+  );
+
+  request.status =
+    "Approved";
+
+  addHistory(
+    "Reschedule",
+    "Reschedule approved.",
+    `${booking.artistName} • ${formatDate(booking.date)} • ${booking.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function declineReschedule(id){
+
+  const request =
+    state.rescheduleRequests.find(
+      item => item.id === id
+    );
+
+  if(
+    !request ||
+    request.status !== "Pending"
+  ){
+    return;
+  }
+
+  const booking =
+    state.bookings.find(
+      item =>
+        item.id === request.bookingId
+    );
+
+  request.status =
+    "Declined";
+
+  if(booking){
+
+    booking.status =
+      state.events.some(
+        event =>
+          event.id === booking.eventId &&
+          event.status === "Confirmed"
+      )
+        ? "Approved"
+        : "Pending";
+  }
+
+  addHistory(
+    "Reschedule",
+    "Reschedule declined.",
+    booking
+      ? `${booking.artistName} • ${formatDate(request.newDate)} • ${request.newTime}`
+      : "Booking unavailable"
+  );
+
+  saveState();
+  renderAll();
+}
+
+/* ================================================================
+   EVENTS
+   ================================================================ */
+
+function createDemoEvent(){
+
+  const dateObject =
+    new Date();
+
+  dateObject.setDate(
+    dateObject.getDate() + 7
+  );
+
+  const date =
+    new Date(
+      dateObject.getTime() -
+      dateObject.getTimezoneOffset() * 60000
+    )
+    .toISOString()
+    .slice(0,10);
+
+  const time =
+    "8:00 PM - 10:00 PM";
+
+  if(
+    !checkSlot(
+      date,
+      time
+    ).available
+  ){
+
+    alert(
+      "The demo event could not be created because the selected window is occupied."
+    );
+
+    return;
+  }
+
+  const event = {
+    id:uid("event"),
+    bookingId:null,
+    artistName:"Gemini House Band",
+    genre:"Live Lounge",
+    date,
+    time,
+    social:"",
+    notes:
+      "Demo confirmed event for ScanCraft presentation.",
+    status:"Confirmed",
+    createdAt:
+      new Date().toISOString()
+  };
+
+  state.events.push(
+    event
+  );
+
+  ensurePromotionForEvent(
+    event
+  );
+
+  addHistory(
+    "Event",
+    "Demo event created.",
+    `${event.artistName} • ${formatDate(event.date)} • ${event.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function cancelEvent(id){
+
+  const event =
+    state.events.find(
+      item => item.id === id
+    );
+
+  if(
+    !event ||
+    event.status !== "Confirmed"
+  ){
+    return;
+  }
+
+  event.status =
+    "Cancelled";
+
+  if(event.bookingId){
+
+    const booking =
+      state.bookings.find(
+        item =>
+          item.id === event.bookingId
+      );
+
+    if(booking){
+      booking.status =
+        "Cancelled";
+    }
+  }
+
+  addHistory(
+    "Event",
+    "Event cancelled.",
+    `${event.artistName} • ${formatDate(event.date)} • ${event.time}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+/* ================================================================
+   PUBLIC EVENT URL
+   ================================================================ */
+
+function getEventUrl(event){
+
+  const url =
+    new URL(location.href);
+
+  url.searchParams.set(
+    EVENT_PARAM,
+    event.id
+  );
+
+  url.searchParams.set(
+    PUBLIC_EVENT_PARAM,
+    encodeURIComponent(
+      JSON.stringify({
+        id:event.id,
+        artistName:event.artistName,
+        genre:event.genre,
+        date:event.date,
+        time:event.time,
+        social:event.social,
+        notes:event.notes,
+        status:event.status
+      })
+    )
+  );
+
+  return url.toString();
+}
+
+function copyText(
+  text,
+  successMessage
+){
+
+  if(
+    navigator.clipboard &&
+    navigator.clipboard.writeText
+  ){
+
+    navigator.clipboard
+      .writeText(text)
+      .then(
+        () => alert(successMessage)
+      )
+      .catch(
+        () =>
+          prompt(
+            "Copy this text:",
+            text
+          )
+      );
+
+  }else{
+
+    prompt(
+      "Copy this text:",
+      text
+    );
+  }
+}
+
+function copyEventUrl(id){
+
+  const event =
+    state.events.find(
+      item => item.id === id
+    );
+
+  if(
+    event &&
+    event.status === "Confirmed"
+  ){
+
+    copyText(
+      getEventUrl(event),
+      "Public event URL copied."
+    );
+  }
+}
+
+/* ================================================================
+   PROMOTION ENGINE
+   ================================================================ */
+
+function buildPromotion(
+  event,
+  promotion
+){
+
+  promotion.headline =
+    `LIVE MUSIC AT GEMINI LOUNGE — ${event.artistName}`;
+
+  promotion.socialPost =
+`LIVE MUSIC AT GEMINI LOUNGE
+
+🎶 ${event.artistName}
+📅 ${formatDate(event.date)}
+🕗 ${event.time}
+
+Join us at Gemini Lounge for a night of ${(event.genre || "live music").toLowerCase()} and good company.
+
+GEMINI LOUNGE
+Live music • Good drinks • Good people`;
+
+  promotion.campaignNote =
+    `Promote ${event.artistName} at Gemini Lounge on ${formatDate(event.date)} from ${event.time}.`;
+
+  promotion.updatedAt =
+    new Date().toISOString();
+
+  promotion.generatedAt =
+    new Date().toISOString();
+
+  return promotion;
+}
+
+function generatePromotion(id){
+
+  const event =
+    state.events.find(
+      item => item.id === id
+    );
+
+  if(
+    !event ||
+    event.status !== "Confirmed"
+  ){
+
+    alert(
+      "Only confirmed events can be promoted."
+    );
+
+    return;
+  }
+
+  const promotion =
+    ensurePromotionForEvent(
+      event
+    );
+
+  buildPromotion(
+    event,
+    promotion
+  );
+
+  promotion.status =
+    "Promo Ready";
+
+  addHistory(
+    "Promotion",
+    "Promotion package generated.",
+    `${event.artistName} • ${formatDate(event.date)}`
+  );
+
+  saveState();
+  renderAll();
+}
+
+function regeneratePromotion(id){
+
+  const promotion =
+    state.promotions.find(
+      item => item.id === id
+    );
+
+  const event =
+    promotion &&
+    state.events.find(
+      item =>
+        item.id === promotion.eventId
+    );
+
+  if(
+    !promotion ||
+    !event
+  ){
+    return;
+  }
+
+  buildPromotion(
+    event,
+    promotion
+  );
+
+  promotion.status =
+    "Promo Ready";
+
+  saveState();
+  renderAll();
+}
+
+function setPromotionStatus(
+  id,
+  status
+){
+
+  const promotion =
+    state.promotions.find(
+      item => item.id === id
+    );
+
+  const event =
+    promotion &&
+    state.events.find(
+      item =>
+        item.id === promotion.eventId
+    );
+
+  if(
+    !promotion ||
+    !event
+  ){
+    return;
+  }
+
+  promotion.status =
+    status;
+
+  promotion.updatedAt =
+    new Date().toISOString();
+
+  saveState();
+  renderAll();
+}
+
+function markChannel(
+  id,
+  channel
+){
+
+  const promotion =
+    state.promotions.find(
+      item => item.id === id
+    );
+
+  if(!promotion){
+    return;
+  }
+
+  promotion.channels =
+    promotion.channels || {};
+
+  promotion.channels[channel] =
+    true;
+
+  promotion.updatedAt =
+    new Date().toISOString();
+
+  saveState();
+  renderAll();
+}
+
+/* ================================================================
+   ACTION CENTER
+   ================================================================ */
+
+function getActionItems(){
+
+  const items = [];
+
+  state.bookings
+    .filter(
+      booking =>
+        booking.status === "Pending"
+    )
+    .sort(sortByDateTime)
+    .forEach(
+      booking => {
+
+        items.push({
+          priority:1,
+          title:"Review booking request",
+          meta:
+            `${booking.artistName} • ${formatDate(booking.date)} • ${booking.time}`,
+          button:"Review Request",
+          id:
+            "booking-" +
+            booking.id,
+          tab:"owner"
+        });
+      }
+    );
+
+  state.rescheduleRequests
+    .filter(
+      request =>
+        request.status === "Pending"
+    )
+    .forEach(
+      request => {
+
+        const booking =
+          state.bookings.find(
+            item =>
+              item.id === request.bookingId
+          );
+
+        items.push({
+          priority:2,
+          title:"Review reschedule request",
+          meta:
+            booking
+              ? `${booking.artistName} • ${formatDate(request.newDate)} • ${request.newTime}`
+              : "Booking record unavailable",
+          button:"Review Reschedule",
+          id:
+            "reschedule-" +
+            request.id,
+          tab:"owner"
+        });
+      }
+    );
+
+  state.promotions
+    .filter(
+      promotion =>
+        promotion.status === "Promo Ready"
+    )
+    .forEach(
+      promotion => {
+
+        const event =
+          state.events.find(
+            item =>
+              item.id === promotion.eventId
+          );
+
+        if(event){
+
+          items.push({
+            priority:3,
+            title:"Promotion ready",
+            meta:
+              `${event.artistName} • ${formatDate(event.date)}`,
+            button:"Open Promotion",
+            id:
+              "promotion-" +
+              promotion.id,
+            tab:"promotion"
+          });
+        }
+      }
+    );
+
+  return items
+    .sort(
+      (a,b) =>
+        a.priority - b.priority
+    )
+    .slice(0,12);
+}
+
+/* ================================================================
+   DASHBOARD RENDER
+   ================================================================ */
+
+function renderArtistDashboard(){
+
+  const profile =
+    state.artistProfile || {};
+
+  const profileCard =
+    document.getElementById(
+      "artistProfileCard"
+    );
+
+  profileCard.innerHTML = `
+
+    <div class="head">
+
+      <h2>Artist Profile</h2>
+
+      <button
+        class="link"
+        data-action="profile"
+      >
+        ✎ Edit Profile
+      </button>
+
+    </div>
+
+    <div class="profile-grid">
+
+      <div class="profile-field">
+        <label>Artist / Band Name</label>
+        <span>
+          ${escapeHtml(
+            profile.name ||
+            "Coastal Echo"
+          )}
+        </span>
+      </div>
+
+      <div class="profile-field">
+        <label>Genre</label>
+        <span>
+          ${escapeHtml(
+            profile.genre ||
+            "Acoustic Rock"
+          )}
+        </span>
+      </div>
+
+      <div class="profile-field">
+        <label>Location</label>
+        <span>Bandon, OR</span>
+      </div>
+
+      <div class="profile-field">
+        <label>Contact</label>
+        <span>
+          ${escapeHtml(
+            profile.email ||
+            "coastalecho@example.com"
+          )}
+        </span>
+      </div>
+
+      <div class="profile-field">
+        <label>Performance Type</label>
+        <span>Duo</span>
+      </div>
+
+      <div class="profile-field">
+        <label>Social Links</label>
+        <span>
+          ${escapeHtml(
+            profile.social ||
+            "Not configured"
+          )}
+        </span>
+      </div>
+
+      <div class="profile-bio">
+
+        <label>Artist Bio</label>
+
+        ${escapeHtml(
+          profile.notes ||
+          "A local acoustic duo bringing familiar songs and original music to the coast."
+        )}
+
+      </div>
+
+    </div>
+  `;
+
+  const actionItems =
+    getActionItems();
+
+  const pending =
+    state.bookings.filter(
+      booking =>
+        booking.status === "Pending"
+    );
+
+  const upcoming =
+    state.events
+      .filter(
+        event =>
+          event.status === "Confirmed" &&
+          event.date >= todayISO()
+      )
+      .sort(sortByDateTime);
+
+  const interests =
+    Math.max(
+      11,
+      state.bookings.length +
+      state.events.length +
+      9
+    );
+
+  document.getElementById(
+    "dashboardMetrics"
+  ).innerHTML = `
+
+    <div class="metric">
+      <strong>
+        ${actionItems.length}
+      </strong>
+      <span>
+        Requests Needing Attention
+      </span>
+    </div>
+
+    <div class="metric">
+      <strong>
+        ${upcoming.length}
+      </strong>
+      <span>
+        Upcoming Shows
+      </span>
+    </div>
+
+    <div class="metric">
+      <strong>
+        ${interests}
+      </strong>
+      <span>
+        Customer Interests
+      </span>
+    </div>
+
+  `;
+
+  const attentionRoot =
+    document.getElementById(
+      "dashboardAttention"
+    );
+
+  attentionRoot.innerHTML =
+    pending.length
+
+      ? pending
+          .slice(0,1)
+          .map(
+            booking => `
+
+              <div
+                class="mini-card"
+                data-action="attention"
+                data-focus-id="booking-${booking.id}"
+              >
+
+                <div class="mini-top">
+
+                  <div class="mini-title">
+                    ${escapeHtml(
+                      booking.artistName
+                    )}
+                  </div>
+
+                  <span class="badge pending">
+                    Pending
+                  </span>
+
+                </div>
+
+                <div class="mini-meta">
+                  ▣ ${escapeHtml(
+                    formatDate(
+                      booking.date
+                    )
+                  )}
+                  ·
+                  ${escapeHtml(
+                    booking.time
+                  )}
+                  <br>
+                  ${escapeHtml(
+                    booking.genre ||
+                    "Live Music"
+                  )}
+                </div>
+
+                <div class="actions">
+
+                  <button
+                    class="btn success"
+                    onclick="showTab('owner','booking-${booking.id}')"
+                  >
+                    ✓ Approve
+                  </button>
+
+                  <button
+                    class="btn danger"
+                    onclick="showTab('owner','booking-${booking.id}')"
+                  >
+                    ✕ Decline
+                  </button>
+
+                  <button
+                    class="btn"
+                    onclick="showTab('owner','booking-${booking.id}')"
+                  >
+                    Details
+                  </button>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No immediate requests.
+        </div>
+      `;
+
+  const next =
+    upcoming[0];
+
+  document.getElementById(
+    "dashboardNext"
+  ).innerHTML =
+    next
+
+      ? `
+
+        <div
+          class="mini-card"
+          data-action="event"
+          data-event-id="${next.id}"
+        >
+
+          <div class="mini-top">
+
+            <div class="mini-title">
+              ${escapeHtml(
+                next.artistName
+              )}
+            </div>
+
+            <span class="badge confirmed">
+              Approved
+            </span>
+
+          </div>
+
+          <div class="mini-meta">
+
+            ${escapeHtml(
+              next.genre ||
+              "Live Music"
+            )}
+            · Bandon, OR
+
+            <br>
+
+            ▣ ${escapeHtml(
+              formatDate(
+                next.date
+              )
+            )}
+            ·
+            ${escapeHtml(
+              next.time
+            )}
+
+          </div>
+
+        </div>
+
+      `
+
+      : `
+        <div class="empty">
+          No confirmed shows yet.
+        </div>
+      `;
+
+  document.getElementById(
+    "dashboardUpcoming"
+  ).innerHTML =
+    upcoming.length
+
+      ? upcoming
+          .slice(0,3)
+          .map(
+            event => `
+
+              <div
+                class="mini-card"
+                data-action="event"
+                data-event-id="${event.id}"
+              >
+
+                <div class="mini-top">
+
+                  <div class="mini-title">
+                    ${escapeHtml(
+                      event.artistName
+                    )}
+                  </div>
+
+                  <span class="badge confirmed">
+                    Approved
+                  </span>
+
+                </div>
+
+                <div class="mini-meta">
+
+                  ▣ ${escapeHtml(
+                    formatDate(
+                      event.date
+                    )
+                  )}
+                  ·
+                  ${escapeHtml(
+                    event.time
+                  )}
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No upcoming shows.
+        </div>
+      `;
+}
+
+/* ================================================================
+   BOOKINGS RENDER
+   ================================================================ */
+
+function renderBookings(){
+
+  const root =
+    document.getElementById(
+      "bookingList"
+    );
+
+  root.innerHTML =
+    state.bookings.length
+
+      ? [...state.bookings]
+          .sort(sortByDateTime)
+          .map(
+            booking => `
+
+              <div class="card">
+
+                <div class="card-top">
+
+                  <div>
+
+                    <div class="card-title">
+                      ${escapeHtml(
+                        booking.artistName
+                      )}
+                    </div>
+
+                    <div class="card-meta">
+
+                      ${escapeHtml(
+                        formatDate(
+                          booking.date
+                        )
+                      )}
+                      •
+                      ${escapeHtml(
+                        booking.time
+                      )}
+
+                      <br>
+
+                      ${escapeHtml(
+                        booking.genre ||
+                        "Live Music"
+                      )}
+
+                    </div>
+
+                  </div>
+
+                  <span
+                    class="badge ${badgeClass(
+                      booking.status
+                    )}"
+                  >
+                    ${escapeHtml(
+                      booking.status
+                    )}
+                  </span>
+
+                </div>
+
+                ${
+                  booking.status === "Pending" ||
+                  booking.status === "Approved"
+
+                    ? `
+
+                      <div class="actions">
+
+                        <button
+                          class="btn info"
+                          onclick="requestReschedule('${booking.id}')"
+                        >
+                          Request Reschedule
+                        </button>
+
+                        <button
+                          class="btn danger"
+                          onclick="cancelBooking('${booking.id}')"
+                        >
+                          Cancel Booking
+                        </button>
+
+                      </div>
+
+                    `
+
+                    : ""
+                }
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No bookings yet.
+        </div>
+      `;
+}
+
+/* ================================================================
+   OWNER RENDER
+   ================================================================ */
+
+function renderOwner(){
+
+  const pending =
+    state.bookings.filter(
+      booking =>
+        booking.status === "Pending"
+    ).length;
+
+  const reschedules =
+    state.rescheduleRequests.filter(
+      request =>
+        request.status === "Pending"
+    ).length;
+
+  const upcoming =
+    state.events.filter(
+      event =>
+        event.status === "Confirmed" &&
+        event.date >= todayISO()
+    ).length;
+
+  const promoReady =
+    state.promotions.filter(
+      promotion =>
+        promotion.status === "Promo Ready"
+    ).length;
+
+  const confirmed =
+    state.events.filter(
+      event =>
+        event.status === "Confirmed"
+    ).length;
+
+  document.getElementById(
+    "metrics"
+  ).innerHTML = [
+
+    [
+      String(pending),
+      "Pending Bookings"
+    ],
+
+    [
+      String(reschedules),
+      "Reschedule Requests"
+    ],
+
+    [
+      String(upcoming),
+      "Upcoming Events"
+    ],
+
+    [
+      String(promoReady),
+      "Promo Ready"
+    ],
+
+    [
+      String(confirmed),
+      "Confirmed Events"
+    ],
+
+    [
+      String(state.history.length),
+      "Booking Activity"
+    ]
+
+  ]
+  .map(
+    item => `
+
+      <div class="metric">
+
+        <strong>
+          ${escapeHtml(item[0])}
+        </strong>
+
+        <span>
+          ${escapeHtml(item[1])}
+        </span>
+
+      </div>
+
+    `
+  )
+  .join("");
+
+  const actions =
+    getActionItems();
+
+  window.__actionItems =
+    actions;
+
+  document.getElementById(
+    "actionCenter"
+  ).innerHTML =
+    actions.length
+
+      ? actions
+          .map(
+            (item,index) => `
+
+              <div class="mini-card">
+
+                <div class="mini-top">
+
+                  <div>
+
+                    <div class="mini-title">
+                      ${escapeHtml(
+                        item.title
+                      )}
+                    </div>
+
+                    <div class="mini-meta">
+                      ${escapeHtml(
+                        item.meta
+                      )}
+                    </div>
+
+                  </div>
+
+                  <button
+                    class="btn primary"
+                    onclick="runAction(${index})"
+                  >
+                    ${escapeHtml(
+                      item.button
+                    )}
+                  </button>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No immediate actions required.
+        </div>
+      `;
+
+  renderOwnerBookings();
+  renderOwnerReschedules();
+}
+
+function runAction(index){
+
+  const action =
+    window.__actionItems?.[index];
+
+  if(action){
+
+    showTab(
+      action.tab,
+      action.id
+    );
+  }
+}
+
+function renderOwnerBookings(){
+
+  const root =
+    document.getElementById(
+      "ownerBookingList"
+    );
+
+  const bookings =
+    [...state.bookings]
+      .sort(
+        (a,b) =>
+          String(
+            b.createdAt || ""
+          )
+          .localeCompare(
+            String(
+              a.createdAt || ""
+            )
+          )
+      );
+
+  root.innerHTML =
+    bookings.length
+
+      ? bookings
+          .map(
+            booking => {
+
+              let buttons = "";
+
+              if(
+                booking.status === "Pending"
+              ){
+
+                buttons = `
+
+                  <button
+                    class="btn success"
+                    onclick="approveBooking('${booking.id}')"
+                  >
+                    Approve
+                  </button>
+
+                  <button
+                    class="btn danger"
+                    onclick="declineBooking('${booking.id}')"
+                  >
+                    Decline
+                  </button>
+
+                `;
+
+              }else if(
+                booking.status === "Reschedule"
+              ){
+
+                const request =
+                  state.rescheduleRequests.find(
+                    item =>
+                      item.bookingId === booking.id &&
+                      item.status === "Pending"
+                  );
+
+                buttons = `
+
+                  <button
+                    class="btn info"
+                    onclick="showTab(
+                      'owner',
+                      '${request
+                        ? `reschedule-${request.id}`
+                        : `booking-${booking.id}`}'
+                    )"
+                  >
+                    Review Reschedule
+                  </button>
+
+                `;
+
+              }else if(
+                booking.status === "Approved"
+              ){
+
+                buttons = `
+
+                  <button
+                    class="btn danger"
+                    onclick="cancelBooking('${booking.id}')"
+                  >
+                    Cancel
+                  </button>
+
+                `;
+              }
+
+              return `
+
+                <div
+                  id="booking-${booking.id}"
+                  class="card"
+                >
+
+                  <div class="card-top">
+
+                    <div>
+
+                      <div class="card-title">
+                        ${escapeHtml(
+                          booking.artistName
+                        )}
+                      </div>
+
+                      <div class="card-meta">
+
+                        <strong>
+                          ${escapeHtml(
+                            formatDate(
+                              booking.date
+                            )
+                          )}
+                        </strong>
+
+                        •
+                        ${escapeHtml(
+                          booking.time
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                          booking.genre ||
+                          "Live Music"
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                          booking.email ||
+                          ""
+                        )}
+
+                      </div>
+
+                    </div>
+
+                    <span
+                      class="badge ${badgeClass(
+                        booking.status
+                      )}"
+                    >
+                      ${escapeHtml(
+                        booking.status
+                      )}
+                    </span>
+
+                  </div>
+
+                  ${
+                    buttons
+                      ? `
+                        <div class="actions">
+                          ${buttons}
+                        </div>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+              `;
+            }
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No booking requests yet.
+        </div>
+      `;
+}
+
+function renderOwnerReschedules(){
+
+  const root =
+    document.getElementById(
+      "ownerRescheduleList"
+    );
+
+  root.innerHTML =
+    state.rescheduleRequests.length
+
+      ? state.rescheduleRequests
+          .map(
+            request => {
+
+              const booking =
+                state.bookings.find(
+                  item =>
+                    item.id === request.bookingId
+                );
+
+              return `
+
+                <div
+                  id="reschedule-${request.id}"
+                  class="card"
+                >
+
+                  <div class="card-top">
+
+                    <div>
+
+                      <div class="card-title">
+
+                        ${escapeHtml(
+                          booking?.artistName ||
+                          "Unknown Artist"
+                        )}
+
+                      </div>
+
+                      <div class="card-meta">
+
+                        Current:
+                        ${escapeHtml(
+                          formatDate(
+                            request.oldDate
+                          )
+                        )}
+                        •
+                        ${escapeHtml(
+                          request.oldTime
+                        )}
+
+                        <br>
+
+                        Requested:
+                        <strong>
+                          ${escapeHtml(
+                            formatDate(
+                              request.newDate
+                            )
+                          )}
+                          •
+                          ${escapeHtml(
+                            request.newTime
+                          )}
+                        </strong>
+
+                      </div>
+
+                    </div>
+
+                    <span
+                      class="badge ${badgeClass(
+                        request.status
+                      )}"
+                    >
+                      ${escapeHtml(
+                        request.status
+                      )}
+                    </span>
+
+                  </div>
+
+                  ${
+                    request.status === "Pending"
+
+                      ? `
+
+                        <div class="actions">
+
+                          <button
+                            class="btn success"
+                            onclick="approveReschedule('${request.id}')"
+                          >
+                            Approve Reschedule
+                          </button>
+
+                          <button
+                            class="btn danger"
+                            onclick="declineReschedule('${request.id}')"
+                          >
+                            Decline
+                          </button>
+
+                        </div>
+
+                      `
+
+                      : ""
+                  }
+
+                </div>
+
+              `;
+            }
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No reschedule requests yet.
+        </div>
+      `;
+}
+
+/* ================================================================
+   EVENTS RENDER
+   ================================================================ */
+
+function renderEvents(){
+
+  const activeEvents =
+    state.events
+      .filter(
+        event =>
+          event.status === "Confirmed"
+      )
+      .sort(sortByDateTime);
+
+  document.getElementById(
+    "eventList"
+  ).innerHTML =
+    activeEvents.length
+
+      ? activeEvents
+          .map(
+            event => `
+
+              <div class="card">
+
+                <div class="card-top">
+
+                  <div>
+
+                    <div class="card-title">
+                      ${escapeHtml(
+                        event.artistName
+                      )}
+                    </div>
+
+                    <div class="card-meta">
+
+                      ${escapeHtml(
+                        formatDate(
+                          event.date
+                        )
+                      )}
+                      •
+                      ${escapeHtml(
+                        event.time
+                      )}
+
+                      <br>
+
+                      ${escapeHtml(
+                        event.genre ||
+                        "Live Music"
+                      )}
+
+                    </div>
+
+                  </div>
+
+                  <span class="badge confirmed">
+                    Confirmed
+                  </span>
+
+                </div>
+
+                <div class="actions">
+
+                  <button
+                    class="btn primary"
+                    onclick="copyEventUrl('${event.id}')"
+                  >
+                    Copy Public Event URL
+                  </button>
+
+                  <button
+                    class="btn warn"
+                    onclick="showTab('promotion')"
+                  >
+                    Open Promotion
+                  </button>
+
+                  <button
+                    class="btn danger"
+                    onclick="cancelEvent('${event.id}')"
+                  >
+                    Cancel Event
+                  </button>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No active confirmed events.
+        </div>
+      `;
+}
+
+/* ================================================================
+   PROMOTION RENDER
+   ================================================================ */
+
+function renderPromotion(){
+
+  const records =
+    state.promotions
+      .map(
+        promotion => ({
+          promotion,
+          event:
+            state.events.find(
+              event =>
+                event.id ===
+                promotion.eventId
+            )
+        })
+      )
+      .filter(
+        item => item.event
+      );
+
+  document.getElementById(
+    "promotionList"
+  ).innerHTML =
+    records.length
+
+      ? records
+          .map(
+            ({
+              promotion,
+              event
+            }) => `
+
+              <div class="card">
+
+                <div class="card-top">
+
+                  <div>
+
+                    <div class="card-title">
+                      ${escapeHtml(
+                        event.artistName
+                      )}
+                    </div>
+
+                    <div class="card-meta">
+
+                      ${escapeHtml(
+                        formatDate(
+                          event.date
+                        )
+                      )}
+                      •
+                      ${escapeHtml(
+                        event.time
+                      )}
+
+                    </div>
+
+                  </div>
+
+                  <span
+                    class="badge ${badgeClass(
+                      promotion.status
+                    )}"
+                  >
+                    ${escapeHtml(
+                      promotion.status
+                    )}
+                  </span>
+
+                </div>
+
+                <div class="actions">
+
+                  ${
+                    event.status === "Confirmed" &&
+                    promotion.status !== "Promoted"
+
+                      ? `
+
+                        <button
+                          class="btn primary"
+                          onclick="generatePromotion('${event.id}')"
+                        >
+                          ${
+                            promotion.socialPost
+                              ? "Regenerate Promotion"
+                              : "Generate Promotion"
+                          }
+                        </button>
+
+                      `
+                      : ""
+                  }
+
+                  ${
+                    promotion.socialPost
+
+                      ? `
+
+                        <button
+                          class="btn info"
+                          onclick='copyText(
+                            ${JSON.stringify(
+                              promotion.socialPost
+                            )},
+                            "Social post copied."
+                          )'
+                        >
+                          Copy Social Post
+                        </button>
+
+                      `
+                      : ""
+                  }
+
+                  ${
+                    promotion.status === "Promo Ready"
+
+                      ? `
+
+                        <button
+                          class="btn success"
+                          onclick="setPromotionStatus(
+                            '${promotion.id}',
+                            'Promoted'
+                          )"
+                        >
+                          Mark Promoted
+                        </button>
+
+                      `
+                      : ""
+                  }
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No promotion records yet.
+        </div>
+      `;
+}
+
+/* ================================================================
+   CALENDAR
+   ================================================================ */
+
+function renderCalendar(){
+
+  const events =
+    state.events
+      .filter(
+        event =>
+          event.status === "Confirmed"
+      )
+      .sort(sortByDateTime);
+
+  document.getElementById(
+    "calendarList"
+  ).innerHTML =
+    events.length
+
+      ? events
+          .map(
+            event => `
+
+              <div
+                class="card"
+                data-action="event"
+                data-event-id="${event.id}"
+              >
+
+                <div class="card-title">
+
+                  ${escapeHtml(
+                    formatDate(
+                      event.date
+                    )
+                  )}
+
+                </div>
+
+                <div class="card-meta">
+
+                  <strong>
+                    ${escapeHtml(
+                      event.time
+                    )}
+                  </strong>
+
+                  —
+                  ${escapeHtml(
+                    event.artistName
+                  )}
+
+                  <span class="badge confirmed">
+                    Confirmed
+                  </span>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No scheduled activity.
+        </div>
+      `;
+}
+
+/* ================================================================
+   HISTORY
+   ================================================================ */
+
+function renderHistory(){
+
+  document.getElementById(
+    "historyList"
+  ).innerHTML =
+    state.history.length
+
+      ? state.history
+          .map(
+            item => `
+
+              <div class="card">
+
+                <div class="card-top">
+
+                  <div>
+
+                    <div class="card-title">
+                      ${escapeHtml(
+                        item.title
+                      )}
+                    </div>
+
+                    <div class="card-meta">
+                      ${escapeHtml(
+                        item.details || ""
+                      )}
+                    </div>
+
+                  </div>
+
+                  <span class="badge">
+                    ${escapeHtml(
+                      item.type
+                    )}
+                  </span>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `
+        <div class="empty">
+          No history yet.
+        </div>
+      `;
+}
+
+/* ================================================================
+   BADGE CLASS
+   ================================================================ */
+
+function badgeClass(status){
+
+  return {
+    Pending:"pending",
+    Approved:"approved",
+    Confirmed:"confirmed",
+    Reschedule:"reschedule",
+    "Promo Ready":"promo-ready",
+    Promoted:"promoted",
+    Declined:"declined",
+    Cancelled:"cancelled",
+    "Not Ready":"not-ready"
+  }[status] || "";
+}
+
+/* ================================================================
+   DEMO BOOKING
+   ================================================================ */
+
+function loadDemoBooking(){
+
+  const pending =
+    state.bookings.find(
+      booking =>
+        booking.status === "Pending"
+    );
+
+  const dateObject =
+    new Date();
+
+  dateObject.setDate(
+    dateObject.getDate() + 10
+  );
+
+  const demoDate =
+    new Date(
+      dateObject.getTime() -
+      dateObject.getTimezoneOffset() * 60000
+    )
+    .toISOString()
+    .slice(0,10);
+
+  const value =
+    pending || {
+      artistName:"Coastal Echo",
+      email:"coastalecho@example.com",
+      phone:"(555) 555-0199",
+      genre:"Acoustic Rock",
+      date:demoDate,
+      time:"7:00 PM - 9:00 PM",
+      social:"instagram.com/coastalecho",
+      notes:
+        "A local acoustic duo bringing familiar songs and original music to the coast."
+    };
+
+  document.getElementById(
+    "artistName"
+  ).value =
+    value.artistName || "";
+
+  document.getElementById(
+    "artistEmail"
+  ).value =
+    value.email || "";
+
+  document.getElementById(
+    "artistPhone"
+  ).value =
+    value.phone || "";
+
+  document.getElementById(
+    "artistGenre"
+  ).value =
+    value.genre || "";
+
+  document.getElementById(
+    "bookingDate"
+  ).value =
+    value.date || demoDate;
+
+  document.getElementById(
+    "bookingTime"
+  ).value =
+    value.time ||
+    "7:00 PM - 9:00 PM";
+
+  document.getElementById(
+    "artistSocial"
+  ).value =
+    value.social &&
+    value.social.startsWith("http")
+      ? value.social
+      : "";
+
+  document.getElementById(
+    "artistNotes"
+  ).value =
+    value.notes || "";
+
+  showTab(
+    "artist"
+  );
+
+  setTimeout(
+    () => {
+
+      document
+        .getElementById("bookingForm")
+        ?.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+    },
+    80
+  );
+}
+
+/* ================================================================
+   DEMO DATA
+   ================================================================ */
+
+function loadDemoData(){
+
+  const bookingDateObject =
+    new Date();
+
+  bookingDateObject.setDate(
+    bookingDateObject.getDate() + 19
+  );
+
+  const bookingDate =
+    new Date(
+      bookingDateObject.getTime() -
+      bookingDateObject.getTimezoneOffset() * 60000
+    )
+    .toISOString()
+    .slice(0,10);
+
+  const eventDateObject =
+    new Date();
+
+  eventDateObject.setDate(
+    eventDateObject.getDate() + 7
+  );
+
+  const eventDate =
+    new Date(
+      eventDateObject.getTime() -
+      eventDateObject.getTimezoneOffset() * 60000
+    )
+    .toISOString()
+    .slice(0,10);
+
+  const pending = {
+
+    id:uid("booking"),
+
+    artistName:"Harbor Lights",
+
+    email:
+      "harborlights@example.com",
+
+    phone:
+      "(555) 555-0144",
+
+    genre:
+      "Indie Folk",
+
+    date:
+      bookingDate,
+
+    time:
+      "8:00 PM - 10:00 PM",
+
+    social:"",
+
+    notes:
+      "Saturday night set request for Gemini Lounge.",
+
+    status:"Pending",
+
+    eventId:null,
+
+    createdAt:
+      new Date().toISOString()
+  };
+
+  const event = {
+
+    id:uid("event"),
+
+    bookingId:null,
+
+    artistName:
+      "Coastal Echo",
+
+    genre:
+      "Acoustic Rock",
+
+    date:
+      eventDate,
+
+    time:
+      "7:00 PM - 9:00 PM",
+
+    social:"",
+
+    notes:
+      "Demo confirmed Gemini Lounge event.",
+
+    status:"Confirmed",
+
+    createdAt:
+      new Date().toISOString()
+  };
+
+  state.artistProfile = {
+
+    name:
+      "Coastal Echo",
+
+    email:
+      "coastalecho@example.com",
+
+    phone:
+      "(555) 555-0199",
+
+    genre:
+      "Acoustic Rock",
+
+    social:
+      "instagram.com/coastalecho",
+
+    notes:
+      "A local acoustic duo bringing familiar songs and original music to the coast."
+  };
+
+  state.bookings = [
+    pending
+  ];
+
+  state.events = [
+    event
+  ];
+
+  state.promotions = [];
+
+  ensurePromotionForEvent(
+    event
+  );
+
+  state.history = [
+
+    {
+      id:uid("history"),
+
+      type:"Demo",
+
+      title:
+        "Gemini Lounge dashboard initialized.",
+
+      details:
+        `${event.artistName} • ${formatDate(event.date)} • ${event.time}`,
+
+      createdAt:
+        new Date().toISOString()
+    }
+
+  ];
+}
+
+/* ================================================================
+   RESET
+   ================================================================ */
+
+function resetDemo(){
+
+  if(
+    !confirm(
+      "Reset Gemini Lounge demo data and reload the demonstration?"
+    )
+  ){
+    return;
+  }
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+  LEGACY_KEYS.forEach(
+    key =>
+      localStorage.removeItem(key)
+  );
+
+  location.reload();
+}
+
+/* ================================================================
+   PUBLIC EVENT PAGE
+   ================================================================ */
+
+function renderPublicEventPage(event){
+
+  const root =
+    document.getElementById(
+      "publicEventRoot"
+    );
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+  if(
+    event.status !== "Confirmed"
+  ){
+
+    root.innerHTML = `
+
+      <div class="event-public">
+
+        <div class="public-card">
+
+          <div class="public-brand">
+            GEMINI LOUNGE
+          </div>
+
+          <h1>
+            Event Unavailable
+          </h1>
+
+          <div class="public-notes">
+            This event is no longer an active
+            confirmed Gemini Lounge event.
+          </div>
+
+          <button
+            class="btn"
+            onclick="closePublicEvent()"
+          >
+            Open Booking Engine
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    app.classList.add(
+      "hidden"
+    );
+
+    root.classList.remove(
+      "hidden"
+    );
+
+    return true;
+  }
+
+  root.innerHTML = `
+
+    <div class="event-public">
+
+      <div class="public-card">
+
+        <div class="public-brand">
+          GEMINI LOUNGE
+        </div>
+
+        <h1>
+          ${escapeHtml(
+            event.artistName
+          )}
+        </h1>
+
+        <div class="public-date">
+          ${escapeHtml(
+            formatDate(
+              event.date
+            )
+          )}
+        </div>
+
+        <div class="public-time">
+          ${escapeHtml(
+            event.time
+          )}
+        </div>
+
+        ${
+          event.genre
+            ? `
+              <div class="public-notes">
+                ${escapeHtml(
+                  event.genre
+                )}
+              </div>
+            `
+            : ""
+        }
+
+        <div
+          class="actions"
+          style="justify-content:center"
+        >
+
+          <button
+            class="btn"
+            onclick="closePublicEvent()"
+          >
+            Open Booking Engine
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  app.classList.add(
+    "hidden"
+  );
+
+  root.classList.remove(
+    "hidden"
+  );
+
+  return true;
+}
+
+function closePublicEvent(){
+
+  const root =
+    document.getElementById(
+      "publicEventRoot"
+    );
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+  root.innerHTML = "";
+
+  root.classList.add(
+    "hidden"
+  );
+
+  app.classList.remove(
+    "hidden"
+  );
+
+  const url =
+    new URL(location.href);
+
+  url.searchParams.delete(
+    EVENT_PARAM
+  );
+
+  url.searchParams.delete(
+    PUBLIC_EVENT_PARAM
+  );
+
+  history.replaceState(
+    {},
+    "",
+    url.toString()
+  );
+}
+
+function checkPublicEvent(){
+
+  const params =
+    new URLSearchParams(
+      location.search
+    );
+
+  const id =
+    params.get(
+      EVENT_PARAM
+    );
+
+  const encoded =
+    params.get(
+      PUBLIC_EVENT_PARAM
+    );
+
+  if(id){
+
+    const event =
+      state.events.find(
+        item =>
+          item.id === id
+      );
+
+    if(event){
+
+      return renderPublicEventPage(
+        event
+      );
+    }
+  }
+
+  if(encoded){
+
+    try{
+
+      const event =
+        JSON.parse(
+          decodeURIComponent(
+            encoded
+          )
+        );
+
+      if(
+        event &&
+        event.artistName
+      ){
+
+        return renderPublicEventPage(
+          event
+        );
+      }
+
+    }catch(error){
+      /* Invalid public-event payload. */
+    }
+  }
+
+  return false;
+}
+
+/* ================================================================
+   V2.7.5 INTERACTION ARCHITECTURE
+   ================================================================ */
+
+/*
+  This is intentionally centralized.
+
+  The old versions attempted to determine what a component
+  should do by reading its visible text or by assigning routes
+  based on element position.
+
+  V2.7.5 uses explicit semantic actions instead.
+*/
+
+const ACTIONS = {
+
+  artist:() => {
+    showTab("artist");
+  },
+
+  profile:() => {
+
+    showTab("artist");
+
+    setTimeout(
+      () => {
+
+        const form =
+          document.getElementById(
+            "bookingForm"
+          );
+
+        if(form){
+
+          form.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+          });
+
+          const firstField =
+            document.getElementById(
+              "artistName"
+            );
+
+          if(firstField){
+            firstField.focus();
+          }
+        }
+
+      },
+      100
+    );
+  },
+
+  bookings:() => {
+    showTab("bookings");
+  },
+
+  events:() => {
+    showTab("events");
+  },
+
+  calendar:() => {
+    showTab("calendar");
+  },
+
+  owner:() => {
+    showTab("owner");
+  },
+
+  attention:element => {
+
+    const focusId =
+      element?.dataset?.focusId;
+
+    showTab(
+      "owner",
+      focusId || null
+    );
+  },
+
+  promotion:() => {
+    showTab("promotion");
+  },
+
+  share:() => {
+    shareGemini();
+  },
+
+  social:() => {
+    visitSocial();
+  },
+
+  directions:() => {
+    openDirections();
+  },
+
+  event:element => {
+
+    const eventId =
+      element?.dataset?.eventId;
+
+    if(eventId){
+
+      showTab(
+        "events"
+      );
+
+      setTimeout(
+        () => {
+
+          const cards =
+            document.querySelectorAll(
+              "#eventList .card"
+            );
+
+          cards.forEach(
+            card => {
+
+              if(
+                card.textContent
+                  .includes(
+                    state.events.find(
+                      event =>
+                        event.id === eventId
+                    )?.artistName || ""
+                  )
+              ){
+
+                card.scrollIntoView({
+                  behavior:"smooth",
+                  block:"center"
+                });
+              }
+            }
+          );
+
+        },
+        100
+      );
+
+    }else{
+
+      showTab(
+        "events"
+      );
+    }
+  }
+};
+
+/* ================================================================
+   SHARE GEMINI
+   ================================================================ */
+
+function shareGemini(){
+
+  const cleanUrl =
+    new URL(
+      location.href
+    );
+
+  cleanUrl.searchParams.delete(
+    EVENT_PARAM
+  );
+
+  cleanUrl.searchParams.delete(
+    PUBLIC_EVENT_PARAM
+  );
+
+  const shareData = {
+
+    title:
+      "Gemini Lounge",
+
+    text:
+      "Gemini Lounge — Live Music • Good Drinks • Good People",
+
+    url:
+      cleanUrl.toString()
+  };
+
+  if(
+    navigator.share
+  ){
+
+    navigator
+      .share(
+        shareData
+      )
+      .catch(
+        () => {}
+      );
+
+    return;
+  }
+
+  copyText(
+    shareData.url,
+    "Gemini Lounge link copied."
+  );
+}
+
+/* ================================================================
+   SOCIAL MEDIA
+   ================================================================ */
+
+function visitSocial(){
+
+  const profile =
+    window.GeminiScanCraft &&
+    typeof window.GeminiScanCraft.state === "function"
+      ? window.GeminiScanCraft.state().artistProfile
+      : state.artistProfile;
+
+  const raw =
+    (
+      profile?.social ||
+      ""
+    ).trim();
+
+  const url =
+    safeUrl(raw);
+
+  if(url){
+
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    return;
+  }
+
+  alert(
+    "No valid social media URL is configured yet. Add an http:// or https:// social URL to the profile."
+  );
+}
+
+/* ================================================================
+   DIRECTIONS
+   ================================================================ */
+
+function openDirections(){
+
+  const query =
+    encodeURIComponent(
+      "Gemini Lounge, Bandon, Oregon"
+    );
+
+  const mapsUrl =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    query;
+
+  window.open(
+    mapsUrl,
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+
+/* ================================================================
+   ACTION ACTIVATION
+   ================================================================ */
+
+function activateAction(element){
+
+  const actionName =
+    element?.dataset?.action;
+
+  if(
+    !actionName ||
+    typeof ACTIONS[actionName] !== "function"
+  ){
+    return;
+  }
+
+  ACTIONS[actionName](
+    element
+  );
+}
+
+/* ================================================================
+   INTERACTION DECORATION
+   ================================================================ */
+
+function decorateActions(){
+
+  document
+    .querySelectorAll(
+      "[data-action]"
+    )
+    .forEach(
+      element => {
+
+        const actionName =
+          element.dataset.action;
+
+        if(
+          !ACTIONS[actionName]
+        ){
+          return;
+        }
+
+        element.classList.add(
+          "sc-v275-interactive"
+        );
+
+        if(
+          !element.getAttribute(
+            "role"
+          )
+        ){
+
+          element.setAttribute(
+            "role",
+            "button"
+          );
+        }
+
+        if(
+          !element.hasAttribute(
+            "tabindex"
+          )
+        ){
+
+          element.setAttribute(
+            "tabindex",
+            "0"
+          );
+        }
+      }
+    );
+}
+
+/* ================================================================
+   EVENT DELEGATION
+   ================================================================ */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const element =
+      event.target.closest(
+        "[data-action]"
+      );
+
+    if(!element){
+      return;
+    }
+
+    const actionName =
+      element.dataset.action;
+
+    if(
+      !ACTIONS[actionName]
+    ){
+      return;
+    }
+
+    /*
+      Don't hijack actual nested controls
+      unless the control itself owns the action.
+    */
+
+    if(
+      event.target.closest(
+        "button:not([data-action])," +
+        "a:not([data-action])," +
+        "input," +
+        "select," +
+        "textarea"
+      )
+    ){
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    activateAction(
+      element
+    );
+
+  },
+  true
+);
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key !== "Enter" &&
+      event.key !== " "
+    ){
+      return;
+    }
+
+    const element =
+      event.target.closest(
+        "[data-action]"
+      );
+
+    if(!element){
+      return;
+    }
+
+    const actionName =
+      element.dataset.action;
+
+    if(
+      !ACTIONS[actionName]
+    ){
+      return;
+    }
+
+    event.preventDefault();
+
+    activateAction(
+      element
+    );
+
+  }
+);
+
+/*
+  Because renderAll() replaces chunks of the dashboard DOM,
+  the observer keeps semantic interactive elements decorated
+  without attaching duplicate click handlers.
+*/
+
+const interactionObserver =
+  new MutationObserver(
+    () => {
+      decorateActions();
+    }
+  );
+
+interactionObserver.observe(
+  document.body,
+  {
+    childList:true,
+    subtree:true
+  }
+);
+
+/* ================================================================
+   GLOBAL STATE API
+   ================================================================ */
+
+window.GeminiScanCraft = {
+
+  reset(){
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+    location.reload();
+  },
+
+  state(){
+    return JSON.parse(
+      JSON.stringify(state)
+    );
+  },
+
+  checkSlot(
+    date,
+    time
+  ){
+    return checkSlot(
+      date,
+      time
+    );
+  }
+
+};
+
+/* ================================================================
+   GLOBAL STORAGE SYNC
+   ================================================================ */
+
+window.addEventListener(
+  "storage",
+  event => {
+
+    if(
+      event.key !== STORAGE_KEY
+    ){
+      return;
+    }
+
+    const stored =
+      readState(
+        STORAGE_KEY
+      );
+
+    if(!stored){
+      return;
+    }
+
+    state =
+      normalizeState(
+        stored
+      );
+
+    ensureStateIntegrity();
+    renderAll();
+  }
+);
+
+/* ================================================================
+   RENDER ALL
+   ================================================================ */
+
+function renderAll(){
+
+  ensureStateIntegrity();
+
+  renderArtistDashboard();
+  renderBookings();
+  renderOwner();
+  renderEvents();
+  renderPromotion();
+  renderCalendar();
+  renderHistory();
+
+  saveState();
+
+  decorateActions();
+}
+
+/* ================================================================
+   INITIALIZATION
+   ================================================================ */
+
+loadState();
+
+document
+  .getElementById(
+    "publicEventRoot"
+  )
+  .classList.add(
+    "hidden"
+  );
+
+renderAll();
+
+checkPublicEvent();
+
+decorateActions();
+
 </script>
+
 </body>
 </html>
