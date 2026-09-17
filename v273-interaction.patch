@@ -1,0 +1,27 @@
+<!-- SC-V273-INTERACTION -->
+<style>
+.sc-v273-clickable{cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+.sc-v273-clickable:hover{transform:translateY(-2px);border-color:rgba(255,61,90,.62)!important;box-shadow:0 12px 30px rgba(0,0,0,.34),0 0 18px rgba(242,29,59,.12)!important}
+.sc-v273-clickable:active{transform:translateY(0)}
+.sc-v273-clickable:focus-visible{outline:2px solid #ff3d5a;outline-offset:2px}
+.quick-item.sc-v273-clickable{padding-left:9px;padding-right:9px;border-radius:7px}
+.mini-card.sc-v273-clickable,.card.sc-v273-clickable{position:relative}
+</style>
+<script>
+(function(){
+const nav=name=>{const b=[...document.querySelectorAll('.nav button')].find(x=>(x.dataset.tab||'')===name);if(b)b.click()};
+const safe=(el,fn)=>{if(!el||el.dataset.scV273Bound)return;el.dataset.scV273Bound='1';el.classList.add('sc-v273-clickable');el.tabIndex=0;el.addEventListener('click',e=>{if(e.target.closest('button,a,input,select,textarea'))return;fn()});el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();fn()}})};
+const text=el=>(el?.textContent||'').toLowerCase();
+function bind(){
+ document.querySelectorAll('.quick-item').forEach(el=>{const t=text(el);if(t.includes('book')||t.includes('artist'))safe(el,()=>nav('bookings'));else if(t.includes('upcoming')||t.includes('show'))safe(el,()=>nav('events'));else if(t.includes('calendar'))safe(el,()=>nav('calendar'));else if(t.includes('owner')||t.includes('command'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
+ document.querySelectorAll('.profile').forEach(el=>safe(el,()=>nav('artist')));
+ document.querySelectorAll('.request').forEach(el=>safe(el,()=>nav('bookings')));
+ document.querySelectorAll('.command,.attention').forEach(el=>safe(el,()=>nav('owner')));
+ document.querySelectorAll('.upcoming,.next').forEach(el=>safe(el,()=>nav('events')));
+ document.querySelectorAll('.promo-art').forEach(el=>safe(el,()=>nav('promotion')));
+ document.querySelectorAll('.mini-card,.card').forEach(el=>{const t=text(el);if(t.includes('upcoming')||t.includes('next show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('attention')||t.includes('pending')||t.includes('reschedule')||t.includes('booking'))safe(el,()=>nav('owner'));else if(t.includes('promotion')||t.includes('promo'))safe(el,()=>nav('promotion'))});
+ document.querySelectorAll('.link').forEach(el=>{const t=text(el);if(t.includes('book'))safe(el,()=>nav('bookings'));else if(t.includes('show')||t.includes('event'))safe(el,()=>nav('events'));else if(t.includes('owner'))safe(el,()=>nav('owner'));else if(t.includes('promo'))safe(el,()=>nav('promotion'))});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',bind);
+})();
+</script>
